@@ -17,6 +17,7 @@ public class Loops {
             ++a;
         }
 
+
         System.out.println();
         System.out.println();
         System.out.println("Aufgabe 2");
