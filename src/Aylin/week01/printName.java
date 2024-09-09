@@ -8,5 +8,13 @@ public class printName {
         System.out.println("  / /    \\ \\     \\  /      | |        | |   | |  \\ \\ | |");
         System.out.println(" /  =======  \\   | |       | |_____   | |   | |   \\ \\| |");
         System.out.println("/_/         \\_\\  |_|       |_______|  |_|   |_|    \\___|");
+        System.out.println();
+        System.out.println("|=============|  |-|     |-|  |-|  |--------|  |-\\       /--|   /-----\\");
+        System.out.println("      | |        | |     | |  | |  | |         |  \\     /   |  | |   | |");
+        System.out.println("      | |        | |     | |  | |  | |         | |\\ \\  / /| |  | |   | |");
+        System.out.println("      | |        | ======= |  | |  | =====|    | | \\ \\/ / | |  | |   | |");
+        System.out.println("      | |        | |     | |  | |  | |         | |  \\__/  | |  | |   | |");
+        System.out.println("      | |        | |     | |  | |  | |         | |        | |  | |   | |");
+        System.out.println("      |_|        |_|     |_|  |_|  |--------|  |_|        |_|   \\-----/");
     }
 }
