@@ -5,50 +5,82 @@ public class Loops {
         System.out.println("Aufgabe 1");
         System.out.println();
         System.out.println("1.1");
-        for (int i = 0; i <= 10; i++) {
-            System.out.print(i + " ");
+        int h = 10;
+        for (int i = 0; i <= h; i++) {
+            if(i<h) {
+                System.out.print(i + ", ");
+            }
+                else{
+                    System.out.println(i);
+                }
         }
-        System.out.println();
+
         System.out.println();
         System.out.println("1.2");
         int a = 0;
-        while (a <= 10) {
-            System.out.print(a + " ");
+        int k = 10;
+        while (a <= k) {
+            if(a<k) {
+                System.out.print(a + ", ");
+            }
+            else{
+                System.out.println(a);
+            }
             ++a;
         }
 
         System.out.println();
-        System.out.println();
         System.out.println("Aufgabe 2");
-        for (int l=0; l<10; l++){
-            System.out.print(l+" ");
+        int p = 9;
+        for (int l=0; l<=p; l++){
+            if(l<p) {
+                System.out.print(l + ", ");
+            }
+            else{
+                System.out.println(l);
+            }
         }
-        System.out.println();
+
         System.out.println();
         System.out.println("Aufgabe 3");
         System.out.println();
         System.out.println("3.1");
-
-        for (int b = 0; b<=10; b++) {
+        int r = 10;
+        for (int b = 0; b<=r; b++) {
             if (b % 2 ==0){
-                System.out.print(b + " ");
+                if(b<r) {
+                    System.out.print(b + ", ");
+                }
+                else{
+                    System.out.println(b);
+                }
             }
         }
 
-        System.out.println();
         System.out.println();
         System.out.println("3.2");
-        for(int g=0; g<=10;g+=2) {
-            System.out.print(g + " ");
+        int u= 10;
+        for(int g=0; g<=u;g+=2) {
+            if(g<r) {
+                System.out.print(g + ", ");
             }
-
-
-        System.out.println();
-        System.out.println();
-        System.out.println("Aufgabe 4");
-        for (int c=10; c>=-10; c--){
-            System.out.print(c+ " ");
+            else{
+                System.out.println(g);
+            }
         }
 
+
+        System.out.println();
+        System.out.println("Aufgabe 4");
+        int x = 10;
+        int y = -10;
+        for (int c=x; c>=y; c--){
+            if(c>y) {
+                System.out.print(c + ", ");
+            }
+            else{
+                System.out.println(c);
+            }
+        }
     }
 }
