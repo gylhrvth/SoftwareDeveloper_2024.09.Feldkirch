@@ -1,6 +1,6 @@
 package Akif_Malik.week01;
 
-public class PrintRect {
+public class PrintRectangle {
     public static void main(String[] args) {
         printRect("x ", 10, 3);
 
