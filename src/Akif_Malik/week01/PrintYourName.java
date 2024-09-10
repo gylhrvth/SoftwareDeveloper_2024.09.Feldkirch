@@ -1,6 +1,6 @@
 package Akif_Malik.week01;
 
-public class PrintName {
+public class PrintYourName {
     public static void main(String[] args) {
         System.out.println("    AAA               kkkkkkkk             iiii     ffffffffffffffff  \n" +
                 "              A:::A              k::::::k            i::::i   f::::::::::::::::f \n" +

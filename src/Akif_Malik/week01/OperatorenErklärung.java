@@ -1,6 +1,6 @@
 package Akif_Malik.week01;
 
-public class Operatoren {
+public class OperatorenErklärung {
     public static void main(String[] args) {
         int a = 22;
         int b = 3;
