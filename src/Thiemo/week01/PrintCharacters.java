@@ -32,7 +32,7 @@ public class PrintCharacters {
         System.out.println("-----------");
         System.out.println("-Bonusübung");
         System.out.println("-----------");
-        printtriangle4("x", 5);
+        BonusÜbung("x", 5);
 
     }
 
@@ -107,13 +107,14 @@ public class PrintCharacters {
 
     public static void BonusÜbung(String text, int count) {
         for (int r = 0; r < count; r++) {
-            for (int s = 0; s < count - r - 1; s++) {
-                System.out.print(".");
-            }
-            for (int c = 0; c <= r; ++c) {
-                System.out.print(text);
+            for (int c = 0; c < count; ++c) {
+                if (r == c) {
+                    System.out.print(text);
+                } else {
+                    System.out.print(".");
+                }
             }
             System.out.println();
         }
     }
-    }
+}
