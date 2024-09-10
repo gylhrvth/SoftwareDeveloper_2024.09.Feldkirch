@@ -89,7 +89,7 @@ public class AllAgain {
     public static void printTriangleBottomRight(String text, int count){
         for(int zeile = 0; zeile < count ; zeile++){
             for(int p = 0; p < count ; p++){
-                if(p < count - zeile - 1){
+                if(p + zeile < count - 1){
                     System.out.print(". ");
                 } else{
                     System.out.print(text);
