@@ -10,7 +10,8 @@ public class PrintCharacters {
         printRectangle("A ", 10, 3);
         System.out.println("============================"); //Ende dritte Aufgabe
         printTrinangle1("X ", 4);
-
+        System.out.println("============================"); //Ende vierte Aufgabe
+        printTriangle2("x ",5);
 
 
     }
@@ -26,7 +27,7 @@ public class PrintCharacters {
     public static void printSquare(String text, int count) {
         for (int row = 0; row < count; row++) {
             for (int i = 0; i < count; i++) {
-                System.out.print("x ");
+                System.out.print(text);
             }
             System.out.println();
         }
@@ -45,12 +46,24 @@ public class PrintCharacters {
     //Aufgabe 4 Print Trinangle 1
     public static void printTrinangle1(String text, int count) {
         for (int row = 0; row < count; row++) {
-            for (int i = 4; i < count; i++) {
-                System.out.print("x ");
+            for (int column = 0; column < row + 1; column++) {
+                System.out.print(text);
+            }
+            System.out.println();
+        }
+    }
+    //Aufgabe 5 Print Triangle 2
+    public static void printTriangle2 (String text, int count){
+        for (int row=0; row < count; row++){
+            for (int column = 0; column < count-
+
+                    row ; column++) {
+                System.out.print(text);
             }
             System.out.println();
         }
 
-
     }
+    //Aufgabe 6 Print Triangle 3
+
 }
