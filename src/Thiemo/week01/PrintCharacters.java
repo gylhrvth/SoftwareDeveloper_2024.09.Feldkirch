@@ -33,6 +33,10 @@ public class PrintCharacters {
         System.out.println("-Bonusübung");
         System.out.println("-----------");
         BonusÜbung("x", 5);
+        System.out.println("-----------");
+        System.out.println("EmptySquare");
+        System.out.println("-----------");
+        EmptySquare("x", 10);
 
     }
 
@@ -108,7 +112,7 @@ public class PrintCharacters {
     public static void BonusÜbung(String text, int count) {
         for (int r = 0; r < count; r++) {
             for (int c = 0; c < count; ++c) {
-                if (r == c) {
+                if (r <= c) {
                     System.out.print(text);
                 } else {
                     System.out.print(".");
@@ -117,4 +121,11 @@ public class PrintCharacters {
             System.out.println();
         }
     }
+    public static void EmptySquare(String text, int Count){
+
+    }
+
+
 }
+
+
