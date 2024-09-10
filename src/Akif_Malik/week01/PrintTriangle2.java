@@ -1,18 +1,19 @@
 package Akif_Malik.week01;
 
-public class PrintTrinangle1 {
+public class PrintTriangle2 {
     public static void main(String[] args) {
-        printTriangleTopLeft("x ",4);
+        printTriangleTopLeft("x ", 5);
+
     }
+
 
 
     public static void printTriangleTopLeft(String text, int count){
         for (int row = 0; row < count ; row++) {
-            for (int column = 0; column < row + 1; column++) {
+            for (int column = 0; column < count-row  ; column++) {
                 System.out.print(text);
             }
             System.out.println();
-
         }
     }
 }

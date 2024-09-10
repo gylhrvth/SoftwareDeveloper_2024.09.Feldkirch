@@ -1,6 +1,6 @@
 package Akif_Malik.week01;
 
-public class PrintTrinangle3 {
+public class PrintTriangle3 {
     public static void main(String[] args) {
         printTriangleTopRight("x ", 5);
 
