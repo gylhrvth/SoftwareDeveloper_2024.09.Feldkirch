@@ -14,6 +14,8 @@ public class PrintCharacters {
         printTriangleTopLeft("x ", 5);
         System.out.println("============================"); //Ende fünfte Aufgabe
         printTriangleTopRight("x", 5);
+        System.out.println("============================"); //Ende fünfte Aufgabe
+        printTriangleBottomRight("x", 5);
 
     }
 
@@ -54,7 +56,7 @@ public class PrintCharacters {
         }
     }
 
-    //Aufgabe 5 Print Triangle 2
+    //Aufgabe 5 Print Triangle 2 || maxRep5
     public static void printTriangleTopLeft(String text, int maxRep) {
         for (int repB = 0; repB < maxRep; repB++) {
             for (int block = 0; block < maxRep - repB; block++) {
@@ -78,7 +80,20 @@ public class PrintCharacters {
 
         }
     }
+
     //Aufgabe 7 Print Triangle 4 || maxRep 5
+    public static void printTriangleBottomRight(String text, int maxRep) {
+        for (int repBM = 0; repBM < maxRep; repBM++) {
+            for (int repP = 0; repP < maxRep - repBM - 1; repP++) {
+                System.out.print(".");
+            }
+            for (int repBS = 0; repBS < maxRep; repBS++) {
+                System.out.print(text);
+            }
+            System.out.println();
+
+        }
+    }
 
 
 }
