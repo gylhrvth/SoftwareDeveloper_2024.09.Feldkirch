@@ -2,11 +2,11 @@ package Akif_Malik.week01;
 
 public class PrintTrinangle1 {
     public static void main(String[] args) {
-        printTri("x ",4);
+        printTriangleTopLeft("x ",4);
     }
 
 
-    public static void printTri(String text, int count){
+    public static void printTriangleTopLeft(String text, int count){
         for (int row = 0; row <count ; row++) {
             for (int column = 0; column < row + 1; column++) {
                 System.out.print(text);
