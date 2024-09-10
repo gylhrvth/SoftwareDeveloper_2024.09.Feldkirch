@@ -7,26 +7,27 @@ public class PrintCharacters {
         System.out.println("============================"); //Ende erste Aufgabe
         printSquare("x", 10);
         System.out.println("============================"); //Ende zweite Aufgabe
-        printRectangle("A ", 10, 3);
+        printRect("A ", 10, 3);
         System.out.println("============================"); //Ende dritte Aufgabe
-        printTrinangle1("X ", 4);
+        printTrinangleBottomLeft("X ", 4);
         System.out.println("============================"); //Ende vierte Aufgabe
-        printTriangle2("x ",5);
-
+        printTriangleTopLeft("x ", 5);
+        System.out.println("============================"); //Ende fünfte Aufgabe
+        printTriangleTopRight("x", 5);
 
     }
 
     //Aufgabe 1 Print Characters
-    public static void printChars(String text, int count) {
-        for (int i = 0; i < count; i++) {
+    public static void printChars(String text, int menge) {
+        for (int i = 0; i < menge; i++) {
             System.out.print(text);
         }
     }
 
     //Aufgabe 2 Print Square
-    public static void printSquare(String text, int count) {
-        for (int row = 0; row < count; row++) {
-            for (int i = 0; i < count; i++) {
+    public static void printSquare(String text, int menge) {
+        for (int repB = 0; repB < menge; repB++) {
+            for (int rep = 0; rep < menge; rep++) {
                 System.out.print(text);
             }
             System.out.println();
@@ -34,9 +35,9 @@ public class PrintCharacters {
     }
 
     //Aufgabe 3 Print Rectangle
-    public static void printRectangle(String text, int countColumns, int countRows) {
-        for (int row = 0; row < countRows; row++) {
-            for (int col = 0; col < countColumns; col++) {
+    public static void printRect(String text, int maxBlock, int maxRep) {
+        for (int repB = 0; repB < maxRep; repB++) {
+            for (int block = 0; block < maxBlock; block++) {
                 System.out.print(text);
             }
             System.out.println();
@@ -44,26 +45,40 @@ public class PrintCharacters {
     }
 
     //Aufgabe 4 Print Trinangle 1
-    public static void printTrinangle1(String text, int count) {
-        for (int row = 0; row < count; row++) {
-            for (int column = 0; column < row + 1; column++) {
+    public static void printTrinangleBottomLeft(String text, int maxRep) {
+        for (int repB = 0; repB < maxRep; repB++) {
+            for (int block = 0; block < repB + 1; block++) {
                 System.out.print(text);
             }
             System.out.println();
         }
     }
+
     //Aufgabe 5 Print Triangle 2
-    public static void printTriangle2 (String text, int count){
-        for (int row=0; row < count; row++){
-            for (int column = 0; column < count-
-
-                    row ; column++) {
+    public static void printTriangleTopLeft(String text, int maxRep) {
+        for (int repB = 0; repB < maxRep; repB++) {
+            for (int block = 0; block < maxRep - repB; block++) {
                 System.out.print(text);
             }
             System.out.println();
         }
 
     }
-    //Aufgabe 6 Print Triangle 3
+
+    //Aufgabe 6 Print Triangle 3 || maxRep 5
+    public static void printTriangleTopRight(String text, int maxRep) {
+        for (int repBM = 0; repBM < maxRep; repBM++) {
+            for (int repP = 0; repP < repBM; repP++) {
+                System.out.print(".");
+            }
+            for (int repBS = 0; repBS < maxRep - repBM; repBS++) {
+                System.out.print(text);
+            }
+            System.out.println();
+
+        }
+    }
+    //Aufgabe 7 Print Triangle 4 || maxRep 5
+
 
 }
