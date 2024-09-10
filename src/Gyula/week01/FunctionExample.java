@@ -11,6 +11,7 @@ public class FunctionExample {
         System.out.println("Summe = " + summe);
         System.out.println("------");
         sayHelloTo("Gyula", 2);
+        sayTo("Guten Morgen,", "Aylin", 100);
     }
 
 
@@ -33,4 +34,11 @@ public class FunctionExample {
             System.out.println("Hello " + name + "!");
         }
     }
+
+    public static void sayTo(String greeting, String name, int count){
+        for (int i = 0; i < count; ++i){
+            System.out.println(greeting + " " + name + "!");
+        }
+    }
+
 }
