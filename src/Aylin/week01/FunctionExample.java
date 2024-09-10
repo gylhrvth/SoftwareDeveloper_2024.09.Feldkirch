@@ -31,7 +31,7 @@ public class FunctionExample {
 
     public static void printChars(String text, int count) {
         for (int i = 0; i < count; ++i) {
-            System.out.print("x");
+            System.out.print(text);
         }
     }
 
