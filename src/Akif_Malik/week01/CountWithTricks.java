@@ -1,6 +1,6 @@
 package Akif_Malik.week01;
 
-public class ZählenMitTrick {
+public class CountWithTricks {
     public static void main(String[] args) {
         for (int i = 0; i <= 10; i++) {
             if (i % 2 == 0) {

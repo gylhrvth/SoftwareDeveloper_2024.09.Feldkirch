@@ -7,7 +7,7 @@ public class PrintTrinangle1 {
 
 
     public static void printTriangleTopLeft(String text, int count){
-        for (int row = 0; row <count ; row++) {
+        for (int row = 0; row < count ; row++) {
             for (int column = 0; column < row + 1; column++) {
                 System.out.print(text);
             }

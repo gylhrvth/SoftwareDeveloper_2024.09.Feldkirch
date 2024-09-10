@@ -8,8 +8,6 @@ public class PrintTrinangle2 {
 
 
 
-
-
     public static void printTriangleTopLeft(String text, int count){
         for (int row = 0; row < count ; row++) {
             for (int column = 0; column < count-row  ; column++) {
