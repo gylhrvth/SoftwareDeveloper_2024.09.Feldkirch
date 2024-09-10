@@ -117,6 +117,7 @@ public class PrintCharacters {
         for (int reihe = 0; reihe < maxRep; reihe++) {
             for (int point = 0; point < maxRep - reihe -1 ; point++) {
                 System.out.print(".");
+
             }
         }
     }
