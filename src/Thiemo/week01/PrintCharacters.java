@@ -2,22 +2,15 @@ package Thiemo.week01;
 
 public class PrintCharacters {
     public static void main(String[] args) {
-        printchars();
-        System.out.println("-------");
-        repeat(10);
-        System.out.println("--------");
-    }
+        System.out.println("--Übung 1--");
+        printchars("x", 10);
+        System.out.println("-----------");}
 
-    public static void printchars() {
-        System.out.println("x");
+    public static void printchars(String text, int count) {
+        for (int i = 0; i <= count; ++i)
+            System.out.println(text);
     }
-
-    public static void repeat(int count) {
-        for (int q = 1; q < count; q++) {
-            System.out.print("x");
-        }
-        System.out.println();
-    }
-
 
 }
+
+

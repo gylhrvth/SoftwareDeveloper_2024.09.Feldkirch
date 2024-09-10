@@ -39,6 +39,10 @@ public class CountTheNumbers {
             } else {
                 System.out.println("Hello");
             }
+
+            for (int s = 0; s <= 10; s += 2) {
+                System.out.println(s);
+            }
         }
         System.out.println("");
         System.out.println("Übung 4");
@@ -46,6 +50,9 @@ public class CountTheNumbers {
         for (int u = -10; u <= 10; u++) {
 
             System.out.println(u);
+
+
+            }
         }
     }
-}
+
