@@ -2,7 +2,11 @@ package Thiemo.week01;
 
 public class GyulaExamples {
     public static void main(String[] args) {
-        printEmptySquere2("x ", 15);
+        System.out.println("==============");
+        printEmptySquere("x ", 10);
+        System.out.println("==============");
+        printEmptySquere2("y ", 5);
+        System.out.println("==============");
     }
 
     public static void printEmptySquere(String text, int size){
