@@ -33,47 +33,38 @@ public class PrintCharactersNew {
         System.out.println();
         printEmptySquare("c ", 10);
         System.out.println();
-        System.out.println("Print Empty Square 2");
+        System.out.println("Print Slash");
         System.out.println();
-        printEmptySquare2("A ", 3);
+        printSlash("D ", 7, true);
     }
-    public static void printChars(int count){
-        for(int i = 0; i < count; i++){
+
+    public static void printChars(int count) {
+        for (int i = 0; i < count; i++) {
             System.out.print("x");
         }
     }
 
-    public static void printSquare (String text, int count){
-        for(int row = 0; row<count; row++){
-            for(int column = 0; column < count; column++){
+    public static void printSquare(String text, int count) {
+        for (int row = 0; row < count; row++) {
+            for (int column = 0; column < count; column++) {
                 System.out.print(text);
             }
             System.out.println();
         }
     }
 
-    public static void printRectangle (String text, int count, int row){
-        for(int i = 0; i < row; i++){
-            for(int j = 0; j < count; j++){
+    public static void printRectangle(String text, int count, int row) {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < count; j++) {
                 System.out.print(text);
             }
             System.out.println();
         }
     }
 
-    public static void printTriangleBottomLeft(String text, int count){
-        for(int zeile = 0; zeile < count ; zeile++){
-            for(int z = 0; z < zeile + 1 ; z++){
-                System.out.print(text);
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
-
-    public static void printTriangleTopLeft(String text, int count){
-        for(int zeile = 0; zeile < count ; zeile++){
-            for(int a = 0; a < count - zeile; a++){
+    public static void printTriangleBottomLeft(String text, int count) {
+        for (int zeile = 0; zeile < count; zeile++) {
+            for (int z = 0; z < zeile + 1; z++) {
                 System.out.print(text);
             }
             System.out.println();
@@ -81,12 +72,22 @@ public class PrintCharactersNew {
         System.out.println();
     }
 
-    public static void printTriangleTopRight(String text, int count){
-        for(int zeile = 0; zeile < count ; zeile++){
-            for(int t = 0; t < count; t++) {
-                if (t >= zeile){
+    public static void printTriangleTopLeft(String text, int count) {
+        for (int zeile = 0; zeile < count; zeile++) {
+            for (int a = 0; a < count - zeile; a++) {
+                System.out.print(text);
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    public static void printTriangleTopRight(String text, int count) {
+        for (int zeile = 0; zeile < count; zeile++) {
+            for (int t = 0; t < count; t++) {
+                if (t >= zeile) {
                     System.out.print(text);
-                }else{
+                } else {
                     System.out.print(". ");
                 }
             }
@@ -94,12 +95,12 @@ public class PrintCharactersNew {
         }
     }
 
-    public static void printTriangleBottomRight(String text, int count){
-        for(int zeile = 0; zeile < count ; zeile++){
-            for(int p = 0; p < count ; p++){
-                if(p + zeile < count - 1){
+    public static void printTriangleBottomRight(String text, int count) {
+        for (int zeile = 0; zeile < count; zeile++) {
+            for (int p = 0; p < count; p++) {
+                if (p + zeile < count - 1) {
                     System.out.print(". ");
-                } else{
+                } else {
                     System.out.print(text);
                 }
             }
@@ -107,12 +108,12 @@ public class PrintCharactersNew {
         }
     }
 
-    public static void printEmptySquare (String text, int breite){
-        for(int zeile = 0 ; zeile < breite ; zeile++){
-            for(int spalte = 0 ; spalte < breite ; spalte++) {
-                if(spalte == 0 || zeile == 0 || spalte == breite - 1 || zeile == breite - 1) {
+    public static void printEmptySquare(String text, int breite) {
+        for (int zeile = 0; zeile < breite; zeile++) {
+            for (int spalte = 0; spalte < breite; spalte++) {
+                if (spalte == 0 || zeile == 0 || spalte == breite - 1 || zeile == breite - 1) {
                     System.out.print(text);
-                }else {
+                } else {
                     System.out.print(". ");
                 }
             }
@@ -120,16 +121,39 @@ public class PrintCharactersNew {
         }
     }
 
-    public static void printEmptySquare2 (String text, int breite){
-        for(int zeile = 0 ; zeile < breite ; zeile++){
-            for(int spalte = 0 ; spalte < breite ; spalte++){
-                if(spalte == 0 || zeile == 0 || spalte == breite - 1 || zeile == breite - 1) {
+    public static void printSlashForward(String text, int count) {
+        for (int zeile = 0; zeile < count; zeile++) {
+            for (int spalte = 0; spalte < count; spalte++) {
+                if (zeile + spalte + 1 == count) {
                     System.out.print(text);
-                }else {
+                } else {
                     System.out.print(". ");
                 }
             }
             System.out.println();
         }
     }
+
+    public static void printSlashBackward(String text, int count) {
+        for (int zeile = 0; zeile < count; zeile++) {
+            for (int spalte = 0; spalte < count; spalte++) {
+                if ( zeile == spalte) {
+                    System.out.print(text);
+                } else {
+                    System.out.print(". ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    public static void printSlash(String text, int count, boolean isBackslash){
+        if (isBackslash){
+            printSlashBackward(text, count);
+        } else {
+            printSlashForward(text, count);
+        }
+
+    }
+
 }
