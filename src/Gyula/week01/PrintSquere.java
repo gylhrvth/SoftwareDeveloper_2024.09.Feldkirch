@@ -1,4 +1,4 @@
-package Erik.week01;
+package Gyula.week01;
 
 public class PrintSquere {
     public static void main(String[] args) {

@@ -12,7 +12,9 @@ public class PrintCharacters {
         System.out.println("------------------------");
         printTriangleTopLeft("C", 5);
         System.out.println("------------------------");
-        printTriangleTopRight("D", 5);
+        printTriangleTopRight("D ", 5);
+        System.out.println("------------------------");
+        printTriangleBottomRight("F ", 5);
 
 
     }
@@ -66,17 +68,30 @@ public class PrintCharacters {
 
     public static void printTriangleTopRight(String text, int count) {
         for (int row = 0; row < count; row++) {
-            for (int column = 0; column < count; column++) {
-                System.out.print(".");
+            for (int column = 0; column < row + 1; column++) {
+                System.out.print(". ");
             }
-            for (int column = 0; column < row; column++) {
-                System.out.println(text);
-
-
+            for (int column = 0; column < count - row; column++) {
+                System.out.print(text);
             }
+            System.out.println();
+        }
+    }
+
+    public static void printTriangleBottomRight (String text,int count){
+        for (int row=0; row< count; row++){
+            for (int column = 0; column < count - row -1; column++){
+                System.out.print(". ");
+            }
+            for (int column = 0; column < row +1; column++){
+                System.out.print(text);
+            }
+            System.out.println();
         }
 
     }
+
+
 }
 
 
