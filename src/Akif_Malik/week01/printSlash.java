@@ -2,10 +2,10 @@ package Akif_Malik.week01;
 
 public class printSlash {
     public static void main(String[] args) {
-        printslash("x ", 7, false);
+        printslash("x ", 9, false);
         System.out.println(" .-. .-. .-. .-. .-. .-. .-. ");
         System.out.println();
-        printslash("y ", 7, true);
+        printslash("y ", 10, true);
 
     }
 
