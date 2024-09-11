@@ -31,7 +31,7 @@ public class PrintCharacters {
         System.out.println();
         System.out.println("===============================");
         System.out.println();
-        //printEmptySquare("X ", 10);
+        printEmptySquare("X ", 10);
         System.out.println();
 
 
@@ -112,15 +112,24 @@ public class PrintCharacters {
         }
     }
 
-/*    //Aufgabe 8 Print Empty Square || maxRep:10
+    //Aufgabe 8 Print Empty Square || maxRep:10
     public static void printEmptySquare(String text, int maxRep) {
-        for (int reihe = 0; reihe < maxRep; reihe++) {
-            for (int point = 0; point < maxRep - reihe -1 ; point++) {
-                System.out.print(".");
-
-            }
+        for (int spalte = 0; spalte < maxRep; spalte++) {
+            System.out.print(text);
         }
-    }
-*/
+        System.out.println();
+        for (int reihe = 1; reihe < maxRep - 1; reihe++) {
+            System.out.print(text);
+            for (int point = 0; point < maxRep - 2; point++) {
+                System.out.print(". ");
+            }
+            System.out.println(text);
+        }
+        for (int spalte = 0; spalte < maxRep; spalte++) {
+            System.out.print(text);
 
+
+        }
+
+    }
 }
