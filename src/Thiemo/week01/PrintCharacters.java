@@ -33,11 +33,21 @@ public class PrintCharacters {
         System.out.println("-----------");
         System.out.println("-Bonusübung");
         System.out.println("-----------");
-        BonusÜbung("x ", 5);
+        Bonusuebung("x ", 5);
         System.out.println("-----------");
         System.out.println("--Übung 8--");
         System.out.println("-----------");
-        EmptySquare("x ", 10);
+        EmptySquareX("x ", 10);
+        System.out.println("-----------");
+        System.out.println("--Übung 9--");
+        System.out.println("-----------");
+        EmptySquareA("A ", 3);
+        System.out.println("-----------");
+        System.out.println("--Übung 10-");
+        System.out.println("-----------");
+        printSlash("x ", 3, true);
+        printSlash("y ", 4, false);
+
 
     }
 
@@ -118,7 +128,7 @@ public class PrintCharacters {
     }
 
     //BonusÜbung  (text: x count: 5)
-    public static void BonusÜbung(String text, int count) {
+    public static void Bonusuebung(String text, int count) {
         for (int row = 0; row < count; row++) {
             for (int column = 0; column < count; ++column) {
                 if (row <= column) {
@@ -132,11 +142,78 @@ public class PrintCharacters {
     }
 
     //Übung 8 (text: x count: 10)
-    public static void EmptySquare(String text, int count) {
-        for (int row = 0; row < count; ++row) {
+    public static void EmptySquareX(String text, int count) {
+        for (int columns = 0; columns < count; ++columns) {
             System.out.print(text);
+        }
+        System.out.println();
+        for (int row = 2; row < count; row++) {
+            System.out.print(text);
+            for (int spacebar = 2; spacebar < count; ++spacebar) {
+                System.out.print(". ");
+            }
+            System.out.println(text);
+        }
+        for (int columns = 0; columns < count; ++columns) {
+            System.out.print(text);
+        }
+            System.out.println();
+    }
 
-                System.out.println();
+
+
+    //Übung 9 (text: x count: 10)
+    public static void EmptySquareA(String text, int count) {
+        for (int columns = 0; columns < count; ++columns) {
+            System.out.print(text);
+        }
+        System.out.println();
+        for (int row = 2; row < count; row++) {
+            System.out.print(text);
+            for (int spacebar = 2; spacebar < count; ++spacebar) {
+                System.out.print(". ");
+            }
+            System.out.println(text);
+        }
+        for (int columns = 0; columns < count; ++columns) {
+            System.out.print(text);
+        }
+        System.out.println();
+    }
+    //Übung 10 (text: x count: 3)
+    public static void printSlashBackward(String text, int count) {
+        for (int row = 0; row < count; row++) {
+            for (int column = 0; column < count; ++column) {
+                if (row == column) {
+                    System.out.print(text);
+                } else {
+                    System.out.print(". ");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    public static void printSlashForward(String text, int count) {
+        for (int row = 0; row < count; row++) {
+            for (int column = 0; column < count; ++column) {
+                if (row + column +1 == count) {
+                    System.out.print(text);
+                } else {
+                    System.out.print(". ");
+                }
+            }
+            System.out.println();
+
+        }
+    }
+
+    public static void printSlash(String text, int count, boolean isBackslash){
+        if (isBackslash){
+            printSlashBackward(text, count);
+        } else {
+            printSlashForward(text, count);
         }
     }
 }
