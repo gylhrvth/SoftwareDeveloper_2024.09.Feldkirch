@@ -127,9 +127,9 @@ public class PrintCharacters {
         }
         for (int spalte = 0; spalte < maxRep; spalte++) {
             System.out.print(text);
-
-
         }
 
     }
+
+    //Aufgabe 8.1 Print Empty Square
 }
