@@ -1,4 +1,4 @@
-package Furkan;
+package Furkan.week01;
 
 public class Rewind {
     public static void main(String[] args) {
