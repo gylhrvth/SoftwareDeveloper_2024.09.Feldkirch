@@ -222,15 +222,18 @@ public class PrintCharacters {
     }
 
     public static void printtriangle1(String text, int count) {
-        System.out.println();
-        System.out.println("  x  ");
-        System.out.println(" x x ");
-        System.out.println("xxxxx");
-        System.out.println();
-        for (int row = 0; row < count ; row++) {
-            for (int column = 0; column < count + 2 ; column++) {
-
-                System.out.print(text);
+//        System.out.println();
+//        System.out.println("  x  ");
+//        System.out.println(" x x ");
+//        System.out.println("xxxxx");
+//        System.out.println();
+        for (int row = 0; row < count; row++) {
+            for (int column = 0; column < count + 2; column++) {
+                if ((column == 0) || (row == 0)) {
+                    System.out.print(text);
+                } else {
+                    System.out.print(". ");
+                }
             }
             System.out.println();
         }
