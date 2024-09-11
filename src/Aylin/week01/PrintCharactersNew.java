@@ -1,6 +1,6 @@
 package Aylin.week01;
 
-public class AllAgain {
+public class PrintCharactersNew {
     public static void main(String[] args) {
         System.out.println("Print Characters");
         printChars(10);
@@ -28,6 +28,14 @@ public class AllAgain {
         System.out.println("Print Triangle (4)");
         System.out.println();
         printTriangleBottomRight("Y ", 5);
+        System.out.println();
+        System.out.println("Print Empty Square");
+        System.out.println();
+        printEmptySquare("c ", 10);
+        System.out.println();
+        System.out.println("Print Empty Square 2");
+        System.out.println();
+        printEmptySquare2("A ", 3);
     }
     public static void printChars(int count){
         for(int i = 0; i < count; i++){
@@ -89,10 +97,36 @@ public class AllAgain {
     public static void printTriangleBottomRight(String text, int count){
         for(int zeile = 0; zeile < count ; zeile++){
             for(int p = 0; p < count ; p++){
-                if(p < count - zeile - 1){
+                if(p + zeile < count - 1){
                     System.out.print(". ");
                 } else{
                     System.out.print(text);
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    public static void printEmptySquare (String text, int breite){
+        for(int zeile = 0 ; zeile < breite ; zeile++){
+            for(int spalte = 0 ; spalte < breite ; spalte++) {
+                if(spalte == 0 || zeile == 0 || spalte == breite - 1 || zeile == breite - 1) {
+                    System.out.print(text);
+                }else {
+                    System.out.print(". ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    public static void printEmptySquare2 (String text, int breite){
+        for(int zeile = 0 ; zeile < breite ; zeile++){
+            for(int spalte = 0 ; spalte < breite ; spalte++){
+                if(spalte == 0 || zeile == 0 || spalte == breite - 1 || zeile == breite - 1) {
+                    System.out.print(text);
+                }else {
+                    System.out.print(". ");
                 }
             }
             System.out.println();
