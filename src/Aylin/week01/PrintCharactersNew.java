@@ -35,7 +35,7 @@ public class PrintCharactersNew {
         System.out.println();
         System.out.println("Print Slash");
         System.out.println();
-        printSlash("D ", 7, true);
+        printSlash("D ", 4, false);
     }
 
     public static void printChars(int count) {
