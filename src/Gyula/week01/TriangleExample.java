@@ -2,7 +2,7 @@ package Gyula.week01;
 
 public class TriangleExample {
     public static void main(String[] args) {
-        printTriangle("X ", 10);
+        printTriangle("X ", 4);
     }
 
     public static void printTriangle(String text, int size) {
@@ -13,7 +13,7 @@ public class TriangleExample {
                 } else if (col == row + size - 1) {
                     System.out.print("B ");
                 } else if (row == size -1){
-                    System.out.print("C ");
+                        System.out.print("C ");
                 } else {
                     System.out.print(". ");
                 }

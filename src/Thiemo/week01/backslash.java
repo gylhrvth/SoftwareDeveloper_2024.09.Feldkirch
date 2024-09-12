@@ -7,7 +7,7 @@ public class backslash {
     public static void main(String[] args) {
         System.out.println("--Übung 10-");
         System.out.println("-----------");
-        printSlash("x ", 3, false);
+        printSlash("x ", 3, true);
         printSlash("y ", 4, false);
 
     }
@@ -25,8 +25,7 @@ public class backslash {
             }
             System.out.println();
         }
-        System.out.println(1);
-        System.out.println(1);
+        System.out.println();
     }
 
     public static void printSlashForward(String text, int count) {
