@@ -1,5 +1,7 @@
 package Aylin.week01;
 
+import java.util.Random;
+
 public class PrintCharactersNew {
     public static void main(String[] args) {
         System.out.println("Print Characters");
@@ -36,6 +38,14 @@ public class PrintCharactersNew {
         System.out.println("Print Slash");
         System.out.println();
         printSlash("D ", 4, false);
+        System.out.println();
+        System.out.println("Print Triangle Empty ");
+        System.out.println();
+        printTriangleEmpty("x ", 4);
+        System.out.println();
+        System.out.println("Print Rhombus ");
+        System.out.println();
+        printRhombus("e", 8);
     }
 
     public static void printChars(int count) {
@@ -156,4 +166,49 @@ public class PrintCharactersNew {
 
     }
 
+    public static void printTriangleEmpty(String text, int count) {
+        for (int row = 0; row < count; row++) {
+            for (int column = 0; column < 2 * count - 1; column++) {
+                if ( row + count - 1  == column) {
+                    System.out.print(text);
+                }else if(row + column + 1 == count) {
+                    System.out.print(text);
+                }else if(row == count - 1) {
+                    System.out.print(text);
+                }else{
+                    System.out.print(". ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    public static void printRhombus(String text, int count){
+        for(int row = 0; row < count; row++){
+            for(int column = 0; column < count; column++){
+                if (row + count /2 == column) {
+                    System.out.print(text);
+                }else if(column + count / 2 == row) {
+                    System.out.print(text);
+                }else if(row + column == count / 2) {
+                    System.out.print(text);
+                }else if(row + column - (count / 2) == count -1) {
+                    System.out.print(text);
+                }else{
+                        System.out.print(".");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    /*public static void printF (String text, int count){
+        for(int row = 0; row < count ; row ++){
+            for(int column = 0; column < count; count++){
+                System.out.print(text);
+            }
+        }
+        System.out.println();
+    }*/
 }
