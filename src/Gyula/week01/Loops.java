@@ -15,6 +15,7 @@ public class Loops {
         System.out.println("Count loops is " + countLoops);
 
 
+
         for (int i = 0; i < 10; ++i){
             System.out.println("Gyula " + i);
         }
