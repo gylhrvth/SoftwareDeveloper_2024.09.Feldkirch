@@ -5,7 +5,6 @@ public class PrintRectangle {
         printRect("x ", 10, 3);
 
 
-
     }
 
     public static void printRect(String text, int columns, int lines) {
@@ -13,7 +12,7 @@ public class PrintRectangle {
             for (int j = 0; j < columns; j++) {
                 System.out.print(text);
             }
-           System.out.println();
+            System.out.println();
         }
     }
 }

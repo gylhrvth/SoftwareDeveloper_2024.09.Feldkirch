@@ -1,6 +1,6 @@
 package Akif_Malik.week01;
 
-public class emptysquare {
+public class EmptySquare {
     public static void main(String[] args) {
         printEmptySquare("x ", 10);
 

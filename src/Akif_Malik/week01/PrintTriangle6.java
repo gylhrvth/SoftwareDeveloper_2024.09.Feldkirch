@@ -1,8 +1,9 @@
 package Akif_Malik.week01;
 
-public class PrintTriangle5 {
+public class PrintTriangle6 {
     public static void main(String[] args) {
-        printTriangle("x ", 3);
+        printTriangle("x ", 1);
+
     }
 
     public static void printTriangle(String text, int size) {

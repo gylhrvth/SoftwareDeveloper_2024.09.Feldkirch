@@ -1,6 +1,8 @@
 package Thiemo.week01;
 
 
+import org.w3c.dom.ls.LSOutput;
+
 public class backslash {
     public static void main(String[] args) {
         System.out.println("--Übung 10-");
@@ -23,7 +25,8 @@ public class backslash {
             }
             System.out.println();
         }
-        System.out.println();
+        System.out.println(1);
+        System.out.println(1);
     }
 
     public static void printSlashForward(String text, int count) {
