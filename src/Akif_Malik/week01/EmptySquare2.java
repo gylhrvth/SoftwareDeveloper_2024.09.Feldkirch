@@ -6,7 +6,7 @@ public class EmptySquare2 {
     }
 
 
-    public static void emptySquare(String text, int maxRep){
+    public static void emptySquare(String text, int maxRep) {
         for (int zeile1 = 0; zeile1 < maxRep; zeile1++) {
             System.out.print(text);
         }

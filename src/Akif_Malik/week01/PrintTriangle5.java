@@ -12,7 +12,7 @@ public class PrintTriangle5 {
                     System.out.print(text);
                 } else if (col == row + size - 1) {
                     System.out.print(text);
-                } else if (row == size -1){
+                } else if (row == size - 1) {
                     System.out.print(text);
                 } else {
                     System.out.print(". ");
