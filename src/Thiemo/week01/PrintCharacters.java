@@ -59,6 +59,10 @@ public class PrintCharacters {
         System.out.println("==Rhombus 7X");
         System.out.println("===============");
         printrhombus("x ", 5);
+        System.out.println("===============");
+        System.out.println("==Rhombus 7X");
+        System.out.println("===============");
+        printX("x ", 11);
     }
 
     //Übung 1 (text: x count: 10)
@@ -271,20 +275,40 @@ public class PrintCharacters {
         for (int reihe = 0; reihe < 2 * size - 1; reihe++) {
             for (int zeile = 0; zeile < 2 * size - 1; ++zeile) {
                 if (reihe + zeile == size - 1) {
-                 //   System.out.print("A ");
-                    System.out.print(zeile+reihe);
-                } else if (zeile == reihe + size -1) {
-                 //   System.out.print("B ");
+                    //   System.out.print("A ");
+                    System.out.print(zeile + reihe);
+                } else if (zeile == reihe + size - 1) {
+                    //   System.out.print("B ");
                     System.out.print(zeile);
-                } else if (reihe == zeile + size -1 ) {
-                  //  System.out.print("C ");
+                } else if (reihe == zeile + size - 1) {
+                    //  System.out.print("C ");
                     System.out.print(reihe);
-                } else if (reihe + zeile ==  (size-1) * 3 ) {
-                   //System.out.print("D ");
-                    System.out.print(zeile+reihe);
+                } else if (reihe + zeile == (size - 1) * 3) {
+                    //System.out.print("D ");
+                    System.out.print(zeile + reihe);
                 } else {
                     System.out.print(". ");
                 }
+            }
+            System.out.println();
+        }
+    }
+
+    public static void printX(String text, int size) {
+        if (size %2 == 0) {
+            size = size - 1;
+
+        }
+        for (int reihe = 0; reihe < size; reihe++) {
+            for (int zeile = 0; zeile < size; zeile++) {
+                if (reihe == zeile) {
+                    System.out.print(text);
+                } else if (reihe == size - zeile - 1) {
+                    System.out.print(text);
+                } else {
+                   System.out.print(". ");
+                }
+
             }
             System.out.println();
         }
