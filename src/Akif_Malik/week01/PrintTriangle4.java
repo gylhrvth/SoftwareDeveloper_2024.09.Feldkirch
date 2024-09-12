@@ -10,7 +10,7 @@ public class PrintTriangle4 {
     public static void printTriangleBottomRight(String text, int count) {
 
         for (int row = 0; row < count; row++) {
-            for (int column = 0; column < count - row -1; column++) {
+            for (int column = 0; column < count - row - 1; column++) {
                 System.out.print(". ");
             }
             for (int column = 0; column < row + 1; column++) {

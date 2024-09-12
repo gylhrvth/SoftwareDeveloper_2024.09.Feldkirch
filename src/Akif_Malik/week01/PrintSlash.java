@@ -10,7 +10,7 @@ public class PrintSlash {
     }
 
     public static void printslash(String text, int maxRep, boolean isBackslash) {
-        if (isBackslash){
+        if (isBackslash) {
             printBackSlash(text, maxRep);
         } else {
             printForwardSlash(text, maxRep);
@@ -18,7 +18,7 @@ public class PrintSlash {
     }
 
     public static void printBackSlash(String text, int maxRep) {
-        for (int row = 0; row < maxRep ; row++) {
+        for (int row = 0; row < maxRep; row++) {
             for (int column = 0; column < row; column++) {
                 System.out.print(". ");
             }
@@ -28,8 +28,8 @@ public class PrintSlash {
     }
 
     public static void printForwardSlash(String text, int maxRep) {
-        for (int row = 0; row < maxRep ; row++) {
-            for (int column = 0; column < maxRep-row - 1  ; column++) {
+        for (int row = 0; row < maxRep; row++) {
+            for (int column = 0; column < maxRep - row - 1; column++) {
                 System.out.print(". ");
             }
             System.out.println(text);

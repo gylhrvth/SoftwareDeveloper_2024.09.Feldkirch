@@ -7,21 +7,22 @@ public class PrintRhombus {
     }
 
 
-
     public static void printRhombus(String text, int maxRep) {
-        for (int row = 0; row < maxRep ; row++) {
+        for (int row = 0; row < maxRep; row++) {
             for (int column = 0; column < row; column++) {
                 System.out.print(". ");
             }
+
             System.out.println(text);
 
         }
-        for (int row = 0; row < maxRep ; row++) {
-            for (int column = 0; column < maxRep-row - 1  ; column++) {
+        for (int row = 0; row < maxRep; row++) {
+            for (int column = 0; column < maxRep - row - 1; column++) {
                 System.out.print(". ");
             }
             System.out.println(text);
         }
+
 
     }
 }
