@@ -1,21 +1,21 @@
-package Gyula.week01;
+package Furkan.week01;
 
-public class TriangleExample {
+public class PrintTriangle {
     public static void main(String[] args) {
-        printTriangle("X ", 4);
+        printTriangle("x", 3);
     }
 
     public static void printTriangle(String text, int size) {
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < 2 * size - 1; col++) {
                 if (row + col == size - 1) {
-                    System.out.print("A ");
+                    System.out.print(text);
                 } else if (col == row + size - 1) {
-                    System.out.print("B ");
+                    System.out.print(text);
                 } else if (row == size -1){
-                        System.out.print("C ");
+                    System.out.print(text);
                 } else {
-                    System.out.print(". ");
+                    System.out.print(".");
                 }
             }
             System.out.println();

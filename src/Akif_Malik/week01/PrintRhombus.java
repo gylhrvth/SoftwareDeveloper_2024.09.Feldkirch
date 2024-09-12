@@ -8,30 +8,24 @@ public class PrintRhombus {
 
 
     public static void printRhombus(String text, int size) {
-        for (int row = 0; row < size; row++) {
-            for (int col = 0; col < 2 * size - 1; col++) {
-                if (row + col == size - 1) {
+        if(size % 2 == 0) {
+            size--;
+        }for(int row = 0; row < size; row++){
+            for(int column = 0; column < size; column++){
+                if (row + size /2 == column) {
                     System.out.print(text);
-                } else if (col == row + size - 1) {
+                }else if(column + size / 2 == row) {
                     System.out.print(text);
-                } else {
+                }else if(row + column == size / 2) {
+                    System.out.print(text);
+                }else if(row + column - (size / 2) == size -1) {
+                    System.out.print(text);
+                }else{
                     System.out.print(". ");
                 }
             }
             System.out.println();
         }
-        for (int row = 0; row < size; row++) {
-            for (int column = 0; column < 2 * size - 1; column++) {
-                if (row + column == size - 1) {
-                    System.out.print(text);
-                } else if (column == row + size - 1) {
-                    System.out.print(text);
-                } else {
-                    System.out.print(". ");
-                }
-            }
-            System.out.println();
-
-        }
+        System.out.println();
     }
 }
