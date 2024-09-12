@@ -1,6 +1,6 @@
 package Akif_Malik.week01;
 
-public class printSlash {
+public class PrintSlash {
     public static void main(String[] args) {
         printslash("x ", 9, false);
         System.out.println(" .-. .-. .-. .-. .-. .-. .-. ");
