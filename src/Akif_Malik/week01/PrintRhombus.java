@@ -1,6 +1,6 @@
 package Akif_Malik.week01;
 
-public class printRhombus {
+public class PrintRhombus {
     public static void main(String[] args) {
         printRhombus("x", 7);
 

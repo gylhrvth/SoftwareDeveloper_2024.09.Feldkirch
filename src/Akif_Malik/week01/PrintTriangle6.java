@@ -1,10 +1,11 @@
 package Akif_Malik.week01;
 
-public class PrintTriangle5 {
+public class PrintTriangle6 {
     public static void main(String[] args) {
-        printTriangle("x ", 3);
-    }
+        printTriangle("x ", 1);
 
+    }
+    
     public static void printTriangle(String text, int size) {
         for (int row = 0; row < size; row++) {
             for (int col = 0; col < 2 * size - 1; col++) {
