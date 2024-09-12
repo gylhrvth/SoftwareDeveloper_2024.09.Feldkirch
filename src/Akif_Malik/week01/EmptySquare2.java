@@ -1,12 +1,12 @@
 package Akif_Malik.week01;
 
-public class emptysquare2 {
+public class EmptySquare2 {
     public static void main(String[] args) {
         emptySquare("A ", 3);
     }
 
 
-    public static void emptySquare(String text, int maxRep){
+    public static void emptySquare(String text, int maxRep) {
         for (int zeile1 = 0; zeile1 < maxRep; zeile1++) {
             System.out.print(text);
         }
