@@ -26,10 +26,10 @@ public class PrintCharacters {
 //        System.out.println("--triangleTopright--");
 //        System.out.println("-----------");
 //        printtriangleTopRight("x ", 5);
-//        System.out.println("-----------");
-//        System.out.println("--triangleBottomright--");
-//        System.out.println("-----------");
-//        printtriangleBottomRight("x ", 5);
+        System.out.println("===================");
+        System.out.println("--triangleBottomright--");
+        System.out.println("===================");
+        printtriangleBottomRight("x ", 10);
 //        System.out.println("-----------");
 //        System.out.println("-Bonusübung");
 //        System.out.println("-----------");
@@ -47,22 +47,22 @@ public class PrintCharacters {
 //        System.out.println("-----------");
 //        printSlash("x ", 3, true);
 //        printSlash("y ", 4, false);
-        System.out.println("-----------");
-        System.out.println("--triangle 3X-");
-        System.out.println("-----------");
-        printtriangle1("x ", 3);
+//        System.out.println("-----------");
+//        System.out.println("--triangle 3X-");
+//        System.out.println("-----------");
+//        printtriangle1("x ", 3);
+//        System.out.println("===============");
+//        System.out.println("==triangle 5X");
+//        System.out.println("===============");
+//        printtriangle2("x ", 5);
+//        System.out.println("===============");
+//        System.out.println("==Rhombus 7X");
+//        System.out.println("===============");
+//        printrhombus("x ", 7);
         System.out.println("===============");
-        System.out.println("==triangle 5X");
+        System.out.println("==PrintX 5X");
         System.out.println("===============");
-        printtriangle2("x ", 5);
-        System.out.println("===============");
-        System.out.println("==Rhombus 7X");
-        System.out.println("===============");
-        printrhombus("x ", 5);
-        System.out.println("===============");
-        System.out.println("==Rhombus 7X");
-        System.out.println("===============");
-        printX("x ", 11);
+        printX("x ", 6);
     }
 
     //Übung 1 (text: x count: 10)
@@ -119,7 +119,7 @@ public class PrintCharacters {
     public static void printtriangleTopRight(String text, int count) {
         for (int row = 0; row < count; row++) {
             for (int spacebar = 0; spacebar < row; spacebar++) {
-                System.out.print(". ");
+                System.out.print(".");
             }
             for (int column = 0; column < count - row; ++column) {
                 System.out.print(text);
@@ -132,7 +132,7 @@ public class PrintCharacters {
     public static void printtriangleBottomRight(String text, int count) {
         for (int row = 0; row < count; row++) {
             for (int spacebar = 0; spacebar < count - row - 1; spacebar++) {
-                System.out.print(". ");
+                System.out.print(".");
             }
             for (int column = 0; column <= row; ++column) {
                 System.out.print(text);
@@ -295,8 +295,9 @@ public class PrintCharacters {
     }
 
     public static void printX(String text, int size) {
-        if (size %2 == 0) {
+        if (size % 2 == 0) {
             size = size - 1;
+            // size--;
 
         }
         for (int reihe = 0; reihe < size; reihe++) {
@@ -306,7 +307,7 @@ public class PrintCharacters {
                 } else if (reihe == size - zeile - 1) {
                     System.out.print(text);
                 } else {
-                   System.out.print(". ");
+                    System.out.print(". ");
                 }
 
             }
