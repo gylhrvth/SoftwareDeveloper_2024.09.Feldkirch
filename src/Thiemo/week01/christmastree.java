@@ -10,10 +10,10 @@ public class christmastree {
     public static void christmastree(int count) {
         for (int rowBaum = 0; rowBaum < count ; rowBaum++) {
             for (int spacebar = 0; spacebar < count - rowBaum - 1 ; spacebar++) {
-                System.out.print(" ");
+                System.out.print(".");
             }
-            for (int column = 0; column <= rowBaum; ++column) {
-                System.out.print("* ");
+            for (int column = 0; column <= 2* rowBaum ; ++column) {
+                System.out.print("*");
             }
             System.out.println();
         }
