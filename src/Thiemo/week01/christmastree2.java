@@ -4,7 +4,7 @@ public class christmastree2 {
 
     public static void main(String[] args) {
     System.out.println();
-    christmastree(13);
+    christmastree(10);
     System.out.println();
 }
 
@@ -15,7 +15,7 @@ public class christmastree2 {
 
         for (int rowBaum = 0; rowBaum < count; rowBaum++) {
             for (int spacebar = 0; spacebar < count - rowBaum - 1; spacebar++) {
-                System.out.print(".");
+                System.out.print(" ");
             }
             for (int column = 0; column <= 2 * rowBaum; ++column) {
                 System.out.print("*");
@@ -27,12 +27,12 @@ public class christmastree2 {
         }
         System.out.println();
 
-        for (int rowTrunk = 0; rowTrunk < count / 3 ; rowTrunk++) {
-            for (int spacebar = 0; spacebar <  count / 3   ; ++spacebar) {
+        for (int rowTrunk = 0; rowTrunk < count / 3 - 1 ; rowTrunk++) {
+            for (int spacebar = 0; spacebar <  count / 3 + 1 ; ++spacebar) {
                System.out.print(". ");
            }
 
-            for (int columnTrunk = 0; columnTrunk  < (count*2 ) / 3  ;  columnTrunk++) {
+            for (int columnTrunk = 0; columnTrunk  < (count*2 ) / 3  - 1;  columnTrunk++) {
 
                 System.out.print("+");
             }
