@@ -21,11 +21,18 @@ public class ChristmasTree {
             }
             System.out.println();
         }
-        for (int leaves = 0; leaves < size ; leaves++) {
+        for (int leaves = 0; leaves < size; leaves++) {
             System.out.print("O   ");
             ;
 
         }
+
+        for (int trunk = 0;trunk  < size/2; trunk++) {
+            System.out.printf("%13d ++++ \n", size);
+
+
+        }
+
 
     }
 
