@@ -4,7 +4,7 @@ public class christmastree3 {
 
     public static void main(String[] args) {
         System.out.println();
-        christmastree(30);
+        christmastree(9);
         System.out.println();
     }
 
@@ -81,6 +81,7 @@ public class christmastree3 {
         printtext(text, count);
         System.out.println();
     }
+
 }
 
 
