@@ -1,7 +1,5 @@
 package Aylin.week01;
 
-import java.util.Random;
-
 public class PrintCharactersNew {
     public static void main(String[] args) {
         System.out.println("Print Characters");
@@ -190,7 +188,8 @@ public class PrintCharactersNew {
     public static void printRhombus(String text, int count){
         if(count % 2 == 0) {
             count--;
-        }for(int row = 0; row < count; row++){
+        }
+        for(int row = 0; row < count; row++){
                 for(int column = 0; column < count; column++){
                     if (row + count /2 == column) {
                         System.out.print(text);
@@ -212,7 +211,8 @@ public class PrintCharactersNew {
     public static void printX (String text, int count){
         if(count % 2 == 0) {
             count--;
-        }for(int row = 0; row < count ; row++) {
+        }
+        for(int row = 0; row < count ; row++) {
                 for (int column = 0; column < count; column++) {
                     if (row == column || row + column == count -1) {
                         System.out.print(text);
