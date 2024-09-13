@@ -2,8 +2,8 @@ package Furkan.week01;
 
 public class PrintSlash {
     public static void main(String[] args) {
-     //   printBackSlash("x", 3);
-   //     printForwardSlash("y", 4);
+        printBackSlash("x", 3);
+        printForwardSlash("y", 4);
         printSlash("y", 4, false);
     }
 
