@@ -26,15 +26,18 @@ public class ChristmasTree {
             ;
 
         }
+        System.out.println();
 
-        for (int trunk = 0;trunk  < size/2; trunk++) {
-            System.out.printf("%13d ++++ \n", size);
+        for (int trunk = 0; trunk < size / 2 - 2; trunk++) {
+            System.out.printf("%14d ++++ \n", size);
 
 
         }
-
 
     }
 
 
 }
+
+
+
