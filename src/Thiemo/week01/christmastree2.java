@@ -4,13 +4,13 @@ public class christmastree2 {
 
     public static void main(String[] args) {
     System.out.println();
-    christmastree(11);
+    christmastree(13);
     System.out.println();
 }
 
     public static void christmastree(int count) {
         if (count % 2 == 0){
-            count--;
+            count++;
         }
 
         for (int rowBaum = 0; rowBaum < count; rowBaum++) {
@@ -28,11 +28,11 @@ public class christmastree2 {
         System.out.println();
 
         for (int rowTrunk = 0; rowTrunk < count / 3 ; rowTrunk++) {
-            for (int spacebar = 0; spacebar < count / 3 ; ++spacebar) {
+            for (int spacebar = 0; spacebar <  count / 3   ; ++spacebar) {
                System.out.print(". ");
            }
 
-            for (int columnTrunk = 0; columnTrunk  < (count*2 + 1 ) / 3 ;  columnTrunk++) {
+            for (int columnTrunk = 0; columnTrunk  < (count*2 ) / 3  ;  columnTrunk++) {
 
                 System.out.print("+");
             }

@@ -3,7 +3,7 @@ package Thiemo.week01;
 public class christmastree {
     public static void main(String[] args) {
         System.out.println();
-        christmastree(9);
+        christmastree(20);
         System.out.println();
     }
 
