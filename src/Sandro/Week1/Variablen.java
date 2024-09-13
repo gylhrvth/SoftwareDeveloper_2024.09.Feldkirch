@@ -1,7 +1,14 @@
 package Sandro.Week1;
 
+import Sandro.Colors;
+
 public class Variablen {
     public static void main(String[] args) {
+
+        System.out.println(Colors.COLORS[1] +"test" + Colors.RESET);
+        System.out.println(Colors.BACKGROUND_COLORS[3] + "Hallo" + Colors.RESET);
+
+
         System.out.println("String: "+"Text Wert");                 // String
         System.out.println("Slash als text: "+"\\");
         System.out.println("Anführungszeichen als text: "+"\"");
