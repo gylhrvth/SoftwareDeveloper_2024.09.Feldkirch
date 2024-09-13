@@ -21,9 +21,16 @@ public class ChristmasTree {
             }
             System.out.println();
         }
-        for (int leaves = 0; leaves < size ; leaves++) {
+        for (int leaves = 0; leaves < size; leaves++) {
             System.out.print("O   ");
             ;
+
+        }
+        System.out.println();
+
+        for (int trunk = 0; trunk < size / 2 - 2; trunk++) {
+            System.out.printf("%14d ++++ \n", size);
+
 
         }
 
@@ -31,3 +38,6 @@ public class ChristmasTree {
 
 
 }
+
+
+
