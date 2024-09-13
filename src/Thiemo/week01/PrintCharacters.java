@@ -3,56 +3,66 @@ package Thiemo.week01;
 public class PrintCharacters {
     public static void main(String[] args) {
 //        System.out.println("-----------");
-//        System.out.println("--Übung 1--");
+//        System.out.println("--characters--");
 //        System.out.println("-----------");
 //        printchars("x ", 10);
 //        System.out.println("-----------");
-//        System.out.println("--Übung 2--");
+//        System.out.println("--suqare--");
 //        System.out.println("-----------");
 //        printsqaure("x ", 10);
 //        System.out.println("-----------");
-//        System.out.println("--Übung 3--");
+//        System.out.println("--rectangle--");
 //        System.out.println("-----------");
 //        printrectangle("x ", 2, 5);
 //        System.out.println("-----------");
-//        System.out.println("--Übung 4--");
+//        System.out.println("--trinagle--");
 //        System.out.println("-----------");
 //        printtriangleBottomLeft("x ", 4);
 //        System.out.println("-----------");
-//        System.out.println("--Übung 5--");
+//        System.out.println("--triagnelBottomleft--");
 //        System.out.println("-----------");
 //        printtriangleTopLeft("x ", 5);
 //        System.out.println("-----------");
-//        System.out.println("--Übung 6--");
+//        System.out.println("--triangleTopright--");
 //        System.out.println("-----------");
 //        printtriangleTopRight("x ", 5);
-//        System.out.println("-----------");
-//        System.out.println("--Übung 7--");
-//        System.out.println("-----------");
-//        printtriangleBottomRight("x ", 5);
+        System.out.println("===================");
+        System.out.println("--triangleBottomright--");
+        System.out.println("===================");
+        printtriangleBottomRight("x ", 10);
 //        System.out.println("-----------");
 //        System.out.println("-Bonusübung");
 //        System.out.println("-----------");
 //        Bonusuebung("x ", 5);
-        System.out.println("-----------");
-        System.out.println("--Übung 8--");
-        System.out.println("-----------");
-        EmptySquareX("x ", 10);
-        System.out.println("-----------");
-        System.out.println("--Übung 9--");
-        System.out.println("-----------");
-        EmptySquareA("A ", 3);
-        System.out.println("-----------");
-        System.out.println("--Übung 10-");
-        System.out.println("-----------");
-        printSlash("x ", 3, true);
-        printSlash("y ", 4, false);
-        System.out.println("-----------");
-        System.out.println("--Übung 11-");
-        System.out.println("-----------");
-        printtriangle1("x ", 3);
-
-
+//        System.out.println("-----------");
+//        System.out.println("--emtpySquare--");
+//        System.out.println("-----------");
+//        EmptySquareX("x ", 10);
+//        System.out.println("-----------");
+//        System.out.println("--emtpySquareA--");
+//        System.out.println("-----------");
+//        EmptySquareA("A ", 3);
+//        System.out.println("-----------");
+//        System.out.println("--printslash-");
+//        System.out.println("-----------");
+//        printSlash("x ", 3, true);
+//        printSlash("y ", 4, false);
+//        System.out.println("-----------");
+//        System.out.println("--triangle 3X-");
+//        System.out.println("-----------");
+//        printtriangle1("x ", 3);
+//        System.out.println("===============");
+//        System.out.println("==triangle 5X");
+//        System.out.println("===============");
+//        printtriangle2("x ", 5);
+//        System.out.println("===============");
+//        System.out.println("==Rhombus 7X");
+//        System.out.println("===============");
+//        printrhombus("x ", 7);
+        System.out.println("===============");
+        System.out.println("==PrintX 5X");
+        System.out.println("===============");
+        printX("x ", 6);
     }
 
     //Übung 1 (text: x count: 10)
@@ -109,7 +119,7 @@ public class PrintCharacters {
     public static void printtriangleTopRight(String text, int count) {
         for (int row = 0; row < count; row++) {
             for (int spacebar = 0; spacebar < row; spacebar++) {
-                System.out.print(". ");
+                System.out.print(".");
             }
             for (int column = 0; column < count - row; ++column) {
                 System.out.print(text);
@@ -122,7 +132,7 @@ public class PrintCharacters {
     public static void printtriangleBottomRight(String text, int count) {
         for (int row = 0; row < count; row++) {
             for (int spacebar = 0; spacebar < count - row - 1; spacebar++) {
-                System.out.print(". ");
+                System.out.print(".");
             }
             for (int column = 0; column <= row; ++column) {
                 System.out.print(text);
@@ -160,82 +170,148 @@ public class PrintCharacters {
         }
         for (int columns = 0; columns < count; ++columns) {
             System.out.print(text);
-    }
-        System.out.println();
-}
-
-
-//Übung 9 (text: x count: 10)
-public static void EmptySquareA(String text, int count) {
-    for (int columns = 0; columns < count; ++columns) {
-        System.out.print(text);
-    }
-    System.out.println();
-    for (int row = 2; row < count; row++) {
-        System.out.print(text);
-        for (int spacebar = 2; spacebar < count; ++spacebar) {
-            System.out.print(". ");
         }
-        System.out.println(text);
+        System.out.println();
     }
-    for (int columns = 0; columns < count; ++columns) {
-        System.out.print(text);
-    }
-    System.out.println();
-}
 
-//Übung 10 (text: x count: 3)
-public static void printSlashBackward(String text, int count) {
-    for (int row = 0; row < count; row++) {
-        for (int column = 0; column < count; ++column) {
-            if (row == column) {
-                System.out.print(text);
-            } else {
+
+    //Übung 9 (text: x count: 10)
+    public static void EmptySquareA(String text, int count) {
+        for (int columns = 0; columns < count; ++columns) {
+            System.out.print(text);
+        }
+        System.out.println();
+        for (int row = 2; row < count; row++) {
+            System.out.print(text);
+            for (int spacebar = 2; spacebar < count; ++spacebar) {
                 System.out.print(". ");
             }
+            System.out.println(text);
+        }
+        for (int columns = 0; columns < count; ++columns) {
+            System.out.print(text);
         }
         System.out.println();
     }
-    System.out.println();
-}
 
-public static void printSlashForward(String text, int count) {
-    for (int row = 0; row < count; row++) {
-        for (int column = 0; column < count; ++column) {
-            if (row + column + 1 == count) {
-                System.out.print(text);
-            } else {
-                System.out.print(". ");
+    //Übung 10 (text: x count: 3)
+    public static void printSlashBackward(String text, int count) {
+        for (int row = 0; row < count; row++) {
+            for (int column = 0; column < count; ++column) {
+                if (row == column) {
+                    System.out.print(text);
+                } else {
+                    System.out.print(". ");
+                }
             }
+            System.out.println();
         }
         System.out.println();
-
     }
-}
 
-public static void printSlash(String text, int count, boolean isBackslash) {
-    if (isBackslash) {
-        printSlashBackward(text, count);
-    } else {
-        printSlashForward(text, count);
+    public static void printSlashForward(String text, int count) {
+        for (int row = 0; row < count; row++) {
+            for (int column = 0; column < count; ++column) {
+                if (row + column + 1 == count) {
+                    System.out.print(text);
+                } else {
+                    System.out.print(". ");
+                }
+            }
+            System.out.println();
+
+        }
     }
-}
 
-public static void printtriangle1(String text, int count) {
+    public static void printSlash(String text, int count, boolean isBackslash) {
+        if (isBackslash) {
+            printSlashBackward(text, count);
+        } else {
+            printSlashForward(text, count);
+        }
+    }
+
+    public static void printtriangle1(String text, int size) {
 //        System.out.println();
 //        System.out.println("  x  ");
 //        System.out.println(" x x ");
 //        System.out.println("xxxxx");
 //        System.out.println();
-    for (int row = 0; row < count; row++) {
-        for (int column = 0; column < count + 2; column++) {
-            if ((column == 0) || (row == 0)) {
-                System.out.print(text);
-            } else {
-                System.out.print(". ");
+        for (int row = 0; row < size; row++) {
+            for (int column = 0; column < 2 * size - 1; column++) {
+                if (row + column == size - 1) {
+                    System.out.print(text);
+                } else if (column == row + size - 1) {
+                    System.out.print(text);
+                } else if (row == size - 1) {
+                    System.out.print(text);
+                } else {
+                    System.out.print(". ");
+                }
             }
+            System.out.println();
         }
-        System.out.println();
     }
-}
+
+    public static void printtriangle2(String text, int size) {
+        for (int reihe = 0; reihe < size; reihe++) {
+            for (int zeile = 0; zeile < 2 * size - 1; ++zeile) {
+                if (reihe + zeile == size - 1) {
+                    System.out.print(text);
+                } else if (zeile == reihe + size - 1) {
+                    System.out.print(text);
+                } else if (reihe == size - 1) {
+                    System.out.print(text);
+                } else {
+                    System.out.print(". ");
+                }
+            }
+            System.out.println();
+        }
+
+    }
+
+    public static void printrhombus(String text, int size) {
+        for (int reihe = 0; reihe < 2 * size - 1; reihe++) {
+            for (int zeile = 0; zeile < 2 * size - 1; ++zeile) {
+                if (reihe + zeile == size - 1) {
+                    //   System.out.print("A ");
+                    System.out.print(zeile + reihe);
+                } else if (zeile == reihe + size - 1) {
+                    //   System.out.print("B ");
+                    System.out.print(zeile);
+                } else if (reihe == zeile + size - 1) {
+                    //  System.out.print("C ");
+                    System.out.print(reihe);
+                } else if (reihe + zeile == (size - 1) * 3) {
+                    //System.out.print("D ");
+                    System.out.print(zeile + reihe);
+                } else {
+                    System.out.print(". ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    public static void printX(String text, int size) {
+        if (size % 2 == 0) {
+            size = size - 1;
+            // size--;
+
+        }
+        for (int reihe = 0; reihe < size; reihe++) {
+            for (int zeile = 0; zeile < size; zeile++) {
+                if (reihe == zeile) {
+                    System.out.print(text);
+                } else if (reihe == size - zeile - 1) {
+                    System.out.print(text);
+                } else {
+                    System.out.print(". ");
+                }
+
+            }
+            System.out.println();
+        }
+    }
 }

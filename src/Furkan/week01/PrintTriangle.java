@@ -1,8 +1,8 @@
-package Akif_Malik.week01;
+package Furkan.week01;
 
-public class PrintTriangle5 {
+public class PrintTriangle {
     public static void main(String[] args) {
-        printTriangle("x ", 7);
+        printTriangle("x", 3);
     }
 
     public static void printTriangle(String text, int size) {
@@ -12,10 +12,10 @@ public class PrintTriangle5 {
                     System.out.print(text);
                 } else if (col == row + size - 1) {
                     System.out.print(text);
-                } else if (row == size - 1) {
+                } else if (row == size -1){
                     System.out.print(text);
                 } else {
-                    System.out.print(". ");
+                    System.out.print(".");
                 }
             }
             System.out.println();
