@@ -37,7 +37,7 @@ public class PrintChristmastreeV1 {
 
 
     public static void printBottom(int size) {
-        int space = 6;
+        int space = size + 4;
         int bottom = 5;
         for (int i = 0; i < size; i++) {
             Print("'", space);
