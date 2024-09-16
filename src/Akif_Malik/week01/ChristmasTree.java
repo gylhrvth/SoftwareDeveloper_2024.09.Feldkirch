@@ -32,10 +32,11 @@ public class ChristmasTree {
         System.out.println();
 
         for (int trunk = 0; trunk < size / 2 - 1; trunk++) {
-            System.out.printf(Colors.COLORS[7]+"%13d +++++ \n"+ Colors.RESET, size);
+            System.out.printf(Colors.COLORS[7]+"%19s \n"+ Colors.RESET,"+++++");
 
 
         }
+        System.out.println();
 
     }
 
