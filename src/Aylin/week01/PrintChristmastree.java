@@ -4,19 +4,22 @@ public class PrintChristmastree {
     public static void main(String[] args) {
         System.out.println("Print Christmastree");
         System.out.println();
-        printChristmastree(13);
+        printChristmastree(7);
     }
 
     public static void printChristmastree(int count) {
         if (count % 2 == 0) {
             count--;
         }
+        String greenStar = "\u001B[32m*\u001B[0m";
+        String brownStamm = "\u001B[33m+\u001B[0m";
+
         for (int row = 0; row < count; row++) {
-            for (int p = 0; p < count - row - 1; p++) {
+            for (int punkt = 0; punkt < count - row - 1; punkt++) {
                 System.out.print(".");
             }
             for (int stern = 0; stern < 2 * row + 1; stern++) {
-                System.out.print("*");
+                System.out.print(greenStar);
             }
             System.out.println();
         }
@@ -26,14 +29,14 @@ public class PrintChristmastree {
         System.out.println();
 
         if(count < 5 && count > 2){
-            System.out.println("  +");
+            System.out.println("  " + brownStamm);
         }else if(count < 3) {
-            System.out.println("+");
+            System.out.println(brownStamm);
         }else{
-            for(int stamm = 0; stamm < count / 4; stamm++) {
-                for (int j = 0; j < 3 * (count / 2); j++) {
-                    if (j > count / 2) {
-                        System.out.print("+");
+            for(int stammHöhe = 0; stammHöhe < count / 4; stammHöhe++) {
+                for (int stammBreite = 0; stammBreite < 3 * (count / 2); stammBreite++) {
+                    if (stammBreite > count / 2) {
+                        System.out.print(brownStamm);
                     } else {
                         System.out.print(".");
                     }
