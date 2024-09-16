@@ -5,7 +5,6 @@ public class PrintChristmastree {
         System.out.println("Print Christmastree");
         System.out.println();
         printChristmastree(7);
-        System.out.println();
     }
 
     public static void printChristmastree(int count) {
