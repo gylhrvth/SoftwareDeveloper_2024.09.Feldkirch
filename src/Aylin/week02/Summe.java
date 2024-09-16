@@ -19,7 +19,6 @@ public class Summe {
     }
     public static void schleife(int a){
         int sum = 20;
-
         for (int i = 21; i <= 50; i++) {
             printRechnung(sum, i, (sum + i));
             sum = sum + i;
