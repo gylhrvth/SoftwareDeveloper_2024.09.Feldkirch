@@ -1,9 +1,12 @@
 package Akif_Malik.week01;
 
+import Sandro.Colors;
+
 public class ChristmasTree {
     public static void main(String[] args) {
-        printChristmasTree("* ", 9);
-
+        System.out.println("ChristmasTree");
+        System.out.println();
+        printChristmasTree(Colors.COLORS[2] + "* " + Colors.RESET, 9);
     }
 
     public static void printChristmasTree(String text, int size) {
@@ -16,23 +19,24 @@ public class ChristmasTree {
                 } else if (row == size - 1) {
                     System.out.print(text);
                 } else {
-                    System.out.print(". ");
+                    System.out.print(Colors.COLORS[3]+". "+ Colors.RESET);
                 }
             }
             System.out.println();
         }
         for (int leaves = 0; leaves < size; leaves++) {
-            System.out.print("O   ");
+            System.out.print(Colors.COLORS[1]+"O   "+ Colors.RESET);
             ;
 
         }
         System.out.println();
 
-        for (int trunk = 0; trunk < size / 2 - 2; trunk++) {
-            System.out.printf("%14d ++++ \n", size);
+        for (int trunk = 0; trunk < size / 2 - 1; trunk++) {
+            System.out.printf(Colors.COLORS[7]+"%19s \n"+ Colors.RESET,"+++++");
 
 
         }
+        System.out.println();
 
     }
 
