@@ -6,12 +6,11 @@ public class Summe {
         System.out.println("Summe von 20 bis 50 addiert");
         System.out.println("===========================");
 
-        printsumfromto(21,50);
+        printsumfromto(21,50,20);
     }
 
-    public static void printsumfromto(int start, int end) {
-        int sum = 20;
-        for (int zahl = start;  zahl < end ; zahl++) {
+    public static void printsumfromto(int start, int end, int sum) {
+        for (int zahl = start;  zahl <= end ; zahl++) {
             int oldsum = sum;
             sum += zahl;
             System.out.println("Rechenweg: " +oldsum + " + " + zahl + " = " + sum);
