@@ -4,7 +4,7 @@ public class PrintChristmastree {
     public static void main(String[] args) {
         System.out.println("================Print X-Mas Tree================");
         System.out.println();
-        printWholeTree(9);
+        printWholeTree(15);
         System.out.println();
         System.out.println("================================================");
 
