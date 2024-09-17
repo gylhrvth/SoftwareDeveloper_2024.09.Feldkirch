@@ -3,6 +3,7 @@ package Gyula.week02;
 public class XmasTree {
     public static void main(String[] args) {
         printXmasTreeWithLoops(9);
+        System.out.println();
         printXmasTreeWithMatrix(9);
     }
 
@@ -10,11 +11,18 @@ public class XmasTree {
         return ((2 * treeSize - 1) / 8) * 2 + 1;
     }
 
+    public static int getTrunkHeight(int treeSize){
+        return treeSize / 8 + 1;
+    }
+
+    public static int getSpaceNextToTrunk(int treeSize){
+        return ((2 * treeSize - 1) - getTrunkWidth(treeSize)) / 2;
+    }
 
     public static void printXmasTreeWithMatrix(int size){
-        int trunkHeight = size / 8 + 1;
+        int trunkHeight = getTrunkHeight(size);
         int trunkWidth = getTrunkWidth(size);
-        int placeNextToTrunk = ((2 * size - 1) - trunkWidth) / 2;
+        int placeNextToTrunk = getSpaceNextToTrunk(size);
 
         for (int row = 0; row < size + 1 + trunkHeight; row++) {
             for (int col = 0; col < 2 * size - 1; col++) { // Tree
@@ -61,9 +69,10 @@ public class XmasTree {
         }
         System.out.println();
         // Stamm
+        int trunkHeight = getTrunkHeight(size);
         int trunkWidth = getTrunkWidth(size);
-        int placeNextToTrunk = ((2 * size - 1) - trunkWidth) / 2;
-        for (int row = 0; row < size / 8 + 1; row++) {
+        int placeNextToTrunk = getSpaceNextToTrunk(size);
+        for (int row = 0; row < trunkHeight; row++) {
             // Space left from trunk
             for (int column = 0; column < placeNextToTrunk; column++) {
                 System.out.print(" ");

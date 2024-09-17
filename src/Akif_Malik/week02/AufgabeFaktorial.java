@@ -7,17 +7,16 @@ public class AufgabeFaktorial {
         System.out.println(Colors.COLORS[1] + "------------------" + Colors.RESET);
         System.out.println(Colors.COLORS[5] + "Bonus Aufgabe" + Colors.RESET);
         System.out.println(Colors.COLORS[1] + "------------------" + Colors.RESET);
-        Faktorial(10, 10);
-    }
 
+        int i = 1;
+        long faktorial = 1;
+        int count = 20;
 
+        for (i = 1; i <= count; i++) {
+            faktorial = faktorial * i;
 
-    public static void Faktorial(int number, int produkt){
-        for (int i = 1; i <= 20; i++) {
-            System.out.println(Colors.COLORS[6] + i + "!  =" + Colors.RESET);
-
+            System.out.printf("%2d! = %20d \n", i, faktorial);
         }
     }
-
 
 }
