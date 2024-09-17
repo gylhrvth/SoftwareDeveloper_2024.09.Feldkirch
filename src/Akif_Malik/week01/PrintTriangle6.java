@@ -2,7 +2,7 @@ package Akif_Malik.week01;
 
 public class PrintTriangle6 {
     public static void main(String[] args) {
-        printTriangle("x ", 1);
+        printTriangle("x ", 8);
 
     }
 

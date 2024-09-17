@@ -16,8 +16,8 @@ public class FormatString {
 
 
         for (int i = 1; i < 200;  i= i+19) {
-            //System.out.println(i);
-            //System.out.printf("%3d\n", i);
+          //  System.out.println(i);
+          //  System.out.printf("%3d\n", i);
             System.out.printf("%3d --> %10s \n", i,"test");
         }
     }
