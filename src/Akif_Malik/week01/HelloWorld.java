@@ -1,4 +1,4 @@
-package Akif_Malik;
+package Akif_Malik.week01;
 
 public class HelloWorld {
     public static void main(String[] args) {

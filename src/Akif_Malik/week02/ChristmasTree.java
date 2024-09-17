@@ -1,4 +1,4 @@
-package Akif_Malik.week01;
+package Akif_Malik.week02;
 
 import Sandro.Colors;
 
@@ -19,29 +19,31 @@ public class ChristmasTree {
                 } else if (row == size - 1) {
                     System.out.print(text);
                 } else {
-                    System.out.print(Colors.COLORS[3]+". "+ Colors.RESET);
+                    System.out.print(Colors.COLORS[3] + ". " + Colors.RESET);
                 }
             }
             System.out.println();
         }
         for (int leaves = 0; leaves < size; leaves++) {
-            System.out.print(Colors.COLORS[1]+"O   "+ Colors.RESET);
+            System.out.print(Colors.COLORS[1] + "O   " + Colors.RESET);
             ;
 
         }
         System.out.println();
 
         for (int trunk = 0; trunk < size / 2 - 1; trunk++) {
-            System.out.printf(Colors.COLORS[7]+"%19s \n"+ Colors.RESET,"+++++");
+            System.out.printf(Colors.COLORS[7] + "%19s \n" + Colors.RESET, "+++++");
 
 
         }
         System.out.println();
 
+
     }
 
-
 }
+
+
 
 
 
