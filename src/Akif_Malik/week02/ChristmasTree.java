@@ -26,7 +26,7 @@ public class ChristmasTree {
         }
         for (int leaves = 0; leaves < size; leaves++) {
             System.out.print(Colors.COLORS[1] + "O   " + Colors.RESET);
-            ;
+
 
         }
         System.out.println();

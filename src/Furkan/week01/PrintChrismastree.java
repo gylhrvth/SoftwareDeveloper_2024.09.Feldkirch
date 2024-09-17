@@ -28,10 +28,10 @@ public class PrintChrismastree {
         }
         System.out.println();
 
-        for (int trunk = 0; trunk <= size - 1; trunk++) {
+        for (int trunk = 0; trunk <=  size - 1; trunk++) {
             System.out.print(" ");
         }
-        System.out.println("");
+        System.out.println("+");
     }
 
 
