@@ -12,8 +12,9 @@ public class Summe {
     public static void printsumfromto(int start, int end) {
         int sum = 20;
         for (int zahl = start;  zahl < end ; zahl++) {
+            int oldsum = sum;
             sum += zahl;
-            System.out.println("rechenweg "+ zahl + " = " + sum);
+            System.out.println("Rechenweg: " +oldsum + " + " + zahl + " = " + sum);
 
         }
     }
