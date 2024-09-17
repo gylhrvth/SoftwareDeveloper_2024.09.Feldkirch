@@ -31,7 +31,7 @@ public class Faktorial {
     public static void faktorialerweitert(int start, int end, long sum) {
         for (int i = start; i <= end; i++) {
             sum = sum * i;
-            System.out.printf("%2d! = %25d \n", i, sum);
+            System.out.printf("%2d! = %20d \n", i, sum);
 
         }
 
