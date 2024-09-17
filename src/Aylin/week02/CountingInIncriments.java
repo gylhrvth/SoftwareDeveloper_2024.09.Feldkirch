@@ -6,7 +6,7 @@ public class CountingInIncriments {
         int ende = 100;
         float komma = 0.1f;
 
-        for (start = 0.1f; start <= ende ; start+= 0.1f) {
+        for (start = komma; start <= ende ; start+= komma) {
             System.out.printf("%-2.1f \n", start);
         }
         System.out.println();
@@ -14,9 +14,10 @@ public class CountingInIncriments {
 
         double begin = 0;
         int end = 100;
+        double decimal = 0.1f;
 
-        for (begin = 0.1; begin <= end ; begin+= 0.1) {
-            System.out.printf("%1.1f \n", begin);
+        for (begin = decimal; begin <= end ; begin+= decimal) {
+            System.out.printf("%-1.1f \n", begin);
         }
     }
 }
