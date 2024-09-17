@@ -11,6 +11,8 @@ public class TeilneUndHerrschen {
             System.out.println(i + " / " + withoutDecimal + " = " + (i / withoutDecimal));
             System.out.println(i + " / " + withDecimal + " = " + i / withDecimal);
         }
+        System.out.println();
+        System.out.println("2. Möglichkeit");
 
         for (int i = start; i <= ende ; i++) {
             System.out.println(i + " / 5 = " + (i / 5));
