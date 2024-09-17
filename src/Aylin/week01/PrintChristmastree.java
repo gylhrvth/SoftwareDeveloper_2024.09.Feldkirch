@@ -4,7 +4,7 @@ public class PrintChristmastree {
     public static void main(String[] args) {
         System.out.println("Print Christmastree");
         System.out.println();
-        printChristmastree(7);
+        printChristmastree(1);
     }
 
     public static void printChristmastree(int count) {
@@ -15,10 +15,10 @@ public class PrintChristmastree {
         String brownStamm = "\u001B[33m+\u001B[0m";
 
         for (int row = 0; row < count; row++) {
-            for (int punkt = 0; punkt < count - row - 1; punkt++) {
+            for (int dot = 0; dot < count - row - 1; dot++) {
                 System.out.print(".");
             }
-            for (int stern = 0; stern < 2 * row + 1; stern++) {
+            for (int star = 0; star < 2 * row + 1; star++) {
                 System.out.print(greenStar);
             }
             System.out.println();
