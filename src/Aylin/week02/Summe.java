@@ -19,13 +19,19 @@ public class Summe {
     }
     public static void schleife(int a){
         int sum = 20;
-        for (int i = 21; i <= 50; i++) {
+        /*for (int i = 21; i <= 50; i++) {
             printRechnung(sum, i, (sum + i));
             sum = sum + i;
 
             //printRechnung(sum, i, sum);
             //System.out.println(sum);
             //System.out.println(sum + i);
+        }*/
+        int mitte = 21;
+        int ende = 50;
+        for (int i = mitte; i <= ende; i++) {
+            printRechnung(sum, mitte ++, (sum + i));
+            sum = sum + i;
         }
     }
 }
