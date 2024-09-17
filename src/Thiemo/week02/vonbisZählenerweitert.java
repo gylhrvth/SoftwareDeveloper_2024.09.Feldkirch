@@ -4,10 +4,10 @@ public class vonbisZählenerweitert {
     public static void main(String[] args) {
         float start = 0;
         float ende = 100.0f;
-        float komma = 0.1f;
+        float increment = 0.1f;
 
-        for (start = komma; start <= ende ; start+= komma) {
-            System.out.printf("%-2.1f \n", start);
+        for (start = increment; start <= ende ; start+= increment) {
+            System.out.printf("%5.1f \n", start);
         }
         System.out.println();
         System.out.println("2. Variante");
@@ -18,4 +18,4 @@ public class vonbisZählenerweitert {
     }
 }
 
-}
+
