@@ -13,11 +13,11 @@ public class ZeroToOneHundred_1 {
 
         float anfang = 0;
         int ende = 100;
-        float aufrunden = 0.1f;
+//        float aufrunden = 0.1f;
 
 
         for (anfang = 0.1f; anfang <= ende; anfang += 0.1f) {
-            System.out.printf("%2.1f  \n", anfang);
+            System.out.printf("%3.1f  \n", anfang);
 
             System.out.println(Colors.COLORS[4] + "-----" + Colors.RESET);
 

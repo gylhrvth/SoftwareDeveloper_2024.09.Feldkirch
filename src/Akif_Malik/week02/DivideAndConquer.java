@@ -4,6 +4,7 @@ import Sandro.Colors;
 
 public class DivideAndConquer {
     public static void main(String[] args) {
+
         System.out.println();
         System.out.println();
         System.out.println(Colors.COLORS[6] + "----------------------" + Colors.RESET);
@@ -11,18 +12,16 @@ public class DivideAndConquer {
         System.out.println(Colors.COLORS[6] + "----------------------" + Colors.RESET);
         System.out.println();
 
-        float anfang = 0;
-        int ende = 21;
-        float aufrunden = 0f;
+        int b = 5;
+        float a = 5.0f;
 
-
-        for (int i = 1; i < ende ; i++) {
-            System.out.print(i);
-            System.out.println("/");
-
-
-
+        for (int i = 0; i < 21; i++) {
+            System.out.println(i + " / " + b + " = " + i / b);
+            System.out.println(i + " / " + a + " = " + i / a);
+            System.out.println(Colors.COLORS[4] + "-----------------" + Colors.RESET);
         }
+
 
     }
 }
+
