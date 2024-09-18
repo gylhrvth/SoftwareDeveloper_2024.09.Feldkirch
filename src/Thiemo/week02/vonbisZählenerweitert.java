@@ -4,16 +4,16 @@ public class vonbisZählenerweitert {
     public static void main(String[] args) {
         float start = 0;
         float ende = 100.0f;
-        float increment = 0.1f;
+        float erweitern = 0.1f;
 
-        for (start = increment; start <= ende ; start+= increment) {
+        for (start = 0 ; start <= ende ; start+= erweitern) {
             System.out.printf("%5.1f \n", start);
         }
         System.out.println();
         System.out.println("2. Variante");
 
-        for (int sum = 0; sum <= 1000; sum++) {
-            System.out.println(sum / 10.0f);
+        for (int start2 = 0; start2 <= 1000; start2++) {
+            System.out.println(start2 / 10.0f);
         }
     }
 }
