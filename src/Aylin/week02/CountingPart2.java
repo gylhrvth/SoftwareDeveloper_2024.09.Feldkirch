@@ -6,7 +6,7 @@ public class CountingPart2 {
         int ende = 54;
 
         for (number = 0.0f; number <= ende; number+= 0.1f) {
-            System.out.printf("Result 1 digit = %-1.1f \n", number);
+            System.out.printf("Result 1 digit = %-5.1f \n", number);
             System.out.printf("Result 2 digit = %8.2f \n", number);
         }
     }
