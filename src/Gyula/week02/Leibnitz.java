@@ -4,7 +4,8 @@ public class Leibnitz {
     public static void main(String[] args) {
         //calculatePi();
         //calculatePiV2();
-        calculatePiV3();
+        calculatePiV3(0.01);
+        calculatePiV3(0.000000001);
     }
 
     public static void calculatePi(){
@@ -30,11 +31,11 @@ public class Leibnitz {
     }
 
 
-    public static void calculatePiV3(){
+    public static void calculatePiV3(double precision){
         double sumMax = 4.0;
         double sumMin = 0.0;
         int i = 1;
-        while (sumMax - sumMin > 0.00001) {
+        while (sumMax - sumMin > precision) {
             sumMax = sumMin + 4.0 / i;
             sumMin = sumMax - 4.0/(i + 2);
             i += 4;
