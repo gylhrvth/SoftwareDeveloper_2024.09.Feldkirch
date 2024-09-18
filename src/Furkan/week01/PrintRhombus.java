@@ -2,7 +2,7 @@ package Furkan.week01;
 
 public class PrintRhombus {
     public static void main(String[] args) {
-        printRhombus("x", 14);
+        printRhombus("x", 20);
     }
 
 
