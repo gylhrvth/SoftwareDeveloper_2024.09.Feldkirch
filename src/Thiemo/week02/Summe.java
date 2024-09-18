@@ -6,7 +6,7 @@ public class Summe {
         System.out.println("Summe von 20 bis 50 addiert");
         System.out.println("===========================");
 
-        printsumfromto(21,50,20);
+        printsumfromto(20,50,21);
     }
 
     public static void printsumfromto(int start, int end, int sum) {
@@ -17,5 +17,4 @@ public class Summe {
 
         }
     }
-
 }
