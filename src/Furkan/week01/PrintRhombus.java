@@ -2,7 +2,7 @@ package Furkan.week01;
 
 public class PrintRhombus {
     public static void main(String[] args) {
-        printRhombus("x", 14);
+        printRhombus("x", 20);
     }
 
 
@@ -10,13 +10,13 @@ public class PrintRhombus {
         for (int row = 0; row < 2* size-1  ; row++) {
             for (int col = 0; col < 2 * size-1 ; col++) {
                 if (row + col == size-1) {
-                    System.out.print("A");
+                    System.out.print(text);
                 } else if (col == row + size -1) {
-                    System.out.print("B");
+                    System.out.print(text);
                 } else if (row + col ==3* (size -1) ){
-                    System.out.print("C");
+                    System.out.print(text);
                 }else if (col == row -(size-1) ){
-                    System.out.print("D");
+                    System.out.print(text);
                 }
 
 
