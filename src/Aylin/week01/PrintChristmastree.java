@@ -16,7 +16,7 @@ public class PrintChristmastree {
 
         for (int row = 0; row < count; row++) {
             for (int dot = 0; dot < count - row - 1; dot++) {
-                System.out.print(".");
+                System.out.print(" ");
             }
             for (int star = 0; star < 2 * row + 1; star++) {
                 System.out.print(greenStar);
@@ -30,7 +30,7 @@ public class PrintChristmastree {
 
         if(count < 5 && count > 2){
             System.out.println("  " + brownStamm);
-        }else if(count < 3) {
+        }else if(count < 3 && count >= 0) {
             System.out.println(brownStamm);
         }else{
             for(int stammHöhe = 0; stammHöhe < count / 4; stammHöhe++) {
@@ -38,7 +38,7 @@ public class PrintChristmastree {
                     if (stammBreite > count / 2) {
                         System.out.print(brownStamm);
                     } else {
-                        System.out.print(".");
+                        System.out.print(" ");
                     }
                 }
                 System.out.println();
