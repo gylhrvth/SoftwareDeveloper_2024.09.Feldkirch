@@ -8,16 +8,16 @@ public class christmastree {
     }
 
     public static void christmastree(int count) {
-        for (int rowBaum = 0; rowBaum < count; rowBaum++) {
-            for (int spacebar = 0; spacebar < count - rowBaum - 1; spacebar++) {
+        for (int rowleafes = 0; rowleafes < count; rowleafes++) {
+            for (int spacebar = 0; spacebar < count - rowleafes - 1; spacebar++) {
                 System.out.print(".");
             }
-            for (int column = 0; column <= 2 * rowBaum; ++column) {
+            for (int columnleafes = 0; columnleafes <= 2 * rowleafes; ++columnleafes) {
                 System.out.print("*");
             }
             System.out.println();
         }
-        for (int rowEnd = 0; rowEnd < count; rowEnd++) {
+        for (int balls = 0; balls < count; balls++) {
             System.out.print("O ");
         }
         System.out.println();
