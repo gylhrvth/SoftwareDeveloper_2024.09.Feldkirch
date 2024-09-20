@@ -1,6 +1,7 @@
 package Thiemo.week02;
 
 import java.util.Random;
+import java.util.Scanner;
 
 /*
 Todo:  print text - Funktion
@@ -9,6 +10,12 @@ Todo:  print text - Funktion
        random zahl 0-100 generieren (new Random().nextInt() Variable
        Logik (vergleich random und spilerzahl) (zu hoch oder zu niedrig) if(else)
        Logik while (boolean true or false)
+       different modes ( easy (as many as you need),normal (10),hard (5),hell (2)(how many tries)
+       print counter how many tries are left
+       if playernumber is +30 or -30 within range of random number (with colors or print?)
+
+
+
 
 
 */
@@ -16,10 +23,91 @@ Todo:  print text - Funktion
 public class Ratespiel {
     public static void main(String[] args) {
 
-        System.out.println("Welcome to our Quiz Game" + "\n"+ "Guess the number between 0 and 100"+ "\n");
+//        int random = new Random().nextInt(0, 101);
+//        System.out.println(random);
 
-        int random = new Random().nextInt(0,101);
+
+        Random rand = new Random();
+        int random = rand.nextInt(101);
+//        System.out.println(random);
+        String User = "";
+        User = name("Welcome to the Quiz Game: guessing random numbers." + "\n" + "Please choose your Gamertag");
+        System.out.println();
+        System.out.println("Lets start  the game then " + User + "\n" + "Now try to guess the random number between 0 and 100" + "\n");
+
+
+        boolean gameover = false;
+
+        while (!gameover) {
+            int playernumber = range("Choose a Number", 0, 100);
+//            System.out.println("test" + playernumber);
+            if (playernumber == random) {
+                gameover = true;
+                System.out.println("Victory");
+            } else if (playernumber  < random) {
+                System.out.println(Colors.COLORS[1] + "number to small!"+ Colors.RESET );
+            } else if (playernumber  > random) {
+                System.out.println(Colors.COLORS[1] + "number to high!" + Colors.RESET);
+            } else if (playernumber <  random) {
+                System.out.println("number way to small!");
+            } else if (playernumber >  random) {
+                System.out.println("number way to high!");
+            }
+
+
+
+
+
+
+
+        }
+        System.out.println(Colors.COLORS[1] + " Congratulations, you wasted your time successfully" + Colors.RESET);
+
 
     }
 
+
+    public static String name(String userinfo) {
+
+        System.out.println(userinfo);
+        String text = "";
+        Scanner sc = new Scanner(System.in);
+        text = sc.nextLine();
+        return text;
+
+
+    }
+
+    public static int range(String userinfo, int minValue, int maxValue) {
+
+        int number = 0;
+        Scanner sc = new Scanner(System.in);
+        boolean richtigeEingabe = false;
+        // while (richtigeEingabe == false),
+        while (!richtigeEingabe) {
+            try {
+                System.out.println(userinfo);
+                String hilfsText = sc.nextLine();
+                number = Integer.parseInt(hilfsText);
+//                number = sc.nextInt();
+                if (number >= minValue && number <= maxValue) {
+                    richtigeEingabe = true;
+                } else {
+                    System.out.println("Versuchs von " + minValue + " bis " + maxValue + "\n"/*+userinfo*/);
+                }
+
+            } catch (NumberFormatException nfe)
+//            catch (InputMismatchException ime)
+            {
+                System.out.println("Fail! Maybe try a Number/Something else? " + " \n " + nfe +/*ime*/ "\n"/*+userinfo*/);
+//                sc.nextLine();
+            }
+        }
+        return number;
+    }
+
+
 }
+
+
+
