@@ -13,11 +13,18 @@ Todo:  print text - Funktion
        different modes ( easy (as many as you need),normal (10),hard (5),hell (2)(how many tries)
        print counter how many tries are left
        if playernumber is +30 or -30 within range of random number (with colors or print?)
-
-
-
-
-
+       1-4 spieler? (playing against each other or playing together?)(who guesses it first?)
+       range selber aussuchen
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
 */
 
 public class Ratespiel {
@@ -29,11 +36,17 @@ public class Ratespiel {
 
         Random rand = new Random();
         int random = rand.nextInt(101);
+        
+        
 //        System.out.println(random);
+        
+        
         String User = "";
-        User = name("Welcome to the Quiz Game: guessing random numbers." + "\n" + "Please choose your Gamertag");
+        User = menu("Welcome to the Quiz Game: guessing random numbers." + "\n" + "Please choose your Gamertag");
         System.out.println();
         System.out.println("Lets start  the game then " + User + "\n" + "Now try to guess the random number between 0 and 100" + "\n");
+
+
 
 
         boolean gameover = false;
@@ -67,7 +80,7 @@ public class Ratespiel {
     }
 
 
-    public static String name(String userinfo) {
+    public static String menu(String userinfo) {
 
         System.out.println(userinfo);
         String text = "";
@@ -99,7 +112,7 @@ public class Ratespiel {
             } catch (NumberFormatException nfe)
 //            catch (InputMismatchException ime)
             {
-                System.out.println("Fail! Maybe try a Number/Something else? " + " \n " + nfe +/*ime*/ "\n"/*+userinfo*/);
+                System.out.println("Fail! Maybe try a Number/Something else? " + /* + " \n " + nfe +ime*/ "\n"/*+userinfo*/);
 //                sc.nextLine();
             }
         }
