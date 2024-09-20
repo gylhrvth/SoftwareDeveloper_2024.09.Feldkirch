@@ -18,7 +18,7 @@ public class ConsoleInput {
         System.out.println("Wow, so you are from " + ort + ".");
 
 //        System.out.print("Enter your age: ");
-        age = printNumber("Enter your age: ");
+        age = printNumber("Enter your age: ", 0, 100);
         if(age==1){
             System.out.println("aah, you are " + age + " year old!");
         }else{
@@ -36,7 +36,7 @@ public class ConsoleInput {
         return scannerInput;
     }
 
-    public static int printNumber(String userInput){
+    public static int printNumber(String userInput, int minValue, int maxValue){
         System.out.print(userInput);
         int number = 0;
         Scanner sc = new Scanner(System.in);
@@ -44,11 +44,16 @@ public class ConsoleInput {
 
         while (!validNumber){
             try{
-                number = sc.nextInt();
-                validNumber = true;
-            }catch(InputMismatchException ime) {
-                System.out.print("Something went wrong. " + ime + "\n" + userInput);
-                sc.nextLine();
+                System.out.println(userInput);
+                String tempText = sc.nextLine();
+                number = Integer.parseInt(tempText);
+                if(number >= minValue && number <= maxValue ){
+                    validNumber = true;
+                }else{
+                    System.out.println("Input Number must be between " + minValue + "and " + maxValue);
+                }
+            }catch(NumberFormatException nfe) {
+                System.out.print("Something went wrong. " + nfe + "\n" + userInput);
             }
         }
         return number;
