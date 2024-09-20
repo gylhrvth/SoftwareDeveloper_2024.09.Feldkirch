@@ -3,21 +3,26 @@ package Thiemo.week01;
 public class christmastree {
     public static void main(String[] args) {
         System.out.println();
-        christmastree(20);
+        christmastree(10);
         System.out.println();
+
     }
 
     public static void christmastree(int count) {
-        for (int rowBaum = 0; rowBaum < count; rowBaum++) {
-            for (int spacebar = 0; spacebar < count - rowBaum - 1; spacebar++) {
+
+        String leafes = "\u001B[32m*\u001B[0m";
+        String trunk = "\u001B[33m+\u001B[0m";
+
+        for (int rowleafes = 0; rowleafes < count; rowleafes++) {
+            for (int spacebar = 0; spacebar < count - rowleafes - 1; spacebar++) {
                 System.out.print(".");
             }
-            for (int column = 0; column <= 2 * rowBaum; ++column) {
-                System.out.print("*");
+            for (int columnleafes = 0; columnleafes <= 2 * rowleafes; ++columnleafes) {
+                System.out.print(leafes);
             }
             System.out.println();
         }
-        for (int rowEnd = 0; rowEnd < count; rowEnd++) {
+        for (int balls = 0; balls < count; balls++) {
             System.out.print("O ");
         }
         System.out.println();
@@ -29,7 +34,7 @@ public class christmastree {
 
                 for (int columnTrunk = 0; columnTrunk < count / 2 ;  columnTrunk++) {
 
-                    System.out.print("+");
+                    System.out.print(trunk);
                 }
 
                 System.out.println();
