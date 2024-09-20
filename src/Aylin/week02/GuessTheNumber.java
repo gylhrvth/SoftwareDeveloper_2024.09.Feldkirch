@@ -12,7 +12,6 @@ public class GuessTheNumber {
     }
     public static int returnGame(String userInput, int minValue, int maxValue){
         int randomNumber = new Random().nextInt(0, 101);
-//        System.out.println(randomNumber);
         int number = 0;
         Scanner sc = new Scanner(System.in);
         boolean validNumber = false;
