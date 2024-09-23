@@ -13,34 +13,37 @@ public class Menu {
                 "3) Rhombus ");
 
         int selectSymbol = number ("Please choose now: ", 1, 3);
-        System.out.print("Your choice: " + selectSymbol);
+        System.out.println("Your choice: " + selectSymbol);
         if(selectSymbol == 1){
-            System.out.println();
+            menuXmasTree();
         }else if(selectSymbol == 2){
             menuSquare();
         }else if (selectSymbol == 3){
             menuRhombus();
         }
+
+        System.out.println("Do you want to print anything else? (j/n)");
+        if
     }
 
     public static void menuXmasTree (){
-        int size = number("Wie Groß soll das XmasTree sein? ", 1 , 50);
+        int size = number("How big should the XmasTree be? ", 0 , 54);
         Aylin.week01.PrintChristmastree.printChristmastree(size);
     }
 
     public static void menuSquare(){
-        int size = number("Wie Groß soll der Square sein? ", 2, 50);
-        String character = readText("Which Symbol should be used? ");
+        int size = number("How big should the Square be? ", 0, 54);
+        String character = readText("Which character should be used? ");
         Aylin.week01.Square.printEmptySquare(character, size);
     }
 
     public static void menuRhombus(){
-        int size = number("Wie Groß soll der Rhombus sein? ", 3, 50);
-        String character = readText("Which Symbol should be used? ");
+        int size = number("How big should the Rhombus be?", 0, 54);
+        String character = readText("Which character should be used? ");
         Aylin.week01.Rhombus.printRhombus(character, size);
     }
 
-    public static int number (String userInput, int firstNumber, int lastNumber){
+    public static int number (String userInput, int minValue, int maxValue){
         int number = 0;
         Scanner sc = new Scanner(System.in);
         boolean validNumber = false;
@@ -50,10 +53,10 @@ public class Menu {
                 System.out.println(userInput);
                 String tempText = sc.nextLine();
                 number = Integer.parseInt(tempText);
-                if(number >= firstNumber && number <= lastNumber ){
+                if(number >= minValue && number <= maxValue ){
                     validNumber = true;
                 }else{
-                    System.out.println("Input Number must be between " + firstNumber + "and " + lastNumber);
+                    System.out.println("Input Number must be between " + minValue + "and " + maxValue);
                 }
             }catch(NumberFormatException nfe) {
                 System.out.print("Something went wrong. " + nfe + "\n" + userInput);
