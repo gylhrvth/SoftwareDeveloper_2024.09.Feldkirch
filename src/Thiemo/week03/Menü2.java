@@ -5,7 +5,7 @@ import Thiemo.week02.Ratespiel2;
 
 import java.util.Scanner;
 
-public class menü {
+public class Menü2 {
 
     public static Scanner scanner = new Scanner(System.in);
 
