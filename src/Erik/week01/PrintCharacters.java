@@ -16,7 +16,7 @@ public class PrintCharacters {
         System.out.println();
         System.out.println("==========Trinangle 1==========");
         System.out.println();
-        printTrinangleBottomLeft("X ", 4);
+        printTriangleBottomLeft("X ", 4);
         System.out.println();
         System.out.println("==========Trinangle 2==========");
         System.out.println();
@@ -55,10 +55,6 @@ public class PrintCharacters {
         printSlash2("X ", 4, false);
         System.out.println();
         System.out.println("==================================");
-        System.out.println();
-        //printTriangleSmall("x ", 3);
-        System.out.println();
-        System.out.println("==================================");
     }
 
     //Aufgabe 1 Print Characters
@@ -88,8 +84,8 @@ public class PrintCharacters {
         }
     }
 
-    //Aufgabe 4 Print Trinangle 1 maxRep:4 Backslash
-    public static void printTrinangleBottomLeft(String text, int maxRep) {
+    //Aufgabe 4 Print Triangle 1 maxRep:4 Backslash
+    public static void printTriangleBottomLeft(String text, int maxRep) {
         for (int reihe = 0; reihe < maxRep; reihe++) {
             for (int letter = 0; letter < reihe + 1; letter++) {
                 System.out.print(text);
@@ -113,7 +109,7 @@ public class PrintCharacters {
     public static void printTriangleTopRight(String text, int maxRep) {
         for (int reihe = 0; reihe < maxRep; reihe++) {
             for (int point = 0; point < reihe; point++) {
-                System.out.print(". ");
+                System.out.print("  ");
             }
             for (int letter = 0; letter < maxRep - reihe; letter++) {
                 System.out.print(text);
@@ -127,7 +123,7 @@ public class PrintCharacters {
     public static void printTriangleBottomRight(String text, int maxRep) {
         for (int reihe = 0; reihe < maxRep; reihe++) {
             for (int point = 0; point < maxRep - reihe - 1; point++) {
-                System.out.print(". ");
+                System.out.print("  ");
             }
             for (int letter = 0; letter <= reihe; letter++) {
                 System.out.print(text);
@@ -149,7 +145,7 @@ public class PrintCharacters {
         for (int reihe = 1; reihe < maxRep - 1; reihe++) {
             System.out.print(text);
             for (int point = 0; point < maxRep - 2; point++) {
-                System.out.print(". ");
+                System.out.print("  ");
             }
             System.out.println(text);
         }
@@ -168,7 +164,7 @@ public class PrintCharacters {
         for (int reihe = 1; reihe < maxRep - 1; reihe++) {
             System.out.print(text);
             for (int point = 0; point < maxRep - 2; point++) {
-                System.out.print(". ");
+                System.out.print("  ");
             }
             System.out.println(text);
         }
@@ -246,9 +242,7 @@ public class PrintCharacters {
         }
     }
 }
-    //================================================================================================ 11.09
 
-    //================================================================================================ 12.09
 
 
 
