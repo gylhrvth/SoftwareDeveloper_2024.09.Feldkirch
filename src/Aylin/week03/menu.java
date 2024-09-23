@@ -12,7 +12,7 @@ public class menu {
         int selectSymbol = number ("Bitte wählen Sie nun: ", 1, 3);
         System.out.println("Your choice: " + selectSymbol);
         if(selectSymbol == 1){
-            System.out.println()
+            System.out.println();
         }else if(selectSymbol == 2){
             sizeSquare();
         }else if (selectSymbol == 3){
