@@ -7,12 +7,12 @@ public class GuessTheNumberVol2 {
     public static void main(String[] args) {
         int minValue = 0;
         int maxValue = 100;
-        String name = "";
+//        String name = "";
 
         System.out.println("Welcome to the ultimate guessing adventure! \nGuess the number between " + minValue + " and " + maxValue + " !");
-        name = greeting("Please Enter your Name: ");
+        String name = greeting("Please Enter your Name: ");
         System.out.println("Hello " + name + ". Let the game begin!");
-        theGame(5);
+        theGame(10);
     }
 
     public static void clearScreen() {
@@ -22,10 +22,10 @@ public class GuessTheNumberVol2 {
 
     public static String greeting (String userGreeting){
         System.out.print(userGreeting);
-        String userInput = "";
+//        String userInput = "";
         Scanner sc = new Scanner(System.in);
-        userInput = sc.nextLine();
-        return userInput;
+//        userInput = sc.nextLine();
+        return sc.nextLine();
     }
 
     public static void theGame(int count){
