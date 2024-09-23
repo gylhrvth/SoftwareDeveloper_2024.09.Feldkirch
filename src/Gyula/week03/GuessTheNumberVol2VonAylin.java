@@ -69,7 +69,7 @@ public class GuessTheNumberVol2VonAylin {
                     System.out.println("Input Number must be between " + minValue + " and " + maxValue);
                 }
             }catch(NumberFormatException nfe) {
-                System.out.print("Something went wrong. " + nfe + "\n" + userInput);
+                System.out.print("Something went wrong. " + nfe.getMessage() + "\n" + userInput);
             }
         }
         return number;
