@@ -118,7 +118,7 @@ public class RehearsalWeek02Donnerstag {
                 }
             } catch (NumberFormatException nfe) {
                 System.out.println("Sorry,that was not a Valid number");
-                //sc.nextLine();                                                       //dont need next.line, to read the input Try what is the difference
+                //sc.nextLine();                                                       //don't need next.line, to read the input Try what is the difference
             }
         }
         return number;
