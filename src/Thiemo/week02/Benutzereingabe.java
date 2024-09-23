@@ -38,10 +38,10 @@ public class Benutzereingabe {
     public static String einlesen(String userinfo) {
 
         System.out.println(userinfo);
-        String text = "";
+
         Scanner sc = new Scanner(System.in);
-        text = sc.nextLine();
-        return text;
+        String text = sc.nextLine();
+        return sc.nextLine();
 
     }
 
@@ -66,7 +66,7 @@ public class Benutzereingabe {
             }catch (NumberFormatException nfe)
 //            catch (InputMismatchException ime)
             {
-                System.out.println("Fail! Maybe try a Number/Something else? " + " \n " + nfe +/*ime*/ "\n"/*+userinfo*/);
+                System.out.println("Fail! Maybe try a Number/Something else? " + " \n " +/*ime*/ "\n"/*+userinfo*/);
 //                sc.nextLine();
             }
         }
