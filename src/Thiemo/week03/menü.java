@@ -17,16 +17,16 @@ public class menü {
 
 
 
-        if (menue == 1) {
-           Thiemo.week01.christmastree.christmastree();
-        }
-        else if (menue == 2) {
-         Thiemo.week01.emptysquare.EmptySquareX();
-        }
-        else if (menue == 3){
-            Thiemo.week01.rhombus.printrhombus();
-        }
-        System.out.println("Ok");
+//        if (menue == 1) {
+//           Thiemo.week01.christmastree.christmastree(1);
+//        }
+//        else if (menue == 2) {
+//         Thiemo.week01.emptysquare.EmptySquareX(1,1);
+//        }
+//        else if (menue == 3){
+//            Thiemo.week01.rhombus.printrhombus(,1);
+//        }
+//        System.out.println("Ok");
 
 
 
@@ -39,7 +39,7 @@ public class menü {
 
 
 //        public static void menueXmasstree
-//             int size =
+//
 //
 //        public static void menueQuader
 //
