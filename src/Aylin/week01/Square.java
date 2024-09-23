@@ -13,7 +13,7 @@ public class Square {
                 if (spalte == 0 || zeile == 0 || spalte == breite - 1 ||  zeile == breite - 1) {
                     System.out.print(text);
                 } else {
-                    System.out.print(". ");
+                    System.out.print(".");
                 }
             }
             System.out.println();
