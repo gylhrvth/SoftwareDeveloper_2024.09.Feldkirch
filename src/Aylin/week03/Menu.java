@@ -12,18 +12,16 @@ public class Menu {
                 "2) Square \n" +
                 "3) Rhombus ");
 
-        int selectSymbol = number ("Please choose now: ", 1, 3);
-        System.out.println("Your choice: " + selectSymbol);
-        if(selectSymbol == 1){
+        int userInput = number ("Please choose now: ", 1, 3);
+        System.out.println("Your choice: " + userInput);
+        if(userInput == 1){
             menuXmasTree();
-        }else if(selectSymbol == 2){
+        }else if(userInput == 2){
             menuSquare();
-        }else if (selectSymbol == 3){
+        }else if (userInput == 3){
             menuRhombus();
         }
 
-        System.out.println("Do you want to print anything else? (j/n)");
-        if
     }
 
     public static void menuXmasTree (){
