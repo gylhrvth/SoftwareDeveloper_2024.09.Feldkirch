@@ -2,7 +2,7 @@ package Aylin.week03;
 
 import java.util.Scanner;
 
-public class menu {
+public class Menu2 {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -12,8 +12,8 @@ public class menu {
                 "2) Square \n" +
                 "3) Rhombus ");
 
-        int selectSymbol = number ("Bitte wählen Sie nun: ", 1, 3);
-        System.out.println("Your choice: " + selectSymbol);
+        int selectSymbol = number ("Please choose now: ", 1, 3);
+        System.out.print("Your choice: " + selectSymbol);
         if(selectSymbol == 1){
             System.out.println();
         }else if(selectSymbol == 2){
