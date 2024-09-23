@@ -14,7 +14,6 @@ public class RateSpiel_Edited {
         int maxValue = 100;
         int guessingNumber = randomGenerator.nextInt(minValue, maxValue);
 
-        System.out.println(guessingNumber);
         String name = readString("What's your Name?");
         System.out.println("Hello " + name + " Welcome to the Ratespiel!");
         int number = giveNumber(minValue, maxValue);
