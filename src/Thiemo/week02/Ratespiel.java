@@ -56,25 +56,21 @@ public class Ratespiel {
 //            System.out.println("test" + playernumber);
             if (playernumber == random) {
                 gameover = true;
-                System.out.println("Victory");
-            } else if (playernumber  < random) {
-                System.out.println(Colors.COLORS[1] + "number to small!"+ Colors.RESET );
-            } else if (playernumber  > random) {
-                System.out.println(Colors.COLORS[1] + "number to high!" + Colors.RESET);
-            } else if (playernumber <  random) {
-                System.out.println("number way to small!");
-            } else if (playernumber >  random) {
-                System.out.println("number way to high!");
+                System.out.println("Win");
+
+            } else if (playernumber < random - 30) {
+                System.out.println("Number way too small!");
+            } else if (playernumber > random + 30) {
+                System.out.println("Number way too high!");
+            } else if (playernumber < random) {
+                System.out.println(Colors.COLORS[1] +"Number too small!" + Colors.RESET);
+            } else {
+                System.out.println(Colors.COLORS[4] +"Number too high!" + Colors.RESET);
             }
 
 
-
-
-
-
-
         }
-        System.out.println(Colors.COLORS[1] + " Congratulations, you wasted your time successfully" + Colors.RESET);
+        System.out.println(Colors.COLORS[3] + " Congratulations" +  Colors.RESET);
 
 
     }
@@ -106,7 +102,7 @@ public class Ratespiel {
                 if (number >= minValue && number <= maxValue) {
                     richtigeEingabe = true;
                 } else {
-                    System.out.println("Versuchs von " + minValue + " bis " + maxValue + "\n"/*+userinfo*/);
+                    System.out.println("Try a number betwenn " + minValue + " and " + maxValue + "\n"/*+userinfo*/);
                 }
 
             } catch (NumberFormatException nfe)
