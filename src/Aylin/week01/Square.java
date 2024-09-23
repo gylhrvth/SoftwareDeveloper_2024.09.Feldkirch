@@ -11,7 +11,7 @@ public class Square {
         for (int zeile = 0; zeile < breite; zeile++) {
             for (int spalte = 0; spalte < breite; spalte++) {
                 if (spalte == 0 || zeile == 0 || spalte == breite - 1 ||  zeile == breite - 1) {
-                    System.out.print("*");
+                    System.out.print("* ");
                 } else {
                     System.out.print(". ");
                 }
