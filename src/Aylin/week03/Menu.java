@@ -2,7 +2,7 @@ package Aylin.week03;
 
 import java.util.Scanner;
 
-public class Menu2 {
+public class Menu {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
