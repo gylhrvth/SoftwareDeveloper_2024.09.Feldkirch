@@ -3,7 +3,10 @@ package Aylin.week03;
 import java.util.Scanner;
 
 public class menu {
+    public static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
+
         System.out.println("Welcome to my Assingments. \nWhat would you like to print?\n" +
                         "1) XmasTree \n" +
                 "2) Square \n" +
@@ -14,25 +17,27 @@ public class menu {
         if(selectSymbol == 1){
             System.out.println();
         }else if(selectSymbol == 2){
-            sizeSquare();
+            menuSquare();
         }else if (selectSymbol == 3){
-            sizeRhombus();
+            menuRhombus();
         }
     }
 
-    public static void sizeXmasTree (){
+    public static void menuXmasTree (){
         int size = number("Wie Groß soll das XmasTree sein? ", 1 , 50);
         Aylin.week01.PrintChristmastree.printChristmastree(size);
     }
 
-    public static void sizeSquare (){
+    public static void menuSquare(){
         int size = number("Wie Groß soll der Square sein? ", 2, 50);
-          Aylin.week01.Square.printEmptySquare(size);
+        String character = readText("Which Symbol should be used? ");
+        Aylin.week01.Square.printEmptySquare(character, size);
     }
 
-    public static void sizeRhombus (){
+    public static void menuRhombus(){
         int size = number("Wie Groß soll der Rhombus sein? ", 3, 50);
-        Aylin.week01.Rhombus.printRhombus(size);
+        String character = readText("Which Symbol should be used? ");
+        Aylin.week01.Rhombus.printRhombus(character, size);
     }
 
     public static int number (String userInput, int firstNumber, int lastNumber){
@@ -55,5 +60,10 @@ public class menu {
             }
         }
         return number;
+    }
+
+    public static String readText (String message){
+        System.out.println(message);
+        return scanner.nextLine();
     }
 }
