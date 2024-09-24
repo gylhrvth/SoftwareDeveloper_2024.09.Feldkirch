@@ -19,7 +19,7 @@ public class Taschenrechnerextended {
 
             calculate = keepcalculating();
         }
-        System.out.println("Bye G.");
+        System.out.println(".");
     }
 
 
