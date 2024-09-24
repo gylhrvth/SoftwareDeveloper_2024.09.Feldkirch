@@ -22,8 +22,7 @@ public class Array {
         }
         return result;
 
-        public static int[] createAndFillArrayReversed(int size){
-            int
+
         }
 
 
@@ -32,4 +31,4 @@ public class Array {
 
 
 
-}
+
