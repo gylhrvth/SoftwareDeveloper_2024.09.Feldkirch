@@ -61,19 +61,53 @@ public class Ratespiel2 {
         while (!gameover && attemptsLeft > 0) {
             int playernumber = range("Choose a Number", 0, 100);
             attemptsLeft--; // Decrease number of attempts after each guess
-
             if (playernumber == random) {
                 gameover = true;
                 System.out.println(Colors.COLORS[2] + "Win! You've guessed the correct number!" + Colors.RESET);
-            } else if (playernumber < random - 30) {
-                System.out.println("Number way too small!");
-            } else if (playernumber > random + 30) {
-                System.out.println("Number way too high!");
-            } else if (playernumber < random) {
-                System.out.println(Colors.COLORS[1] +"Number too small!" + Colors.RESET);
             } else {
-                System.out.println(Colors.COLORS[4] +"Number too high!" + Colors.RESET);
+                // Give feedback based on the difficulty level
+                if (difficulty == 1) { // Easy
+                    if (playernumber < random - 30) {
+                        System.out.println("Number way too small!");
+                    } else if (playernumber > random + 30) {
+                        System.out.println("Number way too high!");
+                    } else if (playernumber < random) {
+                        System.out.println(Colors.COLORS[1] + "Number too small!" + Colors.RESET);
+                    } else {
+                        System.out.println(Colors.COLORS[4] + "Number too high!" + Colors.RESET);
+                    }
+                } else if (difficulty == 2) { // Medium
+                    if (playernumber < random - 20) {
+                        System.out.println("Number too small!");
+                    } else if (playernumber > random + 20) {
+                        System.out.println("Number too high!");
+                    } else if (playernumber < random) {
+                        System.out.println("Number smaller!");
+                    } else {
+                        System.out.println("Number larger!");
+                    }
+                } else if (difficulty == 3) { // Hard
+                    if (playernumber < random) {
+                        System.out.println("Too low!");
+                    } else {
+                        System.out.println("Too high!");
+                    }
+                } else { // Extreme (no hints)
+                    System.out.println("No hints in extreme mode! Keep guessing!");
+                }
             }
+//            if (playernumber == random) {
+//                gameover = true;
+//                System.out.println(Colors.COLORS[2] + "Win! You've guessed the correct number!" + Colors.RESET);
+//            } else if (playernumber < random - 30) {
+//                System.out.println("Number way too small!");
+//            } else if (playernumber > random + 30) {
+//                System.out.println("Number way too high!");
+//            } else if (playernumber < random) {
+//                System.out.println(Colors.COLORS[1] +"Number too small!" + Colors.RESET);
+//            } else {
+//                System.out.println(Colors.COLORS[4] +"Number too high!" + Colors.RESET);
+//            }
 
             // If out of attempts
             if (attemptsLeft > 0 && !gameover) {
