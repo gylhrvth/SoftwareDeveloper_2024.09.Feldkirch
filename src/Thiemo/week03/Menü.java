@@ -24,7 +24,7 @@ public class Menü {
             int userNumber = userInput("Choose between these numbers", 1, 4);
             if (userNumber == 4) {
                 Random rand = new Random();
-                userNumber = rand.nextInt(3) + 1;
+                userNumber = rand.nextInt(4);
                 System.out.println("Random choice: " + userNumber);
             }
             if (userNumber == 1) {
