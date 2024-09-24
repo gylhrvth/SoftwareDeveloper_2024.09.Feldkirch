@@ -3,27 +3,6 @@ package Thiemo.week02;
 import java.util.Random;
 import java.util.Scanner;
 
-    /*
-Todo:  print text - Funktion
-       Scanner (String und int) Funktion
-       range 0-100 (abfrage) -Funktion
-       random zahl 0-100 generieren (new Random().nextInt() Variable
-       Logik (vergleich random und spilerzahl) (zu hoch oder zu niedrig) if(else)
-       Logik while (boolean true or false)
-       different modes ( easy (as many as you need),normal (10),hard (5),hell (2)(how many tries)
-       print counter how many tries are left
-       if playernumber is +30 or -30 within range of random number (with colors or print?)
-       1-4 spieler? (playing against each other or playing together?)(who guesses it first?)
-       range selber aussuchen
-
-
-
-
-
-
-
-*/
-
 public class Ratespiel2 {
 
     public static void main(String[] args) {
