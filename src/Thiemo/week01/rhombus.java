@@ -8,7 +8,7 @@ public class rhombus {
         System.out.println("==Rhombus 7X");
         System.out.println("===============");
 
-        printrhombus("X ", 7);
+        printrhombus("T ", 7);
     }
 
     public static void printrhombus(String text, int size) {
@@ -31,7 +31,7 @@ public class rhombus {
 //                    System.out.print(zeile + reihe);
                     System.out.print(text);
                 } else {
-                    System.out.print(". ");
+                    System.out.print(".");
                 }
             }
             System.out.println();

@@ -7,7 +7,7 @@ public class emptysquare {
         System.out.println("-----------");
         System.out.println("--Übung 8--");
         System.out.println("-----------");
-        EmptySquareX("x ", 10);
+        EmptySquareX("T ", 10);
         System.out.println("-----------");
         System.out.println("--Übung 9--");
         System.out.println("-----------");
@@ -24,7 +24,7 @@ public class emptysquare {
         for (int row = 2; row < count; row++) {
             System.out.print(text);
             for (int spacebar = 2; spacebar < count; ++spacebar) {
-                System.out.print(". ");
+                System.out.print(".");
             }
             System.out.println(text);
         }
