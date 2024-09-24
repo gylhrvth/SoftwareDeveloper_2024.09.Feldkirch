@@ -28,7 +28,9 @@ public class ArrayNumber {
     public static int[] createAndFillArrayBackwards(int size) {
         int[] result = new int[size];
         for (int i = 0; i < result.length; i++) {
-            result[i] = /* size--;*/result.length - i;
+//            size --;
+//            result[i] = size;
+            result[i] = /* size--; size - i;*/result.length - i;
 
         }
         return result;
