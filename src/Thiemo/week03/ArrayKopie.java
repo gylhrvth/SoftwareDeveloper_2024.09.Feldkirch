@@ -32,6 +32,8 @@ public class ArrayKopie {
 
         int[]funarray = {100,50,25};
         System.out.println(Arrays.toString(funarray));
+        System.out.println();
+        System.out.println(funarray[2]);
     }
 
     public static int[] createAndFillArray(int size) {
