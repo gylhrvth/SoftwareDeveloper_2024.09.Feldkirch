@@ -3,27 +3,6 @@ package Thiemo.week02;
 import java.util.Random;
 import java.util.Scanner;
 
-    /*
-Todo:  print text - Funktion
-       Scanner (String und int) Funktion
-       range 0-100 (abfrage) -Funktion
-       random zahl 0-100 generieren (new Random().nextInt() Variable
-       Logik (vergleich random und spilerzahl) (zu hoch oder zu niedrig) if(else)
-       Logik while (boolean true or false)
-       different modes ( easy (as many as you need),normal (10),hard (5),hell (2)(how many tries)
-       print counter how many tries are left
-       if playernumber is +30 or -30 within range of random number (with colors or print?)
-       1-4 spieler? (playing against each other or playing together?)(who guesses it first?)
-       range selber aussuchen
-
-
-
-
-
-
-
-*/
-
 public class Ratespiel2 {
 
     public static void main(String[] args) {
@@ -61,19 +40,53 @@ public class Ratespiel2 {
         while (!gameover && attemptsLeft > 0) {
             int playernumber = range("Choose a Number", 0, 100);
             attemptsLeft--; // Decrease number of attempts after each guess
-
             if (playernumber == random) {
                 gameover = true;
                 System.out.println(Colors.COLORS[2] + "Win! You've guessed the correct number!" + Colors.RESET);
-            } else if (playernumber < random - 30) {
-                System.out.println("Number way too small!");
-            } else if (playernumber > random + 30) {
-                System.out.println("Number way too high!");
-            } else if (playernumber < random) {
-                System.out.println(Colors.COLORS[1] +"Number too small!" + Colors.RESET);
             } else {
-                System.out.println(Colors.COLORS[4] +"Number too high!" + Colors.RESET);
+                // Give feedback based on the difficulty level
+                if (difficulty == 1) { // Easy
+                    if (playernumber < random - 30) {
+                        System.out.println("Number way too small!");
+                    } else if (playernumber > random + 30) {
+                        System.out.println("Number way too high!");
+                    } else if (playernumber < random) {
+                        System.out.println(Colors.COLORS[1] + "Number too small!" + Colors.RESET);
+                    } else {
+                        System.out.println(Colors.COLORS[4] + "Number too high!" + Colors.RESET);
+                    }
+                } else if (difficulty == 2) { // Medium
+                    if (playernumber < random - 20) {
+                        System.out.println("Number too small!");
+                    } else if (playernumber > random + 20) {
+                        System.out.println("Number too high!");
+                    } else if (playernumber < random) {
+                        System.out.println("Number smaller!");
+                    } else {
+                        System.out.println("Number larger!");
+                    }
+                } else if (difficulty == 3) { // Hard
+                    if (playernumber < random) {
+                        System.out.println("Too low!");
+                    } else {
+                        System.out.println("Too high!");
+                    }
+                } else { // Extreme (no hints)
+                    System.out.println("No hints in extreme mode! Keep guessing!");
+                }
             }
+//            if (playernumber == random) {
+//                gameover = true;
+//                System.out.println(Colors.COLORS[2] + "Win! You've guessed the correct number!" + Colors.RESET);
+//            } else if (playernumber < random - 30) {
+//                System.out.println("Number way too small!");
+//            } else if (playernumber > random + 30) {
+//                System.out.println("Number way too high!");
+//            } else if (playernumber < random) {
+//                System.out.println(Colors.COLORS[1] +"Number too small!" + Colors.RESET);
+//            } else {
+//                System.out.println(Colors.COLORS[4] +"Number too high!" + Colors.RESET);
+//            }
 
             // If out of attempts
             if (attemptsLeft > 0 && !gameover) {

@@ -1,6 +1,7 @@
 package Erik.week03;
 
 import Gyula.ConsoleTools;
+
 import java.util.Arrays;
 
 public class ArrayNumber {
@@ -10,11 +11,11 @@ public class ArrayNumber {
         System.out.println(Arrays.toString(ar));
         System.out.println("===============================");
         int size_2 = ConsoleTools.readNumber("Gib die Größe des 2. Array's ein: ", 0, 10);
-        int[] ar_2 =createAndFillArray_2(size_2);
+        int[] ar_2 = createAndFillArray_2(size_2);
         System.out.println(Arrays.toString(ar_2));
     }
 
-    public static int[] createAndFillArray(int size){
+    public static int[] createAndFillArray(int size) {
         int[] result = new int[size];
         for (int i = 0; i < result.length; i++) {
             result[i] = i + 1;
@@ -22,10 +23,11 @@ public class ArrayNumber {
         return result;
     }
 
-    public static int[] createAndFillArray_2 (int size_2){
-        int [] result = new int [size_2];
-        for (int i = 0; i < result.length ; i++) {
-            result[i] = size_2 - i;
+    public static int[] createAndFillArray_2(int size_2) {
+        int[] result = new int[size_2];
+        for (int i = 0; i < result.length; i++) {
+            // result[i] = size_2 - i; funktioniert beides
+            result[i] = result.length - i;
         }
 
         return result;
