@@ -11,9 +11,11 @@ public class ArrayNumber {
         int size = ConsoleTools.readNumber("Size:", 0, 999);
         int[] array = createAndFillArray(size);
         System.out.println(Arrays.toString(array));
+        System.out.println();
 
         int[] array2 = createAndFillArrayBackwards(size);
         System.out.println(Arrays.toString(array2));
+        System.out.println();
 
     }
 
@@ -36,7 +38,5 @@ public class ArrayNumber {
         return result;
 
     }
-
-
 }
 
