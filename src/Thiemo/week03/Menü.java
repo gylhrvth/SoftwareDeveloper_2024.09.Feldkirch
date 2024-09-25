@@ -95,7 +95,7 @@ public class Menü {
         } else if (response.equals("N") || response.equals("n")) {
             return false;
         } else {
-            System.out.println("Invalid input. Please enter 'j' for yes or 'n' for no.");
+            System.out.println("Invalid input. Please enter 'y' for yes or 'n' for no.");
             return askToDrawAgain();
 
         }
