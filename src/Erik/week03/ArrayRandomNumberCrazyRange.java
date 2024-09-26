@@ -1,12 +1,12 @@
 package Erik.week03;
 
 /*
-        Todo:   1. Erstelle ein RandomGen.♥
-                2. Erstelle eine Array Size variable, für die Ausgabe. ♥
-                3. Erstelle ein int Array. ♥
-                4. Erstelle eine Methode wo die Randomzahlen von -50 bis 50 in ein Array eingelesen wird. ♥
-                4.1 Versuche ob die Randomzahl einlese Methode funktioniert. ♥
-                5. Erstelle eine For Each Schleife um diese Randomzahlen ausgegeben werden.
+        Todo:   1. Erstelle ein RandomGen.✓
+                2. Erstelle eine Array Size variable, für die Ausgabe. ✓
+                3. Erstelle ein int Array. ✓
+                4. Erstelle eine Methode wo die Randomzahlen von -50 bis 50 in ein Array eingelesen wird. ✓
+                4.1 Versuche ob die Randomzahl einlese Methode funktioniert. ✓
+                5. Erstelle eine For Each Schleife um diese Randomzahlen ausgegeben werden. ✓
  */
 
 
@@ -17,7 +17,10 @@ public class ArrayRandomNumberCrazyRange {
 
     public static void main(String[] args) {
 
-        int arraySize = 14;
+        int arraySize = 15;
+
+
+
         int[] randomArray = new int[arraySize];
 
         fillArrayWithRandomGen(randomArray);
@@ -30,7 +33,7 @@ public class ArrayRandomNumberCrazyRange {
     public static void fillArrayWithRandomGen(int[] array) {
 
         for (int i = 0; i < array.length; i++) {
-            array[i] = randomGen.nextInt(100) - 50;
+            array[i] = randomGen.nextInt(-50,51 );
 //            System.out.print(array[i] + " ");
         }
     }
