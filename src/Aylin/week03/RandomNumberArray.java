@@ -7,12 +7,12 @@ public class RandomNumberArray {
     public static Random random = new Random();
 
     public static void main(String[] args) {
-        int[] randomArray = randomNumber(13);
+        int[] randomArray = randomNumber(30);
         System.out.println(Arrays.toString(randomArray));
         printArray(randomArray);
         printArray2(randomArray);
         printArraySpecificNumbers(randomArray);
-        printEverySecondNumber(randomArray);
+        printSpecificNumbers(randomArray, 2);
     }
 
     public static int[] randomNumber(int size){
@@ -66,14 +66,19 @@ public class RandomNumberArray {
         }
     }
 
-    public static void printEverySecondNumber(int[] arr){
+    public static void printSpecificNumbers(int[] arr, int modulo){
+        boolean firstNumber = true;
         System.out.println();
         System.out.print("[");
-        for (int i = 1; i < arr.length; i += 2) {
-            if (i > 1){
-                System.out.print(", ");
+        for (int i = 0; i < arr.length; i ++) {
+            if ((i + 1) % modulo == 0 ||(i + 1) % 5 == 0){
+                if(firstNumber){
+                    System.out.print(arr[i]);
+                    firstNumber = false;
+                }else{
+                    System.out.print(", " + arr[i]);
+                }
             }
-            System.out.print(arr[i]);
         }
         System.out.println("]");
     }
