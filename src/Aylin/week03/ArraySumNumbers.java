@@ -29,6 +29,4 @@ public class ArraySumNumbers {
         }
         return sum;
     }
-
-
 }
