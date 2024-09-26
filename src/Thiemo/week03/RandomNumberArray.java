@@ -9,7 +9,7 @@ public class RandomNumberArray {
 
     public static void main(String[] args) {
 
-        int[] array = createAndFillArrayWithRandom(9);
+        int[] array = createAndFillArrayWithRandom(10);
         System.out.println(Arrays.toString(array));
         System.out.println();
         printArrayforeach(array);
@@ -18,7 +18,6 @@ public class RandomNumberArray {
         System.out.println();
         printOutValue(array);
         System.out.println();
-        printOutEvery2Value(array);
     }
 
 
@@ -73,19 +72,6 @@ public class RandomNumberArray {
         } else {
             System.out.print("Fahrrad");
         }
-    }
-    public static void printOutEvery2Value(int []array){
-        System.out.print("[");
-        for (int i = 1; i < array.length ; i+=2) {
-            if (i > 1) {
-                System.out.print(", ");
-            }
-            System.out.print(array[i]);
-
-
-        }
-        System.out.print("]");
-
     }
 
 }
