@@ -2,7 +2,6 @@ package Thiemo.week03;
 
 import Sandro.Colors;
 
-import java.util.Arrays;
 import java.util.Random;
 
 
@@ -12,7 +11,7 @@ public class RandomCrazyRange {
 
     public static void main(String[] args) {
 
-        int[] array = createAndFillArrayWithRandom(20);
+        int[] array = createAndFillArrayWithRandom(50);
 //        System.out.println(Arrays.toString(array));
         printArrayforeach(array);
         System.out.println();
@@ -23,7 +22,7 @@ public class RandomCrazyRange {
     public static int[] createAndFillArrayWithRandom(int size) {
         int[] array = new int[size];
         for (int i = 0; i < array.length; i++) {
-            array[i] = randomGenerator.nextInt(-50, 50);
+            array[i] = randomGenerator.nextInt(-1, 2);
         }
         return array;
     }
@@ -35,14 +34,17 @@ public class RandomCrazyRange {
             if (richtigeEingabe) {
                 System.out.print(", ");
             }
-                if (number <= 0) {
-                    System.out.print(Colors.COLORS[4] + number + Colors.RESET);
-                } else {
-                    System.out.print(Colors.COLORS[1] + number + Colors.RESET);
-                }
-                richtigeEingabe = true;
-            }
+            if (number < 0) {
+                System.out.print(Colors.COLORS[1] + number + Colors.RESET);
+            } else if (number > 0) {
+                System.out.print(Colors.COLORS[4] + number + Colors.RESET);
 
-            System.out.println("]");
+            } else {
+                System.out.print(Colors.BACKGROUND_COLORS[7]+Colors.COLORS[0]+ number + Colors.RESET);
+            }
+            richtigeEingabe = true;
         }
+
+        System.out.println("]");
     }
+}
