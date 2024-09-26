@@ -11,7 +11,7 @@ public class ChristmasTree {
 
     public static void printChristmasTree(String text, int size) {
         for (int row = 0; row < size; row++) {
-            for (int col = 0; col < 2 * size - 1; col++) {
+            for (int col = 0; col < 2* size - 1; col++) {
                 if (row + col == size - 1) {
                     System.out.print(text);
                 } else if (col == row + size - 1) {

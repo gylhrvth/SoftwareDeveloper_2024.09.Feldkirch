@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class UserInput_GuessingGame_Test {
     public static void main(String[] args) {
+
         int validNumber2;
         Random rand = new Random();
         int secretNumber = rand.nextInt(1, 101);
@@ -26,7 +27,6 @@ public class UserInput_GuessingGame_Test {
             } else if (validNumber2 == secretNumber) {
                 System.out.println(Colors.COLORS[2] + "Wow!, you've guessed the random number!!! Congratulations" + Colors.RESET);
                 win = true;
-                return;
             }
 
 
@@ -34,4 +34,5 @@ public class UserInput_GuessingGame_Test {
         }
 
     }
+
 }
