@@ -18,6 +18,8 @@ public class RandomNumberArray {
         System.out.println();
         printOutValue(array);
         System.out.println();
+        printOuteverySecondValue(array);
+        System.out.println();
     }
 
 
@@ -70,10 +72,23 @@ public class RandomNumberArray {
         if (index < array.length) {
             System.out.print(array[index]);
         } else {
-            System.out.print("Fahrrad");
+            System.out.print("Not available");
         }
     }
 
+    public static void printOuteverySecondValue(int[] array) {
+        System.out.print("[");
+        for (int i = 1; i < array.length; i += 2) {
+            if (i > 1) {
+                System.out.print(", ");
+            }
+            System.out.print(array[i]);
+        }
+        System.out.println("]");
+    }
 }
+
+
+
 
 
