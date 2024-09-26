@@ -9,7 +9,7 @@ public class RandomNumberArrayCrazyRange {
     public static Random random = new Random();
 
     public static void main(String[] args) {
-        int[] arrayRandom = randomNumber(40);
+        int[] arrayRandom = randomNumber(10);
 //        System.out.println(Arrays.toString(arrayRandom));
         printArray(arrayRandom);
     }
@@ -17,7 +17,7 @@ public class RandomNumberArrayCrazyRange {
     public static int[] randomNumber(int size){
         int[] arr = new int[size];
         for (int i = 0; i < size; i++) {
-            arr[i] = random.nextInt(-50, 51);
+            arr[i] = random.nextInt(-50, 50);
         }
         return arr;
     }
