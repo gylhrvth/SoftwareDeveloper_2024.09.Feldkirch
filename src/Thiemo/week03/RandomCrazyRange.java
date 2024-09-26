@@ -1,5 +1,7 @@
 package Thiemo.week03;
 
+import Sandro.Colors;
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -21,7 +23,7 @@ public class RandomCrazyRange {
     public static int[] createAndFillArrayWithRandom(int size) {
         int[] array = new int[size];
         for (int i = 0; i < array.length; i++) {
-            array[i] = randomGenerator.nextInt(0,101);
+            array[i] = randomGenerator.nextInt(-50, 50);
         }
         return array;
     }
@@ -29,14 +31,18 @@ public class RandomCrazyRange {
     public static void printArrayforeach(int[] array) {
         boolean richtigeEingabe = false;
         System.out.print("[");
-        for (int foreach : array) {
+        for (int number : array) {
             if (richtigeEingabe) {
                 System.out.print(", ");
             }
-            System.out.print(foreach);
-            richtigeEingabe = true;
-        }
+                if (number <= 0) {
+                    System.out.print(Colors.COLORS[4] + number + Colors.RESET);
+                } else {
+                    System.out.print(Colors.COLORS[1] + number + Colors.RESET);
+                }
+                richtigeEingabe = true;
+            }
 
-        System.out.println("]");
+            System.out.println("]");
+        }
     }
-}
