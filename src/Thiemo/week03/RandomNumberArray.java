@@ -18,7 +18,9 @@ public class RandomNumberArray {
         System.out.println();
         printOutValue(array);
         System.out.println();
-        printOuteverySecondValue(array);
+        printOutSingleValue(array, 5);
+        System.out.println();
+        printOuteverySecondValue(array, 2);
         System.out.println();
     }
 
@@ -76,7 +78,7 @@ public class RandomNumberArray {
         }
     }
 
-    public static void printOuteverySecondValue(int[] array) {
+    public static void printOuteverySecondValue(int[] array, int modula ) {
         System.out.print("[");
         for (int i = 1; i < array.length; i += 2) {
             if (i > 1) {
@@ -89,6 +91,20 @@ public class RandomNumberArray {
 }
 
 
-
-
-
+//    public static void printOuteverySecondValue(int[] array, int modula) {
+//        boolean richtigeEingabe = true;
+//        System.out.println();
+//        System.out.print("[");
+//        for (int i = 1; i < array.length; ++i) {
+//            if (i % modula == 0 || i % 5 == 0) {
+//                if (richtigeEingabe) {
+//                    System.out.print(array[i]);
+//                    richtigeEingabe = false;
+//                } else {
+//                    System.out.print(", " + array[i]);
+//                }
+//            }
+//        }System.out.println("]");
+//    }
+//
+//}
