@@ -10,7 +10,7 @@ public class MinMaxAvg {
         int[] randomArray = createRandomNumbArray(10);
         int[] test = createRandomNumbArray(0);
         printArrayWithForI(randomArray);
-        int maxValue = findMaxValue(randomArray);
+        int maxValue = findMaxValue(test);
         int countMax = countMaxValue(randomArray, maxValue);
         int[] indexMax = findIndexOfValue(randomArray, maxValue, countMax);
 
@@ -35,13 +35,19 @@ public class MinMaxAvg {
     }
 
     public static int findMaxValue(int[] arr) {
-        //int maxValue = 0;
-        int maxValue = arr[0];                                           //Why is 0 not good? What happens if you use arr[0] instead and you get a empty Array?
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] > maxValue) {
-                maxValue = arr[i];
+        int maxValue = 0;
+
+        if(arr.length >0){
+             maxValue = arr[0];                                           //Why is 0 not good? What happens if you use arr[0] instead and you get a empty Array?
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] > maxValue) {
+                    maxValue = arr[i];
+                }
+
             }
+
         }
+
         return maxValue;
     }
 
