@@ -9,9 +9,9 @@ public class ArrayMinMaxAvg {
 
     public static void main(String[] args) {
         int size = 4;
-        int [] array = randomNumber(size);
+        int [] array = randomNumber(size); // TODO: Use a tools class for reusable code...
         System.out.println(Arrays.toString(array));
-        System.out.println("Average: " + averageArray(array, size));
+        System.out.println("Average: " + averageArray(array, size)); // TODO: Use avarage without size parameter
 
         int minValue = findMinValue(array);
         int index = findIndexOfMinValue(array);
@@ -39,7 +39,8 @@ public class ArrayMinMaxAvg {
     }
 
     public static int findMinValue(int[] arr){
-        int minValue = arr[0];
+        int minValue = arr[0]; // TODO: Don't touch arr[0] as long it not checked if it's avaiable....
+                               // TODO: Define result for minValue of an empty array
 
         for (int i = 0; i < arr.length ; i++) {
             if(arr[i] < minValue){
@@ -49,6 +50,7 @@ public class ArrayMinMaxAvg {
         return minValue;
     }
 
+    // TODO: Search in 1 for loop (compare value[i] and value[minPos]
     public static int findIndexOfMinValue(int[] arr){
         int minValue = findMinValue(arr);
         int position = 0;
@@ -60,6 +62,8 @@ public class ArrayMinMaxAvg {
         return position;
     }
 
+
+    // TODO: Search in 1 for loop (compare value[i] and value[minPos]
     public static int countMinValueOfArray(int[] arr){
         int minValue = findMinValue(arr);
         int counter = 0;
@@ -79,6 +83,7 @@ public class ArrayMinMaxAvg {
         int counter = 0;
         for (int i = 0; i < arr.length; i++) {
             if(arr[i] == minValue){
+                // TODO: Check counter before write index[counter]
                 index[counter] = i;
                 counter++;
             }
@@ -135,6 +140,7 @@ public class ArrayMinMaxAvg {
         System.out.println(Arrays.toString(index));
     }
 
+    // TODO: Avarage is not an INT function...
     public static int averageArray(int[] arr, int size){
         int average = 0;
         for (int value : arr) {
