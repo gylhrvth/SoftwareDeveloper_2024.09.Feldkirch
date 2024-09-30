@@ -1,6 +1,6 @@
 package Furkan.week03;
 
-import Gyula.ConsoleTools;
+//import Gyula.ConsoleTools;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -13,13 +13,12 @@ public class RandomNumberArray1 {
         // int size = ConsoleTools.readNumber("Gib die Größe des Arrays ein:", 0, 100);
         int size = 10;
         //Aufruf von Funktion create Array...
-        int[] arrayRandom = new int[size];
-        arrayRandom = createArrayRandom(size);
+        int[] arrayRandom = createArrayRandom(size);
         System.out.println(Arrays.toString(arrayRandom));
         printForEach(arrayRandom);
         printI(arrayRandom);
-        System.out.println();
-        prinValue(arrayRandom);
+        // System.out.println();
+      //  prinValue(arrayRandom);
         printSelectedValues(arrayRandom);
         printEverySecond(arrayRandom);
 
@@ -41,35 +40,45 @@ public class RandomNumberArray1 {
 
     public static void printForEach(int[] arr) {
         //int [] arr   ... int, int, int, int
+        System.out.print("[");
         for (int number : arr) {
-            System.out.print(number + " ");
+            System.out.print(number );
+            if (number!= arr[arr.length -1]){
+                System.out.print(", ");
+            }
         }
+
+        System.out.print("]");
         System.out.println();
 
     }
 
     public static void printI(int[] arr) {
+        System.out.print("[");
         for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-
+            System.out.print(arr[i]);
+            if (i!= arr.length-1) {
+                System.out.print(", ");
+            }
         }
-
+        System.out.print("]");
+        System.out.println();
 
     }
 
 
-    public static void prinValue(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            //System.out.println("Der Wert vom Array " + i + "ist: " + arr[i]);
-
-        }
-    }
+//    public static void prinValue(int[] arr) {
+//        for (int i = 0; i < arr.length; i++) {
+//            //System.out.println("Der Wert vom Array " + i + "ist: " + arr[i]);
+//
+//        }
+//    }
 
     public static void printSelectedValues(int[] arr) {
         int[] indices = {1, 4, 9};          // da man von 0 aus anfängt zu zählen, schreibt man die gewünschte Zahl einmal kleiner.
         for (int i : indices) {
             if (i < arr.length) {
-                System.out.println("Der Wert an Position " + (i + 1) + "ist: " + arr[i]);
+                System.out.println("Der Wert an Position " + (i + 1) + " ist: " + arr[i]);
             } else {
                 System.out.println("Der Wert an Position " + (i + 1) + " ist: nicht vorhanden");
             }
