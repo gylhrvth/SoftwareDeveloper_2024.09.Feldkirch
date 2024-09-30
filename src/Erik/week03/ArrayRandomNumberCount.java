@@ -30,7 +30,7 @@ public class ArrayRandomNumberCount {
     public static void fillArrayWithRandomGen(int[] array) {
 
         for (int i = 1; i < array.length; i++) {
-            array[i] = randomGen.nextInt(101);
+            array[i] = randomGen.nextInt(50,101);
         }
     }
 
