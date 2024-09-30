@@ -12,29 +12,22 @@ public class ArrayMinMaxAvg {
         int [] array = randomNumber(size);
         System.out.println(Arrays.toString(array));
         System.out.println("Average: " + averageArray(array, size));
-        System.out.println();
 
-        findMinValue(array);
-        System.out.println("MinValue in this Array is: " + findMinValue(array));
-
-        findIndexOfMinValue(array, findMinValue(array));
         int minValue = findMinValue(array);
-        int index = findIndexOfMinValue(array, minValue);
-        int counterMinValue = countMinValueOfArray(array, minValue);
+        int index = findIndexOfMinValue(array);
+        int counterMinValue = countMinValueOfArray(array);
+        System.out.println("MinValue in this Array is: " + minValue);
         System.out.println("MinValue found in Position: " + index);
         System.out.print("MinValue found " + counterMinValue + " time(s) at position(s): ");
-        printEveryPositionOfMinValue(array, minValue, counterMinValue);
-        System.out.println();
+        printEveryPositionOfMinValue(array);
 
-        findMaxValue(array);
         int maxValue = findMaxValue((array));
-        int indexMaxValue = findIndexOfMaxValue(array, maxValue);
-        int counter = countMaxValueOfArray(array, maxValue);
-        System.out.println("MaxValue in this Array is: " + findMaxValue(array));
+        int indexMaxValue = findIndexOfMaxValue(array);
+        int counter = countMaxValueOfArray(array);
+        System.out.println("MaxValue in this Array is: " + maxValue);
         System.out.println("MaxValue found in Position: " + indexMaxValue);
         System.out.print("MaxValue found "+ counter + " time(s) at position(s): ");
-        printEveryPositionOfMaxValue(array, maxValue, counter);
-
+        printEveryPositionOfMaxValue(array);
     }
 
     public static int[] randomNumber(int size){
@@ -45,7 +38,7 @@ public class ArrayMinMaxAvg {
         return arr;
     }
 
-    public static int findMinValue (int [] arr){
+    public static int findMinValue(int[] arr){
         int minValue = arr[0];
 
         for (int i = 0; i < arr.length ; i++) {
@@ -56,7 +49,8 @@ public class ArrayMinMaxAvg {
         return minValue;
     }
 
-    public static int findIndexOfMinValue(int[] arr, int minValue){
+    public static int findIndexOfMinValue(int[] arr){
+        int minValue = findMinValue(arr);
         int position = 0;
         for (int i = 0; i < arr.length ; i++) {
             if(arr[i] == minValue){
@@ -66,7 +60,8 @@ public class ArrayMinMaxAvg {
         return position;
     }
 
-    public static int countMinValueOfArray(int[] arr, int minValue){
+    public static int countMinValueOfArray(int[] arr){
+        int minValue = findMinValue(arr);
         int counter = 0;
         for (int i = 0; i < arr.length; i++) {
             if(arr[i] == minValue) {
@@ -76,7 +71,10 @@ public class ArrayMinMaxAvg {
         return counter;
     }
 
-    public static void printEveryPositionOfMinValue (int[] arr, int minValue, int size){
+    public static void printEveryPositionOfMinValue(int[] arr){
+        int minValue = findMinValue(arr);
+        int size = countMinValueOfArray(arr);
+
         int[] index = new int[size];
         int counter = 0;
         for (int i = 0; i < arr.length; i++) {
@@ -86,9 +84,10 @@ public class ArrayMinMaxAvg {
             }
         }
         System.out.println(Arrays.toString(index));
+        System.out.println();
     }
 
-    public static int findMaxValue (int [] arr){
+    public static int findMaxValue(int[] arr){
         int maxValue = arr[0];
 
         for (int i = 0; i < arr.length ; i++) {
@@ -99,7 +98,8 @@ public class ArrayMinMaxAvg {
         return maxValue;
     }
 
-    public static int findIndexOfMaxValue(int[] arr, int maxValue) {
+    public static int findIndexOfMaxValue(int[] arr) {
+        int maxValue = findMaxValue(arr);
         int position = 0;
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] == maxValue) {
@@ -109,7 +109,8 @@ public class ArrayMinMaxAvg {
         return position;
     }
 
-    public static int countMaxValueOfArray(int[] arr, int maxValue){
+    public static int countMaxValueOfArray(int[] arr){
+        int maxValue = findMaxValue(arr);
         int counter = 0;
         for (int i = 0; i < arr.length; i++) {
             if(arr[i] == maxValue) {
@@ -119,7 +120,10 @@ public class ArrayMinMaxAvg {
         return counter;
     }
 
-    public static void printEveryPositionOfMaxValue (int[] arr, int maxValue, int size){
+    public static void printEveryPositionOfMaxValue(int[] arr){
+        int maxValue = findMaxValue(arr);
+        int size = countMaxValueOfArray(arr);
+
         int[] index = new int[size];
         int counter = 0;
         for (int i = 0; i < arr.length; i++) {
@@ -131,11 +135,12 @@ public class ArrayMinMaxAvg {
         System.out.println(Arrays.toString(index));
     }
 
-    public static int averageArray (int [] arr, int size){
+    public static int averageArray(int[] arr, int size){
         int average = 0;
         for (int value : arr) {
             average += value ;
         }
+        System.out.println();
         return average/size;
     }
 }
