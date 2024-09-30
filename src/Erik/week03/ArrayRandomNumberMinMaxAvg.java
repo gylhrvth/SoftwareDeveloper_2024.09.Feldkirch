@@ -16,21 +16,17 @@ package Erik.week03;
                 8. Erstelle eine weitere Methode die mehrere Index Positionen von Mix un Max Werten die mehrmals vorkommen zurückgibt.
  */
 
-
 import java.util.Arrays;
-import java.util.Random;
 
 public class ArrayRandomNumberMinMaxAvg {
-    public static Random randomGen = new Random();
-
     public static void main(String[] args) {
 
-        int arraySize = 5; // randomArray.length => 11
+        int arraySize = 11; // randomArray.length => 11
         int[] randomArray = new int[arraySize];
 
-        fillArrayWithRandomeGen(randomArray);
+        Erik.week03.ArrayRandomNumberCount.fillArrayWithRandomGen(randomArray);
         System.out.println("-----------------Version 1------------------");
-        printWholeArray(randomArray);
+        System.out.println(Arrays.toString(randomArray));
         System.out.println("--------------------------------------------");
         int minArrayNumber = giveMinValueFromTheArray("Minimum Value from the Array is: >> ", randomArray);
         System.out.println(minArrayNumber);
@@ -40,20 +36,8 @@ public class ArrayRandomNumberMinMaxAvg {
         System.out.println("--------------------------------------------");
         int averageArrayNumber = giveAverageValueFromTheArray("Average Value from the Array is: >> ", randomArray);
         System.out.println(averageArrayNumber);
-        System.out.println("=============================================");
-        System.out.println("-----------------Version 2------------------");
-        //int indexMin = give();
-    }
-
-    public static void fillArrayWithRandomeGen(int[] array) {
-//        Erik.week03.ArrayRandomNumberCount.fillArrayWithRandomGen(array);
-        for (int i = 0; i < array.length; i++) {
-            array[i] = randomGen.nextInt(1, 101);
-        }
-    }
-
-    public static void printWholeArray(int[] randomArray) {
-        System.out.println(Arrays.toString(randomArray));
+        System.out.println("============================================");
+        System.out.println("----------------Index Stuff-----------------");
     }
 
     public static int giveMinValueFromTheArray(String msg, int[] minArray) {
@@ -93,9 +77,4 @@ public class ArrayRandomNumberMinMaxAvg {
         }
         return averageValue;
     }
-
-  public static void give(){
-
-  }
-
 }
