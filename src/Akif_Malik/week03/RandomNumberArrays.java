@@ -14,8 +14,6 @@ public class RandomNumberArrays {
         printArray(zahlen);
         System.out.println(Colors.COLORS[6] + "----------------------" + Colors.RESET);
 
-        if (zahlen == createAndFillArray(10))
-            System.out.println(zahlen[1] + " zweite wert");
         System.out.println(zahlen[1] + " zweite wert");
         System.out.println(zahlen[4] + " fünfte wert");
         System.out.println(zahlen[9] + " zehnte wert");
@@ -40,10 +38,14 @@ public class RandomNumberArrays {
     }
 
     public static void printArray(int[] arr) {
+        boolean firstValue = true;
         System.out.print("[");
         for (int value : arr) {
+            if (!firstValue) {
+                System.out.print(", ");
+            }
             System.out.print(value);
-            System.out.print(", ");
+            firstValue = false;
         }
         System.out.println("]");
     }
@@ -63,9 +65,9 @@ public class RandomNumberArrays {
         System.out.print("[");
         for (int i = 0; i < arr.length; i++) {
             if (i % 2 == 0) {
-                System.out.print(arr[i]);
                 System.out.print(", ");
-            } else ;
+                System.out.print(arr[i]);
+            }
         }
         System.out.print("]");
     }
