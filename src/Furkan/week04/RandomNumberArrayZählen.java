@@ -12,7 +12,7 @@ public class RandomNumberArrayZählen {
         int[] arrayRandom = createArrayRandom(size);
         System.out.println(Arrays.toString(arrayRandom));
         int count =countNumbersOver(arrayRandom);
-        System.out.println("Die Werte über 30 sind + " + count);
+        System.out.println("Die Werte über 30 sind = " + count);
 
 
     }
