@@ -8,10 +8,10 @@ public class ArrayMinMaxAvg {
     public static Random random = new Random();
 
     public static void main(String[] args) {
-        int size = 4;
-        int [] array = randomNumber(size); // TODO: Use a tools class for reusable code...
+        int [] array = Aylin.week03.RandomNumberArray.randomNumber(10);
         System.out.println(Arrays.toString(array));
-        System.out.println("Average: " + averageArray(array, size)); // TODO: Use avarage without size parameter
+        System.out.println("Average: " + averageArray(array));
+        System.out.println();
 
         int minValue = findMinValue(array);
         int index = findIndexOfMinValue(array);
@@ -30,16 +30,8 @@ public class ArrayMinMaxAvg {
         printEveryPositionOfMaxValue(array);
     }
 
-    public static int[] randomNumber(int size){
-        int [] arr = new int[size];
-        for (int i = 0; i < size; i++) {
-            arr[i] = random.nextInt(101);
-        }
-        return arr;
-    }
-
     public static int findMinValue(int[] arr){
-        int minValue = arr[0]; // TODO: Don't touch arr[0] as long it not checked if it's avaiable....
+        int minValue = arr[0]; // TODO: Don't touch arr[0] as long it not checked if it's available....
                                // TODO: Define result for minValue of an empty array
 
         for (int i = 0; i < arr.length ; i++) {
@@ -50,18 +42,15 @@ public class ArrayMinMaxAvg {
         return minValue;
     }
 
-    // TODO: Search in 1 for loop (compare value[i] and value[minPos]
     public static int findIndexOfMinValue(int[] arr){
-        int minValue = findMinValue(arr);
-        int position = 0;
+        int indexOfMinValue = -1;
         for (int i = 0; i < arr.length ; i++) {
-            if(arr[i] == minValue){
-                position = i;
+            if((indexOfMinValue < 0) || (arr[i] < arr[indexOfMinValue])){
+                indexOfMinValue = i;
             }
         }
-        return position;
+        return indexOfMinValue;
     }
-
 
     // TODO: Search in 1 for loop (compare value[i] and value[minPos]
     public static int countMinValueOfArray(int[] arr){
@@ -82,8 +71,7 @@ public class ArrayMinMaxAvg {
         int[] index = new int[size];
         int counter = 0;
         for (int i = 0; i < arr.length; i++) {
-            if(arr[i] == minValue){
-                // TODO: Check counter before write index[counter]
+            if((counter < size) && (arr[i] == minValue)){
                 index[counter] = i;
                 counter++;
             }
@@ -93,8 +81,7 @@ public class ArrayMinMaxAvg {
     }
 
     public static int findMaxValue(int[] arr){
-        int maxValue = arr[0];
-
+        int maxValue = 0;
         for (int i = 0; i < arr.length ; i++) {
             if(arr[i] > maxValue){
                 maxValue = arr[i];
@@ -104,14 +91,13 @@ public class ArrayMinMaxAvg {
     }
 
     public static int findIndexOfMaxValue(int[] arr) {
-        int maxValue = findMaxValue(arr);
-        int position = 0;
+        int findIndexOfMaxValue = -1;
         for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == maxValue) {
-                position = i;
+            if ((findIndexOfMaxValue < 0 ) || (arr[i] > arr[findIndexOfMaxValue])) {
+                findIndexOfMaxValue = i;
             }
         }
-        return position;
+        return findIndexOfMaxValue;
     }
 
     public static int countMaxValueOfArray(int[] arr){
@@ -140,13 +126,11 @@ public class ArrayMinMaxAvg {
         System.out.println(Arrays.toString(index));
     }
 
-    // TODO: Avarage is not an INT function...
-    public static int averageArray(int[] arr, int size){
-        int average = 0;
+    public static float averageArray(int[] arr){
+        float average = 0f;
         for (int value : arr) {
             average += value ;
         }
-        System.out.println();
-        return average/size;
+        return average/arr.length;
     }
 }
