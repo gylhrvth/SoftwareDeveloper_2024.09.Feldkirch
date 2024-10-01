@@ -11,11 +11,7 @@ public class Number_Counting {
         System.out.println(Arrays.toString(zahlen));
         int counter = counting(zahlen,target);
         System.out.println("Counter is: "+counter);
-
-
-
     }
-
 
     public static int[] createAndFillArray(int size) {
         int[] result = new int[size];
@@ -25,7 +21,7 @@ public class Number_Counting {
         return result;
     }
 
-    public static int counting(int[] arr,int target){
+    public static int counting(int[] arr, int target){
         int count = 0;
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] > target){
@@ -34,6 +30,5 @@ public class Number_Counting {
         }
         return count;
     }
-
 }
 
