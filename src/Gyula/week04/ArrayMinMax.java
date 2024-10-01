@@ -8,6 +8,9 @@ public class ArrayMinMax {
         System.out.println(Arrays.toString(array));
 
         System.out.println("Index of min value: " + findIndexOfMinValue(array));
+        System.out.printf(
+            "Index of min value: %s\n",
+            findIndexOfMinValue(array));
     }
 
     public static int findIndexOfMinValue(int[] arr){
