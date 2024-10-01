@@ -4,14 +4,15 @@ import java.util.Arrays;
 
 import static Akif_Malik.week03.RandomNumberArrays.random;
 
-public class Number_Counting {
+public class RandomNumber_Summary {
+
     public static void main(String[] args) {
-        int target = 70;
         int[] zahlen = createAndFillArray(10);
         System.out.println(Arrays.toString(zahlen));
-        int counter = counting(zahlen,target);
-        System.out.println("Counter is: "+counter);
+        int summary = sumArray(zahlen);
+        System.out.println("Summe: " + summary);
     }
+
 
     public static int[] createAndFillArray(int size) {
         int[] result = new int[size];
@@ -21,14 +22,11 @@ public class Number_Counting {
         return result;
     }
 
-    public static int counting(int[] arr, int target){
-        int count = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] > target){
-                count++;
-            }
+    public static int sumArray (int [] arr){
+        int summmary = 0;
+        for (int value : arr) {
+            summmary += value ;
         }
-        return count;
+        return summmary;
     }
 }
-
