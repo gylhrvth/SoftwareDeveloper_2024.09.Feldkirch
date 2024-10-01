@@ -1,4 +1,4 @@
-package Erik.week03;
+package Erik.week04;
 
 /*
         Todo:
@@ -16,15 +16,17 @@ package Erik.week03;
                 8. Erstelle eine weitere Methode die mehrere Index Positionen von Mix un Max Werten die mehrmals vorkommen zurückgibt.
  */
 
+import Erik.week03.ArrayRandomNumberCount;
+
 import java.util.Arrays;
 
-public class ArrayRandomNumberMinMaxAvg {
+public class ArrayRandomNumberMinMaxAvg_Edited {
     public static void main(String[] args) {
 
         int arraySize = 11; // randomArray.length => 11
         int[] randomArray = new int[arraySize];
 
-        Erik.week03.ArrayRandomNumberCount.fillArrayWithRandomGen(randomArray);
+        ArrayRandomNumberCount.fillArrayWithRandomGen(randomArray);
         System.out.println("-----------------Version 1------------------");
         System.out.println(Arrays.toString(randomArray));
         System.out.println("--------------------------------------------");
@@ -36,43 +38,51 @@ public class ArrayRandomNumberMinMaxAvg {
         System.out.println("============================================");
         System.out.println("----------------Index Stuff-----------------");
         System.out.println(Arrays.toString(randomArray));
-        System.out.println("[0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10] Index Veranschaulichung");
+//        System.out.println("[0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10] Index Veranschaulichung");
         System.out.println("--------------------------------------------");
         System.out.printf("Minimum Value Index is: >> " + giveIndexFromMinValue(randomArray) + "\n");
         System.out.println("--------------------------------------------");
         System.out.printf("Maximum Value Index is: >> " + giveIndexFromMaxValue(randomArray) + "\n");
         System.out.println("--------------------------------------------");
+        System.out.printf("The Index Positions from the Minimum Values are: >> " + Arrays.toString(givesMeAllIndexPositionsFromMinValue(randomArray)) + "\n");
+        System.out.println();
+        System.out.println("--Bonus--");
+        System.out.printf("The Count of Minimum Value Index Positions are: >> " + giveTheCountOfAllMinValueIndices(randomArray) + "\n");
+        System.out.println("--------------------------------------------");
+        System.out.printf("The Count of Maximum Value Index Positions are: >> " + giveTheCountOfAllMaxValueIndices(randomArray) + "\n");
+        System.out.println("--------------------------------------------");
     }
 
-    public static int giveMinValueFromTheArray(int[] minArray) {
-        int minValue = minArray[0];
 
-        for (int i = 0; i < minArray.length; i++) {
-            if (minArray[i] < minValue) {
-                minValue = minArray[i];
+    public static int giveMinValueFromTheArray(int[] randomArray) {
+        int minValue = Integer.MAX_VALUE;
+
+        for (int i = 0; i < randomArray.length; i++) {
+            if (randomArray[i] < minValue) {
+                minValue = randomArray[i];
             }
         }
         return minValue;
     }
 
-    public static int giveMaxValueFromTheArray(int[] maxArray) {
-        int maxValue = maxArray[0];
+    public static int giveMaxValueFromTheArray(int[] randomArray) {
+        int maxValue = Integer.MIN_VALUE;
 
-        for (int i = 0; i < maxArray.length; i++) {
-            if (maxArray[i] > maxValue) {
-                maxValue = maxArray[i];
+        for (int i = 0; i < randomArray.length; i++) {
+            if (randomArray[i] > maxValue) {
+                maxValue = randomArray[i];
             }
         }
         return maxValue;
     }
 
-    public static int giveAverageValueFromTheArray(int[] averageArray) {
-        int averageValue = averageArray[0];
+    public static int giveAverageValueFromTheArray(int[] randomArray) {
+        int averageValue = Integer.MAX_VALUE;
         int sum = 0;
 
-        for (int value : averageArray) {
+        for (int value : randomArray) {
             sum = sum + value;
-            value = sum / averageArray.length;
+            value = sum / randomArray.length;
             averageValue = value;
         }
         return averageValue;
@@ -82,46 +92,61 @@ public class ArrayRandomNumberMinMaxAvg {
         int minIndex = 0;
 
         for (int i = 0; i < randomArray.length; i++) {
-            if (randomArray[i] < randomArray[minIndex]){
+            if (randomArray[i] < randomArray[minIndex]) {
                 minIndex = i;
             }
         }
         return minIndex;
     }
 
-    public static int giveIndexFromMaxValue(int[] randomArray){
+    public static int giveIndexFromMaxValue(int[] randomArray) {
         int maxIndex = 0;
 
-        for (int i = 0; i < randomArray.length ; i++) {
-            if (randomArray[i] > randomArray[maxIndex]){
+        for (int i = 0; i < randomArray.length; i++) {
+            if (randomArray[i] > randomArray[maxIndex]) {
                 maxIndex = i;
             }
         }
         return maxIndex;
     }
 
-    public static int giveIndexFromMoreMinOrMaxValues(int[] randomArray){
-        int moreIndexPos = 0;
+    public static int[] givesMeAllIndexPositionsFromMinValue(int[] randomArray) {
+        int minValue = giveMinValueFromTheArray(randomArray);
+        int range = giveTheCountOfAllMinValueIndices(randomArray);
+        int indexCount = 0;
+        int[] indexPositionsFromMinValues = new int[range]; //new int[randomArray.length]
+
+        for (int i = 0; i < randomArray.length; i++) { // Geht einmal durch das ganze Array
+            if (randomArray[i] == minValue) {
+                indexPositionsFromMinValues[indexCount] = i;
+                indexCount++;
+            }
+        }
+        return indexPositionsFromMinValues;
+    }
+
+    public static int giveTheCountOfAllMinValueIndices(int[] randomArray) { //Nicht in der Aufgabenstellung
+        int minValue = giveMinValueFromTheArray(randomArray);
+        int indexCounter = 0;
 
         for (int i = 0; i < randomArray.length; i++) {
-
+            if (randomArray[i] == minValue) {
+                indexCounter++;
+            }
         }
-
-
-        return 0;
+        return indexCounter;
     }
-}
-//        int minValueIndex = indexArray[0];
-//        System.out.print(msg);
-//
-//        for (int minValueIndex : indexArray){
-//            System.out.print(minValueIndex);
-//            System.out.print(" ");
-//        }
 
-//        for (int i = 0; i < indexArray.length; i++) {
-//            if (minValueIndex < minArrayNumber) {
-//
-//            }
-//        }
-//        return 0;
+    public static int giveTheCountOfAllMaxValueIndices(int[] randomArray) { //Nicht in der Aufgabenstellung
+        int maxValue = giveMaxValueFromTheArray(randomArray);
+        int indexCounter = 0;
+
+        for (int i = 0; i < randomArray.length; i++) {
+            if (randomArray[i] == maxValue) {
+                indexCounter++;
+            }
+        }
+        return indexCounter;
+    }
+
+}
