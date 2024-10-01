@@ -31,7 +31,7 @@ public class ArrayMinMaxAvg {
     }
 
     public static int findMinValue(int[] arr){
-        int minValue = arr[0]; // TODO: Don't touch arr[0] as long it not checked if it's available....
+        int minValue = Integer.MAX_VALUE;   //arr[0]; // TODO: Don't touch arr[0] as long it not checked if it's available....
                                // TODO: Define result for minValue of an empty array
 
         for (int i = 0; i < arr.length ; i++) {
@@ -57,7 +57,10 @@ public class ArrayMinMaxAvg {
         int minValue = findMinValue(arr);
         int counter = 0;
         for (int i = 0; i < arr.length; i++) {
-            if(arr[i] == minValue) {
+            if(arr[i] < minValue){
+                minValue = arr[i];
+                counter = 1;
+            }else if (arr[i] == minValue) {
                 counter++;
             }
         }
