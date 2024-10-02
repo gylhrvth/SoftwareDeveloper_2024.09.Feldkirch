@@ -26,6 +26,7 @@ public class ArrayAufgabe2D {
         System.out.println(Arrays.toString(arrayOfArray));
 
         print2DArray(arrayOfArray);
+        System.out.println("--------------------------------------------------------------------------");
 
     }
 
