@@ -5,15 +5,22 @@ import java.util.Arrays;
 public class MergeSort {
     public static void main(String[] args) {
         int[] array = Thiemo.week03.RandomNumberArray.createAndFillArrayWithRandom(10);
+        System.out.println();
         System.out.println("Original Array " + Arrays.toString(array));
-
         int[] arrayCopyAsc = makeACopy(array);
+//        System.out.println("Sorting Array in Ascending Order:");
         mergeSortAscending(arrayCopyAsc, 0, arrayCopyAsc.length);
+        System.out.println();
         System.out.println("Sorted Array (Ascending):" + Arrays.toString(arrayCopyAsc));
 
+
         int[] arrayCopyDesc = makeACopy(array);
+//        System.out.println("Sorting Array in Descending Order:");
         mergeSortDescending(arrayCopyDesc, 0, arrayCopyDesc.length);
+        System.out.println();
         System.out.println("Sorted Array (Descending) : " + Arrays.toString(arrayCopyDesc));
+        System.out.println();
+        System.out.println("Original Array : " + Arrays.toString(array));
 
     }
 
@@ -26,7 +33,7 @@ public class MergeSort {
         mergeSortAscending(array, low, mid);
         mergeSortAscending(array, mid, high);
 
-        merge(array, low, mid, high);
+        mergeAscending(array, low, mid, high);
 
     }
 
@@ -42,10 +49,11 @@ public class MergeSort {
         mergeDescending(array, low, mid, high);
     }
 
-    private static void merge(int[] array, int low, int mid, int high) {
+    public static void mergeAscending(int[] array, int low, int mid, int high) {
         int[] temp = new int[high - low];
         int i = low, j = mid, k = 0;
 
+//        System.out.println("Merging (Ascending) from " + low + " to " + high);
         while (i < mid && j < high) {
             if (array[i] <= array[j]) {
                 temp[k++] = array[i++];
@@ -63,12 +71,14 @@ public class MergeSort {
         for (int index = 0; index < temp.length; index++) {
             array[low + index] = temp[index];
         }
+//        System.out.println("Merged (Ascending): " + Arrays.toString(temp) +  " into original array: " + Arrays.toString(array));
     }
 
-    private static void mergeDescending(int[] array, int low, int mid, int high) {
+    public static void mergeDescending(int[] array, int low, int mid, int high) {
         int[] temp = new int[high - low];
         int i = low, j = mid, k = 0;
 
+//        System.out.println("Merging (Descending) from " + low + " to " + high);
         while (i < mid && j < high) {
             if (array[i] >= array[j]) {
                 temp[k++] = array[i++];
@@ -86,6 +96,7 @@ public class MergeSort {
         for (int index = 0; index < temp.length; index++) {
             array[low + index] = temp[index];
         }
+//        System.out.println("Merged (Descending): " + Arrays.toString(temp) + " into original array: " + Arrays.toString(array));
     }
 
 
