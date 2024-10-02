@@ -21,7 +21,7 @@ public class BubblesortNumbers {
     public static void bubbleSortAscending(int[] array) {
         for (int i = 0; i < array.length -1; i++) {
 //            System.out.println("before" + Arrays.toString(array));
-            for (int j = 0; j < array.length - 1 - 0*i; j++) {      // -i sortiert nur bis alles sortiert ist und nicht bis die schleife fertig ist
+            for (int j = 0; j < array.length - 1 - /*0*/i; j++) {      // -i sortiert nur bis alles sortiert ist und nicht bis die schleife fertig ist
                 if (array[j] > array[j + 1]) {
                     int temp = array[j];
                     array[j] = array[j + 1];
