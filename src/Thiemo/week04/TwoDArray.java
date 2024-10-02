@@ -19,6 +19,7 @@ public class TwoDArray {
 
 
         int[][] array1 = createAndFillArrayWithoutRandom(userInput);
+        System.out.println("Heres the Number Array\n");
         Gyula.week04.ArrayAdvancedExamples.print2DArray(array1);
 
 //        int[] sumRow = sumRows(array1);
@@ -28,22 +29,22 @@ public class TwoDArray {
 //        System.out.println(Arrays.toString(sumColumn));
 
         int[][] array2 = createAndFillArrayWithRandom(userInput);
-        System.out.println();
+        System.out.println("\nHeres the Random Number Array\n");
         Gyula.week04.ArrayAdvancedExamples.print2DArray(array2);
 
-        System.out.print("\nDo you want to sum rows or columns? (r/c): ");
+        System.out.print("\nDo you want to sum rows or columns? (r/c): \n");
         char choice = scanner.next().charAt(0);
 
         if (choice == 'r') {
             int[] rowSums = sumRows(array1);
-            System.out.println("Sum of each row: " + Arrays.toString(rowSums));
+            System.out.println("Sum of each row Number : \n" + Arrays.toString(rowSums));
             int[] rowSumsRandom = sumRows(array2);
-            System.out.println("Sum of each row: " + Arrays.toString(rowSumsRandom));
+            System.out.println("Sum of each row Random : \n" + Arrays.toString(rowSumsRandom));
         } else if (choice == 'c') {
             int[] colSums = sumColumns(array1);
-            System.out.println("Sum of each column: " + Arrays.toString(colSums));
+            System.out.println("Sum of each column Number : \n " + Arrays.toString(colSums));
             int[] colSumsRandom = sumColumns(array2);
-            System.out.println("Sum of each column: " + Arrays.toString(colSumsRandom));
+            System.out.println("Sum of each column Random : \n" + Arrays.toString(colSumsRandom));
         } else {
             System.out.println("Invalid choice.");
         }
