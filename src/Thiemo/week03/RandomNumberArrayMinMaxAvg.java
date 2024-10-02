@@ -16,24 +16,27 @@ public class RandomNumberArrayMinMaxAvg {
         System.out.println();
         int min = findMin(array);
         System.out.println("Smallest Number = " + min);
+        int indexMin = findIndexMin(array);
+        System.out.println("Index position of first smallest Number  = " + indexMin);
+        int[] positionsMin = findMinPositions(array);
+        System.out.println("Positions = " + Arrays.toString(positionsMin));
+        int counter = countMinValue(array);
+        System.out.println("Counter = " + counter);
         System.out.println();
         int max = findMax(array);
         System.out.println("Highest Number = " + max);
+        int indexMax = findIndexMax(array);
+        System.out.println("Index Position of first highest Number = " + indexMax);
+        int[] positionsMax = findMaxPositions(array);
+        System.out.println("Positions of Max Value = " + Arrays.toString(positionsMax));
+        int counter2 = countMaxValue(array);
+        System.out.println("Counter = " + counter2);
         System.out.println();
         int avg = findAvg(array, size);
         System.out.println("Averge Number = " + avg);
         System.out.println();
-        int indexMin = findIndexMin(array);
-        System.out.println("Index position of smallest Number  = " + indexMin);
-        System.out.println();
-        int indexMax = findIndexMax(array);
-        System.out.println("Index Position of highest Number = " + indexMax);
-        System.out.println();
-        int counter = count(array);
-        System.out.println("Counter = " + counter);
-        System.out.println();
-        int moreThan1Index = findMorethan1Index(array);
-        System.out.println("How often and which Position = " + moreThan1Index);
+
+
     }
 
     public static int[] createAndFillArrayWithNumber(int size) {
@@ -45,16 +48,16 @@ public class RandomNumberArrayMinMaxAvg {
         return array;
     }
 
-    public static int findMin(int[] value) {
-        int min = value[0];
+    public static int findMin(int[] array) {
+        int min = Integer.MAX_VALUE;
 
-        for (int i = 1; i < value.length; i++) {
-            if (value[i] < min) {
-                min = value[i];
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] < min) {
+                min = array[i];
             }
         }
 
-//        for (int num : value) {
+//        for (int num : array) {
 //            if (num < min) {
 //                min = num;
 //            }
@@ -64,18 +67,17 @@ public class RandomNumberArrayMinMaxAvg {
     }
 
     public static int findMax(int[] array) {
-        int max = 0;
-        if (array.length > 0) {
-            max = array[0];
+        int max = Integer.MIN_VALUE;
 
-            for (int i = 0; i < array.length; i++) {
-                if (array[i] > max) {
-                    max = array[i];
-                }
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
             }
         }
         return max;
     }
+
 
     public static int findAvg(int[] value, int size) {
         int avg = 0;
@@ -115,10 +117,11 @@ public class RandomNumberArrayMinMaxAvg {
 
     }
 
-    public static int count(int[] array) {
+    public static int countMinValue(int[] array) {
         int count = 0;
-        for (int i = 1; i < array.length; i++) {
-            if (array[i] == count) {
+        int findMin = findMin(array);
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == findMin) {
                 count++;
             }
         }
@@ -126,11 +129,44 @@ public class RandomNumberArrayMinMaxAvg {
     }
 
 
-    public static int findMorethan1Index(int[] morethan1Index) {
-        int morethan1 = 0;
+    public static int countMaxValue(int[] array) {
+        int count = 0;
+        int findMax = findMax(array);
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == findMax) {
+                count++;
+            }
+        }
+        return count;
+    }
 
+    public static int[] findMinPositions(int[] array) {
+        int min = findMin(array);
+        int arraysize = countMinValue(array);
 
-        return morethan1;
+        int[] indexposition = new int[arraysize];
+        int counter = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == min) {
+                indexposition[counter] = i;
+                counter++;
+            }
+        }
+        return indexposition;
+    }
+
+    public static int[] findMaxPositions(int[] array) {
+        int max = findMax(array);
+        int arraysize = countMaxValue(array);
+
+        int[] indexposition = new int[arraysize];
+        int counter = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == max) {
+                indexposition[counter] = i;
+                counter++;
+            }
+        }
+        return indexposition;
     }
 }
-
