@@ -1,8 +1,13 @@
 package Gyula.week04;
 
+import Sandro.Colors;
+
 import java.util.Arrays;
+import java.util.Random;
 
 public class ArrayAdvancedExamples {
+    public static Random random = new Random();
+
     public static void main(String[] args) {
         int[] number = new int[10];
         for (int i = 0; i < number.length; i++) {
@@ -55,7 +60,7 @@ public class ArrayAdvancedExamples {
                 if (j > 0){
                     System.out.print(", ");
                 }
-                System.out.printf("%4d", arr[i][j]);
+                System.out.printf("%s%4d%s",Colors.COLORS[random.nextInt(Colors.COLORS.length)],  arr[i][j], Colors.RESET);
             }
             System.out.println("]");
         }
