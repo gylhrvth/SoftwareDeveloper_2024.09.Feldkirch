@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class MergeSort {
     public static void main(String[] args) {
         int[] array = Thiemo.week03.RandomNumberArray.createAndFillArrayWithRandom(10);
+        System.out.println();
         System.out.println("Original Array " + Arrays.toString(array));
         int[] arrayCopyAsc = makeACopy(array);
 //        System.out.println("Sorting Array in Ascending Order:");
