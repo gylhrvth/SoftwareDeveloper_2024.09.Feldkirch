@@ -13,34 +13,29 @@ public class CocktailShaker {
     }
 
     public static void cocktailShakerSort(int[] arr){
-        boolean swapped = true;
-        int start = 0;
-        int end = arr.length - 1;
+        int lo = 0;
+        int hi = arr.length - 1;
+        int mov = lo;
 
-        while(swapped){
-            swapped = false;
-            for (int i = start; i < end ; i++) {
+        while(lo < hi){
+            for (int i = lo; i < hi ; i++) {
                 if(arr[i] > arr[i + 1]) {
                     swap(arr, i, i + 1);
-                    swapped = true;
+                    mov = i;
                 }
             }
-            if(!swapped){
-                break;
-            }
-            end--;
+            hi = mov;
 
-            swapped = false;
-
-            for (int i = end; i > start ; i--) {
+            for (int i = hi; i > lo ; i--) {
                 if(arr[i] < arr[i - 1]){
                     swap(arr, i, i -1);
-                    swapped = true;
+                    mov = i;
                 }
             }
-            start++;
+            lo = mov;
         }
     }
+
     public static void swap(int[] arr, int a, int b) {
         int temp = arr[a];
         arr[a] = arr[b];
