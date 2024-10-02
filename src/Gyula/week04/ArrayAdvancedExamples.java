@@ -1,8 +1,14 @@
 package Gyula.week04;
 
+import Gyula.WildColors;
+import Sandro.Colors;
+
 import java.util.Arrays;
+import java.util.Random;
 
 public class ArrayAdvancedExamples {
+    public static Random random = new Random();
+
     public static void main(String[] args) {
         int[] number = new int[10];
         for (int i = 0; i < number.length; i++) {
@@ -50,10 +56,14 @@ public class ArrayAdvancedExamples {
 
     public static void print2DArray(int[][] arr){
         for (int i = 0; i < arr.length; i++) {
+            System.out.print("[");
             for (int j = 0; j < arr[i].length; j++) {
-                System.out.printf("%4d ", arr[i][j]);
+                if (j > 0){
+                    System.out.print(", ");
+                }
+                System.out.printf("%s%4d%s", WildColors.getColor(204, 0, 102),  arr[i][j], Colors.RESET);
             }
-            System.out.println();
+            System.out.println("]");
         }
     }
 }
