@@ -8,6 +8,7 @@ public class CocktailShaker {
         System.out.println(Arrays.toString(arr));
         System.out.println();
         int[] arrayCopyForSort = Arrays.copyOf(arr, arr.length);
+        cocktailShakerSort(arrayCopyForSort);
         System.out.println("Sortiertes Array: " + Arrays.toString(arrayCopyForSort));
     }
 
