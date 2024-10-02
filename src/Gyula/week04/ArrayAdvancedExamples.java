@@ -61,7 +61,9 @@ public class ArrayAdvancedExamples {
                 if (j > 0){
                     System.out.print(", ");
                 }
-                System.out.printf("%s%4d%s", WildColors.getColor(204, 0, 102),  arr[i][j], Colors.RESET);
+                int blue = (int)Math.round(255 * (0.4 + 0.6 * i / arr.length));
+                int green = (int)Math.round(255 * (0.4 + 0.6 * j / arr[i].length));
+                System.out.printf("%s%4d%s", WildColors.getColor(0, green, blue),  arr[i][j], Colors.RESET);
             }
             System.out.println("]");
         }
