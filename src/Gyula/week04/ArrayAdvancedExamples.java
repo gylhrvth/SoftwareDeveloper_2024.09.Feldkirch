@@ -1,5 +1,6 @@
 package Gyula.week04;
 
+import Gyula.WildColors;
 import Sandro.Colors;
 
 import java.util.Arrays;
@@ -60,7 +61,7 @@ public class ArrayAdvancedExamples {
                 if (j > 0){
                     System.out.print(", ");
                 }
-                System.out.printf("%s%4d%s",Colors.COLORS[random.nextInt(Colors.COLORS.length)],  arr[i][j], Colors.RESET);
+                System.out.printf("%s%4d%s", WildColors.getColor(204, 0, 102),  arr[i][j], Colors.RESET);
             }
             System.out.println("]");
         }
