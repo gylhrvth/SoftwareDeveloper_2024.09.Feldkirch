@@ -18,7 +18,7 @@ public class RandomNumberArray {
     public static int[] randomNumber(int size){
         int[] arr = new int[size];
         for (int i = 0; i < size; i++) {
-            arr[i] = random.nextInt(54);
+            arr[i] = random.nextInt(100);
         }
         return arr;
     }
