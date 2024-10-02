@@ -50,10 +50,14 @@ public class ArrayAdvancedExamples {
 
     public static void print2DArray(int[][] arr){
         for (int i = 0; i < arr.length; i++) {
+            System.out.print("[");
             for (int j = 0; j < arr[i].length; j++) {
-                System.out.printf("%4d ", arr[i][j]);
+                if (j > 0){
+                    System.out.print(", ");
+                }
+                System.out.printf("%4d", arr[i][j]);
             }
-            System.out.println();
+            System.out.println("]");
         }
     }
 }
