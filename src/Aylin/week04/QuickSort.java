@@ -1,15 +1,17 @@
 package Aylin.week04;
 
+import Sandro.Colors;
+
 import java.util.Arrays;
 
 public class QuickSort {
     public static void main(String[] args) {
         int[] arr = Aylin.week03.RandomNumberArray.randomNumber(10);
-        System.out.println("Unsortiertes Array: " + Arrays.toString(arr));
+        System.out.println(Colors. COLORS[4] + "Sortiertes Array: " + Arrays.toString(arr));
         System.out.println();
         int n = arr.length - 1;
         quickSortAlg(arr, 0, n);
-        System.out.println("Sortiertes Array: " + Arrays.toString(arr));
+        System.out.println(Colors.COLORS[6] + "Sortiertes Array: " + Arrays.toString(arr) + Colors.RESET);
     }
 
     public static void quickSortAlg(int[] arr, int lo, int hi){
