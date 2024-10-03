@@ -19,9 +19,8 @@ public class TwoDArray {
 
 
         int[][] array1 = createAndFillArrayWithoutRandom(userInput);
-        System.out.println("Heres the Number Array\n");
+        System.out.println("Here's the Number Array\n");
         Gyula.week04.ArrayAdvancedExamples.print2DArray(array1);
-
 //        int[] sumRow = sumRows(array1);
 //        int[] sumColumn = sumColumns(array1);
 //
@@ -29,22 +28,30 @@ public class TwoDArray {
 //        System.out.println(Arrays.toString(sumColumn));
 
         int[][] array2 = createAndFillArrayWithRandom(userInput);
-        System.out.println("\nHeres the Random Number Array\n");
+        System.out.println("\nHere's the Random Number Array\n");
         Gyula.week04.ArrayAdvancedExamples.print2DArray(array2);
 
         System.out.print("\nDo you want to sum rows or columns? (r/c): \n");
-        char choice = scanner.next().charAt(0);
+        String choice = scanner.nextLine();
 
-        if (choice == 'r') {
-            int[] rowSums = sumRows(array1);
-            System.out.println("Sum of each row Number : \n" + Arrays.toString(rowSums));
-            int[] rowSumsRandom = sumRows(array2);
-            System.out.println("Sum of each row Random : \n" + Arrays.toString(rowSumsRandom));
-        } else if (choice == 'c') {
-            int[] colSums = sumColumns(array1);
-            System.out.println("Sum of each column Number : \n " + Arrays.toString(colSums));
-            int[] colSumsRandom = sumColumns(array2);
-            System.out.println("Sum of each column Random : \n" + Arrays.toString(colSumsRandom));
+        if (choice .equals("r")) {
+            int[] rowSums = sumX(array1);
+            Gyula.week04.ArrayAdvancedExamples.print2DArray(array1);
+            System.out.println(Arrays.toString(rowSums)+ "\nSum of each X Number\n");
+//            System.out.println("Sum of each row Number : \n" + Arrays.toString(rowSums));
+            int[] rowSumsRandom = sumX(array2);
+            Gyula.week04.ArrayAdvancedExamples.print2DArray(array2);
+            System.out.println(Arrays.toString(rowSumsRandom)+ "\nSum of each X Random\n");
+//            System.out.println("Sum of each row Random : \n" + Arrays.toString(rowSumsRandom));
+
+
+        } else if (choice .equals("c")) {
+            int[] colSums = sumY(array1);
+            Gyula.week04.ArrayAdvancedExamples.print2DArray(array1);
+            System.out.println(Arrays.toString(colSums)+ "\nSum of each Y Number \n");
+            int[] colSumsRandom = sumY(array2);
+            Gyula.week04.ArrayAdvancedExamples.print2DArray(array2);
+            System.out.println(Arrays.toString(colSumsRandom)+ "\nSum of each Y Random \n");
         } else {
             System.out.println("Invalid choice.");
         }
@@ -60,29 +67,29 @@ public class TwoDArray {
 
 
     public static int[][] createAndFillArrayWithRandom(int size) {
-        int[][] result = new int[size][size];
-        for (int i = 0; i < result.length; i++) {
-            for (int j = 0; j < result[i].length; j++) {
-                result[i][j] = randomGenerator.nextInt(101);
+        int[][] array = new int[size][size];
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                array[i][j] = randomGenerator.nextInt(101);
             }
         }
-        return result;
+        return array;
     }
 
     public static int[][] createAndFillArrayWithoutRandom(int size) {
-        int counter = 0;
+        int counter = size*size - 1;
         int[][] array = new int[size][size];
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 array[i][j] = counter;
-                counter++;
+                counter--;
             }
 
         }
         return array;
     }
 
-    public static int[] sumRows(int[][] array) {
+    public static int[] sumX(int[][] array) {
         int[] sums = new int[array.length];
         for (int i = 0; i < array.length; i++) {
             int sum = 0;
@@ -94,7 +101,7 @@ public class TwoDArray {
         return sums;
     }
 
-    public static int[] sumColumns(int[][] array) {
+    public static int[] sumY(int[][] array) {
         int[] sums = new int[array[0].length];
         for (int i = 0; i < array[0].length; i++) {
             int sum = 0;
@@ -105,6 +112,13 @@ public class TwoDArray {
         }
         return sums;
     }
+
+//    public static void print2DArray(int [][] array){
+//        for (int i = 0; i < ; i++) {
+//
+//        }
+//
+//    }
 }
 
 

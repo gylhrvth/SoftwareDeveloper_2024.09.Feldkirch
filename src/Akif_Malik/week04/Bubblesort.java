@@ -9,9 +9,9 @@ public class Bubblesort {
         int[] zahlen = createAndFillArray(10);
         System.out.println(Arrays.toString(zahlen));
         ascending(zahlen);
-        System.out.println(Arrays.toString(zahlen));
+        System.out.println("ascending  :" + Arrays.toString(zahlen));
         descending(zahlen);
-        System.out.println(Arrays.toString(zahlen));
+        System.out.println("descending :" + Arrays.toString(zahlen));
     }
 
 

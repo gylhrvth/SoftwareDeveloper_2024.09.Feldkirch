@@ -44,7 +44,7 @@ public class ArrayAdvancedExamples {
         print2DArray(arraysOfArray);
 
         System.out.println("-------------------");
-        int[][] matrix = new int[16][6];
+        int[][] matrix = new int[12][24];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 matrix[i][j] = counter;
@@ -62,8 +62,8 @@ public class ArrayAdvancedExamples {
                 if (j > 0){
                     System.out.print(", ");
                 }
-                double hue = WildColors.partValue(0, 359, i, arr.length);
-                double light = WildColors.partValue(40, 70, j, arr[i].length)/100.0;
+                double light = WildColors.partValue(40, 80, j, arr[i].length)/100.0;
+                double hue = WildColors.partValue(300, 420, i, arr.length) % 360;
                 System.out.printf("%s%4d%s", WildColors.getColorFromHSL(hue, 0.8, light),  arr[i][j], Colors.RESET);
             }
             System.out.println("]");
