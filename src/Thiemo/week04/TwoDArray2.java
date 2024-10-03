@@ -37,8 +37,8 @@ public class TwoDArray2 {
         System.out.println(Arrays.toString(sumColumR) + "Sum column");
     }
 
-    public static int[][] createAndFillArrayWithRandom(int rowY, int colX) {
-        int[][] array = new int[rowY][colX];
+    public static int[][] createAndFillArrayWithRandom(int row, int col) {
+        int[][] array = new int[row][col];
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 array[i][j] = random.nextInt(10);
@@ -47,9 +47,9 @@ public class TwoDArray2 {
         return array;
     }
 
-    public static int[][] createAndFillArray(int rowY, int colX) {
+    public static int[][] createAndFillArray(int row, int col) {
         int counter = 0;
-        int[][] array = new int[rowY][colX];
+        int[][] array = new int[row][col];
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 array[i][j] = counter;
