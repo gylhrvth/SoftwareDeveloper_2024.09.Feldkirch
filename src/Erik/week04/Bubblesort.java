@@ -43,8 +43,8 @@ public class Bubblesort {
             for (int j = 0; j < randArrCopy1.length - 1; j++) {  // Die zweite For I Schleife bringt den höchsten Wert auf die letzte Stelle nach rechts
                 System.out.println("Copy 1: >> " + Arrays.toString(randArrCopy1)); //Veranschaulichung was er macht
                 if (randArrCopy1[j] > randArrCopy1[j + 1]) { // (j+1) nimmt den aktuellen wert j mit dem zweiten wert (+1) von j
-                    int temp = randArrCopy1[j + 1];    // Der aktuelle Wert von randArrCopy1[j] <-- von Position i wird in den int temp gespeichert
-                    randArrCopy1[j + 1] = randArrCopy1[j];  // Der aktuelle Wert von randArrCopy1[i] wird mit dem wert von randArrCopy1[j] überschrieben
+                    int temp = randArrCopy1[j + 1];    // Der aktuelle Wert von randArrCopy1[j] <-- von Position j wird in den int temp gespeichert
+                    randArrCopy1[j + 1] = randArrCopy1[j];  // Der aktuelle Wert von randArrCopy1[j] wird mit dem wert von randArrCopy1[j] überschrieben
                     randArrCopy1[j] = temp;        // Der Leerstehende randArrCopy1[j] wird befüllt mit dem temp platzhalter/wert von randArrCopy1[i]
                 }
             }

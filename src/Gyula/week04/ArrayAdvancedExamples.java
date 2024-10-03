@@ -6,6 +6,7 @@ import Sandro.Colors;
 import java.util.Arrays;
 import java.util.Random;
 
+
 public class ArrayAdvancedExamples {
     public static Random random = new Random();
 
@@ -43,7 +44,7 @@ public class ArrayAdvancedExamples {
         print2DArray(arraysOfArray);
 
         System.out.println("-------------------");
-        int[][] matrix = new int[5][6];
+        int[][] matrix = new int[12][24];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 matrix[i][j] = counter;
@@ -61,11 +62,14 @@ public class ArrayAdvancedExamples {
                 if (j > 0){
                     System.out.print(", ");
                 }
-                int blue = (int)Math.round(255 * (0.4 + 0.6 * i / arr.length));
-                int green = (int)Math.round(255 * (0.4 + 0.6 * j / arr[i].length));
-                System.out.printf("%s%4d%s", WildColors.getColor(0, green, blue),  arr[i][j], Colors.RESET);
+                double light = WildColors.partValue(40, 80, j, arr[i].length)/100.0;
+                double hue = WildColors.partValue(300, 420, i, arr.length) % 360;
+                System.out.printf("%s%4d%s", WildColors.getColorFromHSL(hue, 0.8, light),  arr[i][j], Colors.RESET);
             }
             System.out.println("]");
         }
     }
+
+
+
 }
