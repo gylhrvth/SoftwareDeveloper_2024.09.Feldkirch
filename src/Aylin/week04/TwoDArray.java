@@ -81,14 +81,14 @@ public class TwoDArray {
                     rowSums[i] = sumArrayRow(arr, i);
                 }
                 System.out.println("Sum of each row: " + Colors.COLORS[6] + Arrays.toString(rowSums) + Colors.RESET);
-                validInput = true; // Eingabe war gültig
+                validInput = true;
             } else if (choice.equals("c")) {
                 int[] colSums = new int[arr[0].length];
                 for (int j = 0; j < arr[0].length; j++) {
                     colSums[j] = sumArrayCol(arr, j);
                 }
                 System.out.println("Sum of each column: " + Colors.COLORS[4] + Arrays.toString(colSums) + Colors.RESET);
-                validInput = true; // Eingabe war gültig
+                validInput = true;
             } else {
                 System.out.println("Invalid choice. Please enter 'r' or 'c'.");
                 validInput = false;
