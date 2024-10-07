@@ -2,7 +2,7 @@ package Thiemo;
 
 import java.util.Scanner;
 
-public class ReadNumber {
+public class ConsoleInput {
 
     public static int readNumber(String userinfo, int minValue, int maxValue) {
 
