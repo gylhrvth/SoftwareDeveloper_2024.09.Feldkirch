@@ -1,9 +1,5 @@
 package Thiemo.week05;
 
-import Sandro.Colors;
-
-import java.util.Scanner;
-
 /*
  ToDo:
 *1  Wie Speichere ich meine Daten? Representation       ??
@@ -18,7 +14,31 @@ import java.util.Scanner;
 */
 
 public class TicTacToe1 {
+    public static void main(String[] args) {
 
+        int [][] board = createBoard();
+        printboard(board);
+
+    }
+    public static int[][] createBoard(){
+        int [][] board = new int[3][3];
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                board[i][j] = 0;
+            }
+        }
+        return board;
+    }
+    public static void printboard(int [][] board){
+        System.out.println("\n");
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                System.out.printf("%7d",board[i][j]);
+
+            }
+            System.out.println("\n");
+        }
+    }
 }
 
 
