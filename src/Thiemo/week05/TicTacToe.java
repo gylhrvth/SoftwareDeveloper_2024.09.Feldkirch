@@ -80,14 +80,16 @@ public class TicTacToe {
 
 
                 if (checkWin(player, board)) {
+                    checkBoard(board);
                     printTicTacToe(board);
                     System.out.println("Player " + player + " won the game");
                     wincondition = true;
-                }else
-                    if (turn == 8) {
+
+                }else if (turn == 8) {
                     printTicTacToe(board);
                     System.out.println("It's a Draw");
                     wincondition = true;
+
                 }
                 if (player == 1) {
                     player = 2;
