@@ -1,71 +1,76 @@
 package Thiemo.week04;
 
-import java.util.Scanner;
+import Sandro.Colors;
 
+import java.util.Scanner;
+/*
+ ToDo:
+*1  Wie Speichere ich meine Daten? Representation
+*2  Spielfeld initialisieren int [3][3] mit 0 gefüllt
+*3  Spielfeld ausdrucken
+*4  Spieler wechseln
+*5  UserInput lesen
+*6  Feld Belegen
+*7  Prüfen ob das Feld leer ist
+*8  Win condition prüfen
+
+*/
 public class TicTacToe {
 
     public static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
 
-
-        System.out.println();
-        int[][] playfield = create2DArray();
-        print2Darray(playfield);
-
-
-        System.out.println();
-//        int[][] testfeld = {
-//
-//                {2, 2, 1},
-//                {1, 2, 1},
-//                {1, 2, 2},
-//        };
-//        print2Darray(testfeld);
-
+        int[][] board = create2DArray();
+        print2Darray(board);
+        int turn = 0;
         boolean gameloop = true;
+
         while (gameloop) {
 
-            int userInputPlayer1 = readNumber("Player 1 choose a position", 1, 9);
-            int player1 = 0;
-            FieldPositions(playfield, userInputPlayer1, player1);
-            print2Darray(playfield);
-            int userInputPlayer2 = readNumber("Player 2 choose a position", 1, 9);
-            int player2 = 1;
-            FieldPositions(playfield, userInputPlayer2, player2);
-            print2Darray(playfield);
-            gameloop = wincondition();
-//            int userInputRowPlayer1 = readNumber("Choose Row", 1, 9);
-//            int userInputColPlayer1 = readNumber("Choose Col", 1, 3);
-//            playfield[userInputRowPlayer1 - 1][userInputColPlayer1 - 1] = 1;
-//            int userInputPosition = readNumber("Player 1 choose position", 1, 9);
-//            playfield[userInputPosition][userInputPosition] = 1;
-//            print2Darray(playfield);
-//            int userInputPosition2 = readNumber("Player 2 choose position", 1, 9);
-//            playfield[userInputPosition2][userInputPosition2] = 2;
-//            print2Darray(playfield);
-//            int userInputRowPlayer2 = readNumber("Choose Row", 1, 9);
-//            int userInputColPlayer2 = readNumber("Choose Col", 1, 3);
-//            playfield[userInputRowPlayer2 - 1][userInputColPlayer2 - 1] = 2;
+            int player;
+            if (turn % 2 == 0) {
+                player = 1;
+            } else {
+                player = 2;
+            }
+            int userInput = readNumber("Player " + player + " choose a position", 1, 9);
+            boolean validMove = FieldPositions(board, userInput, player);
+            boolean validTurn = true;
 
+            if (!validMove) {
+                System.out.println("This spot is already taken! Try again.");
+                validTurn = false;
+            }
+
+            if (validTurn) {
+                print2Darray(board);
+                if (checkWin(board, player)) {
+                    System.out.println("Player" + player + "Wins");
+                    gameloop = false;
+                } else if (turn == 8) {
+                    System.out.println("It's a Draw");
+                    gameloop = false;
+                }
+            }
+            turn++;
         }
         System.out.println("Thanks for wasting your time");
     }
 
     public static int[][] create2DArray() {
-        int counter = 1;
-        int[][] result = new int[3][3];
-        for (int i = 0; i < result.length; i++) {
-            for (int j = 0; j < result[0].length; j++) {
 
-                result[i][j] = counter;
-                counter++;
+        int[][] result = new int[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                result[i][j] = 0;
             }
         }
         return result;
     }
 
     public static void print2Darray(int[][] array) {
+
         for (int i = 0; i < array.length; i++) {
             if (i > 0) {
                 System.out.println("-----|-------|-----");
@@ -75,11 +80,16 @@ public class TicTacToe {
                 if (j > 0) {
                     System.out.print("  |  ");
                 }
-                System.out.print(" " + array[i][j] + " ");
+                if (array[i][j] == 1) {
+                    System.out.print(Colors.COLORS[4] + " X " + Colors.RESET);
+                } else if (array[i][j] == 2) {
+                    System.out.print(Colors.COLORS[2] + " O " + Colors.RESET);
+                } else {
+                    System.out.print(" " + ((i * 3) + j + 1) + " ");
+//                    System.out.print(" " + array[i][j] + " ");
+                }
             }
             System.out.println();
-//            System.out.print("   |  ");
-
         }
     }
 
@@ -103,53 +113,31 @@ public class TicTacToe {
         return number;
     }
 
-    public static void FieldPositions(int[][] field, int input, int player) {
-        int row = -1;
-        int col = -1;
+    public static boolean FieldPositions(int[][] board, int input, int player) {
 
-        if (input == 1) {
-            row = 0;
-            col = 0;
-        } else if (input == 2) {
-            row = 0;
-            col = 1;
-        } else if (input == 3) {
-            row = 0;
-            col = 2;
-        } else if (input == 4) {
-            row = 1;
-            col = 0;
-        } else if (input == 5) {
-            row = 1;
-            col = 1;
-        } else if (input == 6) {
-            row = 1;
-            col = 2;
-        } else if (input == 7) {
-            row = 2;
-            col = 0;
-        } else if (input == 8) {
-            row = 2;
-            col = 1;
-        } else if (input == 9) {
-            row = 2;
-            col = 2;
+        int row = (input - 1) / 3;
+        int col = (input - 1) % 3;
+
+        if (board[row][col] == 0) {
+            board[row][col] = player;
+            return true;
+        } else {
+            return false;
         }
-        field[row][col] = player;
     }
 
-    public static boolean wincondition() {
-        System.out.println("Want to draw something else? (y/n)");
-        String response = sc.nextLine();
+    public static boolean checkWin(int[][] board, int player) {
 
-        if (response.equals("Y") || response.equals("y")) {
-            return true;
-        } else if (response.equals("N") || response.equals("n")) {
-            return false;
-        } else {
-            System.out.println("Invalid input. Please enter 'y' for yes or 'n' for no.");
-            return wincondition();
+        for (int i = 0; i < 3; i++) {
+            if ((board[i][0] == player && board[i][1] == player && board[i][2] == player) ||
+                    (board[0][i] == player && board[1][i] == player && board[2][i] == player)) {
+                return true;
+            }
         }
+        if ((board[0][0] == player && board[1][1] == player && board[2][2] == player) ||
+                (board[0][2] == player && board[1][1] == player && board[2][0] == player)) {
+            return true;
+        }
+        return false;
     }
 }
-
