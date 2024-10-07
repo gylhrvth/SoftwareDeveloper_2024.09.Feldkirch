@@ -37,7 +37,7 @@ public class TicTacToe {
             boolean validmove = false;
             while (!validmove && turn < 9) {
 
-                System.out.println("Player " + player + " choose your Position");
+                System.out.println("Player " + player + (player == 1 ? " (X) " : " (O) " + " choose your Position"));
                 int userInput = ConsoleInput.readNumber(">>>", 1, 9);
 
 //        boardPositions(board, userInput, player);
@@ -67,7 +67,8 @@ public class TicTacToe {
             }
         }
     }
-//    public static int[][] fillboard() {
+
+    //    public static int[][] fillboard() {
 ////        int counter = 0;
 //        int[][] result = new int[3][3];
 //        for (int i = 0; i < result.length; i++) {
@@ -81,20 +82,23 @@ public class TicTacToe {
     public static void printBoard(int[][] board) {
         System.out.println();
         for (int i = 0; i < board.length; i++) {
+            System.out.println("---------------");
             for (int j = 0; j < board[i].length; j++) {
                 if (board[i][j] == 1) {
-                    System.out.print(Colors.COLORS[6] + "X   " + Colors.RESET);
+                    System.out.print(Colors.COLORS[6] + "| X |" + Colors.RESET);
                 } else if (board[i][j] == 2) {
-                    System.out.print(Colors.COLORS[1] + "O   " + Colors.RESET);
+                    System.out.print(Colors.COLORS[1] + "| O |" + Colors.RESET);
                 } else {
+                    System.out.print("| ");
                     System.out.print((i * 3) + j + 1);
-                    System.out.print("   ");
+                    System.out.print(" |");
                 }
 //                System.out.print((i * 3) + j + 1);        // print from 1 to X         // wrong-
 //                System.out.print(board[i][j]);            // print everything as 0     // line?
             }
             System.out.println();
         }
+        System.out.println("---------------");
     }
 
     public static boolean checkWinner(int[][] board, int player) {
