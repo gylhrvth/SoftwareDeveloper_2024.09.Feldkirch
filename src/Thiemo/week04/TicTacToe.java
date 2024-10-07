@@ -46,7 +46,7 @@ public class TicTacToe {
             if (validTurn) {
                 print2Darray(board);
                 if (checkWin(board, player)) {
-                    System.out.println("Player" + player + "Wins");
+                    System.out.println("Player " + player + " Wins");
                     gameloop = false;
                 } else if (turn == 8) {
                     System.out.println("It's a Draw");
@@ -85,8 +85,8 @@ public class TicTacToe {
                 } else if (array[i][j] == 2) {
                     System.out.print(Colors.COLORS[2] + " O " + Colors.RESET);
                 } else {
-                    System.out.print(" " + ((i * 3) + j + 1) + " ");
-//                    System.out.print(" " + array[i][j] + " ");
+                    System.out.print(" " + ((i * 3) + j + 1) + " ");               // 1-9
+//                    System.out.print(" " + array[i][j] + " ");                   // everything is 0
                 }
             }
             System.out.println();
@@ -134,10 +134,7 @@ public class TicTacToe {
                 return true;
             }
         }
-        if ((board[0][0] == player && board[1][1] == player && board[2][2] == player) ||
-                (board[0][2] == player && board[1][1] == player && board[2][0] == player)) {
-            return true;
-        }
-        return false;
+        return (board[0][0] == player && board[1][1] == player && board[2][2] == player) ||
+                (board[0][2] == player && board[1][1] == player && board[2][0] == player);
     }
 }
