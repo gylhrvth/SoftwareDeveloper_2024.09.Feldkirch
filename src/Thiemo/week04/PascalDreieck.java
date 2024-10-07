@@ -1,14 +1,18 @@
 package Thiemo.week04;
 
+import Gyula.ConsoleTools;
+
 public class PascalDreieck {
     public static void main(String[] args) {
 
-        int[][] array = create2DArray(10);
+        int size = ConsoleTools.readNumber("How big?", 0, 100);
+        int[][] array = create2DArray(size);
         print2DArray(array);
         System.out.println();
-        int [][] array2 = create2DArray2(10);
+        int[][] array2 = create2DArray2(size);
         print2DArray(array2);
     }
+
 
     public static int[][] create2DArray(int size) {
         int[][] result = new int[size][size];
