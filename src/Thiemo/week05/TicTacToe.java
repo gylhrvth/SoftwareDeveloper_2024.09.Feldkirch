@@ -1,6 +1,7 @@
 package Thiemo.week05;
 
 import Gyula.ConsoleTools;
+import Sandro.Colors;
 
 /*
  ToDo:
@@ -25,9 +26,9 @@ public class TicTacToe {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
                 if (board[i][j] == 1)
-                    System.out.print("X ");
+                    System.out.print(Colors.COLORS[4] + "X " + Colors.RESET);
                 else if (board[i][j] == 2) {
-                    System.out.print("O ");
+                    System.out.print(Colors.COLORS[2] + "O " + Colors.RESET);
                 } else {
                     System.out.printf("%d ", 3 * i + j + 1);
                 }
@@ -63,7 +64,7 @@ public class TicTacToe {
     public static void playTicTacToe() {
         int[][] board = new int[3][3];
         int player = 1;
-
+        int turn = 0;
         boolean wincondition = false;
 
         while (!wincondition && checkBoard(board)) {
@@ -73,10 +74,19 @@ public class TicTacToe {
             int row = (input - 1) / 3;
             int col = (input - 1) % 3;
 
+
             if (board[row][col] == 0) {
                 board[row][col] = player;
 
+
                 if (checkWin(player, board)) {
+                    printTicTacToe(board);
+                    System.out.println("Player " + player + " won the game");
+                    wincondition = true;
+                }else
+                    if (turn == 8) {
+                    printTicTacToe(board);
+                    System.out.println("It's a Draw");
                     wincondition = true;
                 }
                 if (player == 1) {
@@ -87,6 +97,7 @@ public class TicTacToe {
             } else {
                 System.out.println("Position is already taken. Please choose a different position");
             }
+            turn++;
         }
     }
 }
