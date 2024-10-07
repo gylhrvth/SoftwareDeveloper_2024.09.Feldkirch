@@ -2,6 +2,7 @@ package Aylin.week04;
 
 import Sandro.Colors;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class TicTacToe {
@@ -20,11 +21,11 @@ public class TicTacToe {
             System.out.print("Row " + i + " |");
             for (int j = 0; j < arr[i].length; j++) {
                 if (arr[i][j] == 1) {
-                    System.out.print(" " + Gyula.WildColors.getColor(255, 239, 3) + arr[i][j] + Colors.RESET + " ");
+                    System.out.print(" " + Gyula.WildColors.getColor(255, 239, 3) + "x" + Colors.RESET + " ");
                 } else if (arr[i][j] == 2) {
-                    System.out.print(" " + Gyula.WildColors.getColor(0, 70, 132) + arr[i][j] + Colors.RESET + " ");
+                    System.out.print(" " + Gyula.WildColors.getColor(0, 70, 132) + "o" + Colors.RESET + " ");
                 } else {
-                    System.out.print(" " + arr[i][j] + " ");
+                    System.out.print("   ");
                 }
                 if (j < arr[i].length - 1) {
                     System.out.print("|");
@@ -47,22 +48,22 @@ public class TicTacToe {
             int col = getValidInput("Enter col: ");
             if (board[row][col] != 0) {
                 System.out.println("Field already taken. Please choose another Field.");
-                continue;
-            }
-            board[row][col] = player;
-            counter++;
-            win = false;
-            if (rules(board, player)) {
-                printField(board);
-                win = true;
-            }
-            win = checkGameStatus(board, player, win, counter);
-            if (player == 1) {
-                player = 2;
-            } else {
-                player = 1;
+            }else {
+                board[row][col] = player;
+                counter++;
+                win = false;
+                if (rules(board, player)) {
+                    win = true;
+                }
+                if (player == 1) {
+                    player = 2;
+                } else {
+                    player = 1;
+                }
             }
         }
+        printField(board);
+        printResult(board, player, win, counter);
     }
 
     public static int getValidInput(String message) {
@@ -72,27 +73,26 @@ public class TicTacToe {
             try {
                 System.out.print(message);
                 number = sc.nextInt();
+                sc.nextLine();
                 if (number >= 0 && number < 3) {
                     validNumber = true;
                 } else {
                     System.out.println("Input Number must be between 0 and 2.");
                 }
-            } catch (Exception e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Invalid input, please enter a number.");
-                sc.next();
+                sc.nextLine();
             }
         }
         return number;
     }
 
-    public static boolean checkGameStatus(int[][] board, int player, boolean win, int counter){
+    public static void printResult(int[][] board, int player, boolean win, int counter){
         if (win) {
             System.out.println(aylinGreen + "Congratulations, Player " + player + " wins!!!" + Colors.RESET);
         } else if(counter == 9) {
-            printField(board);
             System.out.println(aylinGreen + "It's a draw. Do better next time!" + Colors.RESET);
         }
-        return win;
     }
 
     public static boolean rules(int[][] board, int player) {
