@@ -18,8 +18,8 @@ public class CardDeck {
 
     public static void swap(int[] arr, int pos1, int pos2){
         int temp = arr[pos1];
-        arr[pos1] = arr[2];
-        arr[2] = temp;
+        arr[pos1] = arr[pos2];
+        arr[pos2] = temp;
     }
 
     public static int[] generateDeck(){
