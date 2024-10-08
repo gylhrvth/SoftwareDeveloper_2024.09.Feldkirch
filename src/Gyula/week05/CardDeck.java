@@ -7,7 +7,7 @@ public class CardDeck {
     public static void main(String[] args) {
         int[] deck = generateDeck();
 
-        for (int i = 0; i < 500; i++) {
+        for (int i = 0; i < 50 * deck.length; i++) {
             swap(deck, random.nextInt(deck.length), random.nextInt(deck.length));
         }
 
