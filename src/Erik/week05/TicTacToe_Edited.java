@@ -1,4 +1,7 @@
-package Erik.week04;
+package Erik.week05;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 /*
             Todo:       1. Wie speichere ich meine Daten? Representation. ♥
@@ -18,12 +21,9 @@ package Erik.week04;
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 // Code Review Edited with Gyula
 
-public class TicTacToe {
+public class TicTacToe_Edited {
     public static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
