@@ -33,6 +33,7 @@ public class CardDeck {
     public static String getCardName(int cardValue){
         if (cardValue < 0 || cardValue > 51){
             System.out.println("There is no card");
+            return "";
         }
         String[] suitsName = new String[]{"Club", "Diamond", "Heart", "Spades"};
         String[] numberName = new String[]{"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
