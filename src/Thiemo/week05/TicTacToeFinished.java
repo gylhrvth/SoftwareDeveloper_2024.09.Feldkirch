@@ -15,9 +15,7 @@ import Thiemo.ConsoleInput;
 *8  Win condition prüfen
 
 */
-public class TicTacToe2 {
-
-
+public class TicTacToeFinished {
 
     public static void main(String[] args) {
         int[][] board = new int[3][3];           //int [][] board = fillboard();
