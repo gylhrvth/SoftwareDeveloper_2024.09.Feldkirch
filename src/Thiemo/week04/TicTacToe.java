@@ -1,155 +1,120 @@
 package Thiemo.week04;
 
-import java.util.Scanner;
+
+import Sandro.Colors;
+import Thiemo.ConsoleInput;
+/*
+ ToDo:
+*1  Wie Speichere ich meine Daten? Representation           !!
+*2  Spielfeld initialisieren int [3][3] mit 0 gefüllt       !!
+*3  Spielfeld ausdrucken                                    !!
+*4  Spieler wechseln                                        !!
+*5  UserInput lesen                                         !!
+*6  Feld Belegen                                            !!
+*7  Prüfen ob das Feld leer ist                             ??
+*8  Win condition prüfen                                    ??
+
+*/
 
 public class TicTacToe {
 
-    public static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
 
+        int[][] board = new int[3][3];           //int [][] board = fillboard();
+        printBoard(board);
 
-        System.out.println();
-        int[][] playfield = create2DArray();
-        print2Darray(playfield);
+        boolean wincon = false;
+        int player = 0;
+        int turn = 0;
+        while (!wincon) {
 
-
-        System.out.println();
-//        int[][] testfeld = {
-//
-//                {2, 2, 1},
-//                {1, 2, 1},
-//                {1, 2, 2},
-//        };
-//        print2Darray(testfeld);
-
-        boolean gameloop = true;
-        while (gameloop) {
-
-            int userInputPlayer1 = readNumber("Player 1 choose a position", 1, 9);
-            int player1 = 0;
-            FieldPositions(playfield, userInputPlayer1, player1);
-            print2Darray(playfield);
-            int userInputPlayer2 = readNumber("Player 2 choose a position", 1, 9);
-            int player2 = 1;
-            FieldPositions(playfield, userInputPlayer2, player2);
-            print2Darray(playfield);
-            gameloop = wincondition();
-//            int userInputRowPlayer1 = readNumber("Choose Row", 1, 9);
-//            int userInputColPlayer1 = readNumber("Choose Col", 1, 3);
-//            playfield[userInputRowPlayer1 - 1][userInputColPlayer1 - 1] = 1;
-//            int userInputPosition = readNumber("Player 1 choose position", 1, 9);
-//            playfield[userInputPosition][userInputPosition] = 1;
-//            print2Darray(playfield);
-//            int userInputPosition2 = readNumber("Player 2 choose position", 1, 9);
-//            playfield[userInputPosition2][userInputPosition2] = 2;
-//            print2Darray(playfield);
-//            int userInputRowPlayer2 = readNumber("Choose Row", 1, 9);
-//            int userInputColPlayer2 = readNumber("Choose Col", 1, 3);
-//            playfield[userInputRowPlayer2 - 1][userInputColPlayer2 - 1] = 2;
-
-        }
-        System.out.println("Thanks for wasting your time");
-    }
-
-    public static int[][] create2DArray() {
-        int counter = 1;
-        int[][] result = new int[3][3];
-        for (int i = 0; i < result.length; i++) {
-            for (int j = 0; j < result[0].length; j++) {
-
-                result[i][j] = counter;
-                counter++;
+            if (player == 1) {
+                player = 2;
+            } else {
+                player = 1;
             }
-        }
-        return result;
-    }
+            boolean validmove = false;
+            while (!validmove && turn < 9) {
 
-    public static void print2Darray(int[][] array) {
-        for (int i = 0; i < array.length; i++) {
-            if (i > 0) {
-                System.out.println("-----|-------|-----");
-            }
+                System.out.println("Player " + player + (player == 1 ? " (X) " : " (O) " + " choose your Position"));
+                int userInput = ConsoleInput.readNumber(">>>", 1, 9);
 
-            for (int j = 0; j < array[0].length; j++) {
-                if (j > 0) {
-                    System.out.print("  |  ");
+//        boardPositions(board, userInput, player);
+
+                int row = (userInput - 1) / 3;
+                int col = (userInput - 1) % 3;
+
+                if (board[row][col] == 0) {
+                    board[row][col] = player;
+                    validmove = true;
+
+                } else {
+                    System.out.print("This position is already used please take a different one");
                 }
-                System.out.print(" " + array[i][j] + " ");
+                if (checkWinner(board, player)) {
+                    printBoard(board);
+                    System.out.println("\nPlayer " + player + " wins for");
+                    wincon = true;
+
+                }
+                printBoard(board);
+                if (turn == 8) {
+                    System.out.print("It's a Draw");
+                    wincon = true;
+                }
+                turn++;
+            }
+        }
+    }
+
+    //    public static int[][] fillboard() {
+////        int counter = 0;
+//        int[][] result = new int[3][3];
+//        for (int i = 0; i < result.length; i++) {
+//            for (int j = 0; j < result[i].length; j++) {
+////                result[i][j] = counter;
+////                counter++;
+//            }
+//        }
+//        return result;
+//    }
+    public static void printBoard(int[][] board) {
+        System.out.println();
+        for (int i = 0; i < board.length; i++) {
+            System.out.println("---------------");
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] == 1) {
+                    System.out.print(Colors.COLORS[6] + "| X |" + Colors.RESET);
+                } else if (board[i][j] == 2) {
+                    System.out.print(Colors.COLORS[1] + "| O |" + Colors.RESET);
+                } else {
+                    System.out.print("| ");
+                    System.out.print((i * 3) + j + 1);
+                    System.out.print(" |");
+                }
+//                System.out.print((i * 3) + j + 1);        // print from 1 to X         // wrong-
+//                System.out.print(board[i][j]);            // print everything as 0     // line?
             }
             System.out.println();
-//            System.out.print("   |  ");
-
         }
+        System.out.println("---------------");
     }
 
-    public static int readNumber(String userinfo, int minValue, int maxValue) {
-        int number = 0;
-        boolean correctInput = false;
-
-        while (!correctInput) {
-            try {
-                System.out.println(userinfo);
-                number = Integer.parseInt(sc.nextLine());
-                if (number >= minValue && number <= maxValue) {
-                    correctInput = true;
-                } else {
-                    System.out.println("The number should be between " + minValue + " and " + maxValue + "\n");
-                }
-            } catch (NumberFormatException nfe) {
-                System.out.println("Error! Please try a valid number.\n");
+    public static boolean checkWinner(int[][] board, int player) {
+        for (int i = 0; i < 3; i++) {
+            if (board[i][0] == player && board[i][1] == player && (board[i][2] == player)) {
+                return true;
+            }
+            if (board[0][i] == player && (board[1][i]) == player && (board[2][i] == player)) {
+                return true;
             }
         }
-        return number;
-    }
-
-    public static void FieldPositions(int[][] field, int input, int player) {
-        int row = -1;
-        int col = -1;
-
-        if (input == 1) {
-            row = 0;
-            col = 0;
-        } else if (input == 2) {
-            row = 0;
-            col = 1;
-        } else if (input == 3) {
-            row = 0;
-            col = 2;
-        } else if (input == 4) {
-            row = 1;
-            col = 0;
-        } else if (input == 5) {
-            row = 1;
-            col = 1;
-        } else if (input == 6) {
-            row = 1;
-            col = 2;
-        } else if (input == 7) {
-            row = 2;
-            col = 0;
-        } else if (input == 8) {
-            row = 2;
-            col = 1;
-        } else if (input == 9) {
-            row = 2;
-            col = 2;
-        }
-        field[row][col] = player;
-    }
-
-    public static boolean wincondition() {
-        System.out.println("Want to draw something else? (y/n)");
-        String response = sc.nextLine();
-
-        if (response.equals("Y") || response.equals("y")) {
+        if (board[0][0] == player && board[1][1] == player && (board[2][2] == player)) {
             return true;
-        } else if (response.equals("N") || response.equals("n")) {
-            return false;
-        } else {
-            System.out.println("Invalid input. Please enter 'y' for yes or 'n' for no.");
-            return wincondition();
         }
+        return board[0][2] == player && board[1][1] == player && (board[2][0] == player);
     }
 }
+
 
