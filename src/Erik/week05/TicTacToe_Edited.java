@@ -1,5 +1,7 @@
 package Erik.week05;
 
+import Sandro.Colors;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -36,14 +38,15 @@ public class TicTacToe_Edited {
 
         // 1. validMove Schleife durchlaufen || 2. Checken ob jmd gewinnt || 3. Checken, ob es patt ist || wiederholen
         while (!win && !patt) {
-            // 1. Spieler auffordern || 2. Zug abfragen || 3. Zug checken || 4. Feld printen || 5. Spieler wechseln || wiederholen
+
             player = playerSwap(player);
 
+            // 1. Spieler auffordern || 2. Zug abfragen || 3. Zug checken || 4. Feld printen || 5. Spieler wechseln || wiederholen
             boolean validMove = false;
             while (!validMove) {
                 System.out.println("Spieler " + player + " , mach dein Zug.");
-                int userInput = controlUserInput("[Das Spielfeld ist dem Numpad nach empfunden!]\n     [Welches Feld soll es sein 1-9?]", 1, 9);
-                int row = 2 - (userInput - 1) / 3;
+                int userInput = controlUserInput("Das Spielfeld ist dem Numpad nach empfunden!\n     Welches Feld soll es sein 1-9?", 1, 9);
+                int row = 2 - (userInput - 1) / 3; // row 2 - .. wegen der Numpad Reihenfolge
                 int col = (userInput - 1) % 3;
 
                 validMove = checkAndFillPosition(gameField, player, row, col);
@@ -53,9 +56,9 @@ public class TicTacToe_Edited {
             patt = checkPatt(gameField);
         }
         if (win) {
-            System.out.println("Gewonnen");
+            System.out.println("Glückwunsch Player " + player + " hat Gewonnen");
         } else {
-            System.out.println("Patt Situation");
+            System.out.println("Kein Spieler hat gewonnen!\nPatt Situation");
         }
     }
 
@@ -82,19 +85,32 @@ public class TicTacToe_Edited {
     }
 
     public static void printField(int[][] arr) {
-
+        System.out.println("╔═════════════════╗");
+        System.out.println("║   Tik Tak Toe   ║");
+        System.out.println("╚═════════════════╝"); //17 leer
         for (int i = 0; i < arr.length; i++) {
+            if (i == 0){
+                System.out.println("╔═════╦═════╦═════╗");
+            } else{
+                System.out.println("╠═════╬═════╬═════╣");
+            }
             for (int j = 0; j < arr[i].length; j++) {
                 if (arr[i][j] == 1) {
-                    System.out.print("  X");
+                    System.out.print("║ " + Colors.COLORS[1] + " X " + Colors.RESET + " ");
                 } else if (arr[i][j] == 2) {
-                    System.out.print("  O");
+                    System.out.print("║ " + Colors.COLORS[4] + " O " + Colors.RESET + " ");
                 } else {
-                    System.out.printf("%3d", 3 * (2 - i) + j + 1);
+                    if (j == 0){
+                        System.out.print("║"); //Rand Anfang
+                    } else {
+                        System.out.print(" ║"); //Rand Zahlen Ende
+                    }
+                    System.out.printf("%3d ", 3 * (2 - i) + j + 1);
                 }
             }
-            System.out.println();
+            System.out.println(" ║"); //Rand Ende
         }
+        System.out.println("╚═════╩═════╩═════╝");
     }
 
     public static int controlUserInput(String msg, int minValue, int maxValue) {
@@ -104,15 +120,16 @@ public class TicTacToe_Edited {
         while (!vaildNumber) {
             try {
                 System.out.println(msg);
+                System.out.print(">> ");
                 userInput = sc.nextInt();
                 if (userInput >= minValue && userInput <= maxValue) {
                     vaildNumber = true;
                 } else {
-                    System.out.println("Between 1-9!");
+                    System.out.println("Zwischen 1-9!");
                 }
 
             } catch (InputMismatchException ime) {
-                System.out.println("Error Only Numbers");
+                System.out.println("Fehler! Nur Zahlen");
             }
             sc.nextLine();
         }
