@@ -41,7 +41,7 @@ public class ConwaysGameOfLife {
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field.length; j++) {
                 if (field[i][j] == 1){
-                    System.out.print(Colors.BACKGROUND_COLORS[2] + "  " + Colors.RESET);
+                    System.out.print(Colors.BACKGROUND_COLORS[5] + "  " + Colors.RESET);
                 }else {
                     System.out.print(Colors.BACKGROUND_COLORS[4] + "  " + Colors.RESET);
                 }
