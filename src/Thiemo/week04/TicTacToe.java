@@ -50,7 +50,7 @@ public class TicTacToe {
                     validmove = true;
 
                 } else {
-                    System.out.print("This position is already used please take a different one bitch");
+                    System.out.print("This position is already used please take a different one");
                 }
                 if (checkWinner(board, player)) {
                     printBoard(board);
@@ -60,7 +60,7 @@ public class TicTacToe {
                 }
                 printBoard(board);
                 if (turn == 8) {
-                    System.out.print("It's a Draw G.");
+                    System.out.print("It's a Draw");
                     wincon = true;
                 }
                 turn++;
