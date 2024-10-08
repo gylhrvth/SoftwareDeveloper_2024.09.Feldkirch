@@ -54,11 +54,12 @@ public class TicTacToe {
                 win = false;
                 if (rules(board, player)) {
                     win = true;
-                }
-                if (player == 1) {
-                    player = 2;
-                } else {
-                    player = 1;
+                }else{
+                    if (player == 1) {
+                        player = 2;
+                    } else {
+                        player = 1;
+                    }
                 }
             }
         }
