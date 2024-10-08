@@ -21,7 +21,18 @@ public class WildColors {
         }
     }
 
+    public static String resetColor(){
+        return "\u001B[0m";
+    }
 
+
+    /** Create Color Coding Text from HSL
+     *
+     * @param hue 0-359
+     * @param saturation 0-1
+     * @param light 0-1
+     * @return Text to print on console
+     */
     public static String getColorFromHSL(double hue, double saturation, double light){
         int[] rgb = hslToRgb(hue, saturation, light);
         // System.out.printf("%4.0f ==> %3d, %3d, %3d", hue, rgb[0], rgb[1], rgb[2]);
