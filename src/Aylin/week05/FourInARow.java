@@ -59,11 +59,7 @@ public class FourInARow {
                 counter++;
 
                 if (!win) {
-                    if (player == 1) {
-                        player = 2;
-                    } else {
-                        player = 1;
-                    }
+                    player = (player == 1) ? 2 : 1;
                 }
             }else {
                 System.out.println("Column is full");
@@ -127,5 +123,4 @@ public class FourInARow {
         }
         return false;
     }
-
 }
