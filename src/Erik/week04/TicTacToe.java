@@ -10,10 +10,12 @@ package Erik.week04;
                         7. Prüfung ob das ausgewählte Feld leer ist.
                         8. Win Condition prüfen. ♥
                         9. Patt Situation prüfen. ♥
-
-                        Problem:    1. Eingegebener User Input von Player 1 in Zahl "1" ändern und von Player 2 in Zahl "2" (Gelöst) Im updateField mit if/else
-                                    2. Player Swap funktioniert nicht. (Gelöst) Prinzip funktioniert. if/else im Main Block ausführen zum Testen.
-                                    3. Nach dem Player Swap wird der Wert von Player 1 überschrieben obwohl ein anderes Feld ausgewählt wurde. (Gelöst) Falsch ausgeführt im Main Block
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            Problem:    1. Eingegebener User Input von Player 1 in Zahl "1" ändern und von Player 2 in Zahl "2" (Gelöst) Im updateField mit if/else
+                        2. Player Swap funktioniert nicht. (Gelöst) Prinzip funktioniert. if/else im Main Block ausführen zum Testen.
+                        3. Nach dem Player Swap wird der Wert von Player 1 überschrieben obwohl ein anderes Feld ausgewählt wurde. (Gelöst) Falsch ausgeführt im Main Block
+                        4. Spielfeld schon belegt und dann wechselt er den spieler direkt sollte nicht so sein.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
 
 import java.util.InputMismatchException;
@@ -25,23 +27,32 @@ public class TicTacToe {
     public static void main(String[] args) {
         int player = 1;
         int[][] gameField = createGameField();
+        boolean validMove = false;
+        boolean win = false;
 
-        playTicTacToe(gameField);
+        printField(gameField);
 
-//        printField(gameField);
-//        System.out.println("Spieler " + player + " , mach dein Zug.");
-//        for (int i = 0; i < 8; i++) {
-//
-//           int userInput = controlUserInput("[Das Spielfeld ist dem Numpad nach empfunden!]\n     [Welches Feld soll es sein 1-9?]", 1, 9);
-//            updateField(gameField, userInput, player);
-//            printField(gameField);
-//            if (player == 1) {
-//                player = 2;
-//            } else if (player == 2) {
-//                player = 1;
-//            }
-//            System.out.println("Spieler " + player + " , mach dein Zug.");
-//        }
+        // 1. validMove Schleife durchlaufen || 2. Checken ob jmd gewinnt || 3. Checken, ob es patt ist || wiederholen
+        while (!win) {
+
+            checkWin(gameField, player);
+            checkPatt(gameField);
+
+        }
+
+        // 1. Spieler auffordern || 2. Zug abfragen || 3. Zug checken || 4. Feld printen || 5. Spieler wechseln || wiederholen
+        while (!validMove) {
+            System.out.println("Spieler " + player + " , mach dein Zug.");
+            int userInput = controlUserInput("[Das Spielfeld ist dem Numpad nach empfunden!]\n     [Welches Feld soll es sein 1-9?]", 1, 9);
+            checkAndUpdateField(gameField, userInput, player);
+            printField(gameField);
+            if (player == 1) {
+                player = 2;
+            } else if (player == 2) {
+                player = 1;
+            }
+            validMove = true;
+        }
 
     }
 
@@ -87,7 +98,7 @@ public class TicTacToe {
         return userInput;
     }
 
-    public static void updateField(int[][] gameField, int userInput, int player) {
+    public static void checkAndUpdateField(int[][] gameField, int userInput, int player) {
 // User Input wird abgeglichen und hier muss ich, den eingegeben Input von player 1 und 2 auf "1" und "2" schreiben?
         int row = 0; //        row = (userInput-1) /3;
         int col = 0; //        col = (userInput-1) %3;
@@ -121,43 +132,55 @@ public class TicTacToe {
             col = 2;
         }
 
-        if (gameField[row][col] == 0){
+        if (gameField[row][col] == 0) {
             gameField[row][col] = player;
-        } else {
-            System.out.println("Feld schon belegt!");
+        } else if (gameField[row][col] == 1) {
+            System.out.println("[Feld schon belegt! Bitte ein neues Feld Auswählen!]\n[Das Spielfeld ist dem Numpad nach empfunden!]\n");
+            controlUserInput("[Welches Feld soll es sein 1-9?]", 1, 9);
+        } else if (gameField[row][col] == 2) {
+            System.out.println("[Feld schon belegt! Bitte ein neues Feld Auswählen!]\n[Das Spielfeld ist dem Numpad nach empfunden!]\n");
+            controlUserInput("[Welches Feld soll es sein 1-9?]", 1, 9);
         }
-
-//        if (player == 1) {
-//            gameField[row][col] = userInput;
-//            userInput = 1;
-//        } else if (player == 2) {
-//            gameField[row][col] = userInput;
-//            userInput = 2;
-//        }
-//        gameField[row][col] = userInput;
-
     }
 
-    public static void playTicTacToe(int[][] gameField){
+    public static void ticTacToeLogic(int[][] gameField) {
         int player = 1;
+        int count = 0;
         boolean winGame = false;
+        boolean validMove = false;
+
+        while (!winGame && count < 9) {
 
 
-        while(!winGame){
-            printField(gameField);
-            System.out.println("Spieler " + player + " , mach dein Zug.");
-            for (int i = 0; i < 8; i++) {
-
-                int userInput = controlUserInput("[Das Spielfeld ist dem Numpad nach empfunden!]\n     [Welches Feld soll es sein 1-9?]", 1, 9);
-                updateField(gameField, userInput, player);
-                printField(gameField);
-                if (player == 1) {
-                    player = 2;
-                } else if (player == 2) {
-                    player = 1;
-                }
+            while (!validMove) {
                 System.out.println("Spieler " + player + " , mach dein Zug.");
+                int userInput = controlUserInput("[Das Spielfeld ist dem Numpad nach empfunden!]\n     [Welches Feld soll es sein 1-9?]", 1, 9);
+                checkAndUpdateField(gameField, userInput, player);
+                printField(gameField);
+//                if (player == 1) {
+//                    player = 2;
+//                } else if (player == 2) {
+//                    player = 1;
+//                }
+                playerSwap(player);
+//                System.out.println("Spieler " + player + " , mach dein Zug.");
             }
+            checkWin(gameField, player);
+            checkPatt(gameField);
+            if (winGame) {
+                System.out.println("Player " + player + "Won the Game!");
+            } else {
+                System.out.println("...");
+            }
+
+        }
+    }
+
+    public static int playerSwap(int player) {
+        if (player == 1) {
+            return 2;
+        } else {
+            return 1;
         }
     }
 
@@ -195,7 +218,7 @@ public class TicTacToe {
         return false;
     }
 
-    public static boolean checkPatt(int[][] field, int player) {
+    public static boolean checkPatt(int[][] field) {
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field[j].length; j++) {
                 if (field[i][j] == 0) {
@@ -207,33 +230,8 @@ public class TicTacToe {
         }
 
 
-
         return false;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public static void gameLogicOld(int[][] arr) {
@@ -282,50 +280,19 @@ public class TicTacToe {
     }
 }
 
-
-//        playerSwap(player);
-
-//public static int playerSwap(int player) {
-//
-//    if (player == 1) {
-//        player = 2;
-//    } else if (player == 2) {
-//        player = 1;
-//    }
-//    return player;
-//}
-
 //int[][] testfeld = {
 //        {1, 1, 1},
 //        {0, 0, 0},
 //        {0, 0, 0}
 //};
 
-//public static void winCondition(int[][] arr) {
-//    int[][] testfeld = {
-//            {1, 1, 1},
-//            {0, 0, 0},
-//            {0, 0, 0}
-//    };
-////        printField(testfeld);
-//
-//    int player1 = 1;
-//    int player1Win = 3;
-//    int player2 = 2;
-//    int player2Win = 6;
-//    boolean win = false;
-//
-//    while (!win)
-//        for (int i = 0; i < testfeld.length; i++) {
-//            for (int j = 0; j < testfeld[i].length; j++) { //Geht das Spielfeld durch und prüft, ob jemand gewonnen hat
-//                if (testfeld[0][0] == testfeld[i][j]) {
-//                    System.out.println("Spieler 1 Gewinnt!\nSpieler 2 hat Verloren.");
-//                } else if (player2 == player2Win) {
-//                    System.out.println("Spieler 2 Gewinnt!\nSpieler 1 hat Verloren.");
-//                }
-//
-//            }
-//            win = true;
+//  playerSwap(player);
+//        System.out.println("Spieler " + player + " , mach dein Zug.");
+//        controlUserInput("[Das Spielfeld ist dem Numpad nach empfunden!]\n     [Welches Feld soll es sein 1-9?]", 1, 9);
+//        checkAndUpdateField(gameField, userInput, player);
+//        printField(gameField);
+//        if (player == 1) {
+//            player = 2;
+//        } else if (player == 2) {
+//            player = 1;
 //        }
-//
-//}
