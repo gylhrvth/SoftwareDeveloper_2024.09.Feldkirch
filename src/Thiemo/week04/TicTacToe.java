@@ -20,66 +20,81 @@ public class TicTacToe {
 
 
     public static void main(String[] args) {
+
         int[][] board = new int[3][3];           //int [][] board = fillboard();
         printBoard(board);
 
         boolean wincon = false;
         int player = 0;
         int turn = 0;
-        while (!wincon && turn < 9) {
-            player = nextPlayer(player);
-            nextMove(board, player);
-            printBoard(board);
-            wincon = checkWinner(board, player);
-            turn++;
-        }
-        if (wincon){
-            System.out.println("\nPlayer " + player + " wins for");
-        } else {
-            System.out.print("It's a Draw");
-        }
-    }
+        while (!wincon) {
 
-    public static void nextMove(int[][] board, int player){
-        boolean validmove = false;
-        while (!validmove) {
-            System.out.println("Player" + (player == 1 ? " (X) " : " (O) " + " choose your Position"));
-            int userInput = ConsoleInput.readNumber(">>>", 1, 9);
-            int row = (userInput - 1) / 3;
-            int col = (userInput - 1) % 3;
-
-            if (board[row][col] == 0) {
-                board[row][col] = player;
-                validmove = true;
+            if (player == 1) {
+                player = 2;
             } else {
-                System.out.print("This position is already used please take a different one");
+                player = 1;
+            }
+            boolean validmove = false;
+            while (!validmove && turn < 9) {
+
+                System.out.println("Player " + player + (player == 1 ? " (X) " : " (O) " + " choose your Position"));
+                int userInput = ConsoleInput.readNumber(">>>", 1, 9);
+
+//        boardPositions(board, userInput, player);
+
+                int row = (userInput - 1) / 3;
+                int col = (userInput - 1) % 3;
+
+                if (board[row][col] == 0) {
+                    board[row][col] = player;
+                    validmove = true;
+
+                } else {
+                    System.out.print("This position is already used please take a different one");
+                }
+                if (checkWinner(board, player)) {
+                    printBoard(board);
+                    System.out.println("\nPlayer " + player + " wins for");
+                    wincon = true;
+
+                }
+                printBoard(board);
+                if (turn == 8) {
+                    System.out.print("It's a Draw");
+                    wincon = true;
+                }
+                turn++;
             }
         }
-
     }
 
-    public static int nextPlayer(int lastPlayer){
-        int player = 1;
-        if (lastPlayer == 1) {
-            player = 2;
-        }
-        return player;
-    }
-
+    //    public static int[][] fillboard() {
+////        int counter = 0;
+//        int[][] result = new int[3][3];
+//        for (int i = 0; i < result.length; i++) {
+//            for (int j = 0; j < result[i].length; j++) {
+////                result[i][j] = counter;
+////                counter++;
+//            }
+//        }
+//        return result;
+//    }
     public static void printBoard(int[][] board) {
         System.out.println();
         for (int i = 0; i < board.length; i++) {
             System.out.println("---------------");
             for (int j = 0; j < board[i].length; j++) {
-                System.out.print("| ");
                 if (board[i][j] == 1) {
-                    System.out.print(Colors.COLORS[6] + "X" + Colors.RESET);
+                    System.out.print(Colors.COLORS[6] + "| X |" + Colors.RESET);
                 } else if (board[i][j] == 2) {
-                    System.out.print(Colors.COLORS[1] + "O" + Colors.RESET);
+                    System.out.print(Colors.COLORS[1] + "| O |" + Colors.RESET);
                 } else {
+                    System.out.print("| ");
                     System.out.print((i * 3) + j + 1);
+                    System.out.print(" |");
                 }
-                System.out.print(" |");
+//                System.out.print((i * 3) + j + 1);        // print from 1 to X         // wrong-
+//                System.out.print(board[i][j]);            // print everything as 0     // line?
             }
             System.out.println();
         }
