@@ -11,6 +11,8 @@ package Thiemo.week05;
 
 */
 
+import Sandro.Colors;
+
 public class ConwaysGameOfLife {
 
     public static final int[][] GLEITER = {
@@ -30,12 +32,37 @@ public class ConwaysGameOfLife {
     public static void main(String[] args) {
         int[][] field = GLEITER;
 
-        int Generations = 20;
+        int Generations = 100;
         for (int i = 0; i < Generations; i++) {
 
             printfield(field);
             field = nextGen(field);
         }
+    }
+    public static int[][] nextGen(int[][] field) {
+
+        int rows = field.length;
+        int cols = field[0].length;
+        int[][] newField = new int[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                int liveNeighbours = countNeighboursRoundUp(field, i, j);
+
+                if (field[i][j] == 1) {
+                    if (liveNeighbours < 2 || liveNeighbours > 3) {
+                        newField[i][j] = 0;
+                    } else {
+                        newField[i][j] = 1;
+                    }
+                } else {
+                    if (liveNeighbours == 3) {
+                        newField[i][j] = 1;
+                    }
+                }
+            }
+        }
+        return newField;
     }
 
     public static int countNeigboursHardWall(int[][] field, int x, int y) {
@@ -77,40 +104,14 @@ public class ConwaysGameOfLife {
         return count;
     }
 
-    public static int[][] nextGen(int[][] field) {
-
-        int rows = field.length;
-        int cols = field[0].length;
-        int[][] newField = new int[rows][cols];
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                int liveNeighbours = countNeighboursRoundUp(field, i, j);
-
-                if (field[i][j] == 1) {
-                    if (liveNeighbours < 2 || liveNeighbours > 3) {
-                        newField[i][j] = 0;
-                    } else {
-                        newField[i][j] = 1;
-                    }
-                } else {
-                    if (liveNeighbours == 3) {
-                        newField[i][j] = 1;
-                    }
-                }
-            }
-        }
-        return newField;
-    }
-
     public static void printfield(int[][] field) {
 
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field[0].length; j++) {
                 if (field[i][j] == 1) {
-                    System.out.print("@");
+                    System.out.print(Colors.COLORS[6] + " @ " + Colors.RESET);
                 } else {
-                    System.out.print(" ");
+                    System.out.print(Colors.BACKGROUND_COLORS[3] + "   " + Colors.RESET);
                 }
             }
             System.out.println();
