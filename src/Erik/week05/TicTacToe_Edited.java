@@ -1,7 +1,6 @@
 package Erik.week05;
 
 import Sandro.Colors;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -95,20 +94,17 @@ public class TicTacToe_Edited {
                 System.out.println("╠═════╬═════╬═════╣");
             }
             for (int j = 0; j < arr[i].length; j++) {
+                System.out.print("║  ");
                 if (arr[i][j] == 1) {
-                    System.out.print("║ " + Colors.COLORS[1] + " X " + Colors.RESET + " ");
+                    System.out.print(Colors.COLORS[1] + "X" + Colors.RESET);
                 } else if (arr[i][j] == 2) {
-                    System.out.print("║ " + Colors.COLORS[4] + " O " + Colors.RESET + " ");
+                    System.out.print(Colors.COLORS[4] + "O" + Colors.RESET);
                 } else {
-                    if (j == 0){
-                        System.out.print("║"); //Rand Anfang
-                    } else {
-                        System.out.print(" ║"); //Rand Zahlen Ende
-                    }
-                    System.out.printf("%3d ", 3 * (2 - i) + j + 1);
+                    System.out.printf("%1d", 3 * (2 - i) + j + 1);
                 }
+                System.out.print("  ");
             }
-            System.out.println(" ║"); //Rand Ende
+            System.out.println("║"); //Rand Ende
         }
         System.out.println("╚═════╩═════╩═════╝");
     }
@@ -160,7 +156,7 @@ public class TicTacToe_Edited {
         if (field[0][0] == player && field[1][0] == player && field[2][0] == player) {
             return true;
         }
-        if (field[1][0] == player && field[1][1] == player && field[2][1] == player) {
+        if (field[0][1] == player && field[1][1] == player && field[2][1] == player) {
             return true;
         }
         if (field[0][2] == player && field[1][2] == player && field[2][2] == player) {
