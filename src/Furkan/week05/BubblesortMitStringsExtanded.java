@@ -1,16 +1,16 @@
-package Aylin.week05;
+package Furkan.week05;
 
 import java.text.Collator;
 import java.util.Arrays;
 import java.util.Locale;
 
-public class BubblesortMitStringExtended {
+public class BubblesortMitStringsExtanded {
     public static void main(String[] args) {
-        String[] names = new String[]{"Ömer", "Furkan", "Ayla","Eren", "Aylin", "Thiemo", "Erik", "Akif", "Sandro", "Gyula"};
+        String[] names = new String[]{"Ömer", "Furkan", "Ayla", "Aylin", "Thiemo", "Erik", "Akif", "Sandro", "Gyula"};
         System.out.println(Arrays.toString(names));
         bubblesortMitBoolean(names, false);
         System.out.println(Arrays.toString(names));
-        bubblesortMitIndex(names,2);
+        bubblesortMitIndex(names,5);
         System.out.println(Arrays.toString(names));
     }
 
@@ -41,10 +41,10 @@ public class BubblesortMitStringExtended {
     }
 
     public static void bubblesortMitIndex(String[] names, int index) {
-            if (index < 0 ||  isAWordTooShort(names, index)) {
-                System.out.println("Index zu gross, er wurde nicht sortiert");
-                return;
-            }
+        if (index < 0 ||  isAWordTooShort(names, index)) {
+            System.out.println("Index zu gross, er wurde nicht sortiert");
+            return;
+        }
 
         for (int i = 0; i < names.length; i++) {
             for (int j = 0; j < names.length - 1; j++) {
