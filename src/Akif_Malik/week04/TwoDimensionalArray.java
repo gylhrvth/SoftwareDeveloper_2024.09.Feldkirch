@@ -76,11 +76,11 @@ public class TwoDimensionalArray {
         boolean showRows = false;
         boolean showCols = false;
 
-        if(input.equals("Row")){
+        if(input.equals("row")){
             showRows = true;
-        } else if (input.equals("Col")) {
+        } else if (input.equals("col")) {
             showCols = true;
-        } else if (input.equals("All")) {
+        } else if (input.equals("both")) {
             showRows = true;
             showCols = true;
         }
@@ -106,10 +106,7 @@ public class TwoDimensionalArray {
                 }else {
                     System.out.printf("| %3d ",col[i]);
                 }
-
             }
         }
-
-
     }
 }

@@ -1,9 +1,28 @@
 package Akif_Malik.week05;
 
+import java.util.Random;
+import java.util.Scanner;
+import java.util.Arrays;
+
+
 public class Testing {
+    public static Random rand = new Random ();
+    public static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
         String[] names = {"Anna", "Johannes", "Max", "Lena", "Peter", "Zoe", "Tim"};
-        bubbleSortByLengthAndAlphabet(names);
+       // bubbleSortByLengthAndAlphabet(names);
+
+        String userinput = "";
+
+        userinput = sc.nextLine();
+
+        String original = "Hello";
+        String reversed = new StringBuilder(userinput).reverse().toString();
+
+        System.out.println(reversed);  // Output: olleH
+
+
+
 
         // Ausgabe der sortierten Namen
         for (String name : names) {
@@ -26,5 +45,10 @@ public class Testing {
             }
         }
     }
+
+
+    // Output: olleH
+
 }
+
 
