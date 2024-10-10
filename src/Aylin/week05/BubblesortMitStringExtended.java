@@ -6,7 +6,7 @@ import java.util.Locale;
 
 public class BubblesortMitStringExtended {
     public static void main(String[] args) {
-        String[] names = new String[]{"Ömer", "a", "Furkan", "Ayla","Eren", "Aylin", "Thiemo", "Erik", "Akif", "Sandro", "Gyula"};
+        String[] names = new String[]{"Ömer", "Furkan", "Ayla","Eren", "Aylin", "Thiemo", "Erik", "Akif", "Sandro", "Gyula"};
         System.out.println(Arrays.toString(names));
         bubblesortMitBoolean(names, false);
         System.out.println(Arrays.toString(names));

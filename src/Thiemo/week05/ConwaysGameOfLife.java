@@ -47,7 +47,7 @@ public class ConwaysGameOfLife {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                int liveNeighbours = countNeighboursRoundUp(field, i, j);
+                int liveNeighbours = countNeigboursHardWall(field, i, j);
 
                 if (field[i][j] == 1) {
                     if (liveNeighbours < 2 || liveNeighbours > 3) {
