@@ -5,23 +5,23 @@ package Akif_Malik.week05;
                     2. Mit Bubble Sort von vorheriger Aufgabe sortieren und ausgeben.
                     3. In der Bubble Sort Methode einen weiteren int Parameter hinzufügen. (int steht für den charAt index)
                     4. Nach charAt Sortieren
-                    5.
+                    5. Prüfung von Index
 */
 
 public class StringBubbleSortWithCharIndex {
 
     public static void main(String[] args) {
 
-        //String[] names = new String[]{"AA", "Furkan", "Aylin", "Thiemo", "Erik", "Akif", "Sandro", "Gyula"};
-        String[] names = new String[]{"Gyula hat ein ganz lange Name"};
+        String[] names = new String[]{"Furkan", "Aylin", "Thiemo", "Erik", "Akif", "Sandro", "Gyula"
+
+        };
+        // String[] names = new String[]{"Gyula hat ein ganz lange Name"};
 
         System.out.println("------------------Bubble Sort Upwards------------------");
         bubbleSortUpwards(names, 2);
         for (String name : names) {
             System.out.println(name);
         }
-
-
     }
 
     public static void bubbleSortUpwards(String[] names, int index) {
@@ -45,8 +45,8 @@ public class StringBubbleSortWithCharIndex {
                 }
             }
         } else {
+
             System.out.println("Error: Index is not valid");
         }
-
     }
 }
