@@ -9,11 +9,13 @@ public class Reverse {
     public static Random random = new Random();
 
     public static void main(String[] args) {
-        System.out.println("Willkommen zum Reverseprogramm!!!");
+        System.out.println("Welcome to reverse program!!!");
         System.out.print(">>>");
         String textUser = sc.nextLine();
         System.out.println(reverse(textUser));
-
+        System.out.println();
+        System.out.println("Welcome to random shuffle!!!");
+        System.out.print(">>>");
         System.out.println(randomize(textUser));
     }
 
