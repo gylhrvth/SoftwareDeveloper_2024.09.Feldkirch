@@ -1,0 +1,41 @@
+Seite für Git Erklärung und Beispiel-Übungen!
+https://git-scm.com/book/de/v2
+
+WICHTIG!!!
+Q = Verlassen im Terminal (ESC funktioniert nicht)
+
+
+
+Git Befehle
+
+//Wenn nichts mehr klappt,
+git help
+
+
+// Wie siehts Aktuell bei meinem Projekt aus
+git status
+
+
+// Wenn wir einen Neue Datei (NAME) erstellt haben, oder eine Datei geändert haben
+git status...
+git add NAME
+    oder
+    git add         ohne NAME für alle Datein
+git status…
+
+
+// Wenn wir eine Datei mit git add hinzugefügt haben
+git status...
+git commit -m "mein text zum commiten"
+git status...
+
+
+// Wenn wir commit und add verwendet haben
+git push
+
+
+// Was ist passiert bis jetzt
+git log 		//git log -p (--patch) 		//git log -p -2
+WICHTIG um das Log zu verlassen --> Q
+
+
