@@ -7,14 +7,14 @@ public class StringExample {
         String word2 = "Aylin";
 
         System.out.println(word2.compareTo(word1));
+        int var = 77;
 
-       //System.out.println("Was ist der 70ig Char? ---> "+(char)5);
+       System.out.printf("char = %c  -- die zahl : %d",(char)var, var);
 
         char [] test = word1.toCharArray();
         word1.toCharArray();
-
 /*
-        for (int i = 0; i < Character.MAX_VALUE; i++) {
+        for (int i = 0; i < 255; i++) {
             System.out.println("Was ist der Char? ("+ i +") ---> "+(char)i);
         }
 */
