@@ -6,8 +6,6 @@ package Erik.week05;
                     3. mit text.toCharArray aufsplitten
                     4. new String(charArray) zum zusammenfügen
                     5. Dann aufgesplitteter und wieder zusammengefügter String ausgeben
-                    3. Irgendwie umdrehen mit (replaceAll?)
-                    4. umgedrehter user input mit text.toCharArray ausgeben
 
  */
 
