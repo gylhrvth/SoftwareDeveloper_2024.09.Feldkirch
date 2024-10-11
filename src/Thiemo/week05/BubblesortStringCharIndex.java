@@ -9,13 +9,13 @@ public class BubblesortStringCharIndex {
 
         String[] names = new String[]{"Furkan", "Aylin", "Thiemo", "Erik", "Akif", "Sandro", "Gyula"};
         System.out.println("Before sorting : " + Arrays.toString(names));
-        bubblesortLexAscending(names,2);
+        bubblesortLexAscending(names,4);
 
     }
 
     public static void bubblesortLexAscending(String[] names, int index) {
         if (index < 0 ||  isAWordTooShort(names, index)) {
-            System.out.println("Index too large or invalid, sorting was not performed.");
+            System.out.println("" + index +" Index too large or invalid, sorting was not performed.");
             return;
         }
         Collator collator = Collator.getInstance(Locale.GERMAN);
