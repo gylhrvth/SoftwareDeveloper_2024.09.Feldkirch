@@ -20,30 +20,25 @@ public class StringRandomize {
 
         System.out.println("Gib ein Wort ein:");
         System.out.print(">> ");
-
         String userInput = sc.nextLine();
         randomizeString(userInput);
 
-
+        System.out.println(randomizeString(userInput));
     }
 
-    public static void randomizeString(String userInput) {
+    public static String randomizeString(String userInput) {
         Random rand = new Random();
-        char[] charArr = new char[100];
+        char[] charArr = userInput.toCharArray();
+        int random = rand.nextInt(charArr.length);
 
-//        for (int i = 0; i < charArr.length; i++) {
-//            charArr[i] = (char) ('a' + rand.nextInt('z' - 'a'));
-//        }
-
-        for (int i = 0; i < charArr.length / 2; i++) {
-            char temp = charArr[rand.nextInt(userInput.length())]; // <--- Randomizer anstelle des [i] einfügen
-            charArr[i] = charArr[charArr.length - 1 - i];
-            charArr[charArr.length - 1 - i] = temp;
+        for (int i = 0; i < charArr.length; i++) {
+            char temp = charArr[i];
+            charArr[i] = charArr[random]; // <--- Randomizer anstelle des [.length] einfügen
+            charArr[random] = temp;
         }
-
         String randomizeUserInput = new String(charArr);
 
-        System.out.println(randomizeUserInput);
-
+        return randomizeUserInput;
     }
+
 }
