@@ -14,7 +14,7 @@ public class StringVergleich {
         System.out.println("Geben Sie String 2 ein:");
         String word2 = sc.nextLine();
 
-        System.out.println("== " + (word == word2));             // checks if the String is the same??
+        System.out.println("== " + (word == word2));             // checks if the memory location is the same
         System.out.println("equals " + (word.equals(word2)));   // checks if the content of the string is the same
     }
 }
