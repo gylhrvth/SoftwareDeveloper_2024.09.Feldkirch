@@ -15,7 +15,7 @@ public class BubblesortStringCharIndex {
 
     public static void bubblesortLexAscending(String[] names, int index) {
         if (index < 0 ||  isAWordTooShort(names, index)) {
-            System.out.println("" + index +" Index too large or invalid, sorting was not performed.");
+            System.out.println("Index too large or invalid, sorting was not performed.");
             return;
         }
         Collator collator = Collator.getInstance(Locale.GERMAN);
