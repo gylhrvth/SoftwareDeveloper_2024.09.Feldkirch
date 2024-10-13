@@ -9,7 +9,7 @@ public class BubblesortStringCharIndex {
 
         String[] names = new String[]{"Furkan", "Aylin", "Thiemo", "Erik", "Akif", "Sandro", "Gyula"};
         System.out.println("Before sorting : " + Arrays.toString(names));
-        bubblesortLexAscending(names,4);
+        bubblesortLexAscending(names,1);
 
     }
 
@@ -39,4 +39,14 @@ public class BubblesortStringCharIndex {
         }
         return false;
     }
+//    public static boolean isAWordTooShort (String[] names, int index){
+//        for (int i = 0; i < names.length; i++) {
+//            System.out.println(names[i]);
+//            if (names[i].length() <= index) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 }
+
