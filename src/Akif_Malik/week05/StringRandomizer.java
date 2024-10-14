@@ -7,7 +7,6 @@ package Akif_Malik.week05;
                           5. Alles zusammenfügen mit new String(charArray)
                           6. Das Lösung ausgeben
  */
-
 import java.util.Random;
 import java.util.Scanner;
 
@@ -20,17 +19,21 @@ public class StringRandomizer {
         System.out.println("Give me a word");
         System.out.print(">>> ");
         String userInput = sc.nextLine();
-        RandomUserInput(userInput);
+        randomizeString(userInput);
     }
 
-    public static void RandomUserInput(String userInput) {
+    public static String randomizeString(String userInput) {
+        Random rand = new Random();
         char[] charArr = userInput.toCharArray();
+        int random = rand.nextInt(charArr.length);
+
         for (int i = 0; i < charArr.length; i++) {
             char temp = charArr[i];
-            charArr[i] = charArr[rand.nextInt(userInput.length())];
-            charArr[userInput.length() - 1 - i] = temp;
+            charArr[i] = charArr[random]; // <--- Randomizer anstelle des [.length] einfügen
+            charArr[random] = temp;
         }
-        String randomizedUserInput = new String(charArr);
-        System.out.println(randomizedUserInput);
+        String randomizeUserInput = new String(charArr);
+
+        return randomizeUserInput;
     }
 }

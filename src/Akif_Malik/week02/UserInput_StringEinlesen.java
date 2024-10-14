@@ -34,7 +34,7 @@ public class UserInput_StringEinlesen {
         System.out.println(Colors.COLORS[5] + "There is no specific rules yet but there might be later" + Colors.RESET);
         System.out.println(Colors.COLORS[5] + "Clue: " + Colors.RESET + Colors.COLORS[6] + "The number You have to guess is between 1 and 100" + Colors.RESET);
         boolean win = false;
-        while (win == false) {
+        while (!win) {
             validNumber2 = readNumbers("give your guess", "you have to enter a number between 1 and 100", 1, 100);
             if (validNumber2 < secretNumber) {
                 System.out.println(Colors.COLORS[1] + "good guess but its too low, try guessing higher" + Colors.RESET);
