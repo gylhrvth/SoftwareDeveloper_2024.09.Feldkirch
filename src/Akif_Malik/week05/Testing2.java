@@ -7,7 +7,7 @@ public class Testing2 {
     public static Scanner sc1 = new Scanner (System.in);
 
     public static void main(String[] args) {
-
+/*
         String userinput = "";
         userinput = sc1.nextLine();
         String original = "Hello";
@@ -28,5 +28,20 @@ public class Testing2 {
         StringBuilder result = new StringBuilder();
         characters.forEach(result::append);
         return result.toString();
+    }
+*/
+        String text = data.Texts.getSimpleText();
+        int[] countLetters = new int[Character.MAX_VALUE];
+        char[] wholeText = text.toCharArray();
+
+        System.out.println(wholeText);
+
+        for (int i = 0; i < wholeText.length; i++) {
+            ++countLetters[wholeText[i]];
+        }
+        System.out.println(Arrays.toString(countLetters));
+
+
+
     }
 }

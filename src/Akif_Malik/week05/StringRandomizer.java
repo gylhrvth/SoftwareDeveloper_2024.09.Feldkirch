@@ -7,7 +7,6 @@ package Akif_Malik.week05;
                           5. Alles zusammenfügen mit new String(charArray)
                           6. Das Lösung ausgeben
  */
-
 import java.util.Random;
 import java.util.Scanner;
 
