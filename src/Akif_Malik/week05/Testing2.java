@@ -29,7 +29,7 @@ public class Testing2 {
         characters.forEach(result::append);
         return result.toString();
     }
-*/
+
         String text = data.Texts.getSimpleText();
         int[] countLetters = new int[Character.MAX_VALUE];
         char[] wholeText = text.toCharArray();
@@ -39,9 +39,8 @@ public class Testing2 {
         for (int i = 0; i < wholeText.length; i++) {
             ++countLetters[wholeText[i]];
         }
-        System.out.println(Arrays.toString(countLetters));
 
-
+*/
 
     }
 }
