@@ -22,15 +22,15 @@ public class DatenTabbellarischTest {
         int lastNameSize = formatStringSize(lastName);
         int placeSize = formatStringSize(place);
         int distanceSize = formatFloatSize(distanceFromCapital);
-        System.out.println("╔════════════════════╦═══════════════════╦══════════╦════════════════════╦════════════╗");
+        System.out.println("╔═"+ "═".repeat(firstNameSize)+"═╦═"+ "═".repeat(lastNameSize)+"═╦═"+ "═".repeat(agesize)+"═╦═"+ "═".repeat(placeSize)+"═╦═"+ "═".repeat(distanceSize)+"═╗");
         for (int i = 0; i < firstName.length; i++) {
-            System.out.printf("║ %-" + firstNameSize + "s ║   %-" + lastNameSize + "s ║   %" + agesize + "d ║ %-" + placeSize + "s ║ %" + distanceSize + ".2f ║", firstName[i], lastName[i], age[i], place[i], distanceFromCapital[i]);
+            System.out.printf("║ %-" + firstNameSize + "s ║ %-" + lastNameSize + "s ║ %" + agesize + "d ║ %-" + placeSize + "s ║ %" + distanceSize + ".2f ║", firstName[i], lastName[i], age[i], place[i], distanceFromCapital[i]);
             System.out.println();
             if (i < firstName.length - 1) {
-                System.out.println("╠════════════════════╬═══════════════════╬══════════╬════════════════════╬════════════╣");
+                System.out.println("╠═"+ "═".repeat(firstNameSize)+"═╬═"+ "═".repeat(lastNameSize)+"═╬═"+ "═".repeat(agesize)+"═╬═"+ "═".repeat(placeSize)+"═╬═"+ "═".repeat(distanceSize)+"═╣");
             }
             if (i == firstName.length - 1) {
-                System.out.println("╚════════════════════╩═══════════════════╩══════════╩════════════════════╩════════════╝");
+                System.out.println("╚═"+ "═".repeat(firstNameSize)+"═╩═" + "═".repeat(lastNameSize)+"═╩═"+ "═".repeat(agesize)+"═╩═"+ "═".repeat(placeSize)+"═╩═"+ "═".repeat(distanceSize)+"═╝");
             }
         }
     }
@@ -38,7 +38,7 @@ public class DatenTabbellarischTest {
     public static int formatIntSize(int[] age) {
         int result = 0;
         for (int i = 0; i < age.length; i++) {
-            String text = String.valueOf(i);
+            String text = String.valueOf(age[i]);
             if (result < text.length()) {
                 result = text.length();
             }
