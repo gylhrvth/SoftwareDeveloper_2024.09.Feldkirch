@@ -9,43 +9,32 @@ package Furkan.week05;
 
 public class BuchstabenZählen {
     public static void main(String[] args) {
-        int[] numbers = new int[100];
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i]= i;
-        }
-        for (int number : numbers){
-            System.out.println("int[" +number + "]");
-        }
-        String text = "Hallo Furkan";
-
-        char[] lettersFromText = text.toCharArray();
-        for (int i = 0; i < lettersFromText.length; i++) {
-
-            System.out.println("Buchstabe: " + lettersFromText);
-
-        }
-
-       // String randomText = data.Texts.getSimpleText();
-       // System.out.println(randomText);
-
+        String text = data.Texts.getSimpleText();
+        System.out.println(text);
+        createArray(countLetter(text));
     }
 
 
-     public static void createArray(){
-         int[] numbers = new int[100];
-         for (int i = 0; i < numbers.length; i++) {
-             numbers[i] = i;
-         }for (int number : numbers) {
-             System.out.println("int[" + number + "]");
-         }
-
-     }
+    public static void createArray(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > 0) {
+                System.out.printf("%-5c ---> %5d- %3d", (char)i, i ,arr[i]);
+                System.out.println();
+            }
 
 
+        }
+    }
 
 
+    public static int[] countLetter(String text) {
+        int[] count = new int[Character.MAX_VALUE];
+        for (int i = 0; i < text.length(); i++) {
+            ++count[text.charAt(i)];
 
-
+        }
+        return count;
+    }
 
 
 }
