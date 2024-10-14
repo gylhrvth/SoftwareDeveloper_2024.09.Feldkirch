@@ -41,10 +41,10 @@ public class BubblesortMitStringExtended {
     }
 
     public static void bubblesortMitIndex(String[] names, int index) {
-            if (index < 0 ||  isAWordTooShort(names, index)) {
-                System.out.println("Index zu gross, er wurde nicht sortiert");
-                return;
-            }
+        if (index < 0 ||  isAWordTooShort(names, index)) {
+            System.out.println("Index zu gross, er wurde nicht sortiert");
+            return;
+        }
 
         for (int i = 0; i < names.length; i++) {
             for (int j = 0; j < names.length - 1; j++) {
