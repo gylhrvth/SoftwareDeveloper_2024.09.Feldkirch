@@ -1,5 +1,7 @@
 package Sandro.Week6;
 
+import javax.swing.*;
+
 public class RegexExamples {
     public static void main(String[] args) {
 
@@ -17,25 +19,23 @@ public class RegexExamples {
         String numb3 = "7";
         String numb4 = "";
 
-        String regex2 = "[0-7]";
+        String regex2 = "[0-7]+";
         System.out.println(numb1.matches(regex2));
         System.out.println(numb2.matches(regex2));
         System.out.println(numb3.matches(regex2));
         System.out.println(numb4.matches(regex2));
 
         System.out.println(numb2);
-        String test = numb2.replaceAll("[3-4]","H");
-
+        String test = "Hallo heute ist ein Guter Tag !";
         System.out.println(test);
 
+        String testnew = test.replaceAll("[a-z]", "");
 
-
-
-
+        System.out.println(testnew);
 
     }
 
-    public static void regexStuff (){
+    public static void regexStuff() {
         //Ist ein al im Text enthalten?
         String text = "Hallo wie gehts?";
         System.out.println(text);
@@ -43,17 +43,17 @@ public class RegexExamples {
         System.out.println("#".repeat(50));
 
         //Genau ab 1 bis unendlich
-        text = "ababababababababababababab";
+        text = "ababababababababababababa";
         System.out.println(text);
-        System.out.println("Text mit genau (ab) einmal, oder unendlich --> "+text.matches("(ab)+"));
+        System.out.println("Text mit genau (ab) einmal, oder unendlich --> " + text.matches("(ab)+"));
         System.out.println("#".repeat(50));
 
 
         //NUR Großbuchstaben 1 bis unendlich
         text = "ABCADFASDFASBHJASJLDFHALSDKFHJASLKDF";
-        System.out.println("Text 1 = "+text);
+        System.out.println("Text 1 = " + text);
         String textFalse = "aslkdfjalskdfjalskfjalskdjfalsdkjfasldkfjAlaksjfalksjf";
-        System.out.println("Text 2 = "+textFalse);
+        System.out.println("Text 2 = " + textFalse);
         String regex = "[A-Z]+";
         System.out.println("Text1 besteht nur aus Großbuchstaben? --> " + text.matches(regex));
         System.out.println("Text2 besteht nur aus Großbuchstaben? --> " + textFalse.matches(regex));
@@ -62,11 +62,11 @@ public class RegexExamples {
 
         //Nur Zahlen, genau 3 bis 8 Stück
         text = "12345";
-        System.out.println("Text1 = "+text);
+        System.out.println("Text1 = " + text);
         textFalse = "21";
-        System.out.println("Text2 = "+textFalse);
+        System.out.println("Text2 = " + textFalse);
         String textFalse2 = "214478901";
-        System.out.println("Text 3 = "+textFalse2);
+        System.out.println("Text 3 = " + textFalse2);
         regex = "[0-9]{3,8}";
         System.out.println("Text1 besteht aus zahlen, mind 3 und max 8 --> " + text.matches(regex));
         System.out.println("Text2 besteht aus zahlen, mind 3 und max 8 --> " + textFalse.matches(regex));
@@ -133,8 +133,6 @@ public class RegexExamples {
         //System.out.println("Wahr: " + email2.matches(regex));
         //System.out.println("Unwahr: " + emailWrong.matches(regex));
         //System.out.println("Unwahr: " + emailWrong2.matches(regex));
-
-
 
 
     }
