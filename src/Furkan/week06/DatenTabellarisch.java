@@ -13,22 +13,22 @@ public class DatenTabellarisch {
 
 
     public static void printAsTable(String[] firstName, String[] lastName, int[] age, String[] place, float[] distance) {
-        System.out.println("Hello Furkan");
 
-        System.out.printf("|%20s | %20s | %20d | %20s | %20.2f | \n",
-                firstName[0],
-                lastName[0],
-                age[0],
-                place[0],
-                distance[0]);
+        String[] columnNames = new String[]{"Firstname", "Lastname", "Age", "Place" , "Distance"};
+
+      //  System.out.printf("|%1$-20s | %2$-20s | %3$-20s | %4$-20s | %5$-20s | %n", columnNames[0], columnNames[1], columnNames[2], columnNames[3],columnNames[4]);
+        System.out.printf("|%-20s | %-20s | %20s | %-20s | %20s | %n", columnNames[0], columnNames[1], columnNames[2], columnNames[3],columnNames[4]);
+        System.out.println("----------------------|----------------------|----------------------|----------------------|----------------------|");
 
 
-
-            for (int i = 0; i < firstName.length; i++) {
-                System.out.printf("");
-            }
-
+        for (int i = 0; i < firstName.length; i++) {
+         //   System.out.printf("|%1$-20s | %2$-20s | %3$20d | %4$-20s | %5$20.2f | %n" , firstName[i],lastName[i],age[i],place[i],distance[i]);
+            System.out.printf("|%-20s | %-20s | %20d | %-20s | %20.2f | %n" , firstName[i],lastName[i],age[i],place[i],distance[i]);
+            
+        }
     }
 
 
 }
+
+ // System.out.printf("|%20s | %20s | %20d | %20s | %20.2f | \n");
