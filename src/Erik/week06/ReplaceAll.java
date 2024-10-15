@@ -17,12 +17,12 @@ public class ReplaceAll {
         String replace2 = "und";
         String replace3 = "ist";
 
-        System.out.println(text);
+        System.out.println("Original: >> " + Colors.COLORS[5] + text + Colors.RESET);
         System.out.println("---");
-        System.out.println(text.replace(orgText,Colors.COLORS[1] + replace1 + Colors.RESET));
+        System.out.println("Replaced 'wird' to 'war': >> " + text.replace(orgText,Colors.COLORS[1] + replace1 + Colors.RESET));
         System.out.println("---");
-        System.out.println(text.replace(orgText, Colors.COLORS[2] + replace2 + Colors.RESET));
+        System.out.println("Replaced 'wird' to 'und': >> " + text.replace(orgText, Colors.COLORS[2] + replace2 + Colors.RESET));
         System.out.println("---");
-        System.out.println(text.replace(orgText,Colors.COLORS[3] + replace3 + Colors.RESET));
+        System.out.println("Replaced 'wird' to 'ist': >> " + text.replace(orgText,Colors.COLORS[3] + replace3 + Colors.RESET));
     }
 }
