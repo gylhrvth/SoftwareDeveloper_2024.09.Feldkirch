@@ -19,7 +19,7 @@ public class WHCountLetters {
     public static void printCharacters(int[] arr){
         for (int i = 0; i < arr.length; i++) {
             if(arr[i] > 0){
-                System.out.println((char)i + " = " + arr[i]);
+                System.out.println((char)i + ": " + arr[i]);
             }
         }
     }
