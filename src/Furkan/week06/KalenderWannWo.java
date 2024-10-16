@@ -24,5 +24,6 @@ public class KalenderWannWo {
         SimpleDateFormat sdf4 = new SimpleDateFormat("EEEE , dd. MMMM yyyy, HH:mm:ss");
         System.out.println("Datum Uhrzeit mit Millisekunde: " + sdf4.format(gc.getTime()));
 
+
     }
 }
