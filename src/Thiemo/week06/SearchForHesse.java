@@ -1,5 +1,6 @@
 package Thiemo.week06;
 
+import Sandro.Colors;
 import data.Texts;
 
 
@@ -17,8 +18,8 @@ public class SearchForHesse {
         printIndexPositions(text, targetWord);
         System.out.println();
 
-
-
+        String upperWord = text.replace(targetWord, Colors.COLORS[1]+ targetWord.toUpperCase()+Colors.RESET);
+        System.out.println(upperWord);
     }
 
     public static int countoccurences(String text, String targetWord) {
