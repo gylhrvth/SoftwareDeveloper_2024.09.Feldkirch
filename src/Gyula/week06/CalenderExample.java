@@ -1,11 +1,11 @@
 package Gyula.week06;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Locale;
+import java.util.*;
 
 public class CalenderExample {
+    public static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
         GregorianCalendar gc = new GregorianCalendar();
 
@@ -36,5 +36,26 @@ public class CalenderExample {
         System.out.println("Mein Geburtsdatum ist: " + sdf3.format(meinGeburtstag.getTime()));
 
 
+        GregorianCalendar dateFromConsole = new GregorianCalendar();
+        dateFromConsole.setTime(readDateFromConsole("Gib dein Geburtdatum im Format TT/MM/JJJJ ein:"));
+        System.out.println("Geburtsdatum des Users: " + sdf2.format(dateFromConsole.getTime()));
+
+    }
+
+
+    public static Date readDateFromConsole(String message){
+        Date result = null;
+        SimpleDateFormat birthdayFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        while (result == null) {
+            System.out.print(message + " >>> ");
+            String text = scanner.nextLine();
+            try {
+                result = birthdayFormat.parse(text);
+            } catch (ParseException pe) {
+                System.out.println("ungültige Datum Format. Bitte TT/MM/JJJJ verwenden.");
+            }
+        }
+        return result;
     }
 }
