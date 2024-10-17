@@ -6,7 +6,7 @@ public class ZeroToOneHundred_1 {
     public static void main(String[] args) {
         System.out.println();
         System.out.println(Colors.COLORS[6] + "--------------------------------------" + Colors.RESET);
-        System.out.println(Colors.COLORS[2] + "Erste Variante (float statt double)" + Colors.RESET);
+        System.out.println(Colors.COLORS[2] + "Erste Variante (mit float)" + Colors.RESET);
         System.out.println(Colors.COLORS[6] + "--------------------------------------" + Colors.RESET);
         System.out.println();
 
