@@ -30,11 +30,11 @@ public class Calendar {
         SimpleDateFormat sdf1 = new SimpleDateFormat();
         int maxDay = gc.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
 
-
         for (int i = 0; i < maxDay; i++) {
             System.out.print(i + " | ");
             if (i % 7 == 0) {
                 System.out.println();
+
             }
         }
 
