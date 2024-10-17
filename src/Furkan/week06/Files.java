@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class Files {
     public static void main(String[] args) {
 
-        File target = new File("C:/Users/dcv/IdeaProjects/SoftwareDeveloper_2024.09.Feldkirch/src/Furkan/week06");
+        File target = new File("C:/Users/dcv/IdeaProjects/SoftwareDeveloper_2024.09.Feldkirch/src/Furkan");
 
 //        System.out.println("Name " + target.getName());
 //        System.out.println("Größe " + target.length());
@@ -23,7 +23,10 @@ public class Files {
         System.out.println(Arrays.toString(content));
 
         printList(content);
+        System.out.println("......................");
         sortMyList(content);
+        System.out.println("......................");
+        printList(content);
 
         printState(content);
 
