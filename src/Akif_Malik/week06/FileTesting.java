@@ -28,7 +28,7 @@ public class FileTesting {
         System.out.println("existiert : " + daten2.exists());
 
         System.out.println();
-        System.out.println(Arrays.toString(daten.listFiles()));
+        System.out.println(Arrays.toString(daten2.listFiles()));
         System.out.println();
 
 
