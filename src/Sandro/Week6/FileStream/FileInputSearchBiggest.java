@@ -1,7 +1,6 @@
 package Sandro.Week6.FileStream;
 
 
-
 import Sandro.Colors;
 
 import java.io.File;
@@ -15,11 +14,12 @@ public class FileInputSearchBiggest {
 
         long bigFile = biggestFileSize(start);
         printFilesAndData("", start);
-        printRelativ(start,start,bigFile);
-        printAbsolute(start,bigFile);
-        printFileName(start,bigFile);
+        printRelativ(start, start, bigFile);
+        printAbsolute(start, bigFile);
+        printFileName(start, bigFile);
 
     }
+
     public static void printAbsolute(File current, long fileSizeToPrint) {              //Funktion bekommt, File start(ermittelt druch Path) und biggest size ermittelt durch andere Funktion
         if (current.isFile() && current.length() == fileSizeToPrint) {                  //Check ob es ein File ist und kein Ordner und ob es die Richtige größe hat (biggestSize)
 
@@ -34,6 +34,7 @@ public class FileInputSearchBiggest {
             }
         }
     }
+
     public static void printRelativ(File start, File current, long fileSizeToPrint) {               //Funktion, die den Relativen Pfad ermittelt und in der Konsole wiedergibt
         if (current.isFile() && current.length() == fileSizeToPrint) {                              //Check ob File kein Ordner ist und die größe dem biggestFile entspricht
             Path startPath = Path.of(start.getAbsolutePath());                                      //Path Datentyp verwenden und aus dem StartFile den AbsolutenPath generieren
@@ -49,6 +50,7 @@ public class FileInputSearchBiggest {
             }
         }
     }
+
     public static void printFileName(File current, long fileSizeToPrint) {                          //Funktion die den FileName printet wenn das File übereinstimmt mit der größe
         if (current.isFile() && current.length() == fileSizeToPrint) {                              //Check ob kein Ordner, und vergleiche die größe
             System.out.println(Colors.COLORS[2] + "The FileName for the biggest Size File is: " + Colors.COLORS[1] + current.getName() + Colors.RESET);
@@ -62,6 +64,7 @@ public class FileInputSearchBiggest {
             }
         }
     }
+
     public static long biggestFileSize(File f) {                                    //Funktion die ein Start File bekommt und dann die größte Datei sucht
         File[] files = f.listFiles();                                               //Aus StartFile ein Array machen (aka. Ordner öffnen)
         long biggestSize = 0;                                                       //init Long Var für biggestSize
@@ -80,6 +83,7 @@ public class FileInputSearchBiggest {
         }
         return biggestSize;                                                         //Return
     }
+
     private static String inputPath(String text) {                                  //Scanner Funktion, bekommt einen String und testet ob zulässiger Pfad
         Scanner sc = new Scanner(System.in);                                        //Scanner
         while (true) {                                                              //while logic
@@ -93,8 +97,6 @@ public class FileInputSearchBiggest {
             }
         }
     }
-
-
 
 
     //Funktionen von vorherigen Beispiel
@@ -145,10 +147,6 @@ public class FileInputSearchBiggest {
             }
         }
     }
-
-
-
-
 
 
 }
