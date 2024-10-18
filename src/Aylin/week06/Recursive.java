@@ -4,7 +4,7 @@ import Sandro.Colors;
 
 import java.io.File;
 
-public class Revursive {
+public class Recursive {
     public static void main(String[] args) {
         File file = new File("C:\\Users\\Aslan Topcu\\IdeaProjects\\SoftwareDeveloper_2024.09.Feldkirch\\src\\Aylin");
         printRecursive(1, file);
