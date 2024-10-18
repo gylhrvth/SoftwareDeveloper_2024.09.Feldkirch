@@ -5,7 +5,7 @@ import java.io.File;
 public class FileCount {
     public static void main(String[] args) {
 
-        File search = new File ("C:\\Users\\ossdr\\IdeaProjects\\HomeOffice\\src\\Schleifen") ;
+        File search = new File ("C:\\Users\\ossdr\\IdeaProjects\\SoftwareDeveloper_2024.09.Feldkirch\\src\\Sandro\\Week1") ;
         File[] content = search.listFiles();
         int count = getFileCount(content);
         long sumSize = getSizeSum(content);
