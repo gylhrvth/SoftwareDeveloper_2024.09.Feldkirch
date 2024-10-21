@@ -3,7 +3,6 @@ package Gyula.week07;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.text.DateFormat;
 import java.util.GregorianCalendar;
 
 public class FileWriteExample {
