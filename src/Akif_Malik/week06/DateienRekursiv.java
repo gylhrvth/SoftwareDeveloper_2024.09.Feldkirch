@@ -1,7 +1,6 @@
 package Akif_Malik.week06;
 
 import Sandro.Colors;
-
 import java.io.File;
 
 public class DateienRekursiv {
