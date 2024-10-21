@@ -3,11 +3,17 @@ package Aylin.week06;
 import Sandro.Colors;
 
 import java.io.File;
+import java.util.Scanner;
 
 public class Recursive {
+    public static Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
         File file = new File("C:\\Users\\Aslan Topcu\\IdeaProjects\\SoftwareDeveloper_2024.09.Feldkirch\\src\\Aylin");
+        System.out.print("");
+        String scanner = sc.nextLine();
         printRecursive(1, file);
+
     }
 
     public static void printRecursive(int tabs, File f) {
@@ -61,5 +67,17 @@ public class Recursive {
             }
         }
         return sum;
+    }
+
+    public static void printFile(File f, String search){
+        if(f.isFile() && f.getAbsolutePath().toLowerCase().contains(search.toLowerCase())){
+            System.out.println("Filename: " + f.getName() + "Path to File: " + f.getAbsolutePath());
+        }
+        if(f.isDirectory()){
+            File[] files = f.listFiles();
+            if(files != null){
+
+            }
+        }
     }
 }
