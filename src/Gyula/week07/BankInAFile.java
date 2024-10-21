@@ -2,7 +2,8 @@ package Gyula.week07;
 
 import Gyula.ConsoleTools;
 
-import java.io.File;
+import java.io.*;
+import java.util.Scanner;
 
 public class BankInAFile {
     public static void main(String[] args) {
@@ -19,7 +20,24 @@ public class BankInAFile {
     }
 
     public static int readAccountState(String name){
-        return 100;
+        File f = getFileForAccountName(name);
+        int result = 100;
+        if (f.exists() && f.isFile()){
+            try {
+                FileInputStream fis = new FileInputStream(f);
+                Scanner scanner = new Scanner(fis);
+                if (scanner.hasNext()) {
+                    String accountValueAsText = scanner.nextLine();
+                    result = Integer.parseInt(accountValueAsText);
+                }
+            } catch (FileNotFoundException fnfe) {
+                // Nothing to do...
+            }
+        } else {
+            System.out.printf("Welcome %s! Danke, dass du unser Bank gewählt hast.", name);
+        }
+
+        return result;
     }
 
     public static int transaction(int oldAccountState){
@@ -31,10 +49,24 @@ public class BankInAFile {
     }
 
     public static void writeAccountState(String name, int newAccountState){
-        System.out.println("Account has saved...");
+        File fileToWrite = getFileForAccountName(name);
+
+        try {
+            FileOutputStream fos = new FileOutputStream(fileToWrite, false);
+            PrintStream ps = new PrintStream(fos);
+            ps.println(newAccountState);
+            ps.close();
+            System.out.println("Account has saved...");
+        } catch (FileNotFoundException fnfe){
+            System.out.println("Cannot save account");
+        }
     }
 
     public static File getFileForAccountName(String name){
-        return null;
+        String fileName = "assets/bank/" + name.toLowerCase() + ".txt";
+        File f = new File(fileName);
+        f.getParentFile().mkdirs();
+
+        return f;
     }
 }
