@@ -1,7 +1,6 @@
 package Aylin.week07;
 
 import Gyula.ConsoleTools;
-
 import java.io.*;
 import java.util.Scanner;
 
@@ -22,14 +21,14 @@ public class ReadAndWriteVol2 {
 
     public static int readAccountState(String name){
         File f = getFileForAccountName(name);
-        int initialBalance = 100;
-        if(f.exists() && f.isFile()){
+        int balance = 100;
+        if (f.exists() && f.isFile()){
             try {
                 FileInputStream fis = new FileInputStream(f);
                 Scanner fileScanner = new Scanner(fis);
                 if(fileScanner.hasNextLine()){
                     String accountValueAsText = fileScanner.nextLine();
-                    initialBalance = Integer.parseInt(accountValueAsText);
+                    balance = Integer.parseInt(accountValueAsText);
                 }
             }catch(FileNotFoundException fnfe) {
                 //Nothing to do...
@@ -37,10 +36,11 @@ public class ReadAndWriteVol2 {
         }else {
             System.out.printf("Welcome %s! Thanks for joining our Community", name);
         }
-        return initialBalance;
+        return balance;
     }
 
     public static int transaction(int oldAccountState){
+        System.out.printf("Your current balance is: %d EUR \n", oldAccountState);
         int value = ConsoleTools.readNumber("What kind of transaction would you like to perform? >>> ", -10000, 10000);
         int newAccountState = oldAccountState + value;
         System.out.printf("Your new balance is: %d EUR.\n", newAccountState);
@@ -54,9 +54,8 @@ public class ReadAndWriteVol2 {
             PrintStream ps = new PrintStream(fos);
             ps.println(newAccountState);
             ps.close();
-            System.out.println("Account has saved: ");
         }catch(FileNotFoundException fnfe){
-            System.out.println("Cannot save account");
+            //Nothing to do...
         }
     }
 
