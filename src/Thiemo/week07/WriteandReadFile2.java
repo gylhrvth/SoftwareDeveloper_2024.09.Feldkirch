@@ -57,6 +57,8 @@ public class WriteandReadFile2 {
         int value = Math.round(100 * floatValue);
         int newAccountState = oldAccountState + value;
         System.out.printf("Dein neuer Kontostand ist %.2f€\n", newAccountState / 100f);
+
+        Logging2.log(Logging2.INFO, "Transaction " + String.format("%.2f€", floatValue) + " " + ((floatValue < 0)?"AUSGABE":"EINNAHME"));
         return newAccountState;
     }
 
@@ -64,9 +66,10 @@ public class WriteandReadFile2 {
         File fileToWrite = getFileforAccount(name);
 
         try {
-            FileOutputStream fos = new FileOutputStream(fileToWrite, false);
+            FileOutputStream fos = new FileOutputStream(fileToWrite, true);
             PrintStream ps = new PrintStream(fos);
             ps.println(newAccountState);
+            Logging2.log(3,"Kontobenutzer "+name+" hat Transaktion durchgeführt");
             ps.close();
         } catch (FileNotFoundException fnfe) {
             System.out.println("Cannot save account");
