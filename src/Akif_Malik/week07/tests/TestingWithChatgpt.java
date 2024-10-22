@@ -1,4 +1,4 @@
-package Akif_Malik.week07;
+package Akif_Malik.week07.tests;
 
 import java.io.File;
 import java.io.FileNotFoundException;
