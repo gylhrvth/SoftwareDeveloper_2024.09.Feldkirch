@@ -1,8 +1,6 @@
 package Aylin.week07;
 
 import Gyula.ConsoleTools;
-import Sandro.Colors;
-
 import java.io.*;
 import java.util.Scanner;
 
