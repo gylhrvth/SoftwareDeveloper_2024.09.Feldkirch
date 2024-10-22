@@ -31,7 +31,7 @@ public class ReadAndWriteBank {
     public static String getNameForAccount() {
         System.out.println("Please enter your name....");
         String userInput = sc.nextLine();
-        return "Akif";
+        return userInput;
     }
 
     public static int readAccountState(String name) {
