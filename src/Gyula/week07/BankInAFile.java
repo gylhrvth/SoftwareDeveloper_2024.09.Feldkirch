@@ -21,7 +21,7 @@ public class BankInAFile {
 
     public static int readAccountState(String name){
         File f = getFileForAccountName(name);
-        int result = 100;
+        int result = 10000;
         if (f.exists() && f.isFile()){
             try {
                 FileInputStream fis = new FileInputStream(f);
@@ -41,10 +41,11 @@ public class BankInAFile {
     }
 
     public static int transaction(int oldAccountState){
-        System.out.printf("Dein aktueller Kontostand %d.\n", oldAccountState);
-        int value = ConsoleTools.readNumber("Was für eine Transaktion möchtest du ausführen? >>> ", -10000, 10000);
+        System.out.printf("Dein aktueller Kontostand %.2f.\n", oldAccountState / 100f);
+        float floatValue = ConsoleTools.readFloatNumber("Was für eine Transaktion möchtest du ausführen? >>> ", -10000, 10000);
+        int value = Math.round(100 * floatValue);
         int newAccountState = oldAccountState + value;
-        System.out.printf("Dein neuer Kontostand ist %d.\n", newAccountState);
+        System.out.printf("Dein neuer Kontostand ist %.2f.\n", newAccountState / 100f);
         return newAccountState;
     }
 

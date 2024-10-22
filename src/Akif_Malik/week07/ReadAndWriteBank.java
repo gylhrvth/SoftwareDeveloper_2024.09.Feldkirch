@@ -78,7 +78,7 @@ public class ReadAndWriteBank {
     }
 
     public static File getFileForAccountName(String name) {
-        String fileName = "assets/bank" + name.toLowerCase() + ".txt";
+        String fileName = "assets/bank/" + name.toLowerCase() + ".txt";
         File f = new File(fileName);
         f.getParentFile().mkdirs();
 
