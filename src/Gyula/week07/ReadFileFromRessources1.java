@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class ReadFileFromRessources1 {
     public static void main(String[] args) {
 
-        InputStream inputStream = Objects.requireNonNull(ReadFileFromRessources1.class.getClassLoader().getResourceAsStream("txt/simpleText.txt"));
+        InputStream inputStream = Objects.requireNonNull(ReadFileFromRessources1.class.getClassLoader().getResourceAsStream("csv/sales_100.csv"));
         Scanner scanner = new Scanner(inputStream);
 
         while (scanner.hasNext()){
