@@ -4,12 +4,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.GregorianCalendar;
 
 public class Logger {
     public static final int ERROR = 1;
     public static final int WARNING = 2;
     public static final int INFO = 3;
+    public static final long MAX_SIZE = 1 * 1024 * 1024;
 
     public static void main(String[] args) {
         log(ERROR, "Alles ist schief");
@@ -20,8 +23,12 @@ public class Logger {
     public static void log(int severity, String message) {
         String path = "assets/tmp/log.txt";
         File file = new File(path);
-
         file.getParentFile().mkdirs();
+
+        if(file.exists() && file.length() > MAX_SIZE) {
+            System.out.println("File size exceeds the limit, renaming the file.");
+            overwriteLogFile(file);
+        }
 
         try {
             FileOutputStream fos = new FileOutputStream(file, true);
@@ -41,5 +48,13 @@ public class Logger {
         }catch (FileNotFoundException fnfe){
             System.out.println(fnfe.getMessage());
         }
+    }
+
+    private static void overwriteLogFile(File file) {
+        File oldFile = new File(file.getAbsoluteFile() + ".old");
+        if (oldFile.exists()) {
+            oldFile.delete();
+        }
+        file.renameTo(oldFile);
     }
 }
