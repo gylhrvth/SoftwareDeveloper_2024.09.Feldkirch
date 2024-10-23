@@ -9,11 +9,12 @@ public class ReadAndWriteFile{
         Scanner sc = new Scanner(System.in);
         System.out.print("Please Enter your Name: ");
         String name = sc.nextLine();
-        String path = "assets/bank/" + name + ".txt";
+        String path = "assets/bankAylin/" + name + ".txt";
         File file = new File(path);
         int initialBalance = 100;
 
         if(!file.exists()){
+            // TODO: Remove thıs part of ıf
             try{
                 file.getParentFile().mkdirs();
                 FileOutputStream fos = new FileOutputStream(file);
@@ -26,12 +27,19 @@ public class ReadAndWriteFile{
         }else{
             try(Scanner fileScanner = new Scanner(file)){
                 if(fileScanner.hasNextLine()){
+                    // TODO: Read from fileScanner into initialBase
+                    // TODO: Keine Transaaction
                     transaction(initialBalance);
                 }
             }catch(FileNotFoundException fnfe){
                 System.out.println(fnfe.getMessage());
             }
         }
+
+        // TODO: transaktıon
+
+        // TODO: Wrıte with PrintStrams
+
         sc.close();
     }
 

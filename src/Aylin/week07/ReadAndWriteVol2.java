@@ -6,8 +6,6 @@ import java.util.Scanner;
 
 public class ReadAndWriteVol2 {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Please Enter your Name: ");
         String customerName = getNameForAccount();
         int account = readAccountState(customerName);
         account = transaction(account);
@@ -15,6 +13,7 @@ public class ReadAndWriteVol2 {
     }
 
     public static String getNameForAccount(){
+        System.out.print("Please Enter your Name: ");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
