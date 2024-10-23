@@ -10,7 +10,6 @@ public class FilesAufgaben {
     public static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-
         File target = new File("C:\\Users\\dcv\\IdeaProjects\\SoftwareDeveloper_2024.09.Feldkirch\\src\\Erik");
         File[] content = target.listFiles();
         System.out.print("Verzeichnis Auflisten:\n-----");
@@ -22,8 +21,8 @@ public class FilesAufgaben {
         printList(content);
         goThroughListAndPrintNumbersOfFilesAndSum(content);
         goThroughListAndPrintRekursiv(0, target);
-
-
+        userPathInput("Gib einen Pfad ein: >> ");
+        searchForBiggestFile(target);
     }
 
     // 1. Aufgabe
@@ -76,19 +75,16 @@ public class FilesAufgaben {
 
     // 3. Aufgabe Dateien Zählen und Größe Summieren mit Bonus (Rekursiv)
     public static void goThroughListAndPrintRekursiv(int zahl, File f) {
-
         System.out.println(" ".repeat(zahl * 3) + f.getName());
 
         if (f.isFile()) { // Solange es eine Datei ist printet er
             return;
         }
-
         File[] content = f.listFiles();
         if (content != null) {
             for (File file : content) {
                 goThroughListAndPrintRekursiv(zahl + 1, file);
             }
-
         }
         int count = countAllFilesFromRekursiv(f);
         long sum = sumFilesFromRekursiv(f);
@@ -130,4 +126,35 @@ public class FilesAufgaben {
         return numberOfData;
     }
 
+    // 4. Aufgabe größte Datei suchen mit eingegebenen Pfad vom User
+    public static String userPathInput(String userInfo){
+
+        while (true){                                                           // Läuft, solange bis es true ist bzw. ein return wert zurückkommt
+            System.out.print(userInfo);                                         // Print User Info
+            String userInput = sc.nextLine();                                   // Scanner eingabe in String "userInput" speichern
+            System.out.println("Pfad vom User:" + userInput);                   // Ausgabe vom eingegebenen Pfad für die Darstellung
+            File file = new File(userInput);                                    // Neue File names file erstellen mit dem userInput
+            if (file.isDirectory()){                                            // abfragen, ob die file ein Ordner ist
+                return userInput;                                               // Wenns ein Ordner ist gib den return vom eingegebenen Pfad
+            } else {                                                            // Wenns kein Ordner ist passiert ...
+                System.out.println("Dieser Pfad ist ungültig" + userInput);     // Ausgabe das der Pfad nicht gültig ist bzw. nicht gefunden wurde
+            }
+        }
+    }
+
+    // 4. Aufgabe größte Datei suchen
+    public static long searchForBiggestFile(File f){
+        long size = 0;
+
+        File[] content = f.listFiles();
+        if (content != null) {
+            for (File datei : content) {
+                if (datei.isFile()) {
+                    size++;
+                    size += datei.length();
+                }
+            }
+        }
+        return size;
+    }
 }
