@@ -9,13 +9,6 @@ import java.io.PrintStream;
 
 public class DatenTabellarischDartellen {
     public static void main(String[] args) {
-
-        String[] firstName = {"Alfonso", "Beatrix-Eleonor", "Cecil", "Daniel", "Elmar"};
-        String[] lastName = {"Klein", "Kinderdorfer", "Al Elmenar", "Schmidt", "Simma"};
-        int[] age = {40, 78, 5, 18, 81};
-        String[] place = {"Wien", "Schwarzach", "Wiener Neudorf", "Sankt Pölten", "Sankt Pölten"};
-        float[] distanceFromCapital = {0f, 654.4f, 12.457634366f, 120.0f, 119.9999f};
-
         try {
             File path = new File("assets/tmp/output.txt");
             path.getParentFile().mkdirs();
@@ -23,7 +16,7 @@ public class DatenTabellarischDartellen {
             PrintStream ps = new PrintStream(fos);
 
             ps.println(">>Daten Tabellarisch abgespeichert<<\n");
-            printFormat(firstName, lastName, age, place, distanceFromCapital, ps);
+            printFormat(ps);
 
             ps.close();
         } catch (FileNotFoundException fnfe) {
@@ -31,8 +24,13 @@ public class DatenTabellarischDartellen {
         }
     }
 
+    public static void printFormat(PrintStream ps) {
 
-    public static void printFormat(String[] firstName, String[] lastName, int[] age, String[] place, float[] distanceFromCapital, PrintStream ps) {
+        String[] firstName = {"Alfonso", "Beatrix-Eleonor", "Cecil", "Daniel", "Elmar"};
+        String[] lastName = {"Klein", "Kinderdorfer", "Al Elmenar", "Schmidt", "Simma"};
+        int[] age = {40, 78, 5, 18, 81};
+        String[] place = {"Wien", "Schwarzach", "Wiener Neudorf", "Sankt Pölten", "Sankt Pölten"};
+        float[] distanceFromCapital = {0f, 654.4f, 12.457634366f, 120.0f, 119.9999f};
 
         String[] headLine = new String[]{"First Name", "Last Name", "Age", "Place", "Distance from Capital"};
         int ageSize = DatenTabbellarischTest.formatIntSize(headLine[2], age);

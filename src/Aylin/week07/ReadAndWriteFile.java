@@ -9,7 +9,7 @@ public class ReadAndWriteFile{
         Scanner sc = new Scanner(System.in);
         System.out.print("Please Enter your Name: ");
         String name = sc.nextLine();
-        String path = "assets/bank/" + name + ".txt";
+        String path = "assets/bankAylin/" + name + ".txt";
         File file = new File(path);
         int initialBalance = 100;
 
