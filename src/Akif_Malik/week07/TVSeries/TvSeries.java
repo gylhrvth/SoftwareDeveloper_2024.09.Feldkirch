@@ -21,6 +21,7 @@ public class TvSeries {
 
     private Person produzent;
 
+
     //----------------------------------------------------------------------------------------\\
 
     public TvSeries(String titel, int Folgen, String sprache, int Staffel, int jahr, String genre, Person regisseur, Person produzent) {
@@ -36,52 +37,12 @@ public class TvSeries {
 
     //----------------------------------------------------------------------------------------\\
 
-    public String getTitel() {
-        return titel;
-    }
-
-    public void setTitel(String titel) {
-        this.titel = titel;
-    }
-
     public int getFolgen() {
         return Folgen;
     }
 
-    public void setFolgen(int folgen) {
-        Folgen = folgen;
-    }
-
-    public String getSprache() {
-        return sprache;
-    }
-
-    public void setSprache(String sprache) {
-        this.sprache = sprache;
-    }
-
     public int getStaffel() {
         return Staffel;
-    }
-
-    public void setStaffel(int staffel) {
-        Staffel = staffel;
-    }
-
-    public int getJahr() {
-        return jahr;
-    }
-
-    public void setJahr(int jahr) {
-        this.jahr = jahr;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
     }
 
       //---------------------------------------------------------------------------------\\
