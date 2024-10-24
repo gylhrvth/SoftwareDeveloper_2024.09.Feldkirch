@@ -40,5 +40,9 @@ public class SalesTextFormatted {
         return table;
     }
 
+    public static void printFormatted (){
+        
+    }
+
 
 }
