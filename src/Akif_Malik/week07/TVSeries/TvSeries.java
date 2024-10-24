@@ -1,6 +1,7 @@
 package Akif_Malik.week07.TVSeries;
 
 import Akif_Malik.week07.Human.Person;
+import Sandro.Colors;
 
 public class TvSeries {
 
@@ -20,6 +21,7 @@ public class TvSeries {
 
     private Person produzent;
 
+    //----------------------------------------------------------------------------------------\\
 
     public TvSeries(String titel, int Folgen, String sprache, int Staffel, int jahr, String genre, Person regisseur, Person produzent) {
         this.titel = titel;
@@ -30,9 +32,9 @@ public class TvSeries {
         this.genre = genre;
         this.regisseur = regisseur;
         this.produzent = produzent;
-
     }
 
+    //----------------------------------------------------------------------------------------\\
 
     public String getTitel() {
         return titel;
@@ -82,13 +84,24 @@ public class TvSeries {
         this.genre = genre;
     }
 
+      //---------------------------------------------------------------------------------\\
+     //-----------------------------------------------------------------------------------\\
     //-------------------------------------------------------------------------------------\\
 
     @Override
     public String toString() {
-        return "Title: " + titel + "\nEpisodes: " + Folgen + "\nLanguage: " + sprache + "\nSeasons: " + Staffel + "\nYear: " + jahr + "\nGenre: " + genre + "\n -------------------------" +"\nRegisseur: \n" + regisseur + "\n -------------------------" +"\nProduzent: \n" + produzent + "\n -------------------------";
+        return "Title: " + titel +
+                "\nEpisodes: " + Folgen +
+                "\nLanguage: " + sprache +
+                "\nSeasons: " + Staffel +
+                "\nYear: " + jahr +
+                "\nGenre: " + genre +
+                Colors.COLORS[4] + "\n -------------------------" + Colors.RESET +
+                Colors.COLORS[3] + "\nRegisseur: \n" + regisseur + Colors.RESET +
+                Colors.COLORS[4] + "\n -------------------------" + Colors.RESET +
+                Colors.COLORS[3] + "\nProduzent: \n" + produzent + Colors.RESET +
+                Colors.COLORS[4] + "\n -------------------------" + Colors.RESET;
     }
-
 }
 
 
