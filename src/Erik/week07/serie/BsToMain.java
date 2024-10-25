@@ -32,7 +32,7 @@ public class BsToMain {
         animeSerie1.throwRegisseur(regisseurWatanabe);
         System.out.println(animeSerie1 + "\n" + "-".repeat(55));
 
-
+// Das, selbe wie oben nochmal hier unten machen vllt mit zusatz das (Produktion erst startet, wenn Regisseur und Produzent vorhanden sind mit kleiner kostenrechnung)
         System.out.println("-".repeat(55) + "\n>>Anime-Serie 2<<\n" + "-".repeat(55));
         System.out.println(animeSerie2);
         System.out.println("═".repeat(55));
