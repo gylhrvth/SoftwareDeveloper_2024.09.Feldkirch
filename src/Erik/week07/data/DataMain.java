@@ -16,17 +16,15 @@ public class DataMain {
 
         // Objekte erstellen
         Data randResult = Data.calculateEverything(randArr);
-        System.out.println(Arrays.toString(randArr));
-        System.out.println("Random Array Min/Max/Avg\n" + randResult);
-        System.out.println("x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x");
         Data crazyResult = Data.calculateEverything(crazyArr);
-        System.out.println(Arrays.toString(crazyArr));
-        System.out.println(crazyResult);
 
 
         // Methoden aufruf
-
-
+        System.out.println(Arrays.toString(randArr));
+        System.out.println("Random Array Min/Max/Avg\n" + randResult);
+        System.out.println("x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x");
+        System.out.println(Arrays.toString(crazyArr));
+        System.out.println(crazyResult);
 
     }
 
@@ -48,9 +46,3 @@ public class DataMain {
     }
 
 }
-
-/*
-        Data minValue = new Data(Data.giveMinValueFromArray(testArr));
-        Data maxValue = new Data(Data.giveMaxValueFromArray(testArr));
-        Data avgValue = new Data(Data.giveAverageValueFromArray(testArr));
- */

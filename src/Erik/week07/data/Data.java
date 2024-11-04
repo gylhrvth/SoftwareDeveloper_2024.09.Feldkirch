@@ -23,9 +23,7 @@ public class Data {
                 "\nAverage Value of the Array is: >> " + averageValue;
     }
 
-
     // Getter, Setter
-
     public int getMinValue() {
         return minValue;
     }
@@ -34,21 +32,14 @@ public class Data {
         return maxValue;
     }
 
-    public int getAverageValue() {
-        return averageValue;
-    }
-
-
     //eine funktion min, max, avg ausrechnen
     public static Data calculateEverything(int[] arr) {
 
         Data test = new Data();
 
         if (arr[0] > 0) {
-
             test.minValue = arr[0];
             test.maxValue = arr[0];
-            test.averageValue = 0;
 
             int sum = 0;
 
@@ -61,40 +52,4 @@ public class Data {
         }
         return test;
     }
-
-/*
-    public static int giveMinValueFromArray(int[] minArray) {
-        int minValue = Integer.MAX_VALUE;
-
-        for (int i = 0; i < minArray.length; i++) {
-            if (minArray[i] < minValue) {
-                minValue = minArray[i];
-            }
-        }
-        return minValue;
-    }
-
-    public static int giveMaxValueFromArray(int[] maxArray) {
-        int maxValue = Integer.MIN_VALUE;
-
-        for (int i = 0; i < maxArray.length; i++) {
-            if (maxArray[i] > maxValue) {
-                maxValue = maxArray[i];
-            }
-        }
-        return maxValue;
-    }
-
-    public static int giveAverageValueFromArray(int[] avgArray) {
-        int avgValue = 0;
-        int sum = 0;
-
-        for (int value : avgArray) {
-            sum = sum + value;
-            value = value / avgArray.length;
-            avgValue = value;
-        }
-        return avgValue;
-    }
-*/
 }
