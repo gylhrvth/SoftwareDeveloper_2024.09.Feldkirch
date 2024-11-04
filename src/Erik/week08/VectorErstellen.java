@@ -8,11 +8,8 @@ public class VectorErstellen {
 
     public static void main(String[] args) {
 
-        Vector<Integer> rdm = new Vector<>();
-        for (int i = 0; i < 20; i++) {
-            int numbers = rand.nextInt(0, 99);
-            rdm.add(numbers);
-        }
+        Vector<Integer> rdm = fillVectorWithNumbers();
+        System.out.println(">>Original Vektor<<");
         System.out.println(rdm);
         System.out.println(">>Gerade Zahlen<<");
         printEvenNumbers(rdm);
@@ -27,6 +24,15 @@ public class VectorErstellen {
         deleteUnEvenNumbers(rdm);
         System.out.println("---------------------------------");
         System.out.println("Vector Integer without UnEven Numbers\n" + rdm);
+    }
+
+    public static Vector<Integer> fillVectorWithNumbers(){
+        Vector<Integer> rdm = new Vector<>();
+        for (int i = 0; i < 20; i++) {
+            int numbers = rand.nextInt(0, 99);
+            rdm.add(numbers);
+        }
+        return rdm;
     }
 
     public static void printEvenNumbers(Vector<Integer> arr) {
