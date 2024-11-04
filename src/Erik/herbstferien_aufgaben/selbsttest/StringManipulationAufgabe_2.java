@@ -24,8 +24,8 @@ public class StringManipulationAufgabe_2 {
         System.out.print("Please Enter something you want to see reversed:\n>> ");
         String userInput = sc.nextLine();
         char[] text = userInput.toCharArray();
-        reverseText(text);
-        System.out.print("The entered text reversed is:\n>> " + text);
+        String newText = reverseText(text);
+        System.out.print("The entered text reversed is:\n>> " + newText);
 
 
     }

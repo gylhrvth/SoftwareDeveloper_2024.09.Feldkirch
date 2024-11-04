@@ -4,7 +4,7 @@ package Erik.herbstferien_aufgaben.selbsttest;
 
 public class SchleifenAufgabe_2 {
     public static void main(String[] args) {
-// if i % 3 == 0 für was die 0?
+// if i % 3 == 0 für, was die 0?
         for (int i = -30; i <= 30 ; i++) {
             if (i % 3 == 0) {
                 System.out.println(i);
