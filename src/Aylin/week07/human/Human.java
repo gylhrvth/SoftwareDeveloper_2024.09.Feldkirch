@@ -21,6 +21,10 @@ public class Human {
         this.fullname = name + " " + surname;
     }
 
+    public String getFullname(){
+        return fullname;
+    }
+
     @Override
     public String toString() {
         return "Name: " + name + ", " + age + " Jahre alt, " + size + "cm groß und wiegt " + weight + "kg.";
