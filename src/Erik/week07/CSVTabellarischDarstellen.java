@@ -1,41 +1,57 @@
 package Erik.week07;
 
 import Gyula.week07.ReadFileFromRessources1;
-import java.io.File;
+
 import java.io.InputStream;
 import java.util.Objects;
 import java.util.Scanner;
 
+
 public class CSVTabellarischDarstellen {
+    public static final int DATATYPE_STRING = 3;
+    public static final int DATATYPE_DATE = 0;
+    public static final int DATATYPE_INT = 1;
+    public static final int DATATYPE_FLOAT = 2;
+
     public static void main(String[] args) {
 
         String fileName = "csv/sales_100.csv";
         int row = countRowFromCSV(fileName);
-//        int col = countColFromCSV(fileName);
-        String[][] h = readCSVirgendwas(fileName);
 
-        String[][] csv = new String[row][14];
+        String[][] csv = readCSVInToMyArray(fileName);
         printCSVTabellarisch(csv);
     }
 
-    public static void printCSVTabellarisch(String[][] csv){
-        for (int i = 0; i <csv.length ; i++) {
-            for (int j = 0; j <csv[i].length ; j++) {
-                System.out.printf("| %s |\n", csv[i]);
+    public static void printCSVTabellarisch(String[][] csv) {
+        int[] formatFloat = getDataType(csv);
+        int[] maxColWidth = getMaxColWidth(csv);
+
+        for (int row = 0; row < csv.length; row++) {
+            for (int col = 0; col < csv[row].length; col++) {
+                String formatColumn = String.format("| %%%s%ds ", formatFloat, maxColWidth[col]);
+                System.out.printf(formatColumn, csv[row][col]);
+            }
+            System.out.println("|");
+            if (row == 0) {
+                for (int col = 0; col < csv[row].length; col++) {
+                    String formatColumn = String.format("|-%%-%ds-", maxColWidth[col]);
+                    System.out.printf(formatColumn, "-".repeat(maxColWidth[col]));
+                }
+                System.out.println("|");
             }
         }
     }
 
-// Gibt mir die Columns zurück???
-    public static String[][] readCSVirgendwas(String fileName){
-       int row = countRowFromCSV(fileName);
+    // Gibt mir die CSV Datei in mein Array
+    public static String[][] readCSVInToMyArray(String fileName) {
+        int row = countRowFromCSV(fileName);
         String[][] arr = new String[row][];
 
         InputStream inputStream = Objects.requireNonNull(ReadFileFromRessources1.class.getClassLoader().getResourceAsStream(fileName));
         Scanner scanner = new Scanner(inputStream);
 
         int col = 0;
-        while (scanner.hasNext()){
+        while (scanner.hasNext()) {
             String line = scanner.nextLine();
             arr[col] = line.split(",");
             ++col;
@@ -44,31 +60,56 @@ public class CSVTabellarischDarstellen {
         return arr;
     }
 
-// Zählt die Rows und gibt sie zurück
-    public static int countRowFromCSV(String fileName){
+    // Zählt die Rows und gibt sie zurück
+    public static int countRowFromCSV(String fileName) {
         InputStream inputStream = Objects.requireNonNull(ReadFileFromRessources1.class.getClassLoader().getResourceAsStream(fileName));
         Scanner scanner = new Scanner(inputStream);
 
         int row = 0;
-        while (scanner.hasNext()){
+        while (scanner.hasNext()) {
             String line = scanner.nextLine();
             ++row;
         }
-        System.out.println(row);
         scanner.close();
         return row;
     }
 
-//    public static int countColFromCSV(String fileName){
-//        File path = new File("csv/sales_100.csv");
-//        String text = //inhalt von pfad in String speichern
-//        int col = 0;
-//
-//        for (int i = 0; i < text.length ; i++) {
-//            ++col;
-//        }
-//
-//        return col;
-//    }
+    public static int[] getMaxColWidth(String[][] csv) {
+        int[] result = new int[csv[0].length];
 
+        for (int row = 0; row < csv.length; row++) {
+            for (int col = 0; col < csv[row].length; col++) {
+                if (result[col] < csv[row][col].length()) {
+                    result[col] = csv[row][col].length();
+                }
+            }
+        }
+        return result;
+    }
+
+    public static boolean isThisTextAFloat(String text) {
+        boolean isFloat = false;
+        try {
+            Float f = Float.parseFloat(text);
+            isFloat = true;
+        } catch (NumberFormatException nfe) {
+
+        }
+        return isFloat;
+    }
+
+    public static int[] getDataType(String[][] csv) {
+        int[] dataType = new int[csv[0].length];
+
+        for (int row = 1; row < csv.length; row++) {
+            for (int col = 0; col < csv[row].length; col++) {
+                if (dataType[col] == DATATYPE_FLOAT && !isThisTextAFloat(csv[row][col])) {
+                    dataType[col] = DATATYPE_STRING;
+                }
+            }
+
+        }
+
+        return dataType;
+    }
 }
