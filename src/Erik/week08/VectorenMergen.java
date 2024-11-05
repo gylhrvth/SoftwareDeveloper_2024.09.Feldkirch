@@ -14,7 +14,6 @@ public class VectorenMergen {
     public static Random rand = new Random();
 
     public static void main(String[] args) {
-
         Vector<Integer> vec1 = VectorErstellen.fillVectorWithNumbers();     // Wird befüllt mit 20 Random Zahlen
         Vector<Integer> vec2 = VectorErstellen.fillVectorWithNumbers();     // Wird befüllt mit 20 Random Zahlen
 
@@ -25,51 +24,29 @@ public class VectorenMergen {
         System.out.println("\n1.Vec Sortiert: >> " + vec1);
         System.out.println("2.Vec Sortiert: >> " + vec2);
 
-//        Vector<Integer> mergedVec = mergeTwoVectors(vec1, vec2);
-//        System.out.println(">>Merged Vector<<\n" + mergedVec);
-
-//        Vector<Integer> test2 = test2(vec1, vec2);
-//        System.out.println(">>Merged Vector<<\n" + test2);
-
-        Vector<Integer> test2 = mergeBothVectors(vec1, vec2);
-        System.out.println(">>Merged Vector<<\n" + test2);
+        Vector<Integer> merged = mergeBothVectors(vec1, vec2);
+        System.out.println(">>Merged Vector<<\n" + merged);
     }
 
-    public static Vector<Integer> mergeBothVectors(Vector<Integer> vector1, Vector<Integer> vector2) {
-        Vector<Integer> result = new Vector<>();        // Neuer Vektor erstellt
-        int i = 0;
-        int j = 0;
+    public static Vector<Integer> mergeBothVectors(Vector<Integer> left, Vector<Integer> right) {
+        Vector<Integer> result = new Vector<>();    // Neuer Vektor erstellt
 
-        while (i < vector1.size() && j < vector2.size()) {
-            if (vector1.get(i) >= vector2.get(j)) {
-                result.add(vector1.get(i));
-//                vector1.remove(i);
-                i++; // ++ überspringt eine zahl
-                     // -- error
+        while (!left.isEmpty() && !right.isEmpty()) {
+            if (left.firstElement() < right.firstElement()) {
+                result.add(left.removeFirst());     // removed die erste Zahl vom linken Vektor und speicher diesen dann in den result Vektor
             } else {
-                result.add(vector2.get(j));
-//                vector2.remove(j);
-                j++;
+                result.add(right.removeFirst());
             }
         }
-
-        while (i < vector1.size()) {
-            result.add(vector1.get(i));
-            i++;
+        while (left.isEmpty()) {
+            result.add(left.removeFirst());
         }
-
-        while (j < vector2.size()) {
-            result.add(vector2.get(j));
-            j++;
+        while (right.isEmpty()) {
+            result.add(right.removeFirst());
         }
-
         return result;
     }
-
 }
-
-
-
 /*
     1. Vec = linke Seite
     2. Vec = rechte Seite
