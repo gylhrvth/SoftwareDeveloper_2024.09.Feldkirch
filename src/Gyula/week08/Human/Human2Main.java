@@ -12,6 +12,19 @@ public class Human2Main {
         for (Human2 h : freunde){
             System.out.println(h);
         }
+
+        Human2 juengstePerson = getMinAge(freunde);
+        System.out.println("Der jüngste Person ist " + juengstePerson.getName());
+    }
+
+    public static Human2 getMinAge(Vector<Human2> vec){
+        Human2 result = null;
+        for (Human2 h : vec){
+            if ((result == null) || (h.getAge() < result.getAge())){
+                result = h;
+            }
+        }
+        return result;
     }
 
 

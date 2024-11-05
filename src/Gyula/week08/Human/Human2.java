@@ -26,6 +26,10 @@ public class Human2 {
         return weight;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return name + "(" + age + " - " + height + " cm/" + weight +"kg)";
