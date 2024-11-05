@@ -62,9 +62,8 @@ public class ArraysAufgabe_1 {
         // geht das array durch und speichert den derzeitigen Wert beim Durchgehen in die value Varibale?
         for (int value : arr) { // und geht das weiter bis er einmal durch ist, oder? (Nachfragen) int value ist also arr[i]?
             sum = sum + value;
-            value = sum / arr.length;
-            avgValue = value;
         }
+        avgValue = sum / arr.length;
         return avgValue;
     }
 }
