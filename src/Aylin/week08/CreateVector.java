@@ -1,8 +1,6 @@
 package Aylin.week08;
 
 import Sandro.Colors;
-
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Vector;
@@ -31,7 +29,12 @@ public class CreateVector {
         deleteOddNumbers(randomVector1());
         System.out.println(randomVector1());
         System.out.println("===========================");
-
+//        randomVector1().trimToSize();
+//        System.out.println(randomVector1());
+//        for (int num : randomVector1()){
+//            System.out.println("Number: " + num);
+//        }
+//        System.out.println("===========================");
     }
 
     public static Vector <Integer> randomVector1(){
