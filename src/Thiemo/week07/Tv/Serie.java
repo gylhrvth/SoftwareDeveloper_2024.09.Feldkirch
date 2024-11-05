@@ -1,64 +1,98 @@
 package Thiemo.week07.Tv;
 
-import Sandro.Colors;
+import Thiemo.week07.LivingBeing.Person;
 
 public class Serie {
 
     private String title;
     private String genre;
-    private int productionYear;
+    private int startProductionYear;
+    private int endProductionyear;
     private String originalLanguage;
+    private Person regessiuer;
+    private Person producent;
+    private int seasons;
+    private int episode;
 
-
-    public Serie(String title, String genre, int productionYear, String originalLanguage) {
-
+    public Serie(String title, String genre, int productionYear, int endProductionyear, String originalLanguage, Person regessiuer, Person producent, int seasons, int episode) {
         this.title = title;
         this.genre = genre;
-        this.productionYear = productionYear;
+        this.startProductionYear = productionYear;
+        this.endProductionyear = endProductionyear;
         this.originalLanguage = originalLanguage;
+        this.regessiuer = null;
+        this.producent = null;
+        this.seasons = seasons;
+        this.episode = episode;
 
     }
 
-    public String gettitle() {
-        return title;
+
+    public boolean hireWorkers(Person producent, Person regessiuer) {
+        if (this.producent != null && this.regessiuer != null) {
+            System.out.println("The Positions are already filled\n");
+            return false;
+        }
+        if (this.producent == null) {
+            this.producent = producent;
+            System.out.println("New producent hired for "+title+" : " + producent.getName() + "\n");
+        }
+        if (this.regessiuer == null) {
+            this.regessiuer = regessiuer;
+            System.out.println("New Regisseur hired for "+title+" : " + regessiuer.getName() + "\n");
+        }
+        return true;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+
+    public void hireProducent(Person producent) {
+        if (this.producent != null) {
+            System.out.println("Producent for the Series "  + title +" already hired: " + this.producent.getName() + "\n");
+        } else {
+            this.producent = producent;
+            System.out.println("New producent hired for "+title+" : " + producent.getName() + "\n");
+        }
     }
 
-    public String getgenre() {
-        return genre;
+
+    public void hireRegisseur(Person regessiuer) {
+        if (this.regessiuer != null) {
+            System.out.println("Regisseur for the Series "  + title +" already hired: " + this.regessiuer.getName() + "\n");
+        } else {
+            this.regessiuer = regessiuer;
+            System.out.println("New Regisseur hired for "+title+": " + regessiuer.getName() + "\n");
+        }
+
     }
 
-    public void setgenre(String genre) {
-        this.genre = genre;
+
+    public void fireAll() {
+        if (producent == null && regessiuer == null) {
+            System.out.println("Already empty, can't fire anybody\n");
+
+        } else {
+            this.producent = null;
+            this.regessiuer = null;
+            System.out.println("All workers have been fired.\n");
+        }
     }
 
-    public int getproductionYear() {
-        return productionYear;
-    }
-
-    public void setproductionYear(int productionYear) {
-        this.productionYear = productionYear;
-    }
-
-    public String getoriginalLanguage() {
-        return originalLanguage;
-    }
-
-    public void setoriginalLanguage(String originalLanguage) {
-        this.originalLanguage = originalLanguage;
-    }
 
     @Override
     public String toString() {
-        return "Serie  {" +
-                " Titel = '" + title + '\'' +
-                ", Genre = " + genre +
-                ", Produktionsjahr = " + String.format("%s%4d cm%s", Colors.COLORS[2], productionYear, Colors.RESET) +
-                ", Original Sprache = " + originalLanguage +
-                '}';
 
+        String regessiuerName = (regessiuer != null) ? regessiuer.getName() : "Not assigned";
+        String producentName = (producent != null) ? producent.getName() : "Not assigned";
+
+        return " Serie\n" +
+                " Title = " + title + "\n" +
+                " Genre = " + genre + "\n" +
+                " Start ProductionYear = " + startProductionYear + "\n" +
+                " End ProductionYear = " + endProductionyear + "\n" +
+                " OriginalLanguage = " + originalLanguage + "\n" +
+                " Regessiuer = " + regessiuerName + "\n" +
+                " Producent = " + producentName + "\n" +
+                " Seasons = " + seasons + "\n" +
+                " Episode = " + episode + "\n";
     }
 }

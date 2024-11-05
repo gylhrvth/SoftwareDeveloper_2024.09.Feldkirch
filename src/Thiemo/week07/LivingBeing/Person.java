@@ -24,8 +24,8 @@ public class Person {
         this.name = name;
         this.weight = weight;
 
-        personCount++;
-        this.personNumber = personCount;
+//        personCount++;
+//        this.personNumber = personCount;
     }
 
     // Getters and Setters
@@ -84,7 +84,7 @@ public class Person {
         // Overriding the toString method for better output representation
     @Override
     public String toString() {
-        return "Person " + personNumber + " {" +
+        return /*"Person " + personNumber + */" {" +
                 " Name = '" + name + '\'' +
                 ", Alter = " + age + " Jahre" +
                 ", Größe = " + String.format("%s%4d cm%s", Colors.COLORS[2], height, Colors.RESET) +
