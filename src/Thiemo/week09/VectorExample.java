@@ -75,8 +75,11 @@ public class VectorExample {
 
         for (int i = 0; i < randomNumbers.size(); i++) {
             for (int j = 0; j < randomNumbers.size() - 1 - i; j++) {
-                if (randomNumbers.get(j) > randomNumbers.get(j + 1)) {
-                    swap(randomNumbers, j, j + 1);
+                if (randomNumbers.get(j) < randomNumbers.get(j + 1)) {
+                    int temp = randomNumbers.get(j);
+                    randomNumbers.set(j, randomNumbers.get(j + 1));
+                    randomNumbers.set(j + 1, temp);
+//                    swap(randomNumbers, j, j + 1);
                 }
             }
         }
