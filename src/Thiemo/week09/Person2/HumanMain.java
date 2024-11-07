@@ -1,7 +1,6 @@
 package Thiemo.week09.Person2;
 
-import Gyula.week04.BubbleSortExample;
-
+import java.awt.*;
 import java.util.Comparator;
 import java.util.Random;
 import java.util.Vector;
@@ -75,6 +74,7 @@ public class HumanMain {
             System.out.println(h);
         }
     }
+
 
     public static Vector<Human> generateRandomPeople(int count) {
         Vector<Human> result = new Vector<>();
@@ -228,7 +228,7 @@ public class HumanMain {
 
         while (low < high) {
             for (int i = high; i > low; i--) {
-                if (comparator.compare(vec.get(i - 1),vec.get(i)) > 0) {
+                if (comparator.compare(vec.get(i - 1), vec.get(i)) > 0) {
                     swap(vec, i - 1, i);
                     move = i;
                 }
@@ -237,7 +237,7 @@ public class HumanMain {
 
 
             for (int i = low; i < high; i++) {
-                if (comparator.compare(vec.get(i), vec.get(i + 1)) > 0)  {
+                if (comparator.compare(vec.get(i), vec.get(i + 1)) > 0) {
                     swap(vec, i, i + 1);
                     move = i;
                 }
@@ -245,7 +245,8 @@ public class HumanMain {
             high = move;
         }
     }
-    public static void swap(Vector<Human> vec, int i, int j){
+
+    public static void swap(Vector<Human> vec, int i, int j) {
         if (i >= 0 && j >= 0 && i < vec.size() && j < vec.size()) {
             Human temp = vec.get(i);
             vec.set(i, vec.get(j));
