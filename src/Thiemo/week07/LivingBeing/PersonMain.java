@@ -1,6 +1,6 @@
 package Thiemo.week07.LivingBeing;
 
-public class Main {
+public class PersonMain {
     public static void main(String[] args) {
 
         // Erstellen von zwei Person-Objekten
