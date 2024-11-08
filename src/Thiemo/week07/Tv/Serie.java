@@ -1,88 +1,148 @@
 package Thiemo.week07.Tv;
 
 import Thiemo.week07.LivingBeing.Person;
+import Thiemo.week09.Person2.Actor;
+
+import java.util.Random;
+import java.util.Vector;
 
 public class Serie {
+    private static Random random = new Random();
+
 
     private String title;
     private String genre;
     private int startProductionYear;
     private int endProductionyear;
     private String originalLanguage;
-    private Person regessiuer;
-    private Person producent;
+    private Person director;
+    private Person producer;
     private int seasons;
     private int episode;
+    private Vector<Actor> scoutList;
+    private Vector<Actor> castList;
 
-    public Serie(String title, String genre, int productionYear, int endProductionyear, String originalLanguage, Person regessiuer, Person producent, int seasons, int episode) {
+
+    public Serie(String title, String genre, int startProductionYear, int endProductionyear, String originalLanguage, Person director, Person producer, int seasons, int episode) {
         this.title = title;
+
         this.genre = genre;
-        this.startProductionYear = productionYear;
+        this.startProductionYear = startProductionYear;
         this.endProductionyear = endProductionyear;
         this.originalLanguage = originalLanguage;
-        this.regessiuer = null;
-        this.producent = null;
+        this.director = director;
+        this.producer = producer;
         this.seasons = seasons;
         this.episode = episode;
-
+        this.scoutList = new Vector<>();
+        this.castList = new Vector<>();
     }
 
+    public static Random getRandom() {
+        return random;
+    }
+
+    public static void setRandom(Random random) {
+        Serie.random = random;
+    }
+
+    public Vector<Actor> getScoutList() {
+        return scoutList;
+    }
+
+    public void setScoutList(Vector<Actor> scoutList) {
+        this.scoutList = scoutList;
+    }
+
+    public Vector<Actor> getCastList() {
+        return castList;
+    }
+
+    public void setCastList(Vector<Actor> castList) {
+        this.castList = castList;
+    }
 
     public boolean hireWorkers(Person producent, Person regessiuer) {
-        if (this.producent != null && this.regessiuer != null) {
+        if (this.producer != null && this.director != null) {
             System.out.println("The Positions are already filled\n");
             return false;
         }
-        if (this.producent == null) {
-            this.producent = producent;
-            System.out.println("New producent hired for "+title+" : " + producent.getName() + "\n");
+        if (this.producer == null) {
+            this.producer = producent;
+            System.out.println("New producent hired for " + title + " : " + producent.getName() + "\n");
         }
-        if (this.regessiuer == null) {
-            this.regessiuer = regessiuer;
-            System.out.println("New Regisseur hired for "+title+" : " + regessiuer.getName() + "\n");
+        if (this.director == null) {
+            this.director = regessiuer;
+            System.out.println("New Regisseur hired for " + title + " : " + regessiuer.getName() + "\n");
         }
         return true;
     }
 
 
     public void hireProducent(Person producent) {
-        if (this.producent != null) {
-            System.out.println("Producent for the Series "  + title +" already hired: " + this.producent.getName() + "\n");
+        if (this.producer != null) {
+            System.out.println("Producent for the Series " + title + " already hired: " + this.producer.getName() + "\n");
         } else {
-            this.producent = producent;
-            System.out.println("New producent hired for "+title+" : " + producent.getName() + "\n");
+            this.producer = producent;
+            System.out.println("New producent hired for " + title + " : " + producent.getName() + "\n");
         }
     }
 
 
     public void hireRegisseur(Person regessiuer) {
-        if (this.regessiuer != null) {
-            System.out.println("Regisseur for the Series "  + title +" already hired: " + this.regessiuer.getName() + "\n");
+        if (this.director != null) {
+            System.out.println("Regisseur for the Series " + title + " already hired: " + this.director.getName() + "\n");
         } else {
-            this.regessiuer = regessiuer;
-            System.out.println("New Regisseur hired for "+title+": " + regessiuer.getName() + "\n");
+            this.director = regessiuer;
+            System.out.println("New Regisseur hired for " + title + ": " + regessiuer.getName() + "\n");
         }
 
     }
 
 
     public void fireAll() {
-        if (producent == null && regessiuer == null) {
+        if (producer == null && director == null && castList.isEmpty()) {
             System.out.println("Already empty, can't fire anybody\n");
 
         } else {
-            this.producent = null;
-            this.regessiuer = null;
+            this.producer = null;
+            this.director = null;
+            scoutList.addAll(castList);
+            this.castList.clear();
+
+
             System.out.println("All workers have been fired.\n");
         }
+
     }
 
+    public void addToScoutList(Actor person) {
+        if (scoutList.contains(person)) {
+            return;
+        }
+        scoutList.add(person);
+    }
+
+    public void addToCastList(Actor person) {
+        int count = 0;
+        if (castList.contains(person)) {
+            return;
+        } else {
+            castList.add(person);
+            count = person.getCount();
+            person.setCount(count + 1);
+            scoutList.remove(person);
+            if (count >= 3) {
+                castList.remove(person);
+            }
+        }
+    }
 
     @Override
     public String toString() {
 
-        String regessiuerName = (regessiuer != null) ? regessiuer.getName() : "Not assigned";
-        String producentName = (producent != null) ? producent.getName() : "Not assigned";
+        String regessiuerName = (director != null) ? director.getName() : "Not assigned";
+        String producentName = (producer != null) ? producer.getName() : "Not assigned";
 
         return " Serie\n" +
                 " Title = " + title + "\n" +
@@ -93,6 +153,8 @@ public class Serie {
                 " Regessiuer = " + regessiuerName + "\n" +
                 " Producent = " + producentName + "\n" +
                 " Seasons = " + seasons + "\n" +
-                " Episode = " + episode + "\n";
+                " Episode = " + episode + "\n" +
+                " Scoutlist = " + scoutList + "\n" +
+                " Castlist = " + castList + "\n";
     }
 }
