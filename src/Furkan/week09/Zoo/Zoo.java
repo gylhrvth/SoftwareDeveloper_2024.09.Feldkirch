@@ -8,21 +8,27 @@ public class Zoo {
     private Vector<Gehege> gehegeListe;
 
 
-
     public Zoo(String name, int year) {
         this.name = name;
         this.year = year;
-        this.gehegeListe= new Vector<>();
+        this.gehegeListe = new Vector<>();
     }
 
-    public void addGehege(Gehege gehege){
-        gehegeListe.add(gehege);
+    public void addGehege(Gehege gehege) {
+        this.gehegeListe.add(gehege);
+    }
+
+    public void removeGehege(Gehege gehege) {
+        this.gehegeListe.remove(gehege);
     }
 
 
-    public String toString(){ return name + " " + year + " " ;}
-
-
+    public void printZoo() {
+        System.out.println("├──" + name + ", gegründet " + year);
+        for (Gehege gehege : gehegeListe){
+            gehege.printZoo();
+        }
+    }
 
 
 }
