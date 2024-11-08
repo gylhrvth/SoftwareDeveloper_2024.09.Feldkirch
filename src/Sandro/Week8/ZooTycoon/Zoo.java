@@ -39,10 +39,10 @@ public class Zoo {
 
     public void startSimu(){
         System.out.println("Simulation start ...");
-        for (int i = 1; i < 14; i++) {
+        for (int i = 1; i < 100; i++) {
             System.out.println("Tag ("+i+")....");
             for(Enclosure enc : enclosureList){
-                enc.simu();
+                enc.simu(i);
             }
 
         }
@@ -56,15 +56,10 @@ public class Zoo {
         //Food ist der Key der Map!!!
         HashMap<Food,Double> foodRequiert = new HashMap<>();
         //durch alle Gehege forEach, aufruf der Funktion vom Gehege
-
-
         for (Enclosure enclosure : enclosureList) {
             enclosure.collectFoodRequirement(foodRequiert);
         }
         System.out.println();
-
-
-
         //Berechnung mit der Hashmap von Food Cost
         System.out.println("Food requierment stats");
         //Variable für cost
