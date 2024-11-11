@@ -1,7 +1,10 @@
 package Aylin.week07.series;
 
 import Aylin.week07.human.Human;
+import Aylin.week08.SeriesActors.SeriesActors;
 import Sandro.Colors;
+
+import java.util.Vector;
 
 public class Series {
     private String title;
@@ -13,7 +16,8 @@ public class Series {
     private Human director;
     private Human producer;
     private Human writer;
-    private boolean errorMsg;
+    private Vector<SeriesActors> scoutList;
+    private Vector<SeriesActors> castList;
 
     public Series(String title, String genre, int year, String origin, int seasons, int episodes){
         this.title = Colors.COLORS[4] + title + Colors.RESET;
@@ -25,10 +29,53 @@ public class Series {
         this.director = null;
         this.producer = null;
         this.writer = null;
+        this.scoutList = new Vector<>();
+        this.castList = new Vector<>();
+    }
+
+    public static void printScoutList(Vector<SeriesActors> scoutList) {
+        if(scoutList.isEmpty()) {
+            return;
+        }
+        System.out.println("============================ \nScout list: ");
+        for (SeriesActors actor : scoutList) {
+            System.out.println(actor);
+        }
+    }
+
+    public static void printCastList(Vector<SeriesActors> castList){
+        if(castList.isEmpty()){
+            return;
+        }
+        System.out.println("============================ \nCast list: ");
+        for (SeriesActors actor : castList){
+            System.out.println(actor);
+        }
+    }
+
+    public void addScout(SeriesActors actors){
+        scoutList.add(actors);
+    }
+
+    public Vector<SeriesActors> getScoutList() {
+        return scoutList;
+    }
+
+    public void hireCast(SeriesActors actors){
+        if(!castList.isEmpty()){
+            castList.add(actors);
+            scoutList.remove(actors);
+            System.out.println(actors + " is hired as the male protagonist");
+        }
+        System.out.println("You need to hire a protagonist");
+    }
+
+    public Vector<SeriesActors> getCastList() {
+        return castList;
     }
 
     public boolean hireDirector(Human director){
-        if(this.director != null){
+        if(this.castList != null){
             System.out.println("You have already hired a director.");
             return false;
         }
@@ -96,10 +143,16 @@ public class Series {
     public void startProduction(int episodes) {
         if (this.director == null) {
             System.out.println(Colors.COLORS[1] + "You need to hire a Director to start the project." + Colors.RESET);
+            return;
         }else if (this.producer == null) {
             System.out.println(Colors.COLORS[1] + "You need to hire a Producer to start the project." + Colors.RESET);
+            return;
         }else if (this.writer == null) {
             System.out.println(Colors.COLORS[1] + "You need to hire a Writer to start the project." + Colors.RESET);
+            return;
+        }else if(this.castList.isEmpty()){
+            System.out.println(Colors.COLORS[1] + "You need to hire an Actor to start the project." + Colors.RESET);
+            return;
         }else {
             System.out.println("...Production of Ep " + episodes + ".");
         }
