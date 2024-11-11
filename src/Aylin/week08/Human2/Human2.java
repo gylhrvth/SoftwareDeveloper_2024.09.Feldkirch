@@ -14,9 +14,24 @@ public class Human2 {
         this.weight = weight;
     }
 
+    public int getAge(){
+        return age;
+    }
+
+    public int getHeight(){
+        return height;
+    }
+
+    public int getWeight(){
+        return weight;
+    }
+
+    public String getName(){
+        return name;
+    }
 
     @Override
     public String toString() {
-        return "Name: " + name + ", age: " + age + ", height: " + height + " cm, weight: " + weight + " kg.";
+        return String.format("| %-20s: %5s - %5s cm / %5s kg |", name, age, height, weight);
     }
 }
