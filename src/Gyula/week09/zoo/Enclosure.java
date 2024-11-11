@@ -1,5 +1,8 @@
 package Gyula.week09.zoo;
 
+import Gyula.ConsoleTools;
+import Gyula.WildColors;
+
 import java.util.Vector;
 
 public class Enclosure {
@@ -30,9 +33,14 @@ public class Enclosure {
     }
 
     public void printStructure(){
-        System.out.printf("    Gehege: %s\n", name);
+        System.out.printf("    %s\n", this);
         for (Animal ani: animalList){
             ani.printStructure();
         }
+    }
+
+    @Override
+    public String toString() {
+        return WildColors.getColorFromHSL(120, 1.0, 0.5) + name + WildColors.resetColor();
     }
 }

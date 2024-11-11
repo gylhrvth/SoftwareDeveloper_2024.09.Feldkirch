@@ -1,5 +1,7 @@
 package Gyula.week09.zoo;
 
+import Gyula.WildColors;
+
 public class Animal {
     private String name;
     private String species;
@@ -16,6 +18,12 @@ public class Animal {
     }
 
     public void printStructure(){
-        System.out.printf("        Animal: %s %s (%s)\n", name, gender, species);
+        System.out.printf("        Animal: %s %s (%s)\n", this, gender, species);
     }
+
+    @Override
+    public String toString() {
+        return WildColors.getColorFromHSL(210, 1.0, 0.4) + name + WildColors.resetColor();
+    }
+
 }

@@ -6,15 +6,13 @@ public class Zoo {
     private String name;
     private int establishedYear;
     private Vector<Enclosure> enclosureList;
+    private Vector<ZooKeeper> zookKeeperList;
 
     public Zoo(String name, int establishedYear){
         this.name = name;
         this.establishedYear = establishedYear;
         this.enclosureList = new Vector<>();
-    }
-
-    public void addEnclosure(Enclosure enc){
-        enclosureList.add(enc);
+        this.zookKeeperList = new Vector<>();
     }
 
     public Enclosure searchAndCreateEnclosure(String name){
@@ -36,8 +34,30 @@ public class Zoo {
         return enc.searchAndCreateAnimal(animalName, species, gender);
     }
 
+    public ZooKeeper searchAndCreateZooKeeper(String name, String enclosureName){
+        ZooKeeper result = null;
+        for (ZooKeeper zk : zookKeeperList){
+            if (result == null && zk.getName().equals(name)){
+                result = zk;
+            }
+        }
+        if (result == null){
+            result = new ZooKeeper(name);
+            zookKeeperList.add(result);
+        }
+        Enclosure enc = searchAndCreateEnclosure(enclosureName);
+        result.addTask(enc);
+        return result;
+    }
+
+
     public void printStructure(){
         System.out.printf("Zoo: %s (gegründet: %d)\n", name, establishedYear);
+        System.out.println("Zoo keepers:");
+        for (ZooKeeper zk: zookKeeperList){
+            zk.printStructure();
+        }
+        System.out.println("Enclosures:");
         for (Enclosure enc : enclosureList){
             enc.printStructure();
         }
