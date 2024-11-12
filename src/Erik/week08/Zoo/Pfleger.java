@@ -38,7 +38,7 @@ public class Pfleger {
     }
 
     public void printStructure(){
-        System.out.printf("╠════ %s zuständig für: >> ", name);     // "this", ruft die Klasse selbst auf somit die toString Methode
+        System.out.printf("├─── %s zuständig für: >> ", name);     // "this", ruft die Klasse selbst auf somit die toString Methode
         for (int i = 0; i < taskList.size(); i++) {
             if (i > 0){
                 System.out.print(", ");
@@ -50,6 +50,6 @@ public class Pfleger {
 
     @Override
     public String toString() {
-        return Colors.COLORS[5] + getName() + Colors.RESET;
+        return Colors.COLORS[5] + name + Colors.RESET;
     }
 }

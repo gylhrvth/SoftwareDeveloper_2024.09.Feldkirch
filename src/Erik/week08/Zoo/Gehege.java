@@ -57,4 +57,9 @@ public class Gehege {
         }
         System.out.println("─".repeat(80));
     }
+
+    @Override
+    public String toString() {
+        return Colors.COLORS[5] + name + Colors.RESET;
+    }
 }

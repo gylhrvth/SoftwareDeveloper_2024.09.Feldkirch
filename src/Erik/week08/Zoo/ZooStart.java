@@ -36,6 +36,8 @@ public class ZooStart {
         zoo.addGehegeInList(Terrarium);
 
         // Den Pflegern die Gehege zuweisen
+        zoo.addPfleger(pflegerTom);
+        zoo.addPfleger(pflegerSelina);
         pflegerTom.addTask(Freiland);
         pflegerTom.addTask(Aquarium);
         pflegerSelina.addTask(Terrarium);
