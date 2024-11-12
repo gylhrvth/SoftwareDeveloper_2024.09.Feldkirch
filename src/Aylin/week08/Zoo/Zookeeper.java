@@ -1,8 +1,6 @@
 package Aylin.week08.Zoo;
 
 import Gyula.WildColors;
-import Sandro.Colors;
-
 import java.util.Random;
 import java.util.Vector;
 
