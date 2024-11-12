@@ -1,5 +1,7 @@
 package Aylin.week08.Zoo;
 
+import Gyula.WildColors;
+
 import java.util.HashMap;
 
 public class Animals {
@@ -7,18 +9,14 @@ public class Animals {
     private String species;
     private int age;
     private String gender;
-    private String enclosure;
-
     private Food food;
     private double amount;
 
-
-    public Animals(String name, String species, int age, String gender, Food food, double amount){
-        this.name = name;
+    public Animals(String name, String species, int age, String gender, Food food, double amount) {
+        this.name = WildColors.getColorFromHSL(205, 1.0, 0.4) + name + WildColors.resetColor();
         this.species = species;
         this.age = age;
         this.gender = gender;
-        this.enclosure = enclosure;
         this.food = food;
         this.amount = amount;
     }
@@ -27,10 +25,7 @@ public class Animals {
         return name;
     }
 
-    public String getEnclosure() {
-        return enclosure;
-    }
-    public void printAnimals(){
+    public void printAnimals() {
         System.out.println("│       ├── " + name + ", " + species);
     }
 
@@ -39,10 +34,11 @@ public class Animals {
         return species + ", named as: " + name + " (" + age + ")/ " + gender;
     }
 
-    public void collectFoodRequirement(HashMap<Food, Double> foodRequired){
-        if (foodRequired.containsKey(food)){
+    // Collects food requirements for the animal
+    public void collectFoodRequirement(HashMap<Food, Double> foodRequired) {
+        if (foodRequired.containsKey(food)) {
             foodRequired.put(food, foodRequired.get(food) + amount);
-        }else{
+        } else {
             foodRequired.put(food, amount);
         }
     }

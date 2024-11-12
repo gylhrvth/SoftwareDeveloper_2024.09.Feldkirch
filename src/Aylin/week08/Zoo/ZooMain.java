@@ -14,8 +14,9 @@ public class ZooMain {
         Food fruit = new Food("Fruit", "kg", 4);
         Food fishFlakes = new Food("Fish Flakes", "kg", 23);
 
-        Zookeeper bill = new Zookeeper("Bill", "Feeding and caring for mammals and birds");
-        Zookeeper bob = new Zookeeper("Bob", "Managing reptiles and aquatic life");
+        Zookeeper bill = new Zookeeper("Bill", "King Julien");
+        Zookeeper bob = new Zookeeper("Bob", "Nemo");
+        Zookeeper liz = new Zookeeper("Liz", "");
 
 
         //Animals Wildlife
@@ -61,8 +62,8 @@ public class ZooMain {
         //Animals Aquarium
         Animals aquariumAngelfish = new Animals("Angelina", "Angelfish", 4, "Female", fishFlakes, 1);
         Animals aquariumGramma = new Animals("Flame", "Royal Gramma", 2, "Female", fishFlakes, 1);
-//        Animals aquariumSurgeonfish = new Animals("Dory", "Blue Tang", 5, "Female");
-//        Animals aquariumClownfish = new Animals("Nemo", "Clownfish", 3, "Male");
+        Animals aquariumSurgeonfish = new Animals("Dory", "Blue Tang", 5, "Female", fishFlakes, 2);
+        Animals aquariumClownfish = new Animals("Nemo", "Clownfish", 3, "Male", fishFlakes, 1);
 //        Animals aquariumMorayEel = new Animals("Slick", "Moray Eel", 7, "Male");
 //        Animals aquariumLionfish = new Animals("Spike", "Lionfish", 6, "Male");
 //        Animals aquariumSeaTurtle = new Animals("Crush", "Green Sea Turtle", 50, "Male");
@@ -84,12 +85,31 @@ public class ZooMain {
         eAviaries.addAnimals(aviaryHornbill);
         eTerrariums.addAnimals(reptileAligator);
         eTerrariums.addAnimals(reptileAligator2);
-        //adding Zookeeper to visit and feed the animals
-        bill.assignEnclosureAndFeed(eWildlife);
-        bob.assignEnclosureAndFeed(eTerrariums);
+        eAquarium.addAnimals(aquariumClownfish);
+        eAquarium.addAnimals(aquariumSurgeonfish);
+
         //Printing the Structure
         zoo.printZooStructure();
+
+        bill.addTask(eWildlife);
+        bill.addTask((eAviaries));
+        bob.addTask(eWildlife);
+        bob.addTask(eAquarium);
+        liz.addTask(eAviaries);
+        liz.addTask(eTerrariums);
+
+        //adding Zookeeper to visit and feed the animals
+//        bill.assignEnclosureAndFeed(eWildlife);
+//        bob.assignEnclosureAndFeed(eTerrariums);
+
+        zoo.addZookeeper(bill);
+        zoo.addZookeeper(bob);
+        zoo.addZookeeper(liz);
+
         zoo.printFoodCost();
+
+        zoo.startSimu();
+
 
 
     }

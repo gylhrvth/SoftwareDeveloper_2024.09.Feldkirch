@@ -1,20 +1,21 @@
 package Aylin.week08.Zoo;
 
 import Sandro.Colors;
-
 import java.util.HashMap;
 import java.util.Vector;
 
 public class Zoo {
     private String name;
     private int establishment;
-    //List
+    // List of enclosures and zookeepers
     private Vector<Enclosure> enclosureList;
+    private Vector<Zookeeper> zookeeperList;
 
-    public Zoo(String name, int establishment){
+    public Zoo(String name, int establishment) {
         this.name = Colors.COLORS[5] + name + Colors.RESET;
         this.establishment = establishment;
         this.enclosureList = new Vector<>();
+        this.zookeeperList = new Vector<>();
     }
 
     @Override
@@ -22,36 +23,60 @@ public class Zoo {
         return name + ", " + Colors.COLORS[4] + establishment + Colors.RESET;
     }
 
-    public void printZooStructure(){
+    // Prints the structure of the zoo
+    public void printZooStructure() {
         System.out.println("├── " + name + ", " + Colors.COLORS[4] + establishment + Colors.RESET);
-        for (Enclosure enc : enclosureList){
+        for (Enclosure enc : enclosureList) {
             enc.printEnclosure();
         }
     }
 
-    public void addEnclosure(Enclosure enc){
-        if(!enclosureList.contains(enc)){
-            enclosureList.add(enc);
+    // Adds an enclosure to the zoo
+    public void addEnclosure(Enclosure enclosure) {
+        if (!enclosureList.contains(enclosure)) {
+            enclosureList.add(enclosure);
         }
     }
 
-    public void printFoodCost(){
+    // Calculates and prints the total food cost for the zoo
+    public void printFoodCost() {
         System.out.println();
         System.out.println(Colors.COLORS[4] + "***********************************************" + Colors.RESET);
         HashMap<Food, Double> foodRequired = new HashMap<>();
-        for (Enclosure enc : enclosureList){
+        for (Enclosure enc : enclosureList) {
             enc.collectFoodRequirement(foodRequired);
         }
 
-        //Berechnung mit der HashMap von Food Cost
+        // Calculate food costs
         double cost = 0;
         for (Food food : foodRequired.keySet()) {
-            System.out.printf(Colors.COLORS[4] + "*" + Colors.RESET + " %-12s : %3.0f %s / € per Unit: %4.0f €" + Colors.COLORS[4] + "  *\n" + Colors.RESET, food.getName(), cost, food.getUnit(), food.getPrice());
             double amount = foodRequired.get(food);
-            double price = food.getPrice() * amount;
-            cost += price;
+            cost += (food.getPrice() * amount);
+            System.out.printf(Colors.COLORS[4] + "*" + Colors.RESET + " %-12s : %3.0f %s / € per Unit: %4.0f €" + Colors.COLORS[4] + "  *\n" + Colors.RESET,
+                    food.getName(), amount, food.getUnit(), food.getPrice());
         }
-        System.out.printf(Colors.COLORS[4] + "*" + Colors.RESET + " Total costs for all required food: %5.0f €" + Colors.COLORS[4] + "  *\n" + Colors.RESET , cost );
+        System.out.printf(Colors.COLORS[4] + "*" + Colors.RESET + " Total costs for all required food: %5.0f €" + Colors.COLORS[4] + "  *\n" + Colors.RESET, cost);
         System.out.println(Colors.COLORS[4] + "***********************************************" + Colors.RESET);
+    }
+
+    // Starts the simulation for 10 days
+    public void startSimu() {
+        for (int day = 1; day <= 100; day++) {
+            System.out.println(Colors.COLORS[6] + "|- Tag " + day + " im Zoo. -|" + Colors.RESET);
+            for (Enclosure enc : enclosureList){
+                continue;
+            }
+            for (Zookeeper zk : zookeeperList) {
+                zk.performDailyTask();
+            }
+            System.out.println();
+        }
+    }
+
+    // Adds a zookeeper to the zoo
+    public void addZookeeper(Zookeeper zookeeper) {
+        if (!zookeeperList.contains(zookeeper)) {
+            zookeeperList.add(zookeeper);
+        }
     }
 }
