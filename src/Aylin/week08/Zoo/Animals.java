@@ -13,7 +13,7 @@ public class Animals {
     private double amount;
 
 
-    public Animals(String name, String species, int age, String gender, Food food, double amount){
+    public Animals(String name, String species, int age, String gender, String enclosure, Food food, double amount){
         this.name = name;
         this.species = species;
         this.age = age;
