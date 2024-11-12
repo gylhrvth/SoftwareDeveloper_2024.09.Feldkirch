@@ -21,9 +21,12 @@ public class Animal {
         System.out.printf("        Animal: %s %s (%s)\n", this, gender, species);
     }
 
+    public String getSpecies() {
+        return species;
+    }
+
     @Override
     public String toString() {
         return WildColors.getColorFromHSL(210, 1.0, 0.4) + name + WildColors.resetColor();
     }
-
 }

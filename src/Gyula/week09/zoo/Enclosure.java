@@ -3,15 +3,19 @@ package Gyula.week09.zoo;
 import Gyula.ConsoleTools;
 import Gyula.WildColors;
 
+import java.util.Random;
 import java.util.Vector;
 
 public class Enclosure {
+    private static Random random = new Random();
     private String name;
     private Vector<Animal> animalList;
+    private boolean hasProcessed;
 
     public Enclosure(String name){
         this.name = name;
         this.animalList = new Vector<>();
+        this.hasProcessed = false;
     }
 
     public String getName() {
@@ -36,6 +40,33 @@ public class Enclosure {
         System.out.printf("    %s\n", this);
         for (Animal ani: animalList){
             ani.printStructure();
+        }
+    }
+
+    public void resetProceeded(){
+        hasProcessed = false;
+    }
+
+    public void observeRandomAnimal(ZooKeeper zooKeeper){
+        Animal randomAnimal = animalList.get(random.nextInt(animalList.size()));
+        if (zooKeeper.getFavoriteSpecies().equals(randomAnimal.getSpecies())){
+            System.out.println(zooKeeper + " admires " + randomAnimal);
+        } else {
+            System.out.println(zooKeeper + " observes " + randomAnimal);
+        }
+    }
+
+    public void simulateDay(ZooKeeper zooKeeper){
+        if (!hasProcessed){
+            if (animalList.isEmpty()){
+                System.out.printf("%s founds no animals in %s\n", zooKeeper, this);
+            } else {
+                System.out.printf("%s feeds the animals in %s\n", zooKeeper, this);
+                observeRandomAnimal(zooKeeper);
+            }
+            hasProcessed = true;
+        } else {
+            System.out.printf("%s has no work in %s. He/She can move to the next\n", zooKeeper, this);
         }
     }
 
