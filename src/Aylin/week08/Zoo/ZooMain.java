@@ -98,10 +98,6 @@ public class ZooMain {
         liz.addTask(eAviaries);
         liz.addTask(eTerrariums);
 
-        //adding Zookeeper to visit and feed the animals
-//        bill.assignEnclosureAndFeed(eWildlife);
-//        bob.assignEnclosureAndFeed(eTerrariums);
-
         zoo.addZookeeper(bill);
         zoo.addZookeeper(bob);
         zoo.addZookeeper(liz);
@@ -109,8 +105,5 @@ public class ZooMain {
         zoo.printFoodCost();
 
         zoo.startSimu();
-
-
-
     }
 }

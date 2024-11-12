@@ -64,7 +64,7 @@ public class Zoo {
         for (int day = 1; day <= 100; day++) {
             System.out.println(Colors.COLORS[6] + "|- Tag " + day + " im Zoo. -|" + Colors.RESET);
             for (Enclosure enc : enclosureList){
-                continue;
+                enc.resetProcess();
             }
             for (Zookeeper zk : zookeeperList) {
                 zk.performDailyTask();

@@ -4,7 +4,6 @@ import Gyula.WildColors;
 import Sandro.Colors;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
@@ -42,10 +41,6 @@ public class Enclosure {
         return name + ", " + description + ", size: " + size + ", capacity: " + capacity;
     }
 
-    public Vector<Animals> getAnimalList() {
-        return animalList;
-    }
-
     // Prints the enclosure's details
     public void printEnclosure() {
         System.out.println("│   ├── " + name + ", " + description);
@@ -73,27 +68,24 @@ public class Enclosure {
         System.out.println(WildColors.getColorFromHSL(54, 1.0, 0.4) + zookeeper.getName() + WildColors.resetColor() + " observes " + randomAnimal.getName() + ".");
     }
 
+    public void resetProcess(){
+        processedToday = false;
+    }
+
     public void dailyTasks(Zookeeper zookeeper){
         if(random.nextInt(100) < 5){
             System.out.println(Colors.COLORS[1] + zookeeper.getName() + " forgot to visit the " + name + " enclosure." + Colors.RESET);
-            processedToday = false;
         }else{
             if (processedToday) {
                 System.out.println(name + " was visited today.");
-                return;
-            }else{
+            }else {
                 System.out.println(WildColors.getColorFromHSL(54, 1.0, 0.4) + zookeeper.getName() + WildColors.resetColor() + " visits the " + name + " enclosure.");
-                processedToday = false;
-            }
-            for (Animals animals : getAnimalList()) {
-                if(random.nextInt(100) < 5){
-                    System.out.println(Colors.COLORS[1] + "(SIDE NOTE: "  + zookeeper.getName()  + " forgot to feed " + animals.getName() + ")" + Colors.RESET);
-                }else{
-                    System.out.println(WildColors.getColorFromHSL(54, 1.0, 0.4) + zookeeper.getName() + WildColors.resetColor()+ " feeds " + animals.getName() + ".");
-                    processedToday = false;
+                processedToday = true;
+                for (Animals animals : animalList) {
+                    animals.feedAnimals(zookeeper);
                 }
+                observeRandomAnimal(zookeeper);
             }
-            observeRandomAnimal(zookeeper);
         }
     }
 }
