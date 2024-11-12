@@ -9,10 +9,19 @@ public class ZooMain {
         Enclosure eTerrariums = new Enclosure("Terrarium" , 180, 5, "Freshwater Lakes");
         Enclosure eAquarium = new Enclosure("Aquarium", 100, 65, "Kelp forest");
 
+        Food meat = new Food("Meat", "kg", 54);
+        Food hay = new Food("Hay", "kg", 10);
+        Food fruit = new Food("Fruit", "kg", 4);
+        Food fishFlakes = new Food("Fish Flakes", "kg", 23);
+
+        Zookeeper bill = new Zookeeper("Bill", "Feeding and caring for mammals and birds");
+        Zookeeper bob = new Zookeeper("Bob", "Managing reptiles and aquatic life");
+
+
         //Animals Wildlife
 
-        Animals mammalLemurJulien = new Animals("King Julien", "Lemur", 20, "Male");
-        Animals mammalLemurMaurice = new Animals("Maurice", "Lemur", 25, "Male");
+        Animals mammalLemurJulien = new Animals("King Julien", "Lemur", 20, "Male", fruit, 3);
+        Animals mammalLemurMaurice = new Animals("Maurice", "Lemur", 25, "Male", fruit, 4);
 //        Animals mammalLemurMort = new Animals("Mort", "Lemur", 18, "Male");
 //        Animals mammalElephant = new Animals("Henk", "Elephant", 23, "Male");
 //        Animals mammalElephant2 = new Animals("Jumbo", "Elephant", 5, "Male");
@@ -31,8 +40,8 @@ public class ZooMain {
 //        Animals wildlifePenguinRico = new Animals("Rico", "Penguin (Macaroni)", 6, "Male");
 
         //Animals Aviaries
-        Animals aviaryHornbill = new Animals("Bingo", "Hornbill", 5, "Male");
-        Animals aviaryEagle = new Animals("Mighty", "Bald Eagle", 15, "Male");
+        Animals aviaryHornbill = new Animals("Bingo", "Hornbill", 5, "Male", fruit, 6);
+        Animals aviaryEagle = new Animals("Mighty", "Bald Eagle", 15, "Male", fruit, 3);
 //        Animals aviaryFlamingo = new Animals("Flame", "Flamingo", 4, "Male");
 //        Animals aviaryPeacock = new Animals("Regal", "Peacock", 6, "Female");
 //        Animals aviaryGreyParrot = new Animals("Echo", "African Grey Parrot", 10, "Male");
@@ -43,15 +52,15 @@ public class ZooMain {
 //        Animals aviaryOwlet = new Animals("Whiskers", "Owlet", 2, "Female");
 
         //Animals Terrarium
-        Animals reptileAligator = new Animals("George", "Alligator", 32, "Male");
-        Animals reptileAligator2 = new Animals("Roxy", "Alligator", 24, "Female");
+        Animals reptileAligator = new Animals("George", "Alligator", 32, "Male", meat, 3);
+        Animals reptileAligator2 = new Animals("Roxy", "Alligator", 24, "Female", meat, 3);
 //        Animals reptileAligator3 = new Animals("Rex", "Alligator", 1, "Male");
 //        Animals reptileTurtle = new Animals("Donatello", "Turtle", 8, "Male");
 //        Animals reptileTurtle2 = new Animals("Slowpoke", "Turtle", 11, "Female");
 
         //Animals Aquarium
-        Animals aquariumAngelfish = new Animals("Angelina", "Angelfish", 4, "Female");
-        Animals aquariumGramma = new Animals("Flame", "Royal Gramma", 2, "Female");
+        Animals aquariumAngelfish = new Animals("Angelina", "Angelfish", 4, "Female", fishFlakes, 1);
+        Animals aquariumGramma = new Animals("Flame", "Royal Gramma", 2, "Female", fishFlakes, 1);
 //        Animals aquariumSurgeonfish = new Animals("Dory", "Blue Tang", 5, "Female");
 //        Animals aquariumClownfish = new Animals("Nemo", "Clownfish", 3, "Male");
 //        Animals aquariumMorayEel = new Animals("Slick", "Moray Eel", 7, "Male");
@@ -61,12 +70,12 @@ public class ZooMain {
 //        Animals aquariumJellyfish = new Animals("Bubbles", "Jellyfish", 3, "Female");
 //        Animals aquariumOctopus = new Animals("Inky", "Common Octopus", 4, "Male");
 
-
+        //adding Enclosures to the zoo
         zoo.addEnclosure(eWildlife);
         zoo.addEnclosure(eAviaries);
         zoo.addEnclosure(eTerrariums);
         zoo.addEnclosure(eAquarium);
-
+        //adding Animals to the enclosures
         eWildlife.addAnimals(mammalLemurJulien);
         eWildlife.addAnimals((mammalLemurMaurice));
         eAquarium.addAnimals(aquariumAngelfish);
@@ -75,13 +84,13 @@ public class ZooMain {
         eAviaries.addAnimals(aviaryHornbill);
         eTerrariums.addAnimals(reptileAligator);
         eTerrariums.addAnimals(reptileAligator2);
+        //adding Zookeeper to visit and feed the animals
+        bill.assignEnclosureAndFeed(eWildlife);
+        bob.assignEnclosureAndFeed(eTerrariums);
+        //Printing the Structure
+        zoo.printZooStructure();
+        zoo.printFoodCost();
 
-
-        zoo.printZooName();
-//        eAviaries.addEnclosure();
-//        eTerrariums.addEnclosure();
-//        eAquarium.addEnclosure();
-//        reptileAligator.getWildlifeAnimals();
 
     }
 }
