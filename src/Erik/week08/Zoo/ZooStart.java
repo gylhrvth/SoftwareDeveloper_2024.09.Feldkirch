@@ -3,8 +3,6 @@ package Erik.week08.Zoo;
 public class ZooStart {
     public static void main(String[] args) {
 
-        // Objekte erstellen
-
         // Zoo Objekt(e) erstellen
         Zoo zoo = new Zoo("Otter World", "Ottinistan", 2024);
 
@@ -13,47 +11,47 @@ public class ZooStart {
         Pfleger pflegerSelina = new Pfleger("Selina");
 
         // Gehege Objekte erstellen
-        Gehege ghFreiland = new Gehege("Freiland Wiese");
-        Gehege ghAquarium = new Gehege("Aquarium");
-        Gehege ghTerrarium = new Gehege("Terrarium");
+        Gehege freiland = new Gehege("Freiland Wiese");
+        Gehege aquarium = new Gehege("Aquarium");
+        Gehege terrarium = new Gehege("Terrarium");
 
         // Essen Objekte für Tiere erstellen
-        Essen Fleisch = new Essen("Kuhfleisch", 10, 100);
-        Essen Fish = new Essen("Forellen", 10, 100);
-        Essen Gras = new Essen("Gras", 10, 100);
-        Essen Pflanze = new Essen("Wasser Pflanze", 10, 100);
+        Essen fleisch = new Essen("Kuhfleisch", 10, 100);
+        Essen fish = new Essen("Forellen", 10, 100);
+        Essen gras = new Essen("Gras", 10, 100);
+        Essen pflanze = new Essen("Wasser Pflanze", 10, 100);
 
         // Tier Objekte erstellen
-        Tier tiOtter = new Tier("Otter", "Kishi", Fish, 20);
-        Tier tiSchaf = new Tier("Schaf", "Dinnerbone", Gras, 10);
-        Tier tiDelphin = new Tier("Delphin", "Rudolf", Fish, 50);
-        Tier tiKrokodil = new Tier("Krokodil", "Schnappi", Fleisch, 100);
-        Tier tiFish = new Tier("Fish", "Robin", Pflanze, 5);
+        Tier otter = new Tier("Otter", "Kishi", fish, 20);
+        Tier schaf = new Tier("Schaf", "Dinnerbone", gras, 10);
+        Tier delphin = new Tier("Delphin", "Rudolf", fish, 50);
+        Tier krokodil = new Tier("Krokodil", "Schnappi", fleisch, 100);
+        Tier fisch = new Tier("Fish", "Robin", pflanze, 5);
 
 
         // Methoden aufrufen
         // Gehege adden
-        zoo.addGehegeInList(ghFreiland);
-        zoo.addGehegeInList(ghAquarium);
-        zoo.addGehegeInList(ghTerrarium);
+        zoo.addGehegeInList(freiland);
+        zoo.addGehegeInList(aquarium);
+        zoo.addGehegeInList(terrarium);
 
         // Den Pflegern die Gehege zuweisen
-        pflegerTom.addTask(ghFreiland);
-        pflegerTom.addTask(ghAquarium);
-        pflegerSelina.addTask(ghTerrarium);
+        zoo.addPfleger(pflegerTom);
+        zoo.addPfleger(pflegerSelina);
+        pflegerTom.addTask(freiland);
+        pflegerTom.addTask(aquarium);
+        pflegerSelina.addTask(terrarium);
 
         // Tiere adden
-        ghAquarium.addTiereToTierList(tiOtter);
-        ghFreiland.addTiereToTierList(tiSchaf);
-        ghAquarium.addTiereToTierList(tiDelphin);
-        ghTerrarium.addTiereToTierList(tiKrokodil);
-        ghAquarium.addTiereToTierList(tiFish);
+        aquarium.addTiereToTierList(otter);
+        freiland.addTiereToTierList(schaf);
+        aquarium.addTiereToTierList(delphin);
+        terrarium.addTiereToTierList(krokodil);
+        aquarium.addTiereToTierList(fisch);
 
         // Zoo Structure mit Kosten und Simulation Printen
         zoo.printZooStructure();
         zoo.printFoodCost();
         zoo.startSimulation();
-
-
     }
 }
