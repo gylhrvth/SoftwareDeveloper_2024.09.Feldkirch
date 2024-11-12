@@ -1,5 +1,7 @@
 package Thiemo.week09.Zoo;
 
+import Sandro.Colors;
+
 public class ZooMain {
     public static void main(String[] args) {
 
@@ -66,7 +68,9 @@ public class ZooMain {
         zoo.printZoo();
         zoo.printFoodStats();
 
-        for (int day = 1; day < 8; day++) {
+
+        for (int day = 1; day < 3; day++) {
+            System.out.println("\n"+Colors.COLORS[3]+ "Daily Work Starts || Day:" + day + Colors.RESET+"\n");
             zoo.simulateDay(day);
             System.out.println();
         }

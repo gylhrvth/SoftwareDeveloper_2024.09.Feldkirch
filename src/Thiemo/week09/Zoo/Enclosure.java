@@ -70,8 +70,9 @@ public class Enclosure {
     public String getName() {
         return name;
     }
-    public void resetCleaningStatus(){
-        this.cleanedBy =  null;
+
+    public void resetCleaningStatus() {
+        this.cleanedBy = null;
     }
 
     public String getGotfeedby() {
@@ -82,9 +83,30 @@ public class Enclosure {
         this.gotfeedby = gotfeedby;
     }
 
-    public void resetFeedingStatus(){
+    public void resetFeedingStatus() {
         this.gotfeedby = null;
     }
+
+    public void simulateDayEnclosure(String name) {
+        if (getGotfeedby() == null) {
+            System.out.println(name + " feeds the animals in " + getName());
+            for (Animal animal : animalList) {
+                animal.simulateDayAnimalfeeding();
+                setGotfeedby(name);
+            }
+
+        } else {
+            System.out.println("The animals in "+ getName() + " got already fed by: " + getGotfeedby());
+        }
+
+        if (getCleanedBy() == null) {
+            System.out.println(name + " cleans " + getName());
+            setCleanedBy(name);
+        } else {
+            System.out.println(getName() + " got already cleaned by: " + getCleanedBy());
+        }
+    }
+
 
     @Override
     public String toString() {
@@ -94,5 +116,4 @@ public class Enclosure {
                 ", indoorOrOutdoor = " + indoorOrOutdoor;
 
     }
-
 }

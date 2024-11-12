@@ -73,16 +73,22 @@ public class Zoo {
     }
 
     public void simulateDay(int day) {
-        System.out.println("Day" + day);
+
+        for (Enclosure enc : enclosureList) {
+            if (day % 2 != 0) {
+                enc.resetCleaningStatus();
+            }
+            enc.resetFeedingStatus();
+        }
         for (Zookeeper keeper : keeperlist) {
             keeper.simulateDayKeeper(day);
         }
-        if (day % 7 == 0) {
-            System.out.println("\nThe Warzone opens at day " + day);
-            for (Enclosure enclosure : enclosureList) {
-                enclosure.simulateDayEnclosure(day);
-            }
-        }
+//        if (day % 7 == 0) {
+//            System.out.println("\nThe Warzone opens at day " + day);
+//            for (Enclosure enclosure : enclosureList) {
+//                enclosure.simulateDayEnclosure(day);
+//            }
+//        }
     }
 
     @Override

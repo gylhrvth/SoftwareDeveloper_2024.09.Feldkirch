@@ -3,6 +3,7 @@ package Thiemo.week09.Zoo;
 import Sandro.Colors;
 
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Random;
 
 public class Animal {
@@ -42,10 +43,25 @@ public class Animal {
         }
     }
     public void simulateDayAnimal(int day){
-
         System.out.println("Animal "+ name + " attacks ");
 
+    }
+    public void simulateDayAnimalfeeding(){
+        if (random.nextInt(100) < 10){
+//            this.HP = (HP -10);
+            System.out.println(Objects.requireNonNull("==>" +Colors.COLORS[1] + name + " didnt get food and is fucking angry" + Colors.RESET));
+//            System.out.println(name + HP + "HP");
+        }else {
+            System.out.println("==>" +Colors.COLORS[6] + name + " got fed and chills now" + Colors.RESET);
+        }
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
