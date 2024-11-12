@@ -34,7 +34,7 @@ public class Tier {
 
     // Methoden
     public void printTierStructure() {
-        System.out.printf("├—————————— %-10s │ %-10s │ %-15s │ %3d │\n", name, gattung, food.getName(), amountOfFood);
+        System.out.printf("│   │   ├── Tier:  %-10s │ %-10s │ %-15s │ %3d │\n", name, gattung, food.getName(), amountOfFood);
     }
 
     public void getEveryFood(HashMap<Essen, Integer> neededFood) {

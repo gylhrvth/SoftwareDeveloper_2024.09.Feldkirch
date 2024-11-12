@@ -33,10 +33,10 @@ public class Gehege {
 
     // Printet ob Gehege Empty ist, sonst leitet er weiter in Klasse Tiere
     public void printGehegeStructure() {
-        System.out.println("   ╠═════ " + name);
+        System.out.println("│   ├── Gehege: " + name);
 
         if (tierListe.isEmpty()) {
-            System.out.println("   ╠══════════ Empty");
+            System.out.println("│   │   ├── Tier: " + " (Leer) ");
         } else {
             for (Tier ti : tierListe) {
                 ti.printTierStructure();
