@@ -11,4 +11,15 @@ public class Food {
         this.unitPrice = unitPrice;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public int getUnitPrice() {
+        return unitPrice;
+    }
 }

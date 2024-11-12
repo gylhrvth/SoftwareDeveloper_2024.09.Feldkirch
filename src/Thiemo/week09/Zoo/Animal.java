@@ -2,7 +2,11 @@ package Thiemo.week09.Zoo;
 
 import Sandro.Colors;
 
+import java.util.HashMap;
+import java.util.Random;
+
 public class Animal {
+    private static Random random = new Random();
     private String name;
     private String genus;
     private String gender;
@@ -28,6 +32,19 @@ public class Animal {
 
     public void printAnimal() {
         System.out.println("│   │   ├── " + Colors.COLORS[1]+genus +Colors.RESET+ " " + name + ", " + gender + ", " + agegroup + ", Dangerlvl:" + dangerLevel + " HP:" + HP + " SP:" + SP);
+    }
+
+    public void collectFood(HashMap<Food,Double>foodrequiert){
+        if (foodrequiert.containsKey(food)){
+            foodrequiert.put(food,foodrequiert.get(food)+ amount);
+        } else {
+            foodrequiert.put(food,amount);
+        }
+    }
+    public void simulateDayAnimal(int day){
+
+        System.out.println("Animal "+ name + " attacks ");
+
 
     }
 
