@@ -13,7 +13,7 @@ public class Animals {
     private double amount;
 
 
-    public Animals(String name, String species, int age, String gender){
+    public Animals(String name, String species, int age, String gender, String enclosure, Food food, double amount){
         this.name = name;
         this.species = species;
         this.age = age;
@@ -21,6 +21,10 @@ public class Animals {
         this.enclosure = enclosure;
         this.food = food;
         this.amount = amount;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getEnclosure() {
@@ -33,5 +37,13 @@ public class Animals {
     @Override
     public String toString() {
         return species + ", named as: " + name + " (" + age + ")/ " + gender;
+    }
+
+    public void collectFoodRequirement(HashMap<Food, Double> foodRequired){
+        if (foodRequired.containsKey(food)){
+            foodRequired.put(food, foodRequired.get(food) + amount);
+        }else{
+            foodRequired.put(food, amount);
+        }
     }
 }
