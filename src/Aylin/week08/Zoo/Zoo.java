@@ -10,12 +10,14 @@ public class Zoo {
     // List of enclosures and zookeepers
     private Vector<Enclosure> enclosureList;
     private Vector<Zookeeper> zookeeperList;
+    private Vector<Veterinarian> vetList;
 
     public Zoo(String name, int establishment) {
         this.name = Colors.COLORS[5] + name + Colors.RESET;
         this.establishment = establishment;
         this.enclosureList = new Vector<>();
         this.zookeeperList = new Vector<>();
+        this.vetList = new Vector<>();
     }
 
     @Override
@@ -61,7 +63,7 @@ public class Zoo {
 
     // Starts the simulation for 10 days
     public void startSimu() {
-        for (int day = 1; day <= 100; day++) {
+        for (int day = 1; day <= 10; day++) {
             System.out.println(Colors.COLORS[6] + "|- Tag " + day + " im Zoo. -|" + Colors.RESET);
             for (Enclosure enc : enclosureList){
                 enc.resetProcess();
@@ -70,7 +72,7 @@ public class Zoo {
                 zk.performDailyTask();
             }
             for (Enclosure enc : enclosureList){
-                enc.animalsGettingAggressive();
+                enc.simulateFight();
             }
             System.out.println();
         }
@@ -80,6 +82,12 @@ public class Zoo {
     public void addZookeeper(Zookeeper zookeeper) {
         if (!zookeeperList.contains(zookeeper)) {
             zookeeperList.add(zookeeper);
+        }
+    }
+
+    public void addVet(Veterinarian veterinarian){
+        if(!vetList.contains(veterinarian)){
+            vetList.add(veterinarian);
         }
     }
 }
