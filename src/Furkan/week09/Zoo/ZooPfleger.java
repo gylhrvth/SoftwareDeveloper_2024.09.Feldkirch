@@ -29,36 +29,45 @@ public class ZooPfleger {
 
         for (Gehege gehege : gehegeListe) {
             if (bearbeiteteGehege.contains(gehege.getName())) {
-                System.out.println(name + " überspringt das Gehege: " + gehege.getName());
+                System.out.println(name + " kontrolliert das Gehege: " + gehege.getName());
             } else {
                 System.out.println(name + " füttert die Tiere im Gehege: " + gehege.getName());
                 for (Tier tier : gehege.getTierList()) {
-                    tier.simu();
+                    if (tier.getHungerStatus() >= tier.getHungerCycle()) {
+                        System.out.println(name + " hat das Tier " + tier.getName() + " gefüttert.");
+                        tier.simu();
+
+
+                    }
+
                 }
+
             }
+
 
             if (!gehege.getTierList().isEmpty()) {
                 Tier tierToObserve = gehege.getTierList().get(random.nextInt(gehege.getTierList().size()));
                 System.out.println(name + " beobachtet das Tier " + tierToObserve.getName() + " (" + tierToObserve.getGattung() + ") länger.");
 
-                if (tierToObserve.getGattung().equals(favTier)){
+
+                if (tierToObserve.getGattung().equals(favTier)) {
                     System.out.println(name + " bewundert das " + favTier + " im Gehege " + gehege.getName() + ".");
 
-                }
 
-                bearbeiteteGehege.add(gehege.getName());
+                }
             }
 
+            bearbeiteteGehege.add(gehege.getName());
 
 
-//            bearbeiteteGehege.add(gehege.getName());
+//
         }
 
 
     }
 
 
-    public String getFavTier(){
+    public String getFavTier() {
         return favTier;
     }
 

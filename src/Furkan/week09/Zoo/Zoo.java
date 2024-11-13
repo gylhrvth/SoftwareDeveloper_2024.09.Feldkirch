@@ -40,10 +40,23 @@ public class Zoo {
         System.out.println("Simulation start für " + days + " Tage...");
         for (int i = 1; i <= days; i++) {
             System.out.println(Colors.COLORS[3] + "Tag (" + i + ") beginnt:" + Colors.RESET);
+
+            for (Gehege gehege : gehegeListe){
+                gehege.simu();
+                for (Tier tier : gehege.getTierList()){
+                    tier.tagVergeht();
+                }
+
+            }
+
             for (ZooPfleger zooPfleger : pflegerListe) {
                 zooPfleger.workOnGehege();
             }
             System.out.println();
+        }
+
+        for (Gehege gehege : gehegeListe){
+            gehege.simulateFight();
         }
 
     }
