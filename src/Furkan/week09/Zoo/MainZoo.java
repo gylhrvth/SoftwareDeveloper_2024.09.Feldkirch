@@ -14,15 +14,15 @@ public class MainZoo {
 
 
 
-        Tier esel = new Tier("Esek" , "Esel" , hay , 3);
-        Tier pferd = new Tier("Asena" , "Pferd" , hay , 5);
-        Tier katze = new Tier("Garfield" , "Katze" , meat , 1);
-        Tier hund = new Tier("Memoli", "Hund" , meat , 3);
-        Tier papagei= new Tier("Orhan" ,"Papagei", fruit, 3);
-        Tier elefant = new Tier("Ayki", "Elefant" , fruit,  7);
-        Tier bear = new Tier("Yogi" , "Bär" , meat , 14);
-        Tier krokodile = new Tier("Mr.Crocodile","Krokodile" , meat , 7);
-        Tier giraffe = new Tier("Pipilangstrumpf" , "Giraffe" , fruit , 8);
+        Tier esel = new Tier("Esek" , "Esel" , hay , 3,2,200 , 30);
+        Tier pferd = new Tier("Asena" , "Pferd" , hay , 5,1,200,35);
+        Tier katze = new Tier("Garfield" , "Katze" , meat , 1,1,200,15);
+        Tier hund = new Tier("Memoli", "Hund" , meat , 3,1,200,40);
+        Tier papagei= new Tier("Orhan" ,"Papagei", fruit, 3,1,200,5);
+        Tier elefant = new Tier("Ayki", "Elefant" , fruit,  7,2,200,75);
+        Tier bear = new Tier("Yogi" , "Bär" , meat , 14,1,200,110);
+        Tier krokodile = new Tier("Mr.Crocodile","Krokodile" , meat , 7,2,200,100);
+        Tier giraffe = new Tier("Pipilangstrumpf" , "Giraffe" , fruit , 8,1,200,50);
 
         wald.addTier(pferd);
         hof.addTier(esel);
