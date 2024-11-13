@@ -29,9 +29,9 @@ public class Zoo {
         return result;
     }
 
-    public Animal searchAndCreateAnimal(String enclosureName, String animalName, String species, String gender){
+    public Animal searchAndCreateAnimal(String enclosureName, String animalName, String species, String gender, int maxHealth, int attack){
         Enclosure enc = searchAndCreateEnclosure(enclosureName);
-        return enc.searchAndCreateAnimal(animalName, species, gender);
+        return enc.searchAndCreateAnimal(animalName, species, gender, maxHealth, attack);
     }
 
     public ZooKeeper searchAndCreateZooKeeper(String name, String enclosureName, String favoriteSpecies){
@@ -72,5 +72,11 @@ public class Zoo {
         for (ZooKeeper zk: zookKeeperList){
             zk.simulateDay();
         }
+        for (Enclosure enc: enclosureList){
+            enc.simulateFight();
+        }
+
+        System.out.println();
+        printStructure();
     }
 }

@@ -6,20 +6,28 @@ public class ZooMain {
 
         tierpark.searchAndCreateZooKeeper("Thiemo", "Aquarium", "chicken");
         tierpark.searchAndCreateZooKeeper("Erik", "Savanna", "chicken");
-        tierpark.searchAndCreateZooKeeper("Erik", "Schmetterlinghaus", "chicken");
+        tierpark.searchAndCreateZooKeeper("Erik", "Giraffehaus", "chicken");
         tierpark.searchAndCreateZooKeeper("Aylin", "Aquarium", "chicken");
         tierpark.searchAndCreateZooKeeper("Aylin", "Savanna", "chicken");
 
 
-        tierpark.searchAndCreateAnimal("Savanna", "Nuggets", "chicken", "♂");
-        tierpark.searchAndCreateAnimal("Savanna", "Tatar", "beef","♂");
-        tierpark.searchAndCreateAnimal("Savanna", "Steak", "beef", "♀");
-        tierpark.searchAndCreateAnimal("Aquarium", "Nemo", "guppy", "♀");
+        tierpark.searchAndCreateAnimal("Savanna", "Nuggets", "chicken", "♂", 200, 10);
+        tierpark.searchAndCreateAnimal("Savanna", "Tatar", "beef","♂", 200, 100);
+        tierpark.searchAndCreateAnimal("Savanna", "Steak", "beef", "♀", 100, 5);
+        tierpark.searchAndCreateAnimal("Aquarium", "Nemo", "guppy", "♀", 10, 1);
+
+        tierpark.searchAndCreateAnimal("Giraffehaus", "George", "giraffe", "♂", 200, 100);
+        for (int i = 1; i <= 20; i++) {
+            tierpark.searchAndCreateAnimal("Giraffehaus", "Marta " + i, "mosquito", "♀", 1, 20);
+        }
+
 
         tierpark.printStructure();
+        System.out.println();
 
-        for (int day = 1; day <= 3; day++) {
+        for (int day = 1; day <= 10; day++) {
             tierpark.simulateDay(day);
+            System.out.println();
         }
     }
 }

@@ -22,7 +22,7 @@ public class Enclosure {
         return name;
     }
 
-    public Animal searchAndCreateAnimal(String name, String species, String gender){
+    public Animal searchAndCreateAnimal(String name, String species, String gender, int maxHealth, int attack){
         Animal result = null;
         for (Animal ani : animalList){
             if (result == null && ani.getName().equals(name)){
@@ -30,7 +30,7 @@ public class Enclosure {
             }
         }
         if (result == null){
-            result = new Animal(name, species, gender);
+            result = new Animal(name, species, gender, maxHealth, attack);
             animalList.add(result);
         }
         return result;
@@ -56,6 +56,25 @@ public class Enclosure {
         }
     }
 
+    public void simulateFight(){
+        System.out.println("There is some aggression in " + this);
+        for (Animal ani: animalList){
+            Animal victim = animalList.get(random.nextInt(animalList.size()));
+            ani.simulateFight(victim);
+        }
+        removeDeadAnimals();
+    }
+
+    private void removeDeadAnimals(){
+        for (int i = 0; i < animalList.size(); i++) {
+            if (!animalList.get(i).isAlive()){
+                System.out.println(animalList.get(i) + " has been removed from " + this + ".");
+                animalList.remove(i);
+                --i;
+            }
+        }
+    }
+
     public void simulateDay(ZooKeeper zooKeeper){
         if (!hasProcessed){
             if (animalList.isEmpty()){
@@ -66,7 +85,7 @@ public class Enclosure {
             }
             hasProcessed = true;
         } else {
-            System.out.printf("%s has no work in %s. He/She can move to the next\n", zooKeeper, this);
+            System.out.printf("%s has been processed. %s takes the next enclosure\n", this, zooKeeper);
         }
     }
 
