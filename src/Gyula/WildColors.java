@@ -13,6 +13,17 @@ public class WildColors {
         }
     }
 
+    public static String getColor(String colorHex) {
+        if (colorHex.length() == 7) {
+            int red = Integer.parseInt(colorHex.substring(1, 3), 16);
+            int green = Integer.parseInt(colorHex.substring(3, 5), 16);
+            int blue = Integer.parseInt(colorHex.substring(5, 7), 16);
+            return getColor(red, green, blue);
+        } else {
+            return resetColor();
+        }
+    }
+
     public static String getColor(int red, int green, int blue){
         if (red >= 0 && red < 256 && green >= 0 && green < 256 && blue >= 0 && blue < 256){
             return String.format("\u001B[38;2;%d;%d;%dm", red, green, blue);
