@@ -69,6 +69,9 @@ public class Zoo {
             for (Zookeeper zk : zookeeperList) {
                 zk.performDailyTask();
             }
+            for (Enclosure enc : enclosureList){
+                enc.animalsGettingAggressive();
+            }
             System.out.println();
         }
     }
