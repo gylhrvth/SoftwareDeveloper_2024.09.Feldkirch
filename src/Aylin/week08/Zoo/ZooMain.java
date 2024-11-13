@@ -24,11 +24,7 @@ public class ZooMain {
         Veterinarian Christina = new Veterinarian("Christina");
         Veterinarian George = new Veterinarian("George");
 
-
-
-
         //Animals Wildlife
-
         Animals mammalLemurJulien = new Animals("King Julien", "Lemur", 20, "Male", fruit, 3, 99,  24);
         Animals mammalLemurMaurice = new Animals("Maurice", "Lemur", 25, "Male", fruit, 4, 79,  22);
 //        Animals mammalLemurMort = new Animals("Mort", "Lemur", 18, "Male");
@@ -68,10 +64,10 @@ public class ZooMain {
 //        Animals reptileTurtle2 = new Animals("Slowpoke", "Turtle", 11, "Female");
 
         //Animals Aquarium
-        Animals aquariumAngelfish = new Animals("Angelina", "Angelfish", 4, "Female", fishFlakes, 1, 100,  2);
-        Animals aquariumGramma = new Animals("Flame", "Royal Gramma", 2, "Female", fishFlakes, 1, 100,  1);
-        Animals aquariumSurgeonfish = new Animals("Dory", "Blue Tang", 5, "Female", fishFlakes, 2, 100,  1);
-        Animals aquariumClownfish = new Animals("Nemo", "Clownfish", 3, "Male", fishFlakes, 1, 100,  1);
+        Animals aquariumAngelfish = new Animals("Angelina", "Angelfish", 4, "Female", fishFlakes, 1, 10,  2);
+        Animals aquariumGramma = new Animals("Flame", "Royal Gramma", 2, "Female", fishFlakes, 1, 10,  1);
+        Animals aquariumSurgeonfish = new Animals("Dory", "Blue Tang", 5, "Female", fishFlakes, 2, 10,  1);
+        Animals aquariumClownfish = new Animals("Nemo", "Clownfish", 3, "Male", fishFlakes, 1, 10,  1);
 //        Animals aquariumMorayEel = new Animals("Slick", "Moray Eel", 7, "Male");
 //        Animals aquariumLionfish = new Animals("Spike", "Lionfish", 6, "Male");
 //        Animals aquariumSeaTurtle = new Animals("Crush", "Green Sea Turtle", 50, "Male");
@@ -84,6 +80,7 @@ public class ZooMain {
         zoo.addEnclosure(eAviaries);
         zoo.addEnclosure(eTerrariums);
         zoo.addEnclosure(eAquarium);
+
         //adding Animals to the enclosures
         eWildlife.addAnimals(mammalLemurJulien);
         eWildlife.addAnimals((mammalLemurMaurice));
