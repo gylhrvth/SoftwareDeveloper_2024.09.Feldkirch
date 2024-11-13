@@ -25,5 +25,4 @@ public class Animal {
     public String toString() {
         return WildColors.getColorFromHSL(210, 1.0, 0.4) + name + WildColors.resetColor();
     }
-
 }
