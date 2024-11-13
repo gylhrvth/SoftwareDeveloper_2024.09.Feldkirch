@@ -1,5 +1,7 @@
 package Erik.week08.Zoo;
 
+import Sandro.Colors;
+
 public class ZooStart {
     public static void main(String[] args) {
 
@@ -7,8 +9,9 @@ public class ZooStart {
         Zoo zoo = new Zoo("Otter World", "Ottinistan", 2024);
 
         // Pfleger Objekte erstellen
-        Pfleger pflegerTom = new Pfleger("Tom");
-        Pfleger pflegerSelina = new Pfleger("Selina");
+        Pfleger pflegerTom = new Pfleger("Tom", "Schaf");
+        Pfleger pflegerSelina = new Pfleger("Selina", "Delphin");
+        Pfleger pflegerJack = new Pfleger("Jack", "Otter");
 
         // Gehege Objekte erstellen
         Gehege freiland = new Gehege("Freiland Wiese");
@@ -35,12 +38,18 @@ public class ZooStart {
         zoo.addGehegeInList(aquarium);
         zoo.addGehegeInList(terrarium);
 
-        // Den Pflegern die Gehege zuweisen
+
+        // Pfleger adden
         zoo.addPfleger(pflegerTom);
         zoo.addPfleger(pflegerSelina);
+        zoo.addPfleger(pflegerJack);
+
+
+        // Den Pflegern die Gehege zuweisen
         pflegerTom.addTask(freiland);
-        pflegerTom.addTask(aquarium);
         pflegerSelina.addTask(terrarium);
+        pflegerJack.addTask(aquarium);
+
 
         // Tiere adden
         aquarium.addTiereToTierList(otter);
@@ -49,9 +58,15 @@ public class ZooStart {
         terrarium.addTiereToTierList(krokodil);
         aquarium.addTiereToTierList(fisch);
 
+
         // Zoo Structure mit Kosten und Simulation Printen
         zoo.printZooStructure();
         zoo.printFoodCost();
-        zoo.startSimulation();
+
+        System.out.println(Colors.COLORS[3] + "Simulation des Zoo's wird gestartet: ..." + Colors.RESET);
+        for (int tag = 1; tag <= 3; tag++) {
+            System.out.println(Colors.COLORS[1] + "Tag: >> " + tag + " <<" + Colors.RESET);
+            zoo.startTagesSimulation();
+        }
     }
 }
