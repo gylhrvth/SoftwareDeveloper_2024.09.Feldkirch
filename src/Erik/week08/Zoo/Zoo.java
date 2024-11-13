@@ -3,17 +3,18 @@ package Erik.week08.Zoo;
 import Sandro.Colors;
 
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Vector;
 
 public class Zoo {
-
+    public Random ran = new Random();
     // Attribute
     private String name;
     private String place;
     private int foundation;
     private Vector<Gehege> gehegeListe;
     private Vector<Pfleger> pflegerListe;
-
+    private int workDone;
 
     // Konstruktor
     public Zoo(String name, String place, int foundation) {
@@ -22,6 +23,7 @@ public class Zoo {
         this.foundation = foundation;
         this.gehegeListe = new Vector<>();
         this.pflegerListe = new Vector<>();
+        this.workDone = -1;
     }
 
 
@@ -37,6 +39,12 @@ public class Zoo {
     public void addGehegeInList(Gehege gh) {
         if (!gehegeListe.contains(gh)) {
             gehegeListe.add(gh);
+        }
+    }
+
+    public void addPfleger(Pfleger pf) {
+        if (!pflegerListe.contains(pf)) {
+            pflegerListe.add(pf);
         }
     }
 
@@ -60,36 +68,32 @@ public class Zoo {
         System.out.println("─".repeat(80));
     }
 
-    // Zoo printent seine Infos und ruft gleichzeitig die Gehege Print Funktion auf
     public void printZooStructure() {
+        System.out.println("─".repeat(80));
         System.out.println("├── Zoo: " + name + " / " + place + " / " + foundation);
         for (Gehege gh : gehegeListe) {
             gh.printGehegeStructure();
         }
         System.out.println("─".repeat(80));
         System.out.println("Zoo Pfleger:");
-        for (Pfleger pf : pflegerListe){
+        for (Pfleger pf : pflegerListe) {
             pf.printStructure();
         }
         System.out.println("─".repeat(80));
     }
 
-    // Simulation von dem Zoo
-    public void startSimulation() {
-        System.out.println(Colors.COLORS[3] + "Simulation des Zoo's wird gestartet: ..." + Colors.RESET);
-        for (int i = 0; i < 7; i++) {
-            System.out.println(Colors.COLORS[1] + "Tag: >> " + i + " <<" + Colors.RESET);
-            for (Gehege gh : gehegeListe) {
-                gh.simulationStart();           // Bei jedem Gehege in der Gehege Liste wird die Simulation gestartet
-            }
-        }
-    }
 
-    // Pfleger adden!!!!!!
-    public void addPfleger(Pfleger pf){
-        if (!pflegerListe.contains(pf)) {
-            pflegerListe.add(pf);
+    public void startTagesSimulation() {
+        // Reset Gehege Status
+        for (Gehege gh : gehegeListe){
+            gh.resetGehegeStatus();
         }
-    }
+        System.out.println(Colors.COLORS[3] + ">> Pfleger starten mit ihrer Arbeit. <<" + Colors.RESET);
+        // Pfleger start
+        for (Pfleger pf : pflegerListe) {
+            pf.startTagesSimulation();
+        }
+        System.out.println("─".repeat(80));
 
+    }
 }

@@ -34,7 +34,7 @@ public class Zoo {
         return enc.searchAndCreateAnimal(animalName, species, gender);
     }
 
-    public ZooKeeper searchAndCreateZooKeeper(String name, String enclosureName){
+    public ZooKeeper searchAndCreateZooKeeper(String name, String enclosureName, String favoriteSpecies){
         ZooKeeper result = null;
         for (ZooKeeper zk : zookKeeperList){
             if (result == null && zk.getName().equals(name)){
@@ -42,7 +42,7 @@ public class Zoo {
             }
         }
         if (result == null){
-            result = new ZooKeeper(name);
+            result = new ZooKeeper(name, favoriteSpecies);
             zookKeeperList.add(result);
         }
         Enclosure enc = searchAndCreateEnclosure(enclosureName);
@@ -60,6 +60,17 @@ public class Zoo {
         System.out.println("Enclosures:");
         for (Enclosure enc : enclosureList){
             enc.printStructure();
+        }
+    }
+
+
+    public void simulateDay(int day){
+        System.out.println("Day " + day + " starts...");
+        for (Enclosure enc: enclosureList){
+            enc.resetProceeded();
+        }
+        for (ZooKeeper zk: zookKeeperList){
+            zk.simulateDay();
         }
     }
 }
