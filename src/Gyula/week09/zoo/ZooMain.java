@@ -1,5 +1,7 @@
 package Gyula.week09.zoo;
 
+import Gyula.WildColors;
+
 public class ZooMain {
     public static void main(String[] args) {
         Zoo tierpark = new Zoo("Tierpark Feldkirch", 1978);
@@ -18,7 +20,7 @@ public class ZooMain {
 
         tierpark.searchAndCreateAnimal("Giraffehaus", "George", "giraffe", "♂", 200, 100);
         for (int i = 1; i <= 20; i++) {
-            tierpark.searchAndCreateAnimal("Giraffehaus", "Marta " + i, "mosquito", "♀", 1, 5);
+            tierpark.searchAndCreateAnimal("Giraffehaus", "Marta " + String.format("%03d", i), "mosquito", "♀", (i ==7?5:1), 5);
         }
 
 
@@ -29,5 +31,7 @@ public class ZooMain {
             tierpark.simulateDay(day);
             System.out.println();
         }
+
+        System.out.println(WildColors.getColor("#EF1177") + "Game Over" + WildColors.resetColor());
     }
 }

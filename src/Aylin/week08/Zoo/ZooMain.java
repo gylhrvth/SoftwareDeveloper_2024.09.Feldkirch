@@ -18,11 +18,19 @@ public class ZooMain {
         Zookeeper bob = new Zookeeper("Bob", "Clownfish");
         Zookeeper liz = new Zookeeper("Liz", "");
 
+        Veterinarian Shepherd = new Veterinarian("Derek");
+        Veterinarian Mario = new Veterinarian("Mario");
+        Veterinarian ELiza = new Veterinarian("Eliza");
+        Veterinarian Christina = new Veterinarian("Christina");
+        Veterinarian George = new Veterinarian("George");
+
+
+
 
         //Animals Wildlife
 
-        Animals mammalLemurJulien = new Animals("King Julien", "Lemur", 20, "Male", fruit, 3, 99, 100, 24);
-        Animals mammalLemurMaurice = new Animals("Maurice", "Lemur", 25, "Male", fruit, 4, 79, 100, 22);
+        Animals mammalLemurJulien = new Animals("King Julien", "Lemur", 20, "Male", fruit, 3, 99,  24);
+        Animals mammalLemurMaurice = new Animals("Maurice", "Lemur", 25, "Male", fruit, 4, 79,  22);
 //        Animals mammalLemurMort = new Animals("Mort", "Lemur", 18, "Male");
 //        Animals mammalElephant = new Animals("Henk", "Elephant", 23, "Male");
 //        Animals mammalElephant2 = new Animals("Jumbo", "Elephant", 5, "Male");
@@ -41,8 +49,8 @@ public class ZooMain {
 //        Animals wildlifePenguinRico = new Animals("Rico", "Penguin (Macaroni)", 6, "Male");
 
         //Animals Aviaries
-        Animals aviaryHornbill = new Animals("Bingo", "Hornbill", 5, "Male", fruit, 6, 100, 100, 40);
-        Animals aviaryEagle = new Animals("Mighty", "Bald Eagle", 15, "Male", fruit, 3, 89, 100, 18);
+        Animals aviaryHornbill = new Animals("Bingo", "Hornbill", 5, "Male", fruit, 6, 100,  40);
+        Animals aviaryEagle = new Animals("Mighty", "Bald Eagle", 15, "Male", fruit, 3, 89,  18);
 //        Animals aviaryFlamingo = new Animals("Flame", "Flamingo", 4, "Male");
 //        Animals aviaryPeacock = new Animals("Regal", "Peacock", 6, "Female");
 //        Animals aviaryGreyParrot = new Animals("Echo", "African Grey Parrot", 10, "Male");
@@ -53,17 +61,17 @@ public class ZooMain {
 //        Animals aviaryOwlet = new Animals("Whiskers", "Owlet", 2, "Female");
 
         //Animals Terrarium
-        Animals reptileAligator = new Animals("George", "Alligator", 32, "Male", meat, 3, 80, 100, 35);
-        Animals reptileAligator2 = new Animals("Roxy", "Alligator", 24, "Female", meat, 3, 92, 100, 35);
+        Animals reptileAligator = new Animals("George", "Alligator", 32, "Male", meat, 3, 80,  35);
+        Animals reptileAligator2 = new Animals("Roxy", "Alligator", 24, "Female", meat, 3, 92,  35);
 //        Animals reptileAligator3 = new Animals("Rex", "Alligator", 1, "Male");
 //        Animals reptileTurtle = new Animals("Donatello", "Turtle", 8, "Male");
 //        Animals reptileTurtle2 = new Animals("Slowpoke", "Turtle", 11, "Female");
 
         //Animals Aquarium
-        Animals aquariumAngelfish = new Animals("Angelina", "Angelfish", 4, "Female", fishFlakes, 1, 100, 100, 2);
-        Animals aquariumGramma = new Animals("Flame", "Royal Gramma", 2, "Female", fishFlakes, 1, 100, 100, 1);
-        Animals aquariumSurgeonfish = new Animals("Dory", "Blue Tang", 5, "Female", fishFlakes, 2, 100, 100, 1);
-        Animals aquariumClownfish = new Animals("Nemo", "Clownfish", 3, "Male", fishFlakes, 1, 100, 100, 1);
+        Animals aquariumAngelfish = new Animals("Angelina", "Angelfish", 4, "Female", fishFlakes, 1, 100,  2);
+        Animals aquariumGramma = new Animals("Flame", "Royal Gramma", 2, "Female", fishFlakes, 1, 100,  1);
+        Animals aquariumSurgeonfish = new Animals("Dory", "Blue Tang", 5, "Female", fishFlakes, 2, 100,  1);
+        Animals aquariumClownfish = new Animals("Nemo", "Clownfish", 3, "Male", fishFlakes, 1, 100,  1);
 //        Animals aquariumMorayEel = new Animals("Slick", "Moray Eel", 7, "Male");
 //        Animals aquariumLionfish = new Animals("Spike", "Lionfish", 6, "Male");
 //        Animals aquariumSeaTurtle = new Animals("Crush", "Green Sea Turtle", 50, "Male");
@@ -101,6 +109,11 @@ public class ZooMain {
         zoo.addZookeeper(bill);
         zoo.addZookeeper(bob);
         zoo.addZookeeper(liz);
+
+        zoo.addVet(Shepherd);
+        zoo.addVet(Christina);
+        zoo.addVet(George);
+        zoo.addVet(ELiza);
 
         zoo.printFoodCost();
 
