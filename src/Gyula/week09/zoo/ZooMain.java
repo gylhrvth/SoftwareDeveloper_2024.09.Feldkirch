@@ -18,7 +18,7 @@ public class ZooMain {
 
         tierpark.searchAndCreateAnimal("Giraffehaus", "George", "giraffe", "♂", 200, 100);
         for (int i = 1; i <= 20; i++) {
-            tierpark.searchAndCreateAnimal("Giraffehaus", "Marta " + i, "mosquito", "♀", 1, 20);
+            tierpark.searchAndCreateAnimal("Giraffehaus", "Marta " + i, "mosquito", "♀", 1, 5);
         }
 
 

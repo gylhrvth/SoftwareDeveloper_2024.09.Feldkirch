@@ -59,8 +59,16 @@ public class Enclosure {
     public void simulateFight(){
         System.out.println("There is some aggression in " + this);
         for (Animal ani: animalList){
-            Animal victim = animalList.get(random.nextInt(animalList.size()));
-            ani.simulateFight(victim);
+            Vector<Animal> possibleVictims = new Vector<>();
+            for (Animal testAnimal: animalList){
+                if (!ani.getSpecies().equals(testAnimal.getSpecies())){
+                    possibleVictims.add(testAnimal);
+                }
+            }
+            if (!possibleVictims.isEmpty()){
+                Animal victim = possibleVictims.get(random.nextInt(possibleVictims.size()));
+                ani.simulateFight(victim);
+            }
         }
         removeDeadAnimals();
     }

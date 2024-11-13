@@ -37,7 +37,6 @@ public class Animal {
     public void simulateFight(Animal victim){
         if (
                 (random.nextInt(100) < 40) &&
-                (!this.name.equals(victim.name)) &&
                 this.isAlive() &&
                 victim.isAlive()) {
             victim.health -= this.attack;
@@ -46,10 +45,6 @@ public class Animal {
                 System.out.println(" " + victim + " has " + victim.health + " HP left.");
             } else {
                 System.out.println(" " + victim + " RIP.");
-            }
-            if (victim.species.equals("giraffe")){
-                this.health -= this.attack;
-                System.out.println(this + " is get poisoned.");
             }
         }
     }
