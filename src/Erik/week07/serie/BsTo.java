@@ -29,6 +29,16 @@ public class BsTo {
         this.autors = autors;
     }
 
+    // Getter - Setter
+
+    public Person getProduzent(Person produzent) {
+        return produzent;
+    }
+
+    public Person getRegisseur(Person regisseur) {
+        return regisseur;
+    }
+
     // Methoden
     @Override
     public String toString() {
@@ -52,15 +62,6 @@ public class BsTo {
                 "\nProduzent: >> " + produzentName +
                 "\nRegisseur: >> " + regisseurName +
                 "\nAutor: >> " + autors;
-    }
-
-
-    public Person getProduzent(Person produzent) {
-        return produzent;
-    }
-
-    public Person getRegisseur(Person regisseur) {
-        return regisseur;
     }
 
 
@@ -88,6 +89,5 @@ public class BsTo {
         System.out.println(Colors.COLORS[1] + "Regisseur " + getProduzent(regisseur) + " wurde rausgeschmissen! Serie ist fertig.\n" + Colors.RESET);
         return true;
     }
-
 
 }
