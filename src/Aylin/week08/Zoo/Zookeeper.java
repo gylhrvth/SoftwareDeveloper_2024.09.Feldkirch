@@ -8,12 +8,12 @@ public class Zookeeper {
     public static Random random = new Random();
 
     private String name;
-    private String favAnimal;
+    private String favSpepcies;
     private Vector<Enclosure> taskList;
 
-    public Zookeeper(String name, String favAnimal) {
+    public Zookeeper(String name, String favSpepcies) {
         this.name = name;
-        this.favAnimal = favAnimal;
+        this.favSpepcies = favSpepcies;
         this.taskList = new Vector<>();
     }
 
@@ -21,8 +21,8 @@ public class Zookeeper {
         return name;
     }
 
-    public String getFavAnimal() {
-        return favAnimal;
+    public String getFavSpecies() {
+        return favSpepcies;
     }
 
     public void addTask(Enclosure task) {
