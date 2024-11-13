@@ -18,19 +18,19 @@ public class ZooMain {
         Food vegetables = new Food("vegetables", "kg", 2);
         Food trash = new Food("Garbage", "kg", 0);
 
-        Animal croc = new Animal("Crocodile", "Kroko", "male", "Adult", 7, 100, 100, meat, 10);
-        Animal tiger = new Animal("Tiger", "Kahn", "male", "Adult", 9, 100, 100, meat, 10);
-        Animal chicken = new Animal("Chicken", "Nugget", "male", "child", 1, 10, 10, fruit, 1);
-        Animal chicken2 = new Animal("Chicken", "Nugget2", "male", "child", 1, 10, 10, fruit, 1);
-        Animal chickenKing = new Animal("Chicken", "King", "male", "adult", 1, 15, 15, fruit, 2);
-        Animal chickenSlave = new Animal("Chicken", "Slave", "male", ",adult", 1, 1, 1, trash, 0.5);
-        Animal chickenQueen = new Animal("Chicken", "Queen", "female", "adult", 2, 10, 10, fruit, 2);
-        Animal rabbit = new Animal("Rabbit", "Superbit", "male", "adult", 0, 1000, 1000, vegetables, 5);
-        Animal pig = new Animal("Pig", "Fatty", "male", "adult", 4, 50, 50, trash, 10);
+        Animal croc = new Animal("Crocodile", "Kroko", "male", "Adult", 7, 1000, 1000,99, meat, 10);
+        Animal tiger = new Animal("Tiger", "Kahn", "male", "Adult", 9, 1000, 1000,99, meat, 10);
+        Animal chicken = new Animal("Chicken", "Nugget", "male", "child", 1, 100, 100,10, fruit, 1);
+        Animal chicken2 = new Animal("Chicken", "Nugget2", "male", "child", 1, 100, 100,10, fruit, 1);
+        Animal chickenKing = new Animal("Chicken", "King", "male", "adult", 1, 150, 150,15, fruit, 2);
+        Animal chickenSlave = new Animal("Chicken", "Slave", "male", ",adult", 1, 11, 11,50, trash, 0.5);
+        Animal chickenQueen = new Animal("Chicken", "Queen", "female", "adult", 2, 100,100, 10, fruit, 2);
+        Animal rabbit = new Animal("Rabbit", "Superbit", "male", "adult", 0, 1000,1000, 1000, vegetables, 5);
+        Animal pig = new Animal("Pig", "Fatty", "male", "adult", 4, 500,500, 50, trash, 10);
 
-        Zookeeper keeper1 = new Zookeeper("Mike", "Male", 25, 100, 100, 2);
-        Zookeeper keeper2 = new Zookeeper("Dan", "Male", 40, 80, 50, 2);
-        Zookeeper keeper3 = new Zookeeper("Lisa", "Female", 30, 100, 70, 1);
+        Zookeeper keeper1 = new Zookeeper("Mike", "Male", 25, 100, 100, 2,"Kahn");
+        Zookeeper keeper2 = new Zookeeper("Dan", "Male", 40, 80, 50, 2,"Chicken");
+        Zookeeper keeper3 = new Zookeeper("Lisa", "Female", 30, 100, 70, 1,"Superbit");
 
 
         zoo.addEnclosure(ried);
@@ -59,17 +59,17 @@ public class ZooMain {
         keeper1.addEnclosureTasks(ried);
         keeper1.addEnclosureTasks(alpMeadow);
         keeper1.addEnclosureTasks(terrarium);
-        keeper2.addEnclosureTasks(alpMeadow);
+        keeper2.addEnclosureTasks(ried);
         keeper2.addEnclosureTasks(meadow);
         keeper3.addEnclosureTasks(aquararium);
-        keeper3.addEnclosureTasks(terrarium);
+        keeper3.addEnclosureTasks(alpMeadow);
 
 
         zoo.printZoo();
         zoo.printFoodStats();
 
 
-        for (int day = 1; day < 3; day++) {
+        for (int day = 1; day < 100; day++) {
             System.out.println("\n"+Colors.COLORS[3]+ "Daily Work Starts || Day:" + day + Colors.RESET+"\n");
             zoo.simulateDay(day);
             System.out.println();

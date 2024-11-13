@@ -14,46 +14,94 @@ public class Animal {
     private String agegroup;
     private int dangerLevel;
     private int HP;
+    private int MaxHP;
     private int SP;
     private Food food;
     private double amount;
 
 
-    public Animal(String genus, String name, String gender, String agegroup, int dangerLevel, int HP, int SP, Food food, double amount) {
+    public Animal(String genus, String name, String gender, String agegroup, int dangerLevel, int HP, int MaxHP, int SP, Food food, double amount) {
         this.name = name;
         this.genus = genus;
         this.gender = gender;
         this.agegroup = agegroup;
         this.dangerLevel = dangerLevel;
         this.HP = HP;
+        this.MaxHP = MaxHP;
         this.SP = SP;
         this.food = food;
         this.amount = amount;
     }
 
     public void printAnimal() {
-        System.out.println("│   │   ├── " + Colors.COLORS[1]+genus +Colors.RESET+ " " + name + ", " + gender + ", " + agegroup + ", Dangerlvl:" + dangerLevel + " HP:" + HP + " SP:" + SP);
+        System.out.println("│   │   ├── " + Colors.COLORS[1] + genus + Colors.RESET + " " + name + ", " + gender + ", " + agegroup + ", Dangerlvl:" + dangerLevel + " HP:" + HP + " SP:" + SP);
     }
 
-    public void collectFood(HashMap<Food,Double>foodrequiert){
-        if (foodrequiert.containsKey(food)){
-            foodrequiert.put(food,foodrequiert.get(food)+ amount);
+    public static Random getRandom() {
+        return random;
+    }
+
+    public static void setRandom(Random random) {
+        Animal.random = random;
+    }
+
+    public int getHP() {
+        return HP;
+    }
+
+    public void setHP(int HP) {
+        this.HP = HP;
+    }
+
+    public int getSP() {
+        return SP;
+    }
+
+    public void setSP(int SP) {
+        this.SP = SP;
+    }
+
+    public int getMaxHP() {
+        return MaxHP;
+    }
+
+    public void setMaxHP(int maxHP) {
+        MaxHP = maxHP;
+    }
+
+    public void collectFood(HashMap<Food, Double> foodrequiert) {
+        if (foodrequiert.containsKey(food)) {
+            foodrequiert.put(food, foodrequiert.get(food) + amount);
         } else {
-            foodrequiert.put(food,amount);
+            foodrequiert.put(food, amount);
         }
     }
-    public void simulateDayAnimal(int day){
-        System.out.println("Animal "+ name + " attacks ");
 
-    }
-    public void simulateDayAnimalfeeding(){
-        if (random.nextInt(100) < 10){
-//            this.HP = (HP -10);
-            System.out.println(Objects.requireNonNull("==>" +Colors.COLORS[1] + name + " didnt get food and is fucking angry" + Colors.RESET));
-//            System.out.println(name + HP + "HP");
-        }else {
-            System.out.println("==>" +Colors.COLORS[6] + name + " got fed and chills now" + Colors.RESET);
+
+
+    public void simulatefights(Animal animal, Animal randomanimal) {
+
+        this.HP = HP - this.SP;
+        if (HP <= 0) {
+            System.out.println(randomanimal.getName() + " died");
+        } else {
+            System.out.println(randomanimal.getName() + " looses " + animal.getSP() + " HP :" + HP + "/" + MaxHP + "HP");
         }
+    }
+
+
+    public void simulateDayAnimalfeeding() {
+        if (random.nextInt(100) < 10) {
+//            this.HP = HP - 10;
+            System.out.println(("==>" + Colors.COLORS[1] + name + " didnt get food and is angry" + Colors.RESET));
+            System.out.println(name + " " + HP + "/" + MaxHP + "HP");
+        } else {
+            System.out.println("==>" + Colors.COLORS[6] + name + " got fed and chills now" + Colors.RESET);
+        }
+    }
+
+    public String getGenus() {
+        return genus;
     }
 
     public String getName() {
