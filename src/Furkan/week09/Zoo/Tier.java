@@ -25,7 +25,7 @@ public class Tier {
     }
 
     public void simu(){
-        System.out.println("Was macht das Tier--> " + name);
+        System.out.println("Was macht das Tier--> " + name + "");
     }
 
     public void collectFoodRequirement(HashMap<Food,Double> foodRquiert){

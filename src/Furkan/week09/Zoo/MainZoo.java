@@ -3,10 +3,10 @@ package Furkan.week09.Zoo;
 public class MainZoo {
     public static void main(String[] args) {
         Zoo zoo = new Zoo("Muntafuner Zoo" , 2022);
-        Gehege wald = new Gehege("Wald"," im freien");
-        Gehege safari = new Gehege("Safari" , " grün");
-        Gehege hof = new Gehege("Hof", " Bauernhof");
-        Gehege aquarium = new Gehege("Aquarium" , " Süßwasser");
+        Gehege wald = new Gehege("Wald");
+        Gehege safari = new Gehege("Safari" );
+        Gehege hof = new Gehege("Hof");
+        Gehege aquarium = new Gehege("Aquarium" );
 
         Food hay = new Food("Heu" , "kg" , 14);
         Food meat = new Food("Fleisch" , "kg" , 46);
@@ -23,10 +23,6 @@ public class MainZoo {
         Tier bear = new Tier("Yogi" , "Bär" , meat , 14);
         Tier krokodile = new Tier("Mr.Crocodile","Krokodile" , meat , 7);
         Tier giraffe = new Tier("Pipilangstrumpf" , "Giraffe" , fruit , 8);
-
-        ZooPfleger zooPfleger = new ZooPfleger("Coban Aykut" , 31);
-
-
 
         wald.addTier(pferd);
         hof.addTier(esel);
@@ -45,13 +41,20 @@ public class MainZoo {
         zoo.addGehege(hof);
         zoo.addGehege(aquarium);
 
-        zoo.addPfleger(zooPfleger);
+
+        zoo.searchAndCreateZooKeeper("Coban Aykut", "Wald");
+        zoo.searchAndCreateZooKeeper("Göki", "Safari");
+        zoo.searchAndCreateZooKeeper("Herbert" , "Hof");
+        zoo.searchAndCreateZooKeeper("Herman" , "Aquarium");
+
+
+
 
 
 
         zoo.printZoo();
         zoo.printFoodCost();
-        zoo.startSimu();
+        zoo.startSimu(7);
 
 
 

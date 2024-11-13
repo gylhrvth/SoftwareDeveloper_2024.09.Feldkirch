@@ -1,5 +1,7 @@
 package Erik.week08.Zoo;
 
+import Sandro.Colors;
+
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -32,6 +34,7 @@ public class Tier {
         return gattung;
     }
 
+
     // Methoden
     public void printTierStructure() {
         System.out.printf("│   │   ├── Tier:  %-10s │ %-10s │ %-15s │ %3d │\n", name, gattung, food.getName(), amountOfFood);
@@ -47,7 +50,11 @@ public class Tier {
 
     }
 
-    public void simulationStart(){
-        System.out.println("Tier: " + getGattung() + " mit dem Namen " + getName() + " chillt gerade sein Leben.");
+    public void giveTierEssen(Pfleger pfleger){
+        System.out.println(Colors.COLORS[6] + pfleger.getName() + Colors.RESET + " füttert die Tiere.");
+    }
+
+    public void startTagesSimulation(){
+        System.out.println(getName() + " chillt sein Leben.");
     }
 }
