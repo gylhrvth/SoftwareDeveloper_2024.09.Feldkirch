@@ -3,7 +3,6 @@ package Thiemo.week09.Zoo;
 import Sandro.Colors;
 
 import java.util.HashMap;
-import java.util.Objects;
 import java.util.Random;
 
 public class Animal {
@@ -77,18 +76,28 @@ public class Animal {
         }
     }
 
-
-
-    public void simulatefights(Animal animal, Animal randomanimal) {
-
-        this.HP = HP - this.SP;
-        if (HP <= 0) {
-            System.out.println(randomanimal.getName() + " died");
-        } else {
-            System.out.println(randomanimal.getName() + " looses " + animal.getSP() + " HP :" + HP + "/" + MaxHP + "HP");
-        }
+    public void simulateHealing(Animal randomanimal, Vet vet) {
+        int heal = 100;
+        int afterheal = randomanimal.HP + heal;
+        System.out.println(randomanimal.getName() + " got healed by " + vet.getName() + " ==> " + heal + " + " + randomanimal.HP + " = " + afterheal + "/" + randomanimal.MaxHP);
     }
 
+
+    public void simulateFights(Animal animal, Animal randomanimal) {
+
+        randomanimal.HP = randomanimal.HP - animal.SP;
+        System.out.println(randomanimal.getName() + " - " + animal.getSP() + " HP = " + randomanimal.HP + "/" + randomanimal.MaxHP + "HP");
+        if (randomanimal.HP <= 0) {
+            System.out.println(randomanimal.getName() + " died");
+        }
+//        else {
+//            System.out.println(randomanimal.getName() + " looses " + animal.getSP() + " HP :" + randomanimal.HP + "/" + randomanimal.MaxHP + "HP");
+//        }
+    }
+
+    public String getGender() {
+        return gender;
+    }
 
     public void simulateDayAnimalfeeding() {
         if (random.nextInt(100) < 10) {
@@ -122,5 +131,7 @@ public class Animal {
                 ", Stamina=" + SP +
                 '}';
     }
+
+
 }
 

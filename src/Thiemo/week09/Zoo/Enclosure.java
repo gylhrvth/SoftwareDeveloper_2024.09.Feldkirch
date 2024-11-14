@@ -12,6 +12,7 @@ public class Enclosure {
     private int maxCapacityAnimals;
     private String indoorOrOutdoor;
     private Vector<Animal> animalList;
+    private Vector<Animal> deadAnimallist;
     private String cleanedBy = null;
     private String gotfeedby = null;
 
@@ -21,6 +22,11 @@ public class Enclosure {
         this.maxCapacityAnimals = maxCapacityAnimals;
         this.indoorOrOutdoor = indoorOrOutdoor;
         this.animalList = new Vector<>();
+        this.deadAnimallist = new Vector<>();
+    }
+
+    public void addDeadAnimals(Animal animal) {
+        deadAnimallist.add(animal);
     }
 
     public void addAnimals(Animal animal) {
@@ -32,6 +38,7 @@ public class Enclosure {
 
     public void removeAnimals(Animal animal) {
         animalList.remove(animal);
+        System.out.println(animal.getName() + "remove from " + name);
     }
 
     public void printEnclosure() {
@@ -51,24 +58,66 @@ public class Enclosure {
         }
     }
 
-    public void simulateDayEnclosure() {
+    public void simulateDayEnclosurefight() {
         System.out.println("\nIn Enclosure " + name + ":");
-        for (Animal animal : animalList) {
-            Animal randomAnimal = animalList.get(random.nextInt(animalList.size()));
-            if (randomAnimal != animal && animalList.size() > 2 && random.nextInt(100) > 50) {
+
+        Animal randomAnimal = animalList.get(random.nextInt(animalList.size()));
+
+
+        for (int i = 0; i < animalList.size(); i++) {
+            Animal animal = animalList.get(i);
+//        for (Animal animal : animalList)       //makes an java.util.ConcurrentModificationException because ich remove one animal
+
+            if (randomAnimal != animal && animalList.size() >= 2 && random.nextInt(100) > 50 && randomAnimal.getHP() > 0) {
+
                 System.out.println("Animal " + animal.getName() + " attacks " + randomAnimal.getName());
-                animal.simulatefights(animal, randomAnimal);
-                if (randomAnimal.getHP() <= 0) {
-//                    removeAnimals(randomAnimal);
-                }
+                animal.simulateFights(animal, randomAnimal);
 
-
-            } else if (animalList.size() <= 2) {
+            } else if (animalList.size() <= 1) {
                 System.out.println(animal.getName() + " does nothing and chills");
+            } else if (animal.getHP() <= 0) {
+                System.out.println(Colors.COLORS[3] + animal.getName() + " is dead" + Colors.RESET);
             } else {
-                System.out.println(animal.getName() + ".....");
+                System.out.println(animal.getName() + "......");
             }
 
+        }
+        if (randomAnimal.getHP() <= 0) {
+            addDeadAnimals(randomAnimal);
+            removeAnimals(randomAnimal);
+        }
+
+    }
+
+    public void simulateDayEnclosureVet(Vet vet) {
+
+        System.out.println(vet.getName() + " tries to heal the animals in " + name + "\n");
+
+        Animal randomAnimal = animalList.get(random.nextInt(animalList.size()));
+
+//          // heal 1 random animal per enclosure
+        if (random.nextInt(100) > 50) {
+            randomAnimal.simulateHealing(randomAnimal, vet);
+        } else {
+            System.out.println("no heal for the animals");
+
+
+//              // heal every Animal in enclosure
+
+//            for (Animal animal : animalList) {
+//
+//                if (random.nextInt(100) > 50) {
+//                    animal.simulateHealing(animal, vet);
+//                } else {
+//                    System.out.println("no heal for " + animal.getName());
+//                }
+        }
+        System.out.println("\n");
+    }
+
+    public void displayDeadAnimals() {
+        for (Animal deadAnimal : deadAnimallist) {
+            System.out.println(deadAnimal.getName() + " DEAD");
         }
     }
 
@@ -111,7 +160,7 @@ public class Enclosure {
     }
 
 
-    public void simulateDayEnclosure(Zookeeper zookeeper) {
+    public void simulateDayEnclosureKeeper(Zookeeper zookeeper) {
         if (getGotfeedby() == null) {
             System.out.println(zookeeper.getName() + " feeds the animals in " + getName());
             for (Animal animal : animalList) {

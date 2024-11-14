@@ -2,7 +2,7 @@ package Thiemo.week09.Zoo;
 
 import java.util.Vector;
 
-public class Zookeeper {
+public class Vet {
     private String name;
     private String gender;
     private int age;
@@ -12,7 +12,7 @@ public class Zookeeper {
     private Vector<Enclosure> taskList;
     private String mostLikedAnimal;
 
-    public Zookeeper(String name, String gender, int age, int HP, int SP, int dangerLevel,String mostLikedAnimal) {
+    public Vet(String name, String gender, int age, int HP, int SP, int dangerLevel, String mostLikedAnimal) {
         this.name = name;
         this.gender = gender;
         this.age = age;
@@ -23,36 +23,28 @@ public class Zookeeper {
         this.mostLikedAnimal = mostLikedAnimal;
     }
 
-    public void addEnclosureTasks(Enclosure enclosure) {
+
+    public void addEnclosureTasksvet(Enclosure enclosure) {
         if (taskList.contains(enclosure)) {
             return;
         }
         taskList.add(enclosure);
     }
 
+    public void simulateDayVet() {
+        for (Enclosure enc : taskList) {
+            System.out.println(name + " walks over to " + enc.getName());
+            enc.simulateDayEnclosureVet(this);
+
+        }
+    }
+
     public String getName() {
         return name;
     }
 
-
-    public void simulateDayKeeper() {
-        for (Enclosure enc : taskList) {
-            System.out.println(name + " walks over to " + enc.getName());
-            enc.simulateDayEnclosureKeeper(this);
-
-        }
-    }
-
-    public String getMostLikedAnimal() {
-        return mostLikedAnimal;
-    }
-
-    public void printKeeper() {
-//        System.out.print("├── " + "Keeper: " + name + ", " + gender + ", " + age+" ==>");
-        System.out.printf("├── Keeper: %5s , %7s , %5d  ==>", name, gender, age);
-        for (Enclosure enc : taskList) {
-            System.out.print(" |" + enc.getName());
-        }
-        System.out.println();
+    public int getSP() {
+        return SP;
     }
 }
+
