@@ -12,7 +12,7 @@ public class Zookeeper {
     private Vector<Enclosure> taskList;
     private String mostLikedAnimal;
 
-    public Zookeeper(String name, String gender, int age, int HP, int SP, int dangerLevel) {
+    public Zookeeper(String name, String gender, int age, int HP, int SP, int dangerLevel,String mostLikedAnimal) {
         this.name = name;
         this.gender = gender;
         this.age = age;
@@ -35,11 +35,16 @@ public class Zookeeper {
     }
 
 
-    public void simulateDayKeeper(int day) {
+    public void simulateDayKeeper() {
         for (Enclosure enc : taskList) {
-            enc.simulateDayEnclosure(name);
+            System.out.println(name + " walks over to " + enc.getName());
+            enc.simulateDayEnclosure(this);
 
         }
+    }
+
+    public String getMostLikedAnimal() {
+        return mostLikedAnimal;
     }
 
     public void printKeeper() {

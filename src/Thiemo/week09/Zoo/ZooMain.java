@@ -69,9 +69,8 @@ public class ZooMain {
         zoo.printFoodStats();
 
 
-
         for (int day = 1; day < 3; day++) {
-            System.out.print("\n"+Colors.COLORS[3]+ "Daily Work Starts || Day:" + day + Colors.RESET+"\n");
+            System.out.println("\n"+Colors.COLORS[3]+ "Daily Work Starts || Day:" + day + Colors.RESET+"\n");
             zoo.simulateDay(day);
             System.out.println();
         }

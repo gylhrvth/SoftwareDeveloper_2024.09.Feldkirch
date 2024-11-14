@@ -82,15 +82,18 @@ public class Zoo {
             enc.resetFeedingStatus();
         }
         for (Zookeeper keeper : keeperlist) {
-            keeper.simulateDayKeeper(day);
+            keeper.simulateDayKeeper();
+
         }
 //        if (day % 7 == 0) {
-//            System.out.println("\nThe Warzone opens at day " + day);
-//            for (Enclosure enclosure : enclosureList) {
-//                enclosure.simulateDayEnclosure(day);
-//            }
-//        }
+        System.out.println("\n\nThe fight begins");
+        for (Enclosure enclosure : enclosureList) {
+            enclosure.simulateDayEnclosure();
+
+
+        }
     }
+
 
     @Override
     public String toString() {
