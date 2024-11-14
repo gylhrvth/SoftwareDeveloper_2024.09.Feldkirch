@@ -84,15 +84,28 @@ public class Zoo {
 
 
     public void startTagesSimulation() {
+
         // Reset Gehege Status
         for (Gehege gh : gehegeListe){
             gh.resetGehegeStatus();
         }
-        System.out.println(Colors.COLORS[3] + ">> Pfleger starten mit ihrer Arbeit. <<" + Colors.RESET);
+
         // Pfleger start
+        System.out.println(Colors.COLORS[3] + ">> Alle Pfleger fangen an zu Arbeiten. <<" + Colors.RESET);
         for (Pfleger pf : pflegerListe) {
             pf.startTagesSimulation();
         }
+        System.out.println(Colors.COLORS[3] + ">> Alle Pfleger haben ihre Arbeit beendet. <<" + Colors.RESET);
+
+        System.out.println("─".repeat(80));
+
+        // Kampf start
+        System.out.println(Colors.COLORS[3] + ">> Der Kampf beginnt! <<" + Colors.RESET);
+        for (Gehege gh : gehegeListe){
+            gh.startFightSimulation();
+        }
+        System.out.println(Colors.COLORS[3] + ">> Der Kampf ist vorbei! <<" + Colors.RESET);
+
         System.out.println("─".repeat(80));
 
     }

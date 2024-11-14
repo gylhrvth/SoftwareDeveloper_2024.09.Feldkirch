@@ -1,11 +1,15 @@
 package Erik.week08.Zoo;
 
+import Gyula.WildColors;
+import Gyula.week09.zoo.Animal;
 import Sandro.Colors;
 
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Vector;
 
 public class Tier {
+    public static Random rand = new Random();
 
     // Attribute
     private String name;
@@ -13,15 +17,21 @@ public class Tier {
     private Vector<Essen> essensListe;
     private Essen food;
     private int amountOfFood;
+    private int currentHP;
+    private int maxHP;
+    private int damage;
 
 
     // Konstruktor
-    public Tier(String gattung, String name, Essen food, int amountOfFood) {
+    public Tier(String gattung, String name, Essen food, int amountOfFood, int maxHP, int damage) {
         this.gattung = gattung;
         this.name = name;
         this.food = food;
         this.amountOfFood = amountOfFood;
         this.essensListe = new Vector<>();
+        this.maxHP = maxHP;
+        this.currentHP = maxHP;
+        this.damage = damage;
     }
 
 
@@ -32,6 +42,18 @@ public class Tier {
 
     public String getGattung() {
         return gattung;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setCurrentHP(int currentHP) {
+        this.currentHP = currentHP;
+    }
+
+    public int getMaxHP() {
+        return maxHP;
     }
 
 
@@ -50,11 +72,50 @@ public class Tier {
 
     }
 
-    public void giveTierEssen(Pfleger pfleger){
-        System.out.println(Colors.COLORS[6] + pfleger.getName() + Colors.RESET + " füttert die Tiere.");
+    public void giveTierEssen(Pfleger pfleger) {
+        System.out.println(Colors.COLORS[6] + pfleger.getName() + Colors.RESET + " füttert " + Colors.COLORS[6] + getName() + Colors.RESET);
     }
 
-    public void startTagesSimulation(){
+    public void startFightSimulation(Tier victim) {
+        if (rand.nextInt(100) < 40) {       // 40% Wahrscheinlichkeit, dass Tier beißen können
+            if (victim.getName().equals(this.getName())){
+                System.out.println(this + Colors.COLORS[1] + " Kann sich nicht selbst beißen!" + Colors.RESET);
+            } else {
+                System.out.println(this + " attackiert " + Colors.COLORS[6] + victim.getName() + Colors.RESET);
+                // Attacker hat Victim angegriffen
+                // victims current health reduzieren mit dem attacker damage
+                // ausgabe von aktuellem leben
+            }
+        }
+    }
+
+
+    @Override
+    public String toString() {
+        return Colors.COLORS[6] + name  + Colors.RESET;
+    }
+
+    public void startTagesSimulation() {
         System.out.println(getName() + " chillt sein Leben.");
     }
+
 }
+/*
+    // old
+    public void attack(Gehege gh) {
+        Tier attacker = null;
+        Tier opfer = null;
+
+        if (rand.nextInt(100) < 99) {
+            if (gh.getTierListe().size() < 2) { // wenn tier Liste im gehege leer ist
+                System.out.println(Colors.COLORS[8] + getName() + " Hat keine möglichkeit jemanden zu beißen!" + Colors.RESET);
+            } else {
+                System.out.println(Colors.COLORS[1] + getName() + " versucht anderes Tier im Gehege zu beißen" + Colors.RESET);
+            }
+
+
+            //            opfer.setCurrentHP(attacker.getBite());
+            // opfer currentHP wird herunter gesetzt von dem jeweiligen attacker tier bite Damage currentHP.set ....
+        }
+    }
+ */
