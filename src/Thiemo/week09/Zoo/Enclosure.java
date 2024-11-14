@@ -59,6 +59,7 @@ public class Enclosure {
                 System.out.println("Animal " + animal.getName() + " attacks " + randomAnimal.getName());
                 animal.simulatefights(animal, randomAnimal);
                 if (randomAnimal.getHP() <= 0) {
+                    removeDeadAnimals();
 //                    removeAnimals(randomAnimal);
                 }
 
@@ -72,6 +73,16 @@ public class Enclosure {
         }
     }
 
+
+    private void removeDeadAnimals(){
+        for (int i = 0; i < animalList.size(); i++) {
+            if (!animalList.get(i).isAlive()){
+                System.out.println(animalList.get(i).getName() + " has been removed from " + this.getName() + ".");
+                animalList.remove(i);
+                --i;
+            }
+        }
+    }
 
     public String getCleanedBy() {
         return cleanedBy;
