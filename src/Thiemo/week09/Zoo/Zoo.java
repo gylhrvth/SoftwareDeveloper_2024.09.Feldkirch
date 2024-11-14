@@ -70,6 +70,7 @@ public class Zoo {
             cost += (food.getUnitPrice() * amount);
         }
         System.out.println("\n\nTotal costs for all Food requiered: " + cost + " $");
+        System.out.println();
     }
 
     public void simulateDay(int day) {
