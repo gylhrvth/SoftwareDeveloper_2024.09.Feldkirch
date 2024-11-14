@@ -73,6 +73,9 @@ public class Enclosure {
     }
 
     public void simulateFight() {
+        if(animalList.size() < 2){
+            return;
+        }
         Animals attacker = animalList.get(random.nextInt(animalList.size()));
         Animals defender = animalList.get(random.nextInt(animalList.size()));
 
