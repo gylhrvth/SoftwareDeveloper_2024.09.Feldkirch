@@ -13,6 +13,6 @@ public class Essen {
 
     @Override
     public String toString() {
-        return food + "/Quantity: " + amount;
+        return food + "/Quantity: " + amount + " --- cost: 10€ per kg";
     }
 }

@@ -14,7 +14,7 @@ public class Zoo {
 
     private Vector<Gehege> gehegen;
 
-    private Vector<Tiere> tieren;
+    private Vector<Tiere> tiere;
 
     private Vector<Essen> foods;
 
@@ -24,7 +24,7 @@ public class Zoo {
         this.name = name;
         this.year = year;
         this.gehegen = new Vector<>();
-        this.tieren = new Vector<>();
+        this.tiere = new Vector<>();
         this.foods = new Vector<>();
     }
 
@@ -34,26 +34,28 @@ public class Zoo {
         gehegen.add(gehegeName);
     }
 
-    public void addTieren(Tiere animalName) {
-        tieren.add(animalName);
-    }
-
     public void addFoods(Essen foodName) {
         foods.add(foodName);
     }
 
     //---------------ToString---------------\\
 
-    //missing toString for Animals and Foods.
-
-    @Override
-    public String toString() {
-        String result = Colors.COLORS[2] + "\n----|Zoo: " + Colors.RESET + Colors.COLORS[4] + name + Colors.RESET +
-                                           ", founded in " + Colors.COLORS[5] + year + Colors.RESET + "\n";
+    public void printStructure() {
+        String result = Colors.COLORS[2] + "\n├── Zoo: " + Colors.RESET + Colors.COLORS[4] + name + Colors.RESET +
+                ", gegründet " + Colors.COLORS[5] + year + Colors.RESET + "\n";
 
         for (Gehege gehege : gehegen) {
-            result += Colors.COLORS[3] + "------|Gehege: " + Colors.COLORS[1] + gehege + Colors.RESET + "\n";
+            result += "│    ├── Gehege: " + Colors.COLORS[1] + gehege.getName() + Colors.RESET + "\n";
+
+            if (gehege.getAnimals().isEmpty()) {
+                result += "│       ├── (leer)\n";
+            } else {
+                for (Tiere tier : gehege.getAnimals()) {
+                    result += "│       ├── " + tier + "\n";
+                }
+            }
         }
-        return result;
+        System.out.println(result);
     }
+
 }

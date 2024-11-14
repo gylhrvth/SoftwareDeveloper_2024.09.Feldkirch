@@ -1,14 +1,14 @@
-package Thiemo.week09.Zoo;
+package Furkan.week09.Zoo;
 
 public class Food {
     private String name;
     private String unit;
-    private int unitPrice;
+    private double unitprice;
 
-    public Food(String name, String unit, int unitPrice) {
+    public Food(String name, String unit, double unitprice){
         this.name = name;
         this.unit = unit;
-        this.unitPrice = unitPrice;
+        this.unitprice = unitprice;
     }
 
     public String getName() {
@@ -19,7 +19,7 @@ public class Food {
         return unit;
     }
 
-    public int getUnitPrice() {
-        return unitPrice;
+    public double getUnitprice() {
+        return unitprice;
     }
 }
