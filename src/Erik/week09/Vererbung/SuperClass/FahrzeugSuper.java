@@ -13,6 +13,7 @@ public class FahrzeugSuper {
         this.brand = brand;
         this.engine = engine;
         this.wheel = wheel;
+        System.out.println("Ich bin der Konstruktor von der Klasse 'FahrzeugSuper'");
     }
 
 

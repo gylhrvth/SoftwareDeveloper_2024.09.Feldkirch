@@ -10,6 +10,7 @@ public class Auto extends FahrzeugSuper {
     public Auto(String brand, String engine, int wheel, int doors) {
         super(brand, engine, wheel);    // Holt, dass Zeug aus der Klasse "FahrzeugSuper"
         this.doors = doors;             // Attribute von dieser Klasse
+        System.out.println("Ich bin der Konstruktor von der Klasse 'Auto'");
     }
 
 

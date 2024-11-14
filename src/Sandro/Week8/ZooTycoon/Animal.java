@@ -9,6 +9,7 @@ public class Animal {
     //new
     private Food food;
     private double amount;
+    private int counter;
 
 
     public Animal(String name, int age, String genus, Food food, int amount) {
@@ -18,15 +19,41 @@ public class Animal {
         //new
         this.food = food;
         this.amount = amount;
+        this.counter = 0;
     }
 
-
-
-
-    public void simu() {
-        System.out.println("Was macht das Tier --> "+name);
+    public void eat(){
+        System.out.println("Tier "+ name + " isst etwas.");
     }
 
+    public void sleep(){
+        System.out.println("Tier "+name + " schläft!");
+    }
+
+    public void shit (){
+        System.out.println("Tier "+ name + " geht aufs Klo");
+    }
+
+    public void simu(int day) {
+        System.out.println("Was macht das Tier --> "+name +", Years: "+ age);
+        //essen
+        eat();
+        //schlafen
+        sleep();
+        //kacken
+        shit();
+        //älter werden
+        //abfrage von tag der mit gegeben wird
+        //optional einen Counter der hochzählt
+        if (day == 7){
+            System.out.println("Tier "+ name + " ist ein Jahr älter");
+            this.age = age+1;
+        }
+    }
+
+    public void counter() {
+        this.counter = counter+1;
+    }
 
     public void collectFoodRequirement(HashMap<Food, Double> foodRequiert) {
         //Hashmap befüllen mit aktuellen Informationen
