@@ -51,11 +51,11 @@ public class Enclosure {
         }
     }
 
-    public void simulateDayEnclosure(int day) {
+    public void simulateDayEnclosure() {
 
-        System.out.println("In Enclosure " + name + " happens whut?");
+        System.out.println("In Enclosure " + name);
         for (Animal animal : animalList) {
-            animal.simulateDayAnimal(day);
+            animal.simulatefights(animal,animal);
         }
     }
 
