@@ -13,6 +13,7 @@ public class Moped extends Motorrad {
         super(brand, engine, wheel, suitCaseHolder);        // Holt, dass Zeug aus der Klasse "Motorrad"
         this.maxSpeed = maxSpeed;                           // Attribute von dieser Klasse
         this.size = size;
+        System.out.println("Ich bin der Konstruktor von der Klasse 'Moped'");
     }
 
 

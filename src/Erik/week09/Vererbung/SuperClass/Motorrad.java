@@ -11,6 +11,7 @@ public class Motorrad extends FahrzeugSuper {
     public Motorrad(String brand, String engine, int wheel, int suitCaseHolder) {
         super(brand, engine, wheel);            // Holt, dass Zeug aus der Klasse "FahrzeugSuper"
         this.suitCaseHolder = suitCaseHolder;   // Attribute von dieser Klasse
+        System.out.println("Ich bin der Konstruktor von der Klasse 'Motorrad'");
     }
 
 
