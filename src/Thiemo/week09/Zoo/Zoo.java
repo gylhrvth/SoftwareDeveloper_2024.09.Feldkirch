@@ -83,17 +83,14 @@ public class Zoo {
         }
         for (Zookeeper keeper : keeperlist) {
             keeper.simulateDayKeeper();
-
         }
 //        if (day % 7 == 0) {
-        System.out.println("\n\nThe fight begins");
-        for (Enclosure enclosure : enclosureList) {
-            enclosure.simulateDayEnclosure();
-
-
-        }
+//            System.out.println("\nThe Warzone opens at day " + day);
+//            for (Enclosure enclosure : enclosureList) {
+//                enclosure.simulateDayEnclosure(day);
+//            }
+//        }
     }
-
 
     @Override
     public String toString() {

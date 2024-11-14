@@ -18,19 +18,19 @@ public class ZooMain {
         Food vegetables = new Food("vegetables", "kg", 2);
         Food trash = new Food("Garbage", "kg", 0);
 
-        Animal croc = new Animal("Crocodile", "Kroko", "male", "Adult", 7, 100, 100, meat, 10);
-        Animal tiger = new Animal("Tiger", "Kahn", "male", "Adult", 9, 100, 100, meat, 10);
-        Animal chicken = new Animal("Chicken", "Nugget", "male", "child", 1, 10, 10, fruit, 1);
-        Animal chicken2 = new Animal("Chicken", "Nugget2", "male", "child", 1, 10, 10, fruit, 1);
-        Animal chickenKing = new Animal("Chicken", "King", "male", "adult", 1, 15, 15, fruit, 2);
-        Animal chickenSlave = new Animal("Chicken", "Slave", "male", ",adult", 1, 1, 1, trash, 0.5);
-        Animal chickenQueen = new Animal("Chicken", "Queen", "female", "adult", 2, 10, 10, fruit, 2);
-        Animal rabbit = new Animal("Rabbit", "Superbit", "male", "adult", 0, 1000, 1000, vegetables, 5);
-        Animal pig = new Animal("Pig", "Fatty", "male", "adult", 4, 50, 50, trash, 10);
+        Animal croc = new Animal("Crocodile", "Kroko", "male", "Adult", 7, 100, 100,1, meat, 10);
+        Animal tiger = new Animal("Tiger", "Kahn", "male", "Adult", 9, 100, 100,1, meat, 10);
+        Animal chicken = new Animal("Chicken", "Nugget", "male", "child", 1, 10, 10,1, fruit, 1);
+        Animal chicken2 = new Animal("Chicken", "Nugget2", "male", "child", 1, 10, 10,1, fruit, 1);
+        Animal chickenKing = new Animal("Chicken", "King", "male", "adult", 1, 15, 15,1, fruit, 2);
+        Animal chickenSlave = new Animal("Chicken", "Slave", "male", ",adult", 1, 1, 1,1, trash, 0.5);
+        Animal chickenQueen = new Animal("Chicken", "Queen", "female", "adult", 2, 10, 10,10, fruit, 2);
+        Animal rabbit = new Animal("Rabbit", "Superbit", "male", "adult", 0, 1000, 1000, 1000,vegetables, 5);
+        Animal pig = new Animal("Pig", "Fatty", "male", "adult", 4, 50, 50, 50,trash, 10);
 
-        Zookeeper keeper1 = new Zookeeper("Mike", "Male", 25, 100, 100, 2);
-        Zookeeper keeper2 = new Zookeeper("Dan", "Male", 40, 80, 50, 2);
-        Zookeeper keeper3 = new Zookeeper("Lisa", "Female", 30, 100, 70, 1);
+        Zookeeper keeper1 = new Zookeeper("Mike", "Male", 25, 100, 100, 2,"Kahn");
+        Zookeeper keeper2 = new Zookeeper("Dan", "Male", 40, 80, 50, 2,"Chicken");
+        Zookeeper keeper3 = new Zookeeper("Lisa", "Female", 30, 100, 70, 1,"Superbit");
 
 
         zoo.addEnclosure(ried);
