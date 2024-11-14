@@ -52,8 +52,8 @@ public class Tier {
         this.currentHP = currentHP;
     }
 
-    public int getMaxHP() {
-        return maxHP;
+    public int getCurrentHP() {
+        return currentHP;
     }
 
 
@@ -76,15 +76,23 @@ public class Tier {
         System.out.println(Colors.COLORS[6] + pfleger.getName() + Colors.RESET + " füttert " + Colors.COLORS[6] + getName() + Colors.RESET);
     }
 
+    public boolean isAlive() {
+        return currentHP > 0;
+    }
+
     public void startFightSimulation(Tier victim) {
-        if (rand.nextInt(100) < 40) {       // 40% Wahrscheinlichkeit, dass Tier beißen können
-            if (victim.getName().equals(this.getName())){
+        if (rand.nextInt(100) < 40 &&   // 40 % Wahrscheinlichkeit, dass Tier beißen können
+                victim.isAlive() &&
+                this.isAlive()) {
+            if (victim.getName().equals(this.getName())) {
                 System.out.println(this + Colors.COLORS[1] + " Kann sich nicht selbst beißen!" + Colors.RESET);
             } else {
                 System.out.println(this + " attackiert " + Colors.COLORS[6] + victim.getName() + Colors.RESET);
-                // Attacker hat Victim angegriffen
-                // victims current health reduzieren mit dem attacker damage
-                // ausgabe von aktuellem leben
+                victim.setCurrentHP(victim.getCurrentHP() - this.getDamage());
+                System.out.println(Colors.COLORS[6] + victim.getName() + Colors.RESET + "'s aktuelles Leben ist " + Colors.COLORS[6] + victim.getCurrentHP() + " HP" + Colors.RESET);
+            }
+            if (!victim.isAlive()){
+                System.out.println(Colors.COLORS[1] + victim.getName()  + " ist gestorben." + Colors.RESET);
             }
         }
     }
@@ -92,7 +100,7 @@ public class Tier {
 
     @Override
     public String toString() {
-        return Colors.COLORS[6] + name  + Colors.RESET;
+        return Colors.COLORS[6] + name + Colors.RESET;
     }
 
     public void startTagesSimulation() {
