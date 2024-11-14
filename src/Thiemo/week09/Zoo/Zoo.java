@@ -70,7 +70,6 @@ public class Zoo {
             cost += (food.getUnitPrice() * amount);
         }
         System.out.println("\n\nTotal costs for all Food requiered: " + cost + " $");
-        System.out.println();
     }
 
     public void simulateDay(int day) {
@@ -83,14 +82,17 @@ public class Zoo {
         }
         for (Zookeeper keeper : keeperlist) {
             keeper.simulateDayKeeper();
+
         }
 //        if (day % 7 == 0) {
-//            System.out.println("\nThe Warzone opens at day " + day);
-//            for (Enclosure enclosure : enclosureList) {
-//                enclosure.simulateDayEnclosure(day);
-//            }
-//        }
+        System.out.println("\n\nThe fight begins");
+        for (Enclosure enclosure : enclosureList) {
+            enclosure.simulateDayEnclosure();
+
+
+        }
     }
+
 
     @Override
     public String toString() {

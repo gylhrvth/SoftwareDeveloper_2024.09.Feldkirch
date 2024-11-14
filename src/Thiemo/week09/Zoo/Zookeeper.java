@@ -23,11 +23,6 @@ public class Zookeeper {
         this.mostLikedAnimal = mostLikedAnimal;
     }
 
-
-
-
-
-
     public void addEnclosureTasks(Enclosure enclosure) {
         if (taskList.contains(enclosure)) {
             return;
@@ -43,7 +38,7 @@ public class Zookeeper {
     public void simulateDayKeeper() {
         for (Enclosure enc : taskList) {
             System.out.println(name + " walks over to " + enc.getName());
-            enc.simulateDayEnclosure();
+            enc.simulateDayEnclosure(this);
 
         }
     }

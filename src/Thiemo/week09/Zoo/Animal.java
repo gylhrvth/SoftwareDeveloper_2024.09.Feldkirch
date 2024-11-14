@@ -77,17 +77,15 @@ public class Animal {
         }
     }
 
-    public boolean isAlive() {
-        return HP > 0;
-    }
 
 
     public void simulatefights(Animal animal, Animal randomanimal) {
-        randomanimal.HP = randomanimal.HP - animal.SP;
-        if (randomanimal.HP <= 0) {
+
+        this.HP = HP - this.SP;
+        if (HP <= 0) {
             System.out.println(randomanimal.getName() + " died");
         } else {
-            System.out.println(randomanimal.getName() + " looses " + animal.SP + " HP :" + randomanimal.HP + "/" + randomanimal.MaxHP + "HP");
+            System.out.println(randomanimal.getName() + " looses " + animal.getSP() + " HP :" + HP + "/" + MaxHP + "HP");
         }
     }
 
