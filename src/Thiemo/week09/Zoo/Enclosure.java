@@ -88,6 +88,7 @@ public class Enclosure {
     }
 
     public void simulateDayEnclosure(String name) {
+        System.out.println("\n"+name+ " walks to "+getName());
         if (getGotfeedby() == null) {
             System.out.println(name + " feeds the animals in " + getName());
             for (Animal animal : animalList) {
