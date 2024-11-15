@@ -1,6 +1,6 @@
 package Sandro.Week9.ZooTycoon2.ZooTycoon;
 
-import lukas.week03.day4.Colors;
+import Sandro.Colors;
 
 import java.util.HashMap;
 import java.util.Random;
