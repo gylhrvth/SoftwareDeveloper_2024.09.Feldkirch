@@ -10,6 +10,7 @@ public class ZooMain {
         //Vet heilt nur das prozentual schwächstes tier(kleinse HP)
         //Vet heilt zwischen 30-100% vom Maximalen leben
         //Vet kann nicht über maxHP heilen
+        //Liste des essen am ende vom zoo nochmal berechen wieviel es kostet jeden tag plus am ende gesamtabbrechung(jeden tag sout oder einmal am ende??)
 
 
         Zoo zoo = new Zoo("AnimalKingdom", "Feldkirch", 1996, 1000);

@@ -48,9 +48,6 @@ public class Zoo {
         }
     }
 
-
-
-
     public void printFoodCost (){
         //HashMap erstellen aka. Einkaufskorb
         //Food ist der Key der Map!!!
