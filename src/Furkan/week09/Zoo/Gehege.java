@@ -101,4 +101,10 @@ public class Gehege {
     }
 
 
+    @Override
+    public String toString(){
+        return name;
+    }
+
+
 }

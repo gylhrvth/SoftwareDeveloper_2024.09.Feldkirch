@@ -1,5 +1,7 @@
 package Furkan.week09.Zoo;
 
+import Sandro.Colors;
+
 import java.util.HashMap;
 import java.util.Random;
 
@@ -12,12 +14,12 @@ public class Tier {
     private double amount;
     private int hungerCycle;
     private int hungerStatus;
-    private String healthStatus = "gesund";
+    private String healthStatus;
+    private boolean gesund;
 
     private int health;
     private int maxHealth;
     private int attack;
-
 
 
     public Tier(String name, String gattung, Food food, int amount, int hungerCycle, int maxhealth, int attack) {
@@ -30,6 +32,11 @@ public class Tier {
         this.health = maxhealth;
         this.maxHealth = 200;
         this.attack = attack;
+        this.healthStatus = "Gesund";
+    }
+
+    public void setHealthStatus(String healthStatus) {
+        this.healthStatus = healthStatus;
     }
 
     public int getHungerStatus() {
@@ -55,7 +62,7 @@ public class Tier {
         } else
             System.out.println(name + " ist satt und chillt.");
 
-        System.out.println();
+        //System.out.println();
     }
 
     public void tagVergeht() {
@@ -80,16 +87,16 @@ public class Tier {
     }
 
     public void simulateFight(Tier victim) {
-        if( (random.nextInt(100) < 40) &&
+        if ((random.nextInt(100) < 40) &&
             this.isAlive() &&
             victim.isAlive()) {
             victim.health -= this.attack;
-            System.out.println(this + " has bitten the" + victim + ".");
+            System.out.println(this + " has bitten the Victim " + Colors.COLORS[6] + victim + Colors.RESET + ".");
 
-            if (victim.health >0){
-                System.out.println(" " +victim + " has " + victim.health + "HP left.");
+            if (victim.health > 0) {
+                System.out.println(Colors.COLORS[6] + victim + Colors.RESET + " has " + victim.health + "HP left.");
             } else {
-                System.out.println(" " + victim + "died RIP.");
+                System.out.println(Colors.COLORS[6] + victim + Colors.RESET + " died RIP.");
             }
         }
 
@@ -98,6 +105,11 @@ public class Tier {
 
     public String getHealthStatus() {
         return healthStatus;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
 
