@@ -20,6 +20,7 @@ public class Animals {
     private int bite;
     private Vector<Animal> animalList;
 
+
     public Animals(String name, String species, int age, String gender, Food food, double amount, int health, int bite) {
         this.name = WildColors.getColorFromHSL(205, 1.0, 0.4) + name + WildColors.resetColor();
         this.species = species;
