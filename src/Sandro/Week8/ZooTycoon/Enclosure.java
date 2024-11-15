@@ -29,13 +29,16 @@ public class Enclosure {
             animalList.add(ani);
         }
     }
+    public boolean isClean(){
+        return true;
+    }
 
-
-    public void simu(){
+    public void simu(int day){
         System.out.println("Was passiert im Gehege --> "+name);
         for (Animal ani : animalList){
-            ani.simu();
+            ani.simu(day);
         }
+        isClean();
     }
 
     public void collectFoodRequirement(HashMap<Food, Double> foodRequiert) {

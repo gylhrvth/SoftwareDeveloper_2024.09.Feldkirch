@@ -26,4 +26,12 @@ public class Member {
     public String geteMail() {
         return eMail;
     }
+
+    public void test(){
+        System.out.println("I am a test");
+    }
+
+    public void test(int size){
+        System.out.println("I am a test with size");
+    }
 }

@@ -27,14 +27,14 @@ public class ZooMain {
         //Animals Wildlife
         Animals mammalLemurJulien = new Animals("King Julien", "Lemur", 20, "Male", fruit, 3, 99,  24);
         Animals mammalLemurMaurice = new Animals("Maurice", "Lemur", 25, "Male", fruit, 4, 79,  22);
-//        Animals mammalLemurMort = new Animals("Mort", "Lemur", 18, "Male");
-//        Animals mammalElephant = new Animals("Henk", "Elephant", 23, "Male");
-//        Animals mammalElephant2 = new Animals("Jumbo", "Elephant", 5, "Male");
-//        Animals mammalLionKing = new Animals("Sir Roarsalot", "Lion", 6, "Male");
-//        Animals mammalLionQueen = new Animals("Lady Roarington", "Lion", 6, "Female");
-//        Animals mammalGiraffe = new Animals("Stretch Armstrong", "Giraffe", 21, "Male");
-//        Animals mammalGiraffe2 = new Animals("Giraffey", "Giraffe", 16, "Female");
-//        Animals mammalGiraffe3 = new Animals("Neckington", "Giraffe", 4, "Female");
+        Animals mammalLemurMort = new Animals("Mort", "Lemur", 18, "Male", fruit, 2, 100, 14);
+        Animals mammalElephant = new Animals("Henk", "Elephant", 23, "Male", fruit, 15, 85, 47);
+        Animals mammalElephant2 = new Animals("Jumbo", "Elephant", 5, "Male", fruit, 6, 100, 10);
+        Animals mammalLionKing = new Animals("Sir Roarsalot", "Lion", 6, "Male", meat, 7, 100, 42);
+        Animals mammalLionQueen = new Animals("Lady Roarington", "Lion", 6, "Female", meat, 5, 100, 40);
+        Animals mammalGiraffe = new Animals("Stretch Armstrong", "Giraffe", 21, "Male", fruit, 9, 90, 23);
+        Animals mammalGiraffe2 = new Animals("Giraffey", "Giraffe", 16, "Female", fruit, 6, 95, 18);
+        Animals mammalGiraffe3 = new Animals("Neckington", "Giraffe", 4, "Female", fruit, 2, 100, 10);
 //        Animals mammalPuma = new Animals("Hagrit", "Puma", 18, "Male");
 //        Animals mammalPuma2 = new Animals("Charlotte", "Puma", 12, "Female");
 //        Animals mammalPuma3 = new Animals("leon", "Puma", 5, "Male");
@@ -47,9 +47,9 @@ public class ZooMain {
         //Animals Aviaries
         Animals aviaryHornbill = new Animals("Bingo", "Hornbill", 5, "Male", fruit, 6, 100,  40);
         Animals aviaryEagle = new Animals("Mighty", "Bald Eagle", 15, "Male", fruit, 3, 89,  18);
-//        Animals aviaryFlamingo = new Animals("Flame", "Flamingo", 4, "Male");
-//        Animals aviaryPeacock = new Animals("Regal", "Peacock", 6, "Female");
-//        Animals aviaryGreyParrot = new Animals("Echo", "African Grey Parrot", 10, "Male");
+        Animals aviaryFlamingo = new Animals("Flame", "Flamingo", 4, "Male", fruit, 2, 100, 7);
+        Animals aviaryPeacock = new Animals("Regal", "Peacock", 6, "Female", hay, 3, 100, 8);
+        Animals aviaryGreyParrot = new Animals("Echo", "African Grey Parrot", 10, "Male", hay, 5, 95, 5);
 //        Animals aviaryHarpyEagle = new Animals("Storm", "Harpy Eagle", 12, "Female");
 //        Animals aviaryMacaw = new Animals("Sunny", "Macaw Parrot", 8, "Female");
 //        Animals aviaryKeaParrot = new Animals("Kiwi", "Kea Parrot", 7, "Female");
@@ -59,9 +59,9 @@ public class ZooMain {
         //Animals Terrarium
         Animals reptileAligator = new Animals("George", "Alligator", 32, "Male", meat, 3, 80,  35);
         Animals reptileAligator2 = new Animals("Roxy", "Alligator", 24, "Female", meat, 3, 92,  35);
-//        Animals reptileAligator3 = new Animals("Rex", "Alligator", 1, "Male");
-//        Animals reptileTurtle = new Animals("Donatello", "Turtle", 8, "Male");
-//        Animals reptileTurtle2 = new Animals("Slowpoke", "Turtle", 11, "Female");
+        Animals reptileAligator3 = new Animals("Rex", "Alligator", 1, "Male", meat, 1, 100, 15);
+        Animals reptileTurtle = new Animals("Donatello", "Turtle", 8, "Male", fruit, 2, 100, 10);
+        Animals reptileTurtle2 = new Animals("Slowpoke", "Turtle", 11, "Female", fruit, 3, 97, 12);
 
         //Animals Aquarium
         Animals aquariumAngelfish = new Animals("Angelina", "Angelfish", 4, "Female", fishFlakes, 1, 10,  2);
@@ -92,6 +92,20 @@ public class ZooMain {
         eTerrariums.addAnimals(reptileAligator2);
         eAquarium.addAnimals(aquariumClownfish);
         eAquarium.addAnimals(aquariumSurgeonfish);
+        eWildlife.addAnimals(mammalLemurMort);
+        eWildlife.addAnimals(mammalElephant);
+        eWildlife.addAnimals(mammalElephant2);
+        eWildlife.addAnimals(mammalLionKing);
+        eWildlife.addAnimals(mammalLionQueen);
+        eWildlife.addAnimals(mammalGiraffe);
+        eWildlife.addAnimals(mammalGiraffe2);
+        eWildlife.addAnimals(mammalGiraffe3);
+        eAviaries.addAnimals(aviaryFlamingo);
+        eAviaries.addAnimals(aviaryPeacock);
+        eAviaries.addAnimals(aviaryGreyParrot);
+        eTerrariums.addAnimals(reptileAligator3);
+        eTerrariums.addAnimals(reptileTurtle);
+        eTerrariums.addAnimals(reptileTurtle2);
 
         //Printing the Structure
         zoo.printZooStructure();
