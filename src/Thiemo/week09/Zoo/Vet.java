@@ -1,8 +1,10 @@
 package Thiemo.week09.Zoo;
 
+import java.util.Random;
 import java.util.Vector;
 
 public class Vet {
+    private static Random random = new Random();
     private String name;
     private String gender;
     private int age;
@@ -32,13 +34,19 @@ public class Vet {
     }
 
     public void simulateDayVet() {
-//        for (int i = 0; i <taskList.size(); i++) {
-//            Animal animat = ;
-        for (Enclosure enc : taskList) {
-            System.out.println(name + " walks over to " + enc.getName());
-//            enc.simulateDayEnclosureVet(this);
 
-        }
+//                  // get 1 random enclosure
+
+        Enclosure randomEnclosure = taskList.get(random.nextInt(taskList.size()));
+        System.out.println(name + " walks over to " + randomEnclosure.getName());
+        randomEnclosure.simulateDayEnclosureVet(this);
+
+//                  // go to every enclosure and get 1 animal
+//
+//                for (Enclosure enc : taskList) {
+//        System.out.println(name + " walks over to " + randomEnclosure.getName());
+//        randomEnclosure.simulateDayEnclosureVet(this);
+//    }
     }
 
     public String getName() {
@@ -47,6 +55,10 @@ public class Vet {
 
     public int getSP() {
         return SP;
+    }
+
+    public String getMostLikedAnimal() {
+        return mostLikedAnimal;
     }
 }
 
