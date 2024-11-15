@@ -5,6 +5,13 @@ import Sandro.Colors;
 public class ZooMain {
     public static void main(String[] args) {
 
+
+        //nicht ein pfleger macht seine tasks hintereinander sondern sie wechseln sich ab zuerst pfleger 1 dann 2 dann 3 dann wieder pfleger 1 dann 2 dann 3 .... bis tasklist fertig ist
+        //Vet heilt nur das prozentual schwächstes tier(kleinse HP)
+        //Vet heilt zwischen 30-100% vom Maximalen leben
+        //Vet kann nicht über maxHP heilen
+
+
         Zoo zoo = new Zoo("AnimalKingdom", "Feldkirch", 1996, 1000);
 
         Enclosure alpMeadow = new Enclosure("Alpmeadow", 20, "Outdoor");
