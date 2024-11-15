@@ -11,5 +11,8 @@ public class Main {
         System.out.println(aygün.geteMail());
         System.out.println(empty.geteMail());
 
+        aylin.test();
+        aygün.test(5);
+
     }
 }
