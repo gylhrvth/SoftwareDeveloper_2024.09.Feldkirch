@@ -30,6 +30,7 @@ public class Animal {
         this.SP = SP;
         this.food = food;
         this.amount = amount;
+
     }
 
     public void printAnimal() {
