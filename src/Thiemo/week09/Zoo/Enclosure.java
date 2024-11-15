@@ -95,7 +95,9 @@ public class Enclosure {
 
         Animal randomAnimal = animalList.get(random.nextInt(animalList.size()));
 
+
 //          // heal 1 random animal per enclosure
+
         if (random.nextInt(100) > 50) {
             randomAnimal.simulateHealing(randomAnimal, vet);
         } else {

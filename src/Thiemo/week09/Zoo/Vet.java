@@ -32,9 +32,11 @@ public class Vet {
     }
 
     public void simulateDayVet() {
+//        for (int i = 0; i <taskList.size(); i++) {
+//            Animal animat = ;
         for (Enclosure enc : taskList) {
             System.out.println(name + " walks over to " + enc.getName());
-            enc.simulateDayEnclosureVet(this);
+//            enc.simulateDayEnclosureVet(this);
 
         }
     }

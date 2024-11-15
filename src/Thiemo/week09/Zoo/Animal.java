@@ -77,7 +77,7 @@ public class Animal {
     }
 
     public void simulateHealing(Animal randomanimal, Vet vet) {
-        int heal = 100;
+        int heal = random.nextInt(30,100);
         int afterheal = randomanimal.HP + heal;
         System.out.println(randomanimal.getName() + " got healed by " + vet.getName() + " ==> " + heal + " + " + randomanimal.HP + " = " + afterheal + "/" + randomanimal.MaxHP);
     }
