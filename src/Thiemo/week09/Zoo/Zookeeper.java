@@ -38,7 +38,7 @@ public class Zookeeper {
     public void simulateDayKeeper() {
         for (Enclosure enc : taskList) {
             System.out.println(name + " walks over to " + enc.getName());
-            enc.simulateDayEnclosure();
+            enc.simulateDayEnclosureKeeper(this);
 
         }
     }

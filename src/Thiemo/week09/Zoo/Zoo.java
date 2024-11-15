@@ -14,6 +14,7 @@ public class Zoo {
     private int maxCapacitiyVisitors;
     private Vector<Enclosure> enclosureList;
     private Vector<Zookeeper> keeperlist;
+    private Vector<Vet> vetList;
 
     public Zoo(String name, String location, int foundingyear, int maxCapacitiyVisitors) {
         this.name = name;
@@ -22,6 +23,7 @@ public class Zoo {
         this.maxCapacitiyVisitors = maxCapacitiyVisitors;
         this.enclosureList = new Vector<>();
         this.keeperlist = new Vector<>();
+        this.vetList = new Vector<>();
     }
 
     public void addEnclosure(Enclosure enclosure) {
@@ -38,6 +40,12 @@ public class Zoo {
         keeperlist.add(keeper);
     }
 
+    public void addVet(Vet vet){
+        if (vetList.contains(vet)){
+            return;
+        }
+        vetList.add(vet);
+    }
 
     public void printZoo() {
         System.out.println(("┌──────────────────────────────────────────────────────────────────────"));
@@ -70,7 +78,6 @@ public class Zoo {
             cost += (food.getUnitPrice() * amount);
         }
         System.out.println("\n\nTotal costs for all Food requiered: " + cost + " $");
-        System.out.println();
     }
 
     public void simulateDay(int day) {
@@ -83,14 +90,24 @@ public class Zoo {
         }
         for (Zookeeper keeper : keeperlist) {
             keeper.simulateDayKeeper();
+
         }
 //        if (day % 7 == 0) {
-//            System.out.println("\nThe Warzone opens at day " + day);
-//            for (Enclosure enclosure : enclosureList) {
-//                enclosure.simulateDayEnclosure(day);
-//            }
-//        }
+        System.out.println("\n\nThe fight begins");
+        for (Enclosure enclosure : enclosureList) {
+            enclosure.simulateDayEnclosurefight();
+
+        }
+        System.out.println("\n");
+        for (Enclosure enclosure : enclosureList) {
+            enclosure.displayDeadAnimals();
+        }
+        System.out.println("\n");
+        for (Vet vet : vetList){
+            vet.simulateDayVet();
+        }
     }
+
 
     @Override
     public String toString() {

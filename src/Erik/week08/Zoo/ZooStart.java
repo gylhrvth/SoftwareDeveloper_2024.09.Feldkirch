@@ -25,7 +25,7 @@ public class ZooStart {
         Essen pflanze = new Essen("Wasser Pflanze", 10, 100);
 
         // Tier Objekte erstellen
-        Tier otter = new Tier("Otter", "Kishi", fish, 20, 1000, 50);
+        Tier otter = new Tier("Otter", "Kishi", fish, 20, 1000, 999);
         Tier schaf = new Tier("Schaf", "Dinnerbone", gras, 10, 150, 7);
         Tier delphin = new Tier("Delphin", "Rudolf", fish, 50, 250, 4);
         Tier krokodil = new Tier("Krokodil", "Schnappi", fleisch, 100, 550, 18);
@@ -64,7 +64,7 @@ public class ZooStart {
         zoo.printFoodCost();
 
         System.out.println(Colors.COLORS[3] + "Simulation des Zoo's wird gestartet: ..." + Colors.RESET);
-        for (int tag = 1; tag <= 2; tag++) {
+        for (int tag = 1; tag <= 10; tag++) {
             System.out.println(Colors.COLORS[1] + "Tag: >> " + tag + " <<" + Colors.RESET);
             zoo.startTagesSimulation();
         }
