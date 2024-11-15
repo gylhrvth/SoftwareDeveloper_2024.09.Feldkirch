@@ -58,7 +58,7 @@ public class ZooPfleger {
             }
 
             bearbeiteteGehege.add(gehege.getName());
-
+            System.out.println();
 
 //
         }
