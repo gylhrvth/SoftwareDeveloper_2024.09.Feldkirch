@@ -7,14 +7,20 @@ import java.util.Vector;
 public class ZooKeeper {
     private String name;
     private Vector<Gehege> taskList;
+    private String favoriteSpecies;
 
-    public ZooKeeper(String name){
+    public ZooKeeper(String name, String favoriteSpecies){
         this.name = name;
         this.taskList = new Vector<>();
+        this.favoriteSpecies = favoriteSpecies;
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getFavoriteSpecies() {
+        return favoriteSpecies;
     }
 
     public void addTask(Gehege task){
@@ -34,4 +40,17 @@ public class ZooKeeper {
         System.out.println();
     }
 
+    /*public void simulateDay(){
+        if (taskList.isEmpty()){
+            System.out.printf("%s has no assigned enclosure...\n", this);
+            return;
+        }
+        for (Gehege gh: taskList){
+            gh.simulateDay(this);
+        }
+    }
+     */
+
+    @Override
+    public String toString() { return WildColors.getColor("#abcdef") + name + WildColors.resetColor();}
 }
