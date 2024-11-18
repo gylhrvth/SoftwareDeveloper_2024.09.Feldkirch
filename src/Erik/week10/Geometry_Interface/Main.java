@@ -6,7 +6,6 @@ import Erik.week09.Geometry.Rectangle;
 import Erik.week09.Geometry.Square;
 import Erik.week09.Geometry.Triangle;
 import Sandro.Colors;
-
 import java.util.Vector;
 
 public class Main {
@@ -39,10 +38,5 @@ public class Main {
 
         System.out.println("Gesamt Umfang von allen Geometrien: >> " + Colors.COLORS[1] + totalCircumference + Colors.RESET);
         System.out.println("Gesamt Fläche von allen Geometrien: >> " + Colors.COLORS[1] + totalArea + Colors.RESET);
-
-
-
-
-
     }
 }
