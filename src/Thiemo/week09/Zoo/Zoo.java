@@ -40,8 +40,8 @@ public class Zoo {
         keeperlist.add(keeper);
     }
 
-    public void addVet(Vet vet){
-        if (vetList.contains(vet)){
+    public void addVet(Vet vet) {
+        if (vetList.contains(vet)) {
             return;
         }
         vetList.add(vet);
@@ -93,18 +93,26 @@ public class Zoo {
             keeper.simulateDayKeeper();
 
         }
+
 //        if (day % 7 == 0) {
         System.out.println("\n\nThe fight begins");
         for (Enclosure enclosure : enclosureList) {
             enclosure.simulateDayEnclosurefight();
 
         }
+
+//        System.out.println("\n\n Today"+);
+//        for (Enclosure enclosure : enclosureList) {
+//            enclosure.removeDeadAnimals();
+//
+//        }
+
         System.out.println("\n");
         for (Enclosure enclosure : enclosureList) {
             enclosure.displayDeadAnimals();
         }
         System.out.println("\n");
-        for (Vet vet : vetList){
+        for (Vet vet : vetList) {
             vet.simulateDayVet();
         }
     }

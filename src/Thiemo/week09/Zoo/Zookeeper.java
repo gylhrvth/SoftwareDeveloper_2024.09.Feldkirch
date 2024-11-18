@@ -1,8 +1,10 @@
 package Thiemo.week09.Zoo;
 
+import java.util.Random;
 import java.util.Vector;
 
 public class Zookeeper {
+    private static Random random = new Random();
     private String name;
     private String gender;
     private int age;
@@ -12,7 +14,7 @@ public class Zookeeper {
     private Vector<Enclosure> taskList;
     private String mostLikedAnimal;
 
-    public Zookeeper(String name, String gender, int age, int HP, int SP, int dangerLevel,String mostLikedAnimal) {
+    public Zookeeper(String name, String gender, int age, int HP, int SP, int dangerLevel, String mostLikedAnimal) {
         this.name = name;
         this.gender = gender;
         this.age = age;
@@ -41,6 +43,13 @@ public class Zookeeper {
             enc.simulateDayEnclosureKeeper(this);
 
         }
+//        Enclosure randomEnclosure = taskList.get(random.nextInt(taskList.size()));
+//        for (int i = 0; i < taskList.size(); i--) {
+//
+//            System.out.println(name + " walks over to " + randomEnclosure.getName());
+//            randomEnclosure.simulateDayEnclosureKeeper(this);
+//
+//        }
     }
 
     public String getMostLikedAnimal() {
