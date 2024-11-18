@@ -1,22 +1,20 @@
-package Thiemo.week09.Geometry;
+package Thiemo.week10.GeometryInterface;
 
-public class Triangle extends Geometry {
+public class Triangle implements Geometry{
+
     private double length;
 
     public Triangle(double length) {
         this.length = length;
     }
 
-
     @Override
     public double getCircumference() {
-        double result = length * 3;
-        return result;
+        return length*3;
     }
 
     @Override
     public double getArea() {
-        double result = (length * length) / 2;
-        return result;
+        return (length*length) /2;
     }
 }

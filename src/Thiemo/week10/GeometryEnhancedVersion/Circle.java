@@ -1,7 +1,6 @@
-package Thiemo.week09.Geometry;
+package Thiemo.week10.GeometryEnhancedVersion;
 
-public class Circle extends Geometry {
-
+public class Circle implements Geometry{
     private double radius;
 
     public Circle(double radius) {
