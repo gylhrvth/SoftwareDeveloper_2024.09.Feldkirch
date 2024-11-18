@@ -1,6 +1,6 @@
-package Erik.week09.Geometry;
+package Erik.week10.Geometry_Interface;
 
-public class Square extends Rectangle {
+public class Square extends Rectangle{
 
     // Konstruktor
     public Square(double size) {
