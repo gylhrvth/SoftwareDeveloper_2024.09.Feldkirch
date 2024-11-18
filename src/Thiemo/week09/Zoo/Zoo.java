@@ -88,6 +88,7 @@ public class Zoo {
             }
             enc.resetFeedingStatus();
         }
+
         for (Zookeeper keeper : keeperlist) {
             keeper.simulateDayKeeper();
 

@@ -48,16 +48,20 @@ public class Zoo {
                 }
 
             }
-
+            System.out.println();
+            System.out.println("Zoopfleger machen ihren Job...");
             for (ZooPfleger zooPfleger : pflegerListe) {
                 zooPfleger.workOnGehege();
             }
             System.out.println();
+            System.out.println(Colors.COLORS[1] + "Kampf !!!" + Colors.RESET);
+            for (Gehege gehege : gehegeListe){
+                gehege.simulateFight();
+            }
+            System.out.println();
         }
 
-        for (Gehege gehege : gehegeListe){
-            gehege.simulateFight();
-        }
+
 
     }
 

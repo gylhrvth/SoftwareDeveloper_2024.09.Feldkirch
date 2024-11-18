@@ -63,7 +63,7 @@ public class Zoo {
 
     // Starts the simulation for 10 days
     public void startSimu() {
-        for (int day = 1; day <= 10; day++) {
+        for (int day = 1; day <= 100; day++) {
             System.out.println(Colors.COLORS[6] + "|- Tag " + day + " im Zoo. -|" + Colors.RESET);
             for (Enclosure enc : enclosureList){
                 enc.resetProcess();
