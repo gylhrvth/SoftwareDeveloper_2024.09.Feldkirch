@@ -107,7 +107,6 @@ public class ZooMain {
 
 
         keeper1.addEnclosureTasks(ried);
-        keeper1.addEnclosureTasks(alpMeadow);
         keeper1.addEnclosureTasks(terrarium);
         keeper1.addEnclosureTasks(meadow);
         keeper1.addEnclosureTasks(aquararium);
@@ -115,12 +114,9 @@ public class ZooMain {
         keeper2.addEnclosureTasks(ried);
         keeper2.addEnclosureTasks(alpMeadow);
         keeper2.addEnclosureTasks(aquararium);
-        keeper2.addEnclosureTasks(terrarium);
         keeper2.addEnclosureTasks(meadow);
 
-        keeper3.addEnclosureTasks(aquararium);
         keeper3.addEnclosureTasks(terrarium);
-        keeper3.addEnclosureTasks(meadow);
         keeper3.addEnclosureTasks(ried);
         keeper3.addEnclosureTasks(alpMeadow);
 

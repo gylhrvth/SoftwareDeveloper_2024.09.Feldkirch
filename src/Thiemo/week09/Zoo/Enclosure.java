@@ -15,6 +15,7 @@ public class Enclosure {
     private Vector<Animal> deadAnimallist;
     private String cleanedBy = null;
     private String gotfeedby = null;
+    private boolean workdone;
 
 
     public Enclosure(String name, int maxCapacityAnimals, String indoorOrOutdoor) {
@@ -23,6 +24,7 @@ public class Enclosure {
         this.indoorOrOutdoor = indoorOrOutdoor;
         this.animalList = new Vector<>();
         this.deadAnimallist = new Vector<>();
+        this.workdone = false;
     }
 
     public void addDeadAnimals(Animal animal) {
@@ -38,7 +40,7 @@ public class Enclosure {
 
     public void removeAnimals(Animal animal) {
         animalList.remove(animal);
-        System.out.println(animal.getName() + "remove from " + name);
+
     }
 
     public void printEnclosure() {
@@ -82,16 +84,17 @@ public class Enclosure {
                 System.out.println(animal.getName() + "......");
             }
         }
+    }
 
+    public void removeDeadAnimals() {
         for (int i = 0; i < animalList.size(); i++) {
-            Animal randomAnimal = animalList.get(i);
-            if (randomAnimal.getHP() <= 0) {
-                addDeadAnimals(randomAnimal);
-                removeAnimals(randomAnimal);
+            Animal animal = animalList.get(i);
+            if (animal.getHP() <= 0) {
+                addDeadAnimals(animal);
+                removeAnimals(animal);
             }
         }
     }
-
 
     public void simulateDayEnclosureVet(Vet vet) {
 
@@ -144,6 +147,10 @@ public class Enclosure {
         this.cleanedBy = cleanedBy;
     }
 
+    public boolean isWorkdone() {
+        return workdone;
+    }
+
     public String getName() {
         return name;
     }
@@ -158,6 +165,10 @@ public class Enclosure {
 
     public void setGotfeedby(String gotfeedby) {
         this.gotfeedby = gotfeedby;
+    }
+
+    public void resetworkdone() {
+        this.workdone = false;
     }
 
     public void resetFeedingStatus() {
@@ -175,27 +186,32 @@ public class Enclosure {
 
 
     public void simulateDayEnclosureKeeper(Zookeeper zookeeper) {
-        if (getGotfeedby() == null) {
-            System.out.println(zookeeper.getName() + " feeds the animals in " + getName());
-            for (Animal animal : animalList) {
-                animal.simulateDayAnimalfeeding();
-                setGotfeedby(zookeeper.getName());
+        if (workdone) {
+            System.out.println("the job in "+name+" is already done by " + zookeeper.getName());
+        } else {
+            System.out.println(zookeeper.getName() + " walks over to " + name);
+            if (getGotfeedby() == null) {
+                System.out.println(zookeeper.getName() + " feeds the animals in " + getName());
+                for (Animal animal : animalList) {
+                    animal.simulateDayAnimalfeeding();
+                    setGotfeedby(zookeeper.getName());
+                }
+
+            } else {
+                System.out.println("The animals in " + getName() + " got already fed by: " + getGotfeedby());
             }
 
-        } else {
-            System.out.println("The animals in " + getName() + " got already fed by: " + getGotfeedby());
-        }
+            observerandomanimal(zookeeper);
 
-        observerandomanimal(zookeeper);
-
-        if (getCleanedBy() == null) {
-            System.out.println(zookeeper.getName() + " cleans " + name);
-            setCleanedBy(name);
-        } else {
-            System.out.println(getName() + " got already cleaned by: " + getGotfeedby());
+            if (getCleanedBy() == null) {
+                System.out.println(zookeeper.getName() + " cleans " + name);
+                setCleanedBy(name);
+            } else {
+                System.out.println(getName() + " got already cleaned by: " + getGotfeedby());
+            }
+            workdone = true;
         }
     }
-
 
     @Override
     public String toString() {

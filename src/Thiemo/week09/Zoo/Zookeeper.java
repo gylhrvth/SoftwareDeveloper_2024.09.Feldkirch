@@ -13,6 +13,8 @@ public class Zookeeper {
     private int dangerLevel;
     private Vector<Enclosure> taskList;
     private String mostLikedAnimal;
+    private boolean workdone;
+
 
     public Zookeeper(String name, String gender, int age, int HP, int SP, int dangerLevel, String mostLikedAnimal) {
         this.name = name;
@@ -23,7 +25,9 @@ public class Zookeeper {
         this.dangerLevel = dangerLevel;
         this.taskList = new Vector<>();
         this.mostLikedAnimal = mostLikedAnimal;
+        this.workdone = false;
     }
+
 
     public void addEnclosureTasks(Enclosure enclosure) {
         if (taskList.contains(enclosure)) {
@@ -38,19 +42,11 @@ public class Zookeeper {
 
 
     public void simulateDayKeeper() {
-        for (Enclosure enc : taskList) {
-            System.out.println(name + " walks over to " + enc.getName());
-            enc.simulateDayEnclosureKeeper(this);
+        Enclosure randomtask = taskList.get(random.nextInt(taskList.size()));
+        randomtask.simulateDayEnclosureKeeper(this);
 
-        }
-//        Enclosure randomEnclosure = taskList.get(random.nextInt(taskList.size()));
-//        for (int i = 0; i < taskList.size(); i--) {
-//
-//            System.out.println(name + " walks over to " + randomEnclosure.getName());
-//            randomEnclosure.simulateDayEnclosureKeeper(this);
-//
-//        }
     }
+
 
     public String getMostLikedAnimal() {
         return mostLikedAnimal;
@@ -63,5 +59,9 @@ public class Zookeeper {
             System.out.print(" |" + enc.getName());
         }
         System.out.println();
+    }
+
+    public Vector<Enclosure> getTaskList() {
+        return taskList;
     }
 }
