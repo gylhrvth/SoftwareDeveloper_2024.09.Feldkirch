@@ -18,6 +18,7 @@ public class main {
         for (Geometry g : geometries){
             System.out.println("Area of " + g.getClass().getSimpleName() + ": " + g.getArea());
             System.out.println("Circumference of " + g.getClass().getSimpleName() + ": " + g.getCircumference());
+            System.out.println();
             sumOfAllAreas += g.getArea();
             sumOfAllCircumferences += g.getCircumference();
         }

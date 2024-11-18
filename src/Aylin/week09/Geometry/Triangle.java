@@ -9,11 +9,11 @@ public class Triangle extends Geometry{
 
     @Override
     public double getCircumference() {
-        return 0;
+        return 3 * length;
     }
 
     @Override
     public double getArea() {
-        return 0;
+        return Math.sqrt(3) * length * length / 4.0;
     }
 }

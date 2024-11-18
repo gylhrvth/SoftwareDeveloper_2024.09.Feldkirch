@@ -6,14 +6,4 @@ public class Square extends Rectangle{
     public Square(double size) {
         super(size, size);
     }
-
-    @Override
-    public double getCircumference() {
-        return 2 * size;
-    }
-
-    @Override
-    public double getArea() {
-        return size * size;
-    }
 }
