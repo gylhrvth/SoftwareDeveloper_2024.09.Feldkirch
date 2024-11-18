@@ -1,9 +1,9 @@
 package Aylin.week10.GeometryInterface;
 
-public class ICircle implements IGeometry {
+public class Circle implements IGeometry {
     private double radius;
 
-    public ICircle(double radius) {
+    public Circle(double radius) {
         this.radius = radius;
     }
 

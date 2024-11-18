@@ -3,14 +3,16 @@ package Aylin.week10.GeometryInterface;
 import java.util.List;
 import java.util.Vector;
 
-public class IMain {
+public class Main {
     public static void main(String[] args) {
 
         List<IGeometry> geometries = new Vector<>();
-        geometries.add(new ITriangle(30));
-        geometries.add(new IRectangle(24, 36));
-        geometries.add(new ICircle(5));
-        geometries.add(new ISquare(50));
+        geometries.add(new Triangle(30));
+        geometries.add(new Rectangle(24, 36));
+        geometries.add(new Circle(32));
+        geometries.add(new Square(23));
+        geometries.add(new HouseOfNikolaus(5));
+        geometries.add(new CompassStar(54));
 
         int sumOfAllAreas = 0;
         int sumOfAllCircumferences = 0;

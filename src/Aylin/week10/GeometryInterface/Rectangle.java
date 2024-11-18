@@ -1,10 +1,14 @@
 package Aylin.week10.GeometryInterface;
 
-public class IRectangle implements IGeometry {
+public class Rectangle implements IGeometry {
     private double width;
     private double height;
 
-    public IRectangle(double width, double height) {
+    public Rectangle(double width, double height) {
+        if(width < 0 || height < 0){
+            width = 0;
+            height = 0;
+        }
         this.width = width;
         this.height = height;
     }

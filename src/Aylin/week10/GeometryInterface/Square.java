@@ -1,9 +1,9 @@
 package Aylin.week10.GeometryInterface;
 
-public class ISquare extends IRectangle {
+public class Square extends Rectangle {
     private double size;
 
-    public ISquare(double size) {
+    public Square(double size) {
         super(size, size);
     }
 }
