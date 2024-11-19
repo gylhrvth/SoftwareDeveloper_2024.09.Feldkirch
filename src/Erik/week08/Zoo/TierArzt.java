@@ -47,35 +47,5 @@ public class TierArzt {
     public String toString() {
         return Colors.COLORS[5] + name + Colors.RESET;
     }
-
-
-    // Old
-    public void startDaySimulation(Tier tier, Gehege gh) {
-//        Tier needToHeal = gh.searchForLowestHealth();
-//        System.out.println(needToHeal); // welches tier?
-//        tier.heal(needToHeal);
-
-
-        // lowestHP Animal speichern
-        // Heal funktion aufrufen
-
-
-//        for (Gehege gh : taskList) {
-//            gh.vetGoesThroughEveryAnimal();
-//        }
-    }
 }
 
-
-
-
-/*
-    public void behandelnTest(Zoo zoo) {
-        Tier lowestHPAnimal = zoo.findLowestHPAnimal();
-        if (lowestHPAnimal != null) {
-            int neueGesundheit = Math.min(lowestHPAnimal.getCurrentHP() + 15, lowestHPAnimal.getMaxHP());
-            lowestHPAnimal.setCurrentHP(neueGesundheit);
-            System.out.println(this.name + " hat " + lowestHPAnimal.getName() + " behandelt! Neue Gesundheit von " + lowestHPAnimal.getName() + ": " + lowestHPAnimal.getCurrentHP());
-        }
-    }
- */

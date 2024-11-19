@@ -113,33 +113,4 @@ public class Gehege {
         }
         return best;
     }
-
-
-
-    // Old Stuff
-    public void searchForLowestOld() {
-        // Variable erstellen for the lowest Health
-        int searchForLowestHealth = Integer.MAX_VALUE;
-        // Alle Tiere durchgehen
-        for (Tier tier : tierListe) {
-            if (tier.getCurrentHP() < searchForLowestHealth) {
-                searchForLowestHealth = tier.getCurrentHP();
-            }
-        }
-        // erstes Tier aktuelle HP in variable speichern
-        // aktuell gespeicherter Wert mit dem nächsten Tier vergleichen
-        // Falls nächstes Tier currentHP ist kleiner als die gespeicherten Werte überschreiben
-    }
-
-    public void startDaySimVet(TierArzt vet) {
-        Tier needToHeal = searchForLowestHealth();
-        System.out.println("Das Tier mit der geringsten HP: >> " + needToHeal.getName() + " current HP " + needToHeal.getCurrentHP());
-
-
-        needToHeal.heal(vet);
-        System.out.println("Tiere werden geheilt...");
-        System.out.println("Tiere: " + needToHeal.getName() + " +15 HP Aktuelle HP: >> " + needToHeal.getCurrentHP());
-
-
-    }
 }

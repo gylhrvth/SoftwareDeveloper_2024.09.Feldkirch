@@ -54,10 +54,6 @@ public class Tier {
         return currentHP;
     }
 
-    public int getMaxHP() {
-        return maxHP;
-    }
-
 
     // Methoden
     public void printTierStructure() {
@@ -130,17 +126,3 @@ public class Tier {
         return Colors.COLORS[6] + name + Colors.RESET;
     }
 }
-
-
-
-
-/*
-    // Unnötig
-//    public Tier findLowestAnimal(){
-//        Tier best = null;
-//        if (best == null || this.getCurrentHP() < best.getCurrentHP()){
-//            best = this;
-//        }
-//        return best;
-//    }
- */

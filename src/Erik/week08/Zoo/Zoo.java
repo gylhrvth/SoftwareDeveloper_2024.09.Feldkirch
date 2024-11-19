@@ -97,13 +97,11 @@ public class Zoo {
     public Tier findOverallLowestAnimal() {
         Tier overallLowestHP = null;
         for (Gehege gh : gehegeListe) {
-
             Tier lowestHPAnimal = gh.searchForLowestHealth();
 
             if (overallLowestHP == null || overallLowestHP.getCurrentHP() < lowestHPAnimal.getCurrentHP()) {
                 overallLowestHP = lowestHPAnimal;
             }
-//            overallLowestHP = gh.searchForLowestHealth();
         }
         return overallLowestHP;
     }
