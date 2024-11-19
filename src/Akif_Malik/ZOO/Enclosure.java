@@ -1,8 +1,7 @@
 package Akif_Malik.ZOO;
 
-import Gyula.week09.zoo.Animal;
+import Gyula.WildColors;
 import Sandro.Colors;
-
 import java.util.Random;
 import java.util.Vector;
 
@@ -18,10 +17,6 @@ public class Enclosure {
         this.tiere = new Vector<>();
     }
 
-    public void addTiere(Tiere tierName) {
-        tiere.add(tierName);
-    }
-
     public String getName() {
         return name;
     }
@@ -34,8 +29,7 @@ public class Enclosure {
         Tiere randomAnimal = tiere.get(random.nextInt(tiere.size()));
         if (zooKeeper.getFavoriteSpecies().equals(randomAnimal.getDescription())) {
             System.out.println(zooKeeper + " admires " + randomAnimal);
-        } else {
-            System.out.println(zooKeeper + " observes " + randomAnimal);
+        } else { System.out.println(zooKeeper + " observes " + randomAnimal);
         }
     }
 
@@ -68,7 +62,7 @@ public class Enclosure {
     }
 
     public void simulateFight() {
-        System.out.println("There is some aggression in " + this);
+        System.out.println(WildColors.getColor("#35A9F4") + "There is some aggression in " + this + WildColors.resetColor());
         for (Tiere tier : tiere) {
             Vector<Tiere> possibleVictims = new Vector<>();
             for (Tiere testAnimal : tiere) {
@@ -84,20 +78,19 @@ public class Enclosure {
         removeDeadAnimals();
     }
 
-    public Tiere searchAndCreateAnimal(String name, String species, String gender, int maxHealth, int attack){
+    public Tiere searchAndCreateAnimal(String name, String species, String gender, int maxHealth, int attack) {
         Tiere result = null;
-        for (Tiere tiere : tiere){
-            if (result == null && tiere.getName().equals(name)){
+        for (Tiere tiere : tiere) {
+            if (result == null && tiere.getName().equals(name)) {
                 result = tiere;
             }
         }
-        if (result == null){
+        if (result == null) {
             result = new Tiere(name, species, maxHealth, attack);
             tiere.add(result);
         }
         return result;
     }
-
 
     @Override
     public String toString() {

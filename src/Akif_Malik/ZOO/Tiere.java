@@ -1,18 +1,17 @@
 package Akif_Malik.ZOO;
 
+import Gyula.WildColors;
 import Sandro.Colors;
-
 import java.util.Random;
 
 public class Tiere {
+    Random random = new Random();
 
     private String name;
     private String description;
     private int health;
     private int maxHealth;
     private int attack;
-
-    Random random = new Random();
 
     public Tiere(String name, String description, int maxHealth, int attack) {
         this.name = name;
@@ -24,10 +23,6 @@ public class Tiere {
 
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getName() {
@@ -47,14 +42,13 @@ public class Tiere {
     }
 
     public void simulateFight(Tiere victim) {
-        if (
-                (random.nextInt(100) < 40) &&
+        if ((random.nextInt(100) < 40) &&
                         this.isAlive() &&
                         victim.isAlive()) {
             victim.health -= this.attack;
-            System.out.print(this + " has biten " + victim + ".");
+            System.out.print(WildColors.getColor("#DC31A3") + this + " has biten " + victim + "." + WildColors.resetColor());
             if (victim.health > 0) {
-                System.out.println(" " + victim + " has " + victim.health + " HP left.");
+                System.out.println(WildColors.getColor("#A41AEE") + " " + victim + " has " + victim.health + " HP left." + WildColors.resetColor());
             } else {
                 System.out.println(" " + victim + " RIP.");
             }
