@@ -1,19 +1,28 @@
 package Akif_Malik.ZOO;
 
-/*
-    -Jeder Tierarzt wird an jedem Tag - genau 1 Tier behandeln
-    -Der Tierarzt wählt das Tier mit der geringsten relativen Gesundheit
-        Zum Beispiel: 10 Gesundheit mit 100 Maximum ist 10% und so dringender als 1 Gesundheit aus 2 ergo 50%.
-    -Der Tierarzt wird zufällig zwischen 30 und 100% der Gesundheit wiederherstellen
-    -Kein Tier kann über die maximale Gesundheit geboostet werden.
+import Gyula.WildColors;
 
- */
+import java.util.Vector;
 
 public class Doctor {
 
+    private Vector<Enclosure> taskList;
     private String name;
+    private Boolean lowestAnimalHealth;
 
     public Doctor(String name) {
         this.name = name;
+        this.taskList = new Vector<>();
+        this.lowestAnimalHealth = false;
+    }
+
+    public void addTask(Enclosure task) {
+        if (!taskList.contains(task)) {
+            taskList.add(task);
+        }
+    }
+
+    public void startDayForDoctor() {
+            System.out.println("Doctor " + name + ":" + WildColors.getColor("#8F537B") + "Animals do not need to be healed.\n See you tomorrow :-)");
     }
 }

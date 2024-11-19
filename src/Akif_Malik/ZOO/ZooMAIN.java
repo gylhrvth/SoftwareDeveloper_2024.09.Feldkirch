@@ -21,6 +21,9 @@ public class ZooMAIN {
         tiergartenDornbirn.searchAndCreateZooKeeper("Enes", "Savanna", "chicken");
         tiergartenDornbirn.searchAndCreateZooKeeper("Seyda", "Jungle", "monkey");
         tiergartenDornbirn.searchAndCreateZooKeeper("Ubi", "Jungle", "fish");
+        //------------------------------------------------------------------------------------------------------------\\
+        Doctor a = new Doctor("Mahmut");
+
 
 
         for (int day = 1; day < 11; day++) {

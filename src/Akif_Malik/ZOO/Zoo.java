@@ -13,6 +13,7 @@ public class Zoo {
     private Vector<Tiere> tiere;
     private Vector<Essen> foods;
     private Vector<ZooKeeper> zooKeepers;
+    private Vector<Doctor> healing;
     //---------------Constuctor---------------\\
     public Zoo(String name, int year) {
         this.name = name;
@@ -20,7 +21,8 @@ public class Zoo {
         this.gehegen = new Vector<>();
         this.tiere = new Vector<>();
         this.foods = new Vector<>();
-        this.zooKeepers = new Vector<>(); }
+        this.zooKeepers = new Vector<>();
+        this.healing = new Vector<>();  }
     //---------------Functions---------------\\
     public void addGehege(Enclosure gehegeName) {
         gehegen.add(gehegeName);
@@ -62,6 +64,9 @@ public class Zoo {
         for (Enclosure enc : gehegen) {
             enc.simulateFight();
         }
+        for (Doctor dc : healing) {
+            dc.startDayForDoctor();
+        }
         System.out.println();
     }
 
@@ -99,5 +104,4 @@ public class Zoo {
         Enclosure enc = searchAndCreateEnclosure(enclosureName);
         return enc.searchAndCreateAnimal(animalName, species, gender, maxHealth, attack);
     }
-
 }
