@@ -13,6 +13,9 @@ public class ZooStart {
         Pfleger pflegerSelina = new Pfleger("Selina", "Delphin");
         Pfleger pflegerJack = new Pfleger("Jack", "Otter");
 
+        // Tier Arzt Objekt erstellen
+        TierArzt vetOliver = new TierArzt("Oliver");
+
         // Gehege Objekte erstellen
         Gehege freiland = new Gehege("Freiland Wiese");
         Gehege aquarium = new Gehege("Aquarium");
@@ -30,6 +33,18 @@ public class ZooStart {
         Tier delphin = new Tier("Delphin", "Rudolf", fish, 50, 250, 4);
         Tier krokodil = new Tier("Krokodil", "Schnappi", fleisch, 100, 550, 18);
         Tier fisch = new Tier("Fish", "Robin", pflanze, 5, 50, 2);
+        Tier huhn = new Tier("Huhn", "Max",gras,5,100,2);
+        Tier huhn1 = new Tier("Huhn", "Bella",gras,5,100,2);
+        Tier huhn2 = new Tier("Huhn", "Luna",gras,5,100,2);
+        Tier huhn3 = new Tier("Huhn", "Charlie",gras,5,100,2);
+        Tier huhn4 = new Tier("Huhn", "Daisy",gras,5,100,2);
+        Tier huhn5 = new Tier("Huhn", "Simba",gras,5,100,2);
+        Tier huhn6 = new Tier("Huhn", "Nala",gras,5,100,2);
+        Tier huhn7 = new Tier("Huhn", "Milo",gras,5,100,2);
+        Tier huhn8 = new Tier("Huhn", "Nino",gras,5,100,2);
+        Tier huhn9 = new Tier("Huhn", "Chloe",gras,5,100,2);
+
+
 
 
         // Methoden aufrufen
@@ -50,23 +65,39 @@ public class ZooStart {
         pflegerSelina.addTask(terrarium);
         pflegerJack.addTask(aquarium);
 
+        // Tier Arzt adden
+        zoo.addVet(vetOliver);
+
 
         // Tiere adden
-        aquarium.addTiereToTierList(otter);
+        // Freiland
         freiland.addTiereToTierList(schaf);
+        freiland.addTiereToTierList(huhn);
+        freiland.addTiereToTierList(huhn2);
+        freiland.addTiereToTierList(huhn3);
+        freiland.addTiereToTierList(huhn4);
+        freiland.addTiereToTierList(huhn5);
+        freiland.addTiereToTierList(huhn6);
+
+        // Aquarium
+        aquarium.addTiereToTierList(otter);
         aquarium.addTiereToTierList(delphin);
-        terrarium.addTiereToTierList(krokodil);
         aquarium.addTiereToTierList(fisch);
+
+        // Terrarium
+        terrarium.addTiereToTierList(krokodil);
+        freiland.addTiereToTierList(huhn7);
+        freiland.addTiereToTierList(huhn8);
+        freiland.addTiereToTierList(huhn9);
+        freiland.addTiereToTierList(huhn1);
 
 
         // Zoo Structure mit Kosten und Simulation Printen
         zoo.printZooStructure();
         zoo.printFoodCost();
+        zoo.startTagesSimulation();
 
-        System.out.println(Colors.COLORS[3] + "Simulation des Zoo's wird gestartet: ..." + Colors.RESET);
-        for (int tag = 1; tag <= 10; tag++) {
-            System.out.println(Colors.COLORS[1] + "Tag: >> " + tag + " <<" + Colors.RESET);
-            zoo.startTagesSimulation();
-        }
+
+
     }
 }

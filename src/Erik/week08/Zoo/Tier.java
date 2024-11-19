@@ -81,7 +81,7 @@ public class Tier {
     }
 
     public void startFightSimulation(Tier victim) {
-        if (rand.nextInt(100) < 40 &&   // 40 % Wahrscheinlichkeit, dass Tier beißen können
+        if (rand.nextInt(100) < 60 &&   // 60 % Wahrscheinlichkeit, dass Tier beißen können
                 victim.isAlive() &&
                 this.isAlive()) {
             if (victim.getName().equals(this.getName())) {
@@ -102,28 +102,4 @@ public class Tier {
     public String toString() {
         return Colors.COLORS[6] + name + Colors.RESET;
     }
-
-    public void startTagesSimulation() {
-        System.out.println(getName() + " chillt sein Leben.");
-    }
-
 }
-/*
-    // old
-    public void attack(Gehege gh) {
-        Tier attacker = null;
-        Tier opfer = null;
-
-        if (rand.nextInt(100) < 99) {
-            if (gh.getTierListe().size() < 2) { // wenn tier Liste im gehege leer ist
-                System.out.println(Colors.COLORS[8] + getName() + " Hat keine möglichkeit jemanden zu beißen!" + Colors.RESET);
-            } else {
-                System.out.println(Colors.COLORS[1] + getName() + " versucht anderes Tier im Gehege zu beißen" + Colors.RESET);
-            }
-
-
-            //            opfer.setCurrentHP(attacker.getBite());
-            // opfer currentHP wird herunter gesetzt von dem jeweiligen attacker tier bite Damage currentHP.set ....
-        }
-    }
- */
