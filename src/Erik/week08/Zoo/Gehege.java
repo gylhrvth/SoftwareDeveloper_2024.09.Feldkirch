@@ -94,7 +94,6 @@ public class Gehege {
         System.out.println("─".repeat(80));
     }
 
-
     public void startFightSimulation() {
         System.out.println("Aggressivität steigt im Gehege ..." + this);
 
@@ -105,24 +104,10 @@ public class Gehege {
     }
 
 
-    public void startDaySimVet(TierArzt vet) {
-        Tier needToHeal = searchForLowestHealth();
-        System.out.println("Das Tier mit der geringsten HP: >> " + needToHeal.getName() + " current HP " + needToHeal.getCurrentHP());
-
-
-        needToHeal.heal(vet);
-        System.out.println("Tiere werden geheilt...");
-        System.out.println("Tiere: " + needToHeal.getName() + " +15 HP Aktuelle HP: >> " + needToHeal.getCurrentHP());
-
-
-    }
-
     public Tier searchForLowestHealth() {
         Tier best = null;
         for (Tier animal : tierListe) {
-            // Suche stimmt was nicht nimmt immer das gleiche Tier jeden Tag
-            // nimmt immer das letzte tier aus der liste
-            if (best == null || best.getCurrentHP() < animal.getCurrentHP()) {
+            if (best == null || best.getCurrentHP() > animal.getCurrentHP()) {
                 best = animal;
             }
         }
@@ -130,6 +115,8 @@ public class Gehege {
     }
 
 
+
+    // Old Stuff
     public void searchForLowestOld() {
         // Variable erstellen for the lowest Health
         int searchForLowestHealth = Integer.MAX_VALUE;
@@ -142,5 +129,17 @@ public class Gehege {
         // erstes Tier aktuelle HP in variable speichern
         // aktuell gespeicherter Wert mit dem nächsten Tier vergleichen
         // Falls nächstes Tier currentHP ist kleiner als die gespeicherten Werte überschreiben
+    }
+
+    public void startDaySimVet(TierArzt vet) {
+        Tier needToHeal = searchForLowestHealth();
+        System.out.println("Das Tier mit der geringsten HP: >> " + needToHeal.getName() + " current HP " + needToHeal.getCurrentHP());
+
+
+        needToHeal.heal(vet);
+        System.out.println("Tiere werden geheilt...");
+        System.out.println("Tiere: " + needToHeal.getName() + " +15 HP Aktuelle HP: >> " + needToHeal.getCurrentHP());
+
+
     }
 }

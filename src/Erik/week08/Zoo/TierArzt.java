@@ -1,6 +1,7 @@
 package Erik.week08.Zoo;
 
 import Sandro.Colors;
+
 import java.util.Vector;
 
 public class TierArzt {
@@ -11,7 +12,7 @@ public class TierArzt {
 
 
     // Konstruktor
-    public TierArzt(String name){
+    public TierArzt(String name) {
         this.name = name;
         this.taskList = new Vector<>();
     }
@@ -30,22 +31,16 @@ public class TierArzt {
         }
     }
 
-    public void startDaySim(Zoo zoo){
-        Tier animal = zoo.findLowestHPAnimal();
-        if (animal != null){
+    public void startDaySim(Zoo zoo) {
+        Tier animal = zoo.findOverallLowestAnimal();
+        if (animal != null) {
             animal.heal(this);
         } else {
             System.out.println("Dr." + name + ".. nobody needs a heal ..");
         }
-
-
-
-
-
-//        for (Gehege gh : taskList) {
-//            gh.startDaySimVet();
-//        }
     }
+
+
 
 
     @Override
@@ -53,7 +48,9 @@ public class TierArzt {
         return Colors.COLORS[5] + name + Colors.RESET;
     }
 
-    public void startDaySimulation(Tier tier, Gehege gh){
+
+    // Old
+    public void startDaySimulation(Tier tier, Gehege gh) {
 //        Tier needToHeal = gh.searchForLowestHealth();
 //        System.out.println(needToHeal); // welches tier?
 //        tier.heal(needToHeal);
@@ -68,3 +65,17 @@ public class TierArzt {
 //        }
     }
 }
+
+
+
+
+/*
+    public void behandelnTest(Zoo zoo) {
+        Tier lowestHPAnimal = zoo.findLowestHPAnimal();
+        if (lowestHPAnimal != null) {
+            int neueGesundheit = Math.min(lowestHPAnimal.getCurrentHP() + 15, lowestHPAnimal.getMaxHP());
+            lowestHPAnimal.setCurrentHP(neueGesundheit);
+            System.out.println(this.name + " hat " + lowestHPAnimal.getName() + " behandelt! Neue Gesundheit von " + lowestHPAnimal.getName() + ": " + lowestHPAnimal.getCurrentHP());
+        }
+    }
+ */

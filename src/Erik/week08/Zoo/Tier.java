@@ -54,6 +54,10 @@ public class Tier {
         return currentHP;
     }
 
+    public int getMaxHP() {
+        return maxHP;
+    }
+
 
     // Methoden
     public void printTierStructure() {
@@ -95,6 +99,15 @@ public class Tier {
         }
     }
 
+    public float getRelativeHealth(){
+        float relativHealth = 0;
+
+
+
+        return relativHealth;
+    }
+
+
 
     public void heal(TierArzt vet) {
 //        int procentHeal = rand.nextInt(30, 100); // 30 und 100 % später implementieren
@@ -117,3 +130,17 @@ public class Tier {
         return Colors.COLORS[6] + name + Colors.RESET;
     }
 }
+
+
+
+
+/*
+    // Unnötig
+//    public Tier findLowestAnimal(){
+//        Tier best = null;
+//        if (best == null || this.getCurrentHP() < best.getCurrentHP()){
+//            best = this;
+//        }
+//        return best;
+//    }
+ */

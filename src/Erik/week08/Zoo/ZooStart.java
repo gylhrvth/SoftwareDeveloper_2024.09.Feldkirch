@@ -103,6 +103,7 @@ public class ZooStart {
         zoo.printFoodCost();
         zoo.startTagesSimulation();
 
+
         // Tier arzt bekommt liste
         // Tier arzt geht die Liste von Gehegen durch
         // Geht, die Tier liste mit Tieren durch

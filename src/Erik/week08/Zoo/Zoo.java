@@ -51,7 +51,7 @@ public class Zoo {
         }
     }
 
-    public void addVet(TierArzt vet){
+    public void addVet(TierArzt vet) {
         if (!vetList.contains(vet)) {
             vetList.add(vet);
         }
@@ -92,13 +92,24 @@ public class Zoo {
         System.out.println("─".repeat(80));
     }
 
-    public Tier findLowestHPAnimal() {
-        Tier lowestHPFromZoo = null;
+
+    // Abfrage überprüfen
+    public Tier findOverallLowestAnimal() {
+        Tier overallLowestHP = null;
         for (Gehege gh : gehegeListe) {
-            lowestHPFromZoo = gh.searchForLowestHealth();
+
+            Tier lowestHPAnimal = gh.searchForLowestHealth();
+
+            if (overallLowestHP == null || overallLowestHP.getCurrentHP() < lowestHPAnimal.getCurrentHP()) {
+                overallLowestHP = lowestHPAnimal;
+            }
+//            overallLowestHP = gh.searchForLowestHealth();
         }
-        return lowestHPFromZoo;
+        return overallLowestHP;
     }
+
+
+
 
 
     public void startTagesSimulation() {
@@ -135,7 +146,7 @@ public class Zoo {
 
             // Tier Arzt start
             System.out.println(Colors.COLORS[3] + ">> Tier Arzt kommt in den Zoo <<" + Colors.RESET);
-            for (TierArzt vet : vetList){
+            for (TierArzt vet : vetList) {
                 vet.startDaySim(this);
             }
             System.out.println(Colors.COLORS[3] + ">> Tier Arzt hat die Arbeit erledigt <<" + Colors.RESET);
