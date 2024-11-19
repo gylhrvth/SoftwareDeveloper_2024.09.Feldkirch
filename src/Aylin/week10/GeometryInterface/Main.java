@@ -11,7 +11,7 @@ public class Main {
         geometries.add(new Rectangle(24, 36));
         geometries.add(new Circle(32));
         geometries.add(new Square(23));
-        geometries.add(new HouseOfNikolaus(5));
+        geometries.add(new HouseOfNikolaus(7));
         geometries.add(new CompassStar(54));
 
         int sumOfAllAreas = 0;

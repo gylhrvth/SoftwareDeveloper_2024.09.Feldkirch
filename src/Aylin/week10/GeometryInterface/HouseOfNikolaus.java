@@ -7,7 +7,7 @@ public class HouseOfNikolaus implements IGeometry{
 
     public HouseOfNikolaus(double size){
         if(size < 0){
-            size = 0;
+            throw new RuntimeException("Size can't be a negative number");
         }
         this.size = size;
         this.triangle = new Triangle(size);
