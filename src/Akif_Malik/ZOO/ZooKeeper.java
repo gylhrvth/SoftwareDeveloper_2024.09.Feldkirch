@@ -1,7 +1,6 @@
 package Akif_Malik.ZOO;
 
 import Gyula.WildColors;
-
 import java.util.Vector;
 
 public class ZooKeeper {
@@ -41,8 +40,6 @@ public class ZooKeeper {
         }
         System.out.println();
     }
-
-    public void addZooKeeper(ZooKeeper keeperName) { zooKeepers.add(keeperName); }
 
     public void simulateDay() {
         if (taskList.isEmpty()) {
