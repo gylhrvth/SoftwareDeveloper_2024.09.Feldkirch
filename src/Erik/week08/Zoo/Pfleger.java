@@ -29,6 +29,7 @@ public class Pfleger {
         return lieblingsGattung;
     }
 
+
     // Methoden
     public void addTask(Gehege task) {
         if (!taskList.contains(task)) {
@@ -49,7 +50,7 @@ public class Pfleger {
 
     public void startTagesSimulation() {
         for (Gehege gh : taskList) {
-            gh.startTagesSimulation(this); // this (Pfleger Object mit geben; NICHT die Klasse "Pfleger")
+            gh.startDaySimulationForPfleger(this); // this (Pfleger Object mit geben; NICHT die Klasse "Pfleger")
         }
     }
 
