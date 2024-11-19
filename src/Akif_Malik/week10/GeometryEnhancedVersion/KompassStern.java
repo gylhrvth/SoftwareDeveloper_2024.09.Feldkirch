@@ -6,18 +6,18 @@ public class KompassStern extends Geo{
 
     private Triangle triangle;
 
-    public KompassStern() {
-        this.square = new Square(5);
-        this.triangle = new Triangle(5);
+    public KompassStern(int size) {
+        this.square = new Square(size);
+        this.triangle = new Triangle(size);
     }
 
     @Override
     public double getCircumference() {
-        return 1;
+        return triangle.getCircumference()* 4 - square.getCircumference();
     }
 
     @Override
     public double getArea() {
-        return 0;
+        return triangle.getArea() * 4 + square.getArea();
     }
 }

@@ -6,19 +6,21 @@ public class HausVomNikolaus extends Geo{
 
     private Triangle triangle;
 
+    private int size;
 
-    public HausVomNikolaus() {
-        this.square = new Square(5);
-        this.triangle = new Triangle(5);
+
+    public HausVomNikolaus(int size) {
+        this.square = new Square(size);
+        this.triangle = new Triangle(size);
     }
 
     @Override
     public double getCircumference() {
-        return 0;
+        return square.getCircumference() + triangle.getCircumference() -5;
     }
 
     @Override
     public double getArea() {
-        return 0;
+        return square.getArea() + triangle.getArea();
     }
 }
