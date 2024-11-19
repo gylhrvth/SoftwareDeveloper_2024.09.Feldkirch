@@ -30,6 +30,12 @@ public class Gehege {
 
 
     // Methoden
+
+    @Override
+    public String toString() {
+        return Colors.COLORS[5] + name + Colors.RESET;
+    }
+
     public void addTiereToTierList(Tier ti) {
         if (!tierListe.contains(ti)) {
             tierListe.add(ti);
@@ -98,25 +104,43 @@ public class Gehege {
         }
     }
 
-    public void searchForLowestHealth() {
+
+    public void startDaySimVet(TierArzt vet) {
+        Tier needToHeal = searchForLowestHealth();
+        System.out.println("Das Tier mit der geringsten HP: >> " + needToHeal.getName() + " current HP " + needToHeal.getCurrentHP());
+
+
+        needToHeal.heal(vet);
+        System.out.println("Tiere werden geheilt...");
+        System.out.println("Tiere: " + needToHeal.getName() + " +15 HP Aktuelle HP: >> " + needToHeal.getCurrentHP());
+
+
+    }
+
+    public Tier searchForLowestHealth() {
+        Tier best = null;
+        for (Tier animal : tierListe) {
+            // Suche stimmt was nicht nimmt immer das gleiche Tier jeden Tag
+            // nimmt immer das letzte tier aus der liste
+            if (best == null || best.getCurrentHP() < animal.getCurrentHP()) {
+                best = animal;
+            }
+        }
+        return best;
+    }
+
+
+    public void searchForLowestOld() {
         // Variable erstellen for the lowest Health
         int searchForLowestHealth = Integer.MAX_VALUE;
         // Alle Tiere durchgehen
-        for (Tier tier : tierListe){
-            System.out.println(tier.getCurrentHP());    // Veranschaulichung was passiert jedes tier durchgehen aktuelle HP anzeigen
-
-            if (tier.getCurrentHP() < searchForLowestHealth){
+        for (Tier tier : tierListe) {
+            if (tier.getCurrentHP() < searchForLowestHealth) {
                 searchForLowestHealth = tier.getCurrentHP();
             }
         }
         // erstes Tier aktuelle HP in variable speichern
         // aktuell gespeicherter Wert mit dem nächsten Tier vergleichen
         // Falls nächstes Tier currentHP ist kleiner als die gespeicherten Werte überschreiben
-    }
-
-
-    @Override
-    public String toString() {
-        return Colors.COLORS[5] + name + Colors.RESET;
     }
 }

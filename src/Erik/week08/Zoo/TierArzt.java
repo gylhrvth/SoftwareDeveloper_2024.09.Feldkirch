@@ -1,7 +1,6 @@
 package Erik.week08.Zoo;
 
 import Sandro.Colors;
-
 import java.util.Vector;
 
 public class TierArzt {
@@ -14,31 +13,58 @@ public class TierArzt {
     // Konstruktor
     public TierArzt(String name){
         this.name = name;
+        this.taskList = new Vector<>();
     }
 
 
     // Getter - Setter
-
+    public String getName() {
+        return name;
+    }
 
 
     // Methoden
-    public void startDaySimulation(){
-        for (Gehege gh : taskList) {
-            gh.searchForLowestHealth(); // this (Pfleger Object mit geben; NICHT die Klasse "Pfleger")
+    public void addTask(Gehege task) {
+        if (!taskList.contains(task)) {
+            taskList.add(task);
+        }
+    }
+
+    public void startDaySim(Zoo zoo){
+        Tier animal = zoo.findLowestHPAnimal();
+        if (animal != null){
+            animal.heal(this);
+        } else {
+            System.out.println("Dr." + name + ".. nobody needs a heal ..");
         }
 
 
 
+
+
+//        for (Gehege gh : taskList) {
+//            gh.startDaySimVet();
+//        }
     }
 
-
-    // Heal Animal with the lowest Health Function
-    public void HealAnimals(){
-
-    }
 
     @Override
     public String toString() {
         return Colors.COLORS[5] + name + Colors.RESET;
+    }
+
+    public void startDaySimulation(Tier tier, Gehege gh){
+//        Tier needToHeal = gh.searchForLowestHealth();
+//        System.out.println(needToHeal); // welches tier?
+//        tier.heal(needToHeal);
+
+
+        // lowestHP Animal speichern
+        // Heal funktion aufrufen
+
+
+//        for (Gehege gh : taskList) {
+//            gh.vetGoesThroughEveryAnimal();
+//        }
     }
 }

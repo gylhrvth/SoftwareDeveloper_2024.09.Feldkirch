@@ -1,7 +1,5 @@
 package Erik.week08.Zoo;
 
-import Gyula.WildColors;
-import Gyula.week09.zoo.Animal;
 import Sandro.Colors;
 
 import java.util.HashMap;
@@ -91,10 +89,26 @@ public class Tier {
                 victim.setCurrentHP(victim.getCurrentHP() - this.getDamage());
                 System.out.println(Colors.COLORS[6] + victim.getName() + Colors.RESET + "'s aktuelles Leben ist " + Colors.COLORS[6] + victim.getCurrentHP() + " HP" + Colors.RESET);
             }
-            if (!victim.isAlive()){
-                System.out.println(Colors.COLORS[1] + victim.getName()  + " ist gestorben." + Colors.RESET);
+            if (!victim.isAlive()) {
+                System.out.println(Colors.COLORS[1] + victim.getName() + " ist gestorben." + Colors.RESET);
             }
         }
+    }
+
+
+    public void heal(TierArzt vet) {
+//        int procentHeal = rand.nextInt(30, 100); // 30 und 100 % später implementieren
+        int heal = 15; // für Test zwecke "15"
+
+
+        // current health darf nicht über max health
+
+        System.out.println("Current Health is .. " + currentHP + " Maximum Health is .. " + maxHP);
+
+        currentHP += heal;
+
+        System.out.println(name + " got healed + " + heal + " HP " + "from " + vet.getName());
+        System.out.println("Current Health after Heal: >> " + currentHP);
     }
 
 

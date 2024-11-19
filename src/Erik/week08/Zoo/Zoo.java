@@ -38,6 +38,7 @@ public class Zoo {
         return String.format("Name: %s / Ort: %s / Gründungsjahr: %s", name, place, foundation);
     }
 
+
     public void addGehegeInList(Gehege gh) {
         if (!gehegeListe.contains(gh)) {
             gehegeListe.add(gh);
@@ -51,8 +52,11 @@ public class Zoo {
     }
 
     public void addVet(TierArzt vet){
-
+        if (!vetList.contains(vet)) {
+            vetList.add(vet);
+        }
     }
+
 
     public void printFoodCost() {
         HashMap<Essen, Integer> neededFood = new HashMap<>();
@@ -88,6 +92,14 @@ public class Zoo {
         System.out.println("─".repeat(80));
     }
 
+    public Tier findLowestHPAnimal() {
+        Tier lowestHPFromZoo = null;
+        for (Gehege gh : gehegeListe) {
+            lowestHPFromZoo = gh.searchForLowestHealth();
+        }
+        return lowestHPFromZoo;
+    }
+
 
     public void startTagesSimulation() {
 
@@ -120,15 +132,16 @@ public class Zoo {
 
             System.out.println("─".repeat(80));
 
+
             // Tier Arzt start
             System.out.println(Colors.COLORS[3] + ">> Tier Arzt kommt in den Zoo <<" + Colors.RESET);
             for (TierArzt vet : vetList){
-                vet.startDaySimulation();
+                vet.startDaySim(this);
             }
+            System.out.println(Colors.COLORS[3] + ">> Tier Arzt hat die Arbeit erledigt <<" + Colors.RESET);
+
+            System.out.println("─".repeat(80));
         }
     }
-
-
-
 
 }
