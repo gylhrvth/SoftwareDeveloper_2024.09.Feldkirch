@@ -96,10 +96,7 @@ public class Tier {
     }
 
     public float getRelativeHealth() {
-        float relativHealth = 0;
-
-
-        return relativHealth;
+        return (this.maxHP * this.currentHP) / 100f;
     }
 
 
@@ -109,9 +106,11 @@ public class Tier {
         int heal = 15; // für Test zwecke "15"
 
         if (currentHP < maxHP) {
+            System.out.println(this + "'s % Health " + getRelativeHealth() + " Test");
             System.out.println(this + "'s Current Health is >> (" + currentHP + "/" + maxHP + ")");
-            System.out.println(vet.getName() + " starts healing " + this + " ");
+            System.out.println(vet.getName() + " starts healing " + this);
             currentHP += heal;
+
             if (currentHP > maxHP) {
                 setCurrentHP(maxHP);
             }
@@ -119,6 +118,8 @@ public class Tier {
         System.out.println(this + " got healed +" + heal + " HP " + "from " + vet.getName());
         System.out.println(this + "'s HP got restored to Max Health");
         System.out.println(this + "'s Current Health after healing is: >> (" + currentHP + "/" + maxHP + ")");
+
+
     }
 
 
