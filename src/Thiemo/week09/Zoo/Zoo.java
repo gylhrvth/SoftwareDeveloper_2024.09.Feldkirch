@@ -16,6 +16,7 @@ public class Zoo {
     private Vector<Zookeeper> keeperlist;
     private Vector<Vet> vetList;
 
+
     public Zoo(String name, String location, int foundingyear, int maxCapacitiyVisitors) {
         this.name = name;
         this.location = location;
@@ -24,6 +25,7 @@ public class Zoo {
         this.enclosureList = new Vector<>();
         this.keeperlist = new Vector<>();
         this.vetList = new Vector<>();
+
     }
 
     public void addEnclosure(Enclosure enclosure) {
@@ -40,8 +42,8 @@ public class Zoo {
         keeperlist.add(keeper);
     }
 
-    public void addVet(Vet vet){
-        if (vetList.contains(vet)){
+    public void addVet(Vet vet) {
+        if (vetList.contains(vet)) {
             return;
         }
         vetList.add(vet);
@@ -87,26 +89,33 @@ public class Zoo {
                 enc.resetCleaningStatus();
             }
             enc.resetFeedingStatus();
+            enc.resetworkdone();
         }
+
+        for (int i = 0; i < 10; i++) {
 
         for (Zookeeper keeper : keeperlist) {
             keeper.simulateDayKeeper();
-
         }
+    }
 //        if (day % 7 == 0) {
-        System.out.println("\n\nThe fight begins");
-        for (Enclosure enclosure : enclosureList) {
-            enclosure.simulateDayEnclosurefight();
+//        System.out.println("\n\nThe fight begins");
+//        for (Enclosure enclosure : enclosureList) {
+//            enclosure.simulateDayEnclosurefight();
+//
+//        }
+//
+//        System.out.println("\n\n R.I.P");
+//        for (Enclosure enclosure : enclosureList) {
+//            enclosure.removeDeadAnimals();
+//            enclosure.displayDeadAnimals();
+//        }
 
-        }
-        System.out.println("\n");
-        for (Enclosure enclosure : enclosureList) {
-            enclosure.displayDeadAnimals();
-        }
-        System.out.println("\n");
-        for (Vet vet : vetList){
-            vet.simulateDayVet();
-        }
+
+//        System.out.println("\n");
+//        for (Vet vet : vetList) {
+//            vet.simulateDayVet();
+//        }
     }
 
 
