@@ -2,6 +2,7 @@ package Akif_Malik.week10.GeometryEnhancedVersion;
 
 public class Triangle extends Geo {
     private double length;
+    private double base;
 
     public Triangle(double length) {
         this.length = length;
@@ -9,11 +10,11 @@ public class Triangle extends Geo {
 
     @Override
     public double getCircumference() {
-        return length+length+length;
+        return length*3;
     }
 
     @Override
     public double getArea() {
-        return Math.sqrt(3) * length * length / 4.0;
+        return length * length * Math.sqrt(3) / 4;
     }
 }

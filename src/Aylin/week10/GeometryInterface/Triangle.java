@@ -1,9 +1,12 @@
-package Aylin.week09.Geometry;
+package Aylin.week10.GeometryInterface;
 
-public class Triangle extends Geometry{
+public class Triangle implements IGeometry {
     private double length;
 
     public Triangle(double length) {
+        if(length < 0){
+            length = 0;
+        }
         this.length = length;
     }
 

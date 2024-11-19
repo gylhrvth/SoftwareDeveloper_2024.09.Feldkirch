@@ -5,23 +5,28 @@ public class ZooMAIN {
 
         Zoo tiergartenDornbirn = new Zoo("Tiergarten Dornbirn", 2022);
 
-        Gehege alpenwiese = new Gehege("Alpenwiese");
-        Gehege ried = new Gehege("Ried");
-        Gehege terrarium = new Gehege("Terrarium (warm)");
+        Enclosure alpenwiese = new Enclosure("Alpenwiese");
+        Enclosure ried = new Enclosure("Ried");
+        Enclosure terrarium = new Enclosure("Terrarium (warm)");
 
-        alpenwiese.addTier(new Tiere("Rijska", "Kuh"));
-        ried.addTier(new Tiere("Garmond", "Storch"));
-        ried.addTier(new Tiere("Hugo", "Storch"));
-        ried.addTier(new Tiere("Idaxis", "Storch"));
+        tiergartenDornbirn.searchAndCreateAnimal("Savanna", "Nuggets", "chicken", "♂", 200, 10);
+        tiergartenDornbirn.searchAndCreateAnimal("Savanna", "Tatar", "beef","♂", 200, 100);
+        tiergartenDornbirn.searchAndCreateAnimal("Savanna", "Steak", "beef", "♀", 100, 5);
+        tiergartenDornbirn.searchAndCreateAnimal("Aquarium", "Nemo", "guppy", "♀", 10, 1);
 
-        ZooKeeper akif = new ZooKeeper("Akif", "Storch");
-        ZooKeeper enes = new ZooKeeper("Enes", "Kuh");
-        ZooKeeper seyda = new ZooKeeper("Seyda", "fish");
+
+        tiergartenDornbirn.searchAndCreateZooKeeper("Akif", "Aquarium", "chicken");
+        tiergartenDornbirn.searchAndCreateZooKeeper("Enes", "Savanna", "chicken");
 
         tiergartenDornbirn.addGehege(alpenwiese);
         tiergartenDornbirn.addGehege(ried);
         tiergartenDornbirn.addGehege(terrarium);
 
-        tiergartenDornbirn.printStructure();
+        //tiergartenDornbirn.printStructure();
+
+        for (int day = 1; day <10 ; day++) {
+            tiergartenDornbirn.simulateDay(day);
+            System.out.println();
+        }
     }
 }
