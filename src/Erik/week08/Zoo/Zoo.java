@@ -93,7 +93,6 @@ public class Zoo {
     }
 
 
-    // Abfrage überprüfen
     public Tier findOverallLowestAnimal() {
         Tier overallLowestHP = null;
         for (Gehege gh : gehegeListe) {
@@ -105,6 +104,7 @@ public class Zoo {
         }
         return overallLowestHP;
     }
+
 
 
     public void startTagesSimulation() {

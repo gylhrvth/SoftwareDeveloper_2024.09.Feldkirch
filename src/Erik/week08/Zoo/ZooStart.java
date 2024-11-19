@@ -28,9 +28,9 @@ public class ZooStart {
         Essen pflanze = new Essen("Wasser Pflanze", 10, 100);
 
         // Tier Objekte erstellen
-        Tier otter = new Tier("Otter", "Kishi", fish, 20, 1000, 999);
-        Tier schaf = new Tier("Schaf", "Dinnerbone", gras, 10, 150, 7);
-        Tier delphin = new Tier("Delphin", "Rudolf", fish, 50, 250, 4);
+        Tier otter = new Tier("Otter", "Kishi", fish, 20, 1000, 50);
+        Tier schaf = new Tier("Schaf", "Dinnerbone", gras, 10, 150, 17);
+        Tier delphin = new Tier("Delphin", "Rudolf", fish, 50, 250, 14);
         Tier krokodil = new Tier("Krokodil", "Schnappi", fleisch, 100, 1, 18);
         Tier fisch = new Tier("Fish", "Robin", pflanze, 5, 50, 2);
         Tier huhn = new Tier("Huhn", "Max",gras,5,100,2);
@@ -43,7 +43,6 @@ public class ZooStart {
         Tier huhn7 = new Tier("Huhn", "Milo",gras,5,100,2);
         Tier huhn8 = new Tier("Huhn", "Nino",gras,5,100,2);
         Tier huhn9 = new Tier("Huhn", "Chloe",gras,5,100,2);
-
 
 
 
