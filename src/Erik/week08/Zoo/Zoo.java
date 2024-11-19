@@ -107,9 +107,6 @@ public class Zoo {
     }
 
 
-
-
-
     public void startTagesSimulation() {
 
         System.out.println(Colors.COLORS[3] + "Simulation des Zoo's wird gestartet: ..." + Colors.RESET);

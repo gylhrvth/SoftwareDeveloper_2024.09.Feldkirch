@@ -20,7 +20,7 @@ public class TierArzt {
 
     // Getter - Setter
     public String getName() {
-        return name;
+        return Colors.COLORS[6] + "Dr." + name + Colors.RESET;
     }
 
 
@@ -39,8 +39,6 @@ public class TierArzt {
             System.out.println("Dr." + name + ".. nobody needs a heal ..");
         }
     }
-
-
 
 
     @Override

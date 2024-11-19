@@ -95,29 +95,30 @@ public class Tier {
         }
     }
 
-    public float getRelativeHealth(){
+    public float getRelativeHealth() {
         float relativHealth = 0;
-
 
 
         return relativHealth;
     }
 
 
-
     public void heal(TierArzt vet) {
 //        int procentHeal = rand.nextInt(30, 100); // 30 und 100 % später implementieren
+
         int heal = 15; // für Test zwecke "15"
 
-
-        // current health darf nicht über max health
-
-        System.out.println("Current Health is .. " + currentHP + " Maximum Health is .. " + maxHP);
-
-        currentHP += heal;
-
-        System.out.println(name + " got healed + " + heal + " HP " + "from " + vet.getName());
-        System.out.println("Current Health after Heal: >> " + currentHP);
+        if (currentHP < maxHP) {
+            System.out.println(this + "'s Current Health is >> (" + currentHP + "/" + maxHP + ")");
+            System.out.println(vet.getName() + " starts healing " + this + " ");
+            currentHP += heal;
+            if (currentHP > maxHP) {
+                setCurrentHP(maxHP);
+            }
+        }
+        System.out.println(this + " got healed +" + heal + " HP " + "from " + vet.getName());
+        System.out.println(this + "'s HP got restored to Max Health");
+        System.out.println(this + "'s Current Health after healing is: >> (" + currentHP + "/" + maxHP + ")");
     }
 
 
