@@ -31,7 +31,7 @@ public class ZooStart {
         Tier otter = new Tier("Otter", "Kishi", fish, 20, 1000, 999);
         Tier schaf = new Tier("Schaf", "Dinnerbone", gras, 10, 150, 7);
         Tier delphin = new Tier("Delphin", "Rudolf", fish, 50, 250, 4);
-        Tier krokodil = new Tier("Krokodil", "Schnappi", fleisch, 100, 550, 18);
+        Tier krokodil = new Tier("Krokodil", "Schnappi", fleisch, 100, 1, 18);
         Tier fisch = new Tier("Fish", "Robin", pflanze, 5, 50, 2);
         Tier huhn = new Tier("Huhn", "Max",gras,5,100,2);
         Tier huhn1 = new Tier("Huhn", "Bella",gras,5,100,2);
@@ -65,8 +65,14 @@ public class ZooStart {
         pflegerSelina.addTask(terrarium);
         pflegerJack.addTask(aquarium);
 
-        // Tier Arzt adden
+
+        // Tier Arzt adden und Gehege zuweisen
         zoo.addVet(vetOliver);
+
+        vetOliver.addTask(freiland);
+        vetOliver.addTask(terrarium);
+        vetOliver.addTask(aquarium);
+
 
 
         // Tiere adden
@@ -98,6 +104,17 @@ public class ZooStart {
         zoo.startTagesSimulation();
 
 
+        // Tier arzt bekommt liste
+        // Tier arzt geht die Liste von Gehegen durch
+        // Geht, die Tier liste mit Tieren durch
+        // Geht durch alle gehege durch und sucht sich das tier mit der geringsten HP
+        // nächste Gehege nächstes Tier
+        // ...
+        // Die ausgesuchten Tiere miteinander vergleichen und das mit der geringsten HP speichern
+
+        // die hp vor dem heilen wird angezeigt
+        // das angepeilte tier wird geheilt
+        // die hp nach dem heilen wird angezeigt
 
     }
 }
