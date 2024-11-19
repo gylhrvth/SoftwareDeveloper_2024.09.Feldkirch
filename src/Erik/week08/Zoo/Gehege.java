@@ -28,10 +28,6 @@ public class Gehege {
         return name;
     }
 
-    public Vector<Tier> getTierListe() {
-        return tierListe;
-    }
-
 
     // Methoden
     public void addTiereToTierList(Tier ti) {
@@ -73,7 +69,7 @@ public class Gehege {
 
     }
 
-    public void startTagesSimulation(Pfleger pfleger) {
+    public void startDaySimulationForPfleger(Pfleger pfleger) {
         // Pfleger start
         System.out.println(Colors.COLORS[6] + pfleger.getName() + Colors.RESET + " geht ins Gehege " + Colors.COLORS[6] + name + Colors.RESET);
         System.out.println(Colors.COLORS[6] + pfleger.getName() + Colors.RESET + " checkt ...");
@@ -93,27 +89,30 @@ public class Gehege {
     }
 
 
-
-
     public void startFightSimulation() {
-        Tier attacker = tierListe.get(rand.nextInt(tierListe.size()));  // Random Attacker
-        Tier victim = tierListe.get(rand.nextInt(tierListe.size()));     // Random Victim
-
         System.out.println("Aggressivität steigt im Gehege ..." + this);
 
         for (Tier tier : tierListe) {
+            Tier victim = tierListe.get(rand.nextInt(tierListe.size())); // Wählt bei jedem durchlauf ein neues Opfer
             tier.startFightSimulation(victim);
         }
-
-//        if (victim.getName().equals(attacker.getName())){
-//            System.out.println(attacker.getName() + " Kann sich nicht selbst beißen!");
-//        } else {
-//            System.out.println(attacker.getName() + " attackiert " + victim.getName());
-//        }
     }
 
+    public void searchForLowestHealth() {
+        // Variable erstellen for the lowest Health
+        int searchForLowestHealth = Integer.MAX_VALUE;
+        // Alle Tiere durchgehen
+        for (Tier tier : tierListe){
+            System.out.println(tier.getCurrentHP());    // Veranschaulichung was passiert jedes tier durchgehen aktuelle HP anzeigen
 
-
+            if (tier.getCurrentHP() < searchForLowestHealth){
+                searchForLowestHealth = tier.getCurrentHP();
+            }
+        }
+        // erstes Tier aktuelle HP in variable speichern
+        // aktuell gespeicherter Wert mit dem nächsten Tier vergleichen
+        // Falls nächstes Tier currentHP ist kleiner als die gespeicherten Werte überschreiben
+    }
 
 
     @Override
@@ -121,18 +120,3 @@ public class Gehege {
         return Colors.COLORS[5] + name + Colors.RESET;
     }
 }
-
-/*
-    public void test() {
-        for (Tier tier : tierListe) {
-            if (getTierListe().size() < 2) { // wenn tier Liste im gehege leer ist
-                System.out.println(Colors.COLORS[8] + getName() + " Hat keine möglichkeit jemanden zu beißen!" + Colors.RESET);
-            }
-            for (Tier opfer : tierListe) {
-                if (!tier.equals(opfer)) { // attacker kann sich nicht selbst angreifen
-                    tier.attack(this);
-                }
-            }
-        }
-    }
- */

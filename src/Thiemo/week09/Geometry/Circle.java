@@ -10,13 +10,13 @@ public class Circle extends Geometry {
 
     @Override
     public double getCircumference() {
-        double result = radius * 2 * 3.14;
+        double result = (radius * 2) * Math.PI;
         return result;
     }
 
     @Override
     public double getArea() {
-        double result = 3.14 * (radius*radius);
+        double result = Math.PI * radius* radius;
         return result;
     }
 }

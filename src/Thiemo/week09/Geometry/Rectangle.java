@@ -18,7 +18,7 @@ public class Rectangle extends Geometry {
 
     @Override
     public double getArea() {
-        double result = width+height;
+        double result = width*height;
         return result;
     }
 }

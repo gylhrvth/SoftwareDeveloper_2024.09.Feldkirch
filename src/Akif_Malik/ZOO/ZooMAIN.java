@@ -14,6 +14,10 @@ public class ZooMAIN {
         ried.addTier(new Tiere("Hugo", "Storch"));
         ried.addTier(new Tiere("Idaxis", "Storch"));
 
+        ZooKeeper akif = new ZooKeeper("Akif", "Storch");
+        ZooKeeper enes = new ZooKeeper("Enes", "Kuh");
+        ZooKeeper seyda = new ZooKeeper("Seyda", "fish");
+
         tiergartenDornbirn.addGehege(alpenwiese);
         tiergartenDornbirn.addGehege(ried);
         tiergartenDornbirn.addGehege(terrarium);

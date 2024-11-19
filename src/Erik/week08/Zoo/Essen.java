@@ -28,7 +28,4 @@ public class Essen {
     public int getEinheitsPreis() {
         return einheitsPreis;
     }
-
-
-    // Methoden
 }

@@ -14,6 +14,7 @@ public class Zoo {
     private int foundation;
     private Vector<Gehege> gehegeListe;
     private Vector<Pfleger> pflegerListe;
+    private Vector<TierArzt> vetList;
     private int workDone;
 
     // Konstruktor
@@ -23,6 +24,7 @@ public class Zoo {
         this.foundation = foundation;
         this.gehegeListe = new Vector<>();
         this.pflegerListe = new Vector<>();
+        this.vetList = new Vector<>();
         this.workDone = -1;
     }
 
@@ -46,6 +48,10 @@ public class Zoo {
         if (!pflegerListe.contains(pf)) {
             pflegerListe.add(pf);
         }
+    }
+
+    public void addVet(TierArzt vet){
+
     }
 
     public void printFoodCost() {
@@ -85,28 +91,44 @@ public class Zoo {
 
     public void startTagesSimulation() {
 
-        // Reset Gehege Status
-        for (Gehege gh : gehegeListe){
-            gh.resetGehegeStatus();
+        System.out.println(Colors.COLORS[3] + "Simulation des Zoo's wird gestartet: ..." + Colors.RESET);
+        for (int tag = 1; tag <= 10; tag++) {
+            System.out.println(Colors.COLORS[1] + "Tag: >> " + tag + " <<" + Colors.RESET);
+
+            // Reset Gehege Status
+            for (Gehege gh : gehegeListe) {
+                gh.resetGehegeStatus();
+            }
+
+
+            // Pfleger start
+            System.out.println(Colors.COLORS[3] + ">> Alle Pfleger fangen an zu Arbeiten. <<" + Colors.RESET);
+            for (Pfleger pf : pflegerListe) {
+                pf.startTagesSimulation();
+            }
+            System.out.println(Colors.COLORS[3] + ">> Alle Pfleger haben ihre Arbeit beendet. <<" + Colors.RESET);
+
+            System.out.println("─".repeat(80));
+
+
+            // Kampf start
+            System.out.println(Colors.COLORS[3] + ">> Der Kampf beginnt! <<" + Colors.RESET);
+            for (Gehege gh : gehegeListe) {
+                gh.startFightSimulation();
+            }
+            System.out.println(Colors.COLORS[3] + ">> Der Kampf ist vorbei! <<" + Colors.RESET);
+
+            System.out.println("─".repeat(80));
+
+            // Tier Arzt start
+            System.out.println(Colors.COLORS[3] + ">> Tier Arzt kommt in den Zoo <<" + Colors.RESET);
+            for (TierArzt vet : vetList){
+                vet.startDaySimulation();
+            }
         }
-
-        // Pfleger start
-        System.out.println(Colors.COLORS[3] + ">> Alle Pfleger fangen an zu Arbeiten. <<" + Colors.RESET);
-        for (Pfleger pf : pflegerListe) {
-            pf.startTagesSimulation();
-        }
-        System.out.println(Colors.COLORS[3] + ">> Alle Pfleger haben ihre Arbeit beendet. <<" + Colors.RESET);
-
-        System.out.println("─".repeat(80));
-
-        // Kampf start
-        System.out.println(Colors.COLORS[3] + ">> Der Kampf beginnt! <<" + Colors.RESET);
-        for (Gehege gh : gehegeListe){
-            gh.startFightSimulation();
-        }
-        System.out.println(Colors.COLORS[3] + ">> Der Kampf ist vorbei! <<" + Colors.RESET);
-
-        System.out.println("─".repeat(80));
-
     }
+
+
+
+
 }

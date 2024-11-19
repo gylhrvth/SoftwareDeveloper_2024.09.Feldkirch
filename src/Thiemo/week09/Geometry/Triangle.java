@@ -16,7 +16,7 @@ public class Triangle extends Geometry {
 
     @Override
     public double getArea() {
-        double result = (length + length) / 2;
+        double result = (length * length) / 2;
         return result;
     }
 }
