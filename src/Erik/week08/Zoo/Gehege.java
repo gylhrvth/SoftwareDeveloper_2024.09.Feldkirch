@@ -107,7 +107,7 @@ public class Gehege {
     public Tier searchForLowestHealth() {
         Tier best = null;
         for (Tier animal : tierListe) {
-            if (best == null || best.getCurrentHP() > animal.getCurrentHP()) {
+            if (best == null || best.getRelativeHealth() > animal.getRelativeHealth()) {
                 best = animal;
             }
         }

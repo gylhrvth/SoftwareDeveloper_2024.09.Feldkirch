@@ -98,7 +98,7 @@ public class Zoo {
         for (Gehege gh : gehegeListe) {
             Tier lowestHPAnimal = gh.searchForLowestHealth();
 
-            if (overallLowestHP == null || overallLowestHP.getCurrentHP() < lowestHPAnimal.getCurrentHP()) {
+            if (overallLowestHP == null || overallLowestHP.getRelativeHealth() < lowestHPAnimal.getRelativeHealth()) {
                 overallLowestHP = lowestHPAnimal;
             }
         }

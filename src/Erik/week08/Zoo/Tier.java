@@ -95,18 +95,43 @@ public class Tier {
         }
     }
 
+
+    // Bei der Suche nach dem Tier mit dem geringsten HP Wert geht es um die Relative HP nicht um die Current HP
     public float getRelativeHealth() {
         return (this.maxHP * this.currentHP) / 100f;
     }
 
 
     public void heal(TierArzt vet) {
-//        int procentHeal = rand.nextInt(30, 100); // 30 und 100 % später implementieren
+        int procentHeal = rand.nextInt(30, 100); //Zufällig zwischen 30 und 100 %
 
-        int heal = 15; // für Test zwecke "15"
+        int healTest = (maxHP * procentHeal) / 100;
+        // procentHeal mit heal verknüpfen
+        // anstatt heal = 5
+        // heal = prozent wahrscheinlichkeits Heal auf, die aktuelle Leben in Prozent addieren
+        // mit getRelativeHealth arbeiten
 
         if (currentHP < maxHP) {
-            System.out.println(this + "'s % Health " + getRelativeHealth() + " Test");
+            System.out.println(this + "'s Current Health is >> (" + currentHP + "/" + maxHP + ")");
+            System.out.println(vet.getName() + " starts healing " + this);
+            currentHP += healTest;
+
+            if (currentHP > maxHP) {
+                setCurrentHP(maxHP);
+            }
+        }
+        System.out.println(this + " got healed +" + healTest + " HP " + "from " + vet.getName());
+        System.out.println(this + "'s HP got restored to Max Health");
+        System.out.println(this + "'s Current Health after healing is: >> (" + currentHP + "/" + maxHP + ")");
+
+
+        System.out.println("-".repeat(80));
+
+                //Orginal Funkt
+
+        int heal = 5; // für Test zwecke "15"
+
+        if (currentHP < maxHP) {
             System.out.println(this + "'s Current Health is >> (" + currentHP + "/" + maxHP + ")");
             System.out.println(vet.getName() + " starts healing " + this);
             currentHP += heal;
@@ -128,3 +153,12 @@ public class Tier {
         return Colors.COLORS[6] + name + Colors.RESET;
     }
 }
+
+
+/*
+ int heilungsProzent = rand.nextInt(71) + 30;
+        int heilung = (int) (lowestHPAnimal.getMaxGesundheit() * (heilungsProzent / 100.0));
+        int neueGesundheit = Math.min(lowestHPAnimal.getGesundheit() + heilung, lowestHPAnimal.getMaxGesundheit());
+        lowestHPAnimal.setGesundheit(neueGesundheit);
+        System.out.println(this.name + " hat " + lowestHPAnimal.getName() + " behandelt! Neue Gesundheit von " + lowestHPAnimal.getName());
+ */
