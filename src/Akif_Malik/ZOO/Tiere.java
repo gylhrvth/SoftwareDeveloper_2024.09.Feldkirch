@@ -42,7 +42,7 @@ public class Tiere {
     }
 
     public void simulateFight(Tiere victim) {
-        if ((random.nextInt(100) < 40) &&
+        if ((random.nextInt(100) < 50) &&
                         this.isAlive() &&
                         victim.isAlive()) {
             victim.health -= this.attack;
