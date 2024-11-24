@@ -16,4 +16,12 @@ public class ArtObject {
     public void printArtObject(){
         System.out.println("│   │   ├── " + name + ", " + artist + " (" + year + ")");
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
 }
