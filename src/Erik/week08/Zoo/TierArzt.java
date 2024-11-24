@@ -12,33 +12,38 @@ public class TierArzt {
 
 
     // Konstruktor
-    public TierArzt(String name){
+    public TierArzt(String name) {
         this.name = name;
+        this.taskList = new Vector<>();
     }
 
 
     // Getter - Setter
-
+    public String getName() {
+        return Colors.COLORS[6] + "Dr." + name + Colors.RESET;
+    }
 
 
     // Methoden
-    public void startDaySimulation(){
-        for (Gehege gh : taskList) {
-            gh.searchForLowestHealth(); // this (Pfleger Object mit geben; NICHT die Klasse "Pfleger")
+    public void addTask(Gehege task) {
+        if (!taskList.contains(task)) {
+            taskList.add(task);
         }
-
-
-
     }
 
-
-    // Heal Animal with the lowest Health Function
-    public void HealAnimals(){
-
+    public void startDaySim(Zoo zoo) {
+        Tier animal = zoo.findOverallLowestAnimal();
+        if (animal != null) {
+            animal.heal(this);
+        } else {
+            System.out.println("Dr." + name + ".. nobody needs a heal ..");
+        }
     }
+
 
     @Override
     public String toString() {
         return Colors.COLORS[5] + name + Colors.RESET;
     }
 }
+

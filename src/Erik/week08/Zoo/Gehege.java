@@ -30,6 +30,12 @@ public class Gehege {
 
 
     // Methoden
+
+    @Override
+    public String toString() {
+        return Colors.COLORS[5] + name + Colors.RESET;
+    }
+
     public void addTiereToTierList(Tier ti) {
         if (!tierListe.contains(ti)) {
             tierListe.add(ti);
@@ -88,7 +94,6 @@ public class Gehege {
         System.out.println("─".repeat(80));
     }
 
-
     public void startFightSimulation() {
         System.out.println("Aggressivität steigt im Gehege ..." + this);
 
@@ -98,25 +103,14 @@ public class Gehege {
         }
     }
 
-    public void searchForLowestHealth() {
-        // Variable erstellen for the lowest Health
-        int searchForLowestHealth = Integer.MAX_VALUE;
-        // Alle Tiere durchgehen
-        for (Tier tier : tierListe){
-            System.out.println(tier.getCurrentHP());    // Veranschaulichung was passiert jedes tier durchgehen aktuelle HP anzeigen
 
-            if (tier.getCurrentHP() < searchForLowestHealth){
-                searchForLowestHealth = tier.getCurrentHP();
+    public Tier searchForLowestHealth() {
+        Tier best = null;
+        for (Tier animal : tierListe) {
+            if (best == null || best.getRelativeHealth() > animal.getRelativeHealth()) {
+                best = animal;
             }
         }
-        // erstes Tier aktuelle HP in variable speichern
-        // aktuell gespeicherter Wert mit dem nächsten Tier vergleichen
-        // Falls nächstes Tier currentHP ist kleiner als die gespeicherten Werte überschreiben
-    }
-
-
-    @Override
-    public String toString() {
-        return Colors.COLORS[5] + name + Colors.RESET;
+        return best;
     }
 }

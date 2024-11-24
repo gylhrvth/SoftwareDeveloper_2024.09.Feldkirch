@@ -1,7 +1,5 @@
 package Erik.week08.Zoo;
 
-import Gyula.WildColors;
-import Gyula.week09.zoo.Animal;
 import Sandro.Colors;
 
 import java.util.HashMap;
@@ -91,10 +89,62 @@ public class Tier {
                 victim.setCurrentHP(victim.getCurrentHP() - this.getDamage());
                 System.out.println(Colors.COLORS[6] + victim.getName() + Colors.RESET + "'s aktuelles Leben ist " + Colors.COLORS[6] + victim.getCurrentHP() + " HP" + Colors.RESET);
             }
-            if (!victim.isAlive()){
-                System.out.println(Colors.COLORS[1] + victim.getName()  + " ist gestorben." + Colors.RESET);
+            if (!victim.isAlive()) {
+                System.out.println(Colors.COLORS[1] + victim.getName() + " ist gestorben." + Colors.RESET);
             }
         }
+    }
+
+
+    // Bei der Suche nach dem Tier mit dem geringsten HP Wert geht es um die Relative HP nicht um die Current HP
+    public float getRelativeHealth() {
+        return (this.maxHP * this.currentHP) / 100f;
+    }
+
+
+    public void heal(TierArzt vet) {
+        int procentHeal = rand.nextInt(30, 100); //Zufällig zwischen 30 und 100 %
+
+        int healTest = (maxHP * procentHeal) / 100;
+        // procentHeal mit heal verknüpfen
+        // anstatt heal = 5
+        // heal = prozent wahrscheinlichkeits Heal auf, die aktuelle Leben in Prozent addieren
+        // mit getRelativeHealth arbeiten
+
+        if (currentHP < maxHP) {
+            System.out.println(this + "'s Current Health is >> (" + currentHP + "/" + maxHP + ")");
+            System.out.println(vet.getName() + " starts healing " + this);
+            currentHP += healTest;
+
+            if (currentHP > maxHP) {
+                setCurrentHP(maxHP);
+            }
+        }
+        System.out.println(this + " got healed +" + healTest + " HP " + "from " + vet.getName());
+        System.out.println(this + "'s HP got restored to Max Health");
+        System.out.println(this + "'s Current Health after healing is: >> (" + currentHP + "/" + maxHP + ")");
+
+
+        System.out.println("-".repeat(80));
+
+                //Orginal Funkt
+
+        int heal = 5; // für Test zwecke "15"
+
+        if (currentHP < maxHP) {
+            System.out.println(this + "'s Current Health is >> (" + currentHP + "/" + maxHP + ")");
+            System.out.println(vet.getName() + " starts healing " + this);
+            currentHP += heal;
+
+            if (currentHP > maxHP) {
+                setCurrentHP(maxHP);
+            }
+        }
+        System.out.println(this + " got healed +" + heal + " HP " + "from " + vet.getName());
+        System.out.println(this + "'s HP got restored to Max Health");
+        System.out.println(this + "'s Current Health after healing is: >> (" + currentHP + "/" + maxHP + ")");
+
+
     }
 
 
@@ -103,3 +153,12 @@ public class Tier {
         return Colors.COLORS[6] + name + Colors.RESET;
     }
 }
+
+
+/*
+ int heilungsProzent = rand.nextInt(71) + 30;
+        int heilung = (int) (lowestHPAnimal.getMaxGesundheit() * (heilungsProzent / 100.0));
+        int neueGesundheit = Math.min(lowestHPAnimal.getGesundheit() + heilung, lowestHPAnimal.getMaxGesundheit());
+        lowestHPAnimal.setGesundheit(neueGesundheit);
+        System.out.println(this.name + " hat " + lowestHPAnimal.getName() + " behandelt! Neue Gesundheit von " + lowestHPAnimal.getName());
+ */
