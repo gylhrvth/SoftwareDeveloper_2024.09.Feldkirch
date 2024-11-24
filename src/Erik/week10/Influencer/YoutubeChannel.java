@@ -8,21 +8,17 @@ public class YoutubeChannel extends Channel {
 
 
     // Konstruktor
-    public YoutubeChannel(int subscribers, int videosUploaded, String plattformName, int follower, float eiferInProzent) {
-        super(plattformName, follower, eiferInProzent);
+    public YoutubeChannel(String plattformName, String channelName, int follower, float eiferInProzent, int subscribers, int videosUploaded) {
+        super(plattformName, channelName, follower, eiferInProzent);
         this.subscribers = subscribers;
         this.videosUploaded = videosUploaded;
     }
 
 
-    // Getter - Setter
-
-
     // Methoden
     @Override
-    public String showChannelInfo() {
-        return "Abonnenten: >> " + subscribers
-                + "Hochgeladene Videos: >> " + videosUploaded;
+    public void showChannelInfo() {
+        System.out.printf("Plattform Name: >> %s / Channel Name: >> %-12s / Subscribers: >> %7d / Uploaded Videos: >> %d\n",getPlattformName(),getChannelName(),subscribers,videosUploaded);
     }
 
 

@@ -8,8 +8,8 @@ public class TikTokChannel extends Channel {
 
 
     // Konstruktor
-    public TikTokChannel(int videosUploaded, int averageViews, String plattformName, int follower, float eiferInProzent) {
-        super(plattformName, follower, eiferInProzent);
+    public TikTokChannel(String plattformName, String channelName, int follower, float eiferInProzent, int videosUploaded, int averageViews) {
+        super(plattformName, channelName, follower, eiferInProzent);
         this.videosUploaded = videosUploaded;
         this.averageViews = averageViews;
     }
@@ -20,10 +20,7 @@ public class TikTokChannel extends Channel {
 
     // Methoden
     @Override
-    public String showChannelInfo() {
-        return "Durchschnittliche Aufrufe: >> " + averageViews
-                + "Hochgeladene Videos: >> " + videosUploaded;
+    public void showChannelInfo() {
+        System.out.println("Durchschnittliche Aufrufe: >> " + averageViews + " Hochgeladene Videos: >> " + videosUploaded);
     }
-
-
 }

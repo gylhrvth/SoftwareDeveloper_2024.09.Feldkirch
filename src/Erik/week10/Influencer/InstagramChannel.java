@@ -8,8 +8,8 @@ public class InstagramChannel extends Channel {
 
 
     // Konstruktor
-    public InstagramChannel(int posts, int reelsViews, String plattformName, int follower, float eiferInProzent) {
-        super(plattformName, follower, eiferInProzent);
+    public InstagramChannel(String plattformName, String channelName, int follower, float eiferInProzent, int posts, int reelsViews) {
+        super(plattformName, channelName, follower, eiferInProzent);
         this.posts = posts;
         this.reelsViews = reelsViews;
     }
@@ -20,9 +20,9 @@ public class InstagramChannel extends Channel {
 
     // Methoden
     @Override
-    public String showChannelInfo() {
-        return "Beiträge: >> " + posts
-                + "Reels Aufrufe: >> " + reelsViews;
+    public void showChannelInfo() {
+        System.out.println("Beiträge: >> " + posts
+                + "Reels Aufrufe: >> " + reelsViews);
     }
 
 
