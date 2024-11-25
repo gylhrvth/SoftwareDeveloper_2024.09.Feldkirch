@@ -67,6 +67,18 @@ public class Influencer{
         return mostPopularChannel;
     }
 
+    public Influencer findMostPopularFriend(){
+        Influencer mostPopularFriend = null;
+        int maxFollower = 0;
+        for (Influencer friend : friends) {
+            if (mostPopularFriend == null || friend.getTotalFollowers() > maxFollower) {
+                maxFollower = friend.getTotalFollowers();
+                mostPopularFriend = friend;
+            }
+        }
+        return mostPopularFriend;
+    }
+
     public void printMostPopularChannel(){
         if(findMostPopularChannel() == null){
             System.out.println(name + " has no Channel.\n");
