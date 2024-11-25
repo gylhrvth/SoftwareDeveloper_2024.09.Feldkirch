@@ -34,5 +34,7 @@ public class Main {
         rae.addFriends(ninja);
         mrBeast.printFriend();
         rae.printFriend();
+
+        System.out.println(mrBeast.getName() + " best channels are " + mrBeast.sortByFollowers());
     }
 }
