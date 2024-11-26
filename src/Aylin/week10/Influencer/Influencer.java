@@ -67,6 +67,18 @@ public class Influencer{
         return mostPopularChannel;
     }
 
+    public Influencer findMostPopularFriend(){
+        Influencer mostPopularFriend = null;
+        int maxFollower = 0;
+        for (Influencer friend : friends) {
+            if (mostPopularFriend == null || friend.getTotalFollowers() > maxFollower) {
+                maxFollower = friend.getTotalFollowers();
+                mostPopularFriend = friend;
+            }
+        }
+        return mostPopularFriend;
+    }
+
     public void printMostPopularChannel(){
         if(findMostPopularChannel() == null){
             System.out.println(name + " has no Channel.\n");
@@ -92,5 +104,26 @@ public class Influencer{
 
             }
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Vector<Channel> sortByFollowers(){
+        Vector<Channel> sortedChannels = new Vector<>();
+        for (Channel channel : channels){
+            sortedChannels.add(channel);
+        }
+        for (int i = 0; i < sortedChannels.size(); i++) {
+            for (int j = 0; j < sortedChannels.size() - 1 -i; j++) {
+                if (sortedChannels.get(j).getFollowers() < sortedChannels.get(j+1).getFollowers()){
+                    Channel temp = sortedChannels.get(j);
+                    sortedChannels.set(j, sortedChannels.get(j+1));
+                    sortedChannels.set(j+1, temp);
+                }
+            }
+        }
+        return sortedChannels;
     }
 }

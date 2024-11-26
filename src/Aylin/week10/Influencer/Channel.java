@@ -25,4 +25,8 @@ public abstract class Channel {
 
     public abstract String showChannelInfo();
 
+    @Override
+    public String toString() {
+        return platformName;
+    }
 }
