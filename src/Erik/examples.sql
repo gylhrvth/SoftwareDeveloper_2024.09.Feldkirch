@@ -237,9 +237,137 @@ order by r.`Length` asc;
 
 
 
+select * from geo_sea;
+select * from geo_island;
+select * from religion;
+select * from islandin i;
+
+select *
+from islandin i 
+where i.Sea = 'pacific ocean';
+ 
+select i.Island 
+from religion r 
+-- join country c on r.Country = c.Code 
+join geo_island gi on r.Country = gi.Country 
+join islandin i on gi.Island = i.Island 
+where i.Sea = 'pacific ocean' and r.Name ='muslim' and r.Percentage >=50;
 
 
-select * from river
+
+select * from geo_mountain gm;
+select * from mountain m;
+select * from country c;
+select * from religion r;
+
+select distinct m.Name 
+from religion r 
+join geo_mountain gm on r.Country = gm.Country 
+join mountain m on gm.Mountain = m.Name
+where m.Height >=3000 and r.name = 'Roman Catholic' and r.Percentage >=60
+order by m.Name ;
+
+
+select * from country;
+select * from lake;
+select * from mountain;
+
+select distinct gm.Country 
+from geo_mountain gm 
+join geo_lake gl on gm.Country = gl.Country 
+join mountain m on gm.Mountain = m.Name 
+join lake l  on gl.Lake = l.Name 
+where l.`Depth` >=100 and m.Height >=1500;
+
+
+
+-- Population per Religion
+select * from religion r;
+select * from country;
+
+select  c.Population , r.Name 
+from religion r 
+ join country c on r.Country = c.Code;
+
+
+
+select  r.name , sum(round(c.Population *r.Percentage / 100)) religiousPerson
+from religion r 
+ join country c on r.Country = c.Code
+ group by r.name
+order by religiousPerson desc;
+
+
+
+
+
+select * from country;
+select * from geo_sea;
+
+-- Alle länder , nur die Namen und Meere dazu
+select distinct c.name , s.Name 
+from geo_sea gs
+join country c on gs.Country = c.code
+join sea s on gs.Sea = s.Name;
+
+-- Alle länder nur die Namen und wenn sie haben das Meer dazu
+select distinct c.name , gs.Sea 
+from geo_sea gs
+right join country c on gs.Country = c.code;
+
+
+select * from geo_desert;
+select * from country;
+select * from politics p ;
+select * from ethnicgroup e ;
+
+select  p.Independence, c.Name, gd.Desert 
+from geo_desert gd 
+join country c on gd.Country = c.Code
+join politics p on p.Country = c.Code
+join ethnicgroup e on e.Country = c.Code
+where e.Name = 'African';
+
+
+
+select * from country c; 
+select * from city c ;
+
+select c2.Name , Count(c.Name) AnzahlStaedte 
+from city c 
+join country c2 on c.Country = c2.Code 
+group by c2.Name 
+order by c2.Name 
+;
+
+select t.name 
+from 
+(
+	select c2.Name , Count(c.Name) AnzahlStaedte 
+	from city c 
+	join country c2 on c.Country = c2.Code 
+	group by c2.Name 
+) as t
+where t.AnzahlStaedte = 3;
+;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 select * from borders limit 20;
@@ -251,4 +379,5 @@ select * from continent c limit 20;
 
 
 select * from desert d limit 20;
+select * from ethnicgroup e limit 20;
 
