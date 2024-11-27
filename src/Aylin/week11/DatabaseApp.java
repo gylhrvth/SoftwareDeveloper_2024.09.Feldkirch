@@ -8,7 +8,7 @@ public class DatabaseApp {
     public static void main(String[] args) {
         try{
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mondial?user=aylin&password=aylin");               // stellt eine Verbindung zwischen der Datenbank und unserer Java Klasse
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM city WHERE name like 'B%' LIMIT 10");                             // vorbereitete Anweisungen für welche Daten aus der Datenbank ausgegeben werden
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM city WHERE name like 'B%'");                                      // vorbereitete Anweisungen für welche Daten aus der Datenbank ausgegeben werden
 
             ResultSet rs = ps.executeQuery();                                                                                                       // executeQuery: die Ausführung unserer Anweisung (z.B. run in Java)
                                                                                                                                                     // resultSet: Das Ergebnis, was wir durch die Ausführung der Anweisung erhalten
@@ -27,22 +27,21 @@ public class DatabaseApp {
     public static void printResultSet(ResultSet rs) throws SQLException{
         ResultSetMetaData metaData = rs.getMetaData();                                                                                              // metaData: gibt die Spalten-Info zurück
         int[] optimalColumnWidth = new int[1 + metaData.getColumnCount()];                                                                          // Array verschafft die optimale Breite für alle Spalten plus eine zusätzliche Information (+1)
-        for (int i = 1; i < optimalColumnWidth.length; i++) {
-            optimalColumnWidth[i] = Math.max(
-                    metaData.getColumnLabel(i).length(),
-                    metaData.getColumnDisplaySize(i));
+        for (int i = 1; i < optimalColumnWidth.length; i++) {                                                                                       // Abstand zwischen den Spalten was in der Datenbank hinterlegt ist
+            optimalColumnWidth[i] = Math.max(                                                                                                       // Math.max vergleicht, ob die Überschriftlänge oder die hinterlegte Länge lãnger ist und nimmt dann die größte Zahl als Abstand
+                    metaData.getColumnLabel(i).length(),                                                                                            // lãnge der Überschrift
+                    metaData.getColumnDisplaySize(i));                                                                                              // max hinterlegte Lãnge der Eingabe der Spalte in der Datenbank
         }
 
-        for (int col = 1; col <= metaData.getColumnCount(); col++) {                                                // Überschrift
+        for (int col = 1; col <= metaData.getColumnCount(); col++) {                                                                                // fori bestimmt die Überschrift / metaData.getColumnCount(): gibt die Anzahl der Spalten zurück, die durchlaufen werden
             System.out.printf(Colors.COLORS[6] + "| %-" + optimalColumnWidth[col] + "s " + Colors.RESET, metaData.getColumnLabel(col));
         }
         System.out.println(Colors.COLORS[6] + "|"+ Colors.RESET);
 
         while (rs.next()) {
-            for (int col = 1; col <= rs.getMetaData().getColumnCount(); col++) {                                    // Liste ohne überschrift
-                if (metaData.getColumnType(col) == Types.VARCHAR) {
-                    System.out.printf("| %-" + optimalColumnWidth[col] + "s ",
-                            rs.getString(col));
+            for (int col = 1; col <= rs.getMetaData().getColumnCount(); col++) {                                                                    // Liste ohne überschrift
+                if (metaData.getColumnType(col) == Types.VARCHAR) {                                                                                 // schaut ob die Daten Zahlen oder Buchstaben sind
+                    System.out.printf("| %-" + optimalColumnWidth[col] + "s ", rs.getString(col));                                                  // je nachdem wird es linksbündig oder rechtsbündig formatiert
                 } else {
                     System.out.printf("| %" + optimalColumnWidth[col] + "s ", rs.getString(col));
                 }
