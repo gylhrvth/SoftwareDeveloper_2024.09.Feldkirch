@@ -374,6 +374,80 @@ where t.AnzahlStaedte = 3;
 select * from country c;
 select * from city c;
 
+select c.Name 
+from city c 
+join encompasses e on c.Country = e.Country 
+where e.Continent = 'America' 
+order by c.Population desc limit 3;
+
+-- -------------------------------------------------------------
+
+-- Was ist der größte Berg von Österreich? Wie hoch ist er?
+select * from mountain m;
+select * from country c;
+
+select m.Name, m.Height 
+from mountain m 
+join geo_mountain gm on m.Name = gm.Mountain 
+join country c on gm.Country = c.Code 
+where c.Name = 'Austria'
+order by m.Height desc limit 1;
+
+-- -------------------------------------------------------------
+
+-- Was ist der größte Berg von Europa? Wie hoch ist er?
+select * from mountain m;
+select * from encompasses e;
+
+select m.Name, m.Height 
+from mountain m 
+join geo_mountain gm on m.Name = gm.Mountain 
+join encompasses e on gm.Country = e.Country 
+where e.Continent = 'Europe' and e.Percentage >= 50
+order by m.Height desc
+limit 1;
+
+-- -------------------------------------------------------------
+
+-- Was ist der größte Berg pro Kontinent? Wie hoch sind diese?
+
+select * from mountain m;
+select * from encompasses e;
+
+select distinct tempT.Continent, m2.Name, m2.Height 
+from 
+	(
+		select e.Continent, max(m.Height) maxH
+		from mountain m 
+		join geo_mountain gm on m.Name = gm.Mountain 
+		join encompasses e on gm.Country = e.Country
+		where e.Percentage >= 50
+		group by e.Continent						-- Das was im 'group by' steht muss oben im select stehen mit * geht's nicht!
+	) tempT
+join encompasses e2 on tempT.continent = e2.Continent 
+join geo_mountain gm2  on e2.Country = gm2.Country 
+join mountain m2 on gm2.Mountain = m2.Name
+where tempT.maxH = m2.Height 
+
+
+
+-- -------------------------------------------------------------
+
+-- Welches Land hat am meisten anerkannte Religionen? Wie viel sind es?
+
+
+
+
+
+
+
+-- -------------------------------------------------------------
+
+
+
+
+-- -------------------------------------------------------------
+
 
 
 -- -------------------------------------------------------------
