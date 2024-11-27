@@ -42,8 +42,13 @@ public class Zookeeper {
 
 
     public void simulateDayKeeper() {
-        Enclosure randomtask = taskList.get(random.nextInt(taskList.size()));
-        randomtask.simulateDayEnclosureKeeper(this);
+//        for (Enclosure enc : taskList){
+//            enc.simulateDayEnclosureKeeper(this);
+//
+//        }
+
+            Enclosure randomtask = taskList.get(random.nextInt(taskList.size()));
+            randomtask.simulateDayEnclosureKeeper(this);
 
     }
 
