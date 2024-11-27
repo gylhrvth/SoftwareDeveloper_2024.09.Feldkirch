@@ -33,5 +33,6 @@ public class ZooMain {
         }
 
         System.out.println(WildColors.getColor("#EF1177") + "Game Over" + WildColors.resetColor());
+
     }
 }
