@@ -106,7 +106,6 @@ public class Influencer{
         }
     }
 
-
     public String getName() {
         return name;
     }
