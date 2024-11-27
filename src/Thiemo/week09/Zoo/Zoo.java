@@ -25,7 +25,6 @@ public class Zoo {
         this.enclosureList = new Vector<>();
         this.keeperlist = new Vector<>();
         this.vetList = new Vector<>();
-
     }
 
     public void addEnclosure(Enclosure enclosure) {
@@ -92,11 +91,13 @@ public class Zoo {
             enc.resetworkdone();
         }
 
-        for (int i = 0; i < 10; i++) {
+
+//        for (int i = 0; i < 4; i++) {
+
 
         for (Zookeeper keeper : keeperlist) {
             keeper.simulateDayKeeper();
-        }
+//        }
     }
 //        if (day % 7 == 0) {
 //        System.out.println("\n\nThe fight begins");
