@@ -186,6 +186,7 @@ public class Enclosure {
 
 
     public void simulateDayEnclosureKeeper(Zookeeper zookeeper) {
+        System.out.println(zookeeper.getName()+" checks if in "+ name + " is something to do");
         if (workdone) {
             System.out.println("the job in "+name+" is already done by " + zookeeper.getName());
         } else {
