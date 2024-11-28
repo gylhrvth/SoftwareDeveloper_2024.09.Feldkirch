@@ -8,7 +8,6 @@ public class City {
     private float latitude;
     private Country country;
 
-
     public City(String name, String province, int population, float longitude, float latitude) {
 
         this.name = name;
