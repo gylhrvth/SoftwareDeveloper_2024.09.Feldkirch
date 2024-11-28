@@ -48,7 +48,6 @@ public class Main {
         ps.close();
     }
 
-
     public static void processCountries(Mondial mondial, ResultSet rs) throws SQLException {
         while (rs.next()) {
             Country c = new Country(rs.getString("name"),
