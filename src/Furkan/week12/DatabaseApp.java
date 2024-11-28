@@ -16,8 +16,9 @@ public class DatabaseApp {
                     select c.*
                     from country co\s
                     join city c on co.Code = c.Country\s
-                    where co.Name = '""" + input + "'");                                                       // Vorbereitung: Liest den angegebenen wert von der Datenbank aus (SQL Anweisung gespeichert)
+                    where co.Name = ?""");                                                       // Vorbereitung: Liest den angegebenen wert von der Datenbank aus (SQL Anweisung gespeichert)
 
+            ps.setString(1, input);
             ResultSet rs = ps.executeQuery();   // Liefert den Result Set (ausführung von der gespeicherten SQL Anweisung)
             printResultSet(rs);
 
