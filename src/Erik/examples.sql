@@ -4,6 +4,7 @@ use mondial;
 -- Examples
 
 select * from country;
+select * from city;
 
 select Name, Capital from country;
 
