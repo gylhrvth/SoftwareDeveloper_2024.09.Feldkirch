@@ -57,15 +57,18 @@ public class SqlJava {
         System.out.println("Add a City to the List!");
         String userInput = sc.nextLine();
         addCity(userInput);
+        System.out.println("City " + userInput + " has been added to the list!");
 
         System.out.println("Update a cities Country!");
         String city = sc.nextLine();
         String country = sc.nextLine();
         updatecity(city, country);
+        System.out.println("City " + city + " has been updated!");
 
         System.out.println("Delete a city from the List!");
         String userInput3 = sc.nextLine();
         deleteCity(userInput3);
+        System.out.println("City " + userInput3 + " has been deleted from the list! ");
 
         System.out.println("Changes have been made succesfully!");
     }
