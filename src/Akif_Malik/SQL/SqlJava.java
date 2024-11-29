@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class SqlJava {
     public static Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) throws SQLException {
 
         simulateNormalDay();
@@ -36,7 +37,6 @@ public class SqlJava {
 
         ps.execute();
         ps.close();
-
     }
 
     public static void deleteCity(String city) throws SQLException {
@@ -70,7 +70,6 @@ public class SqlJava {
         System.out.println("Changes have been made succesfully!");
     }
 
-
     public static void showQuerry() throws SQLException {
         System.out.println("Choose a Country to work on!");
         String country = sc.nextLine();
@@ -93,7 +92,6 @@ public class SqlJava {
         ps.close();
         con.close();
     }
-
 
     public static void printResultSet(ResultSet rs) throws SQLException{
         ResultSetMetaData meta = rs.getMetaData();
