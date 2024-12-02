@@ -96,8 +96,13 @@ public class CreateReadUpdateDelete {
         printBody(rs, metaData, optimalColWidth);
     }
 
-    public static void updateResultSet() throws SQLException{
+    public static void updateResultSet(Connection conn) throws SQLException{
+        PreparedStatement ps = conn.prepareStatement("select * from city c where c.Country = 'A';");
+        ResultSet rs = ps.executeQuery();
+        printQuery(rs);
 
+        ps.close();
+        rs.close();
     }
 
 
