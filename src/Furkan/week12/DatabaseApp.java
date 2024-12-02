@@ -11,6 +11,7 @@ public class DatabaseApp {
            String input = sc.nextLine();
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mondial?user=Furkan&password=furkan"); // Verbindet Datenbank zu Java Inteliji Klasse
+//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mondial " , " , "furkan" , "furkan";
 
             PreparedStatement ps = connection.prepareStatement("""
                     select c.*
@@ -46,7 +47,7 @@ public class DatabaseApp {
 
         // Head Line
         for (int column = 1; column <= metaData.getColumnCount(); column++) {
-            System.out.printf("| %-20s ", metaData.getColumnLabel(column) + "s",
+            System.out.printf("| %-20s ", metaData.getColumnLabel(column) + " ",
                     metaData.getColumnLabel(column));   // Printet den angegebenenn Column auf
         }
         System.out.println("|");
@@ -55,9 +56,9 @@ public class DatabaseApp {
         while (rs.next()) { // Solange noch was vorhanden ist
             for (int column = 1; column <= rs.getMetaData().getColumnCount(); column++) {   // getColumnCount gibt anzahl der spalten zurück
                 if (metaData.getColumnType(column) == Types.VARCHAR) {                      // getColumnType Gibt die spalten zahl zurück | und Types.Varchar = "Variabler Charakter" um die länge von einem wort zu speichern
-                    System.out.printf("%-20s", rs.getString(column) + "s ", rs.getString(column));
+                    System.out.printf("%-20s", rs.getString(column) + " ", rs.getString(column));
                 } else {
-                    System.out.printf("%-20s", rs.getString(column) + "s ", rs.getString(column));
+                    System.out.printf("%-20s", rs.getString(column) + " ", rs.getString(column));
                 }
             }
             System.out.println("|");
