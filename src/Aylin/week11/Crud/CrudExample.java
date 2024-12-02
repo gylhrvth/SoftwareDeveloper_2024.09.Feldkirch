@@ -1,6 +1,5 @@
 package Aylin.week11.Crud;
 
-import Gyula.WildColors;
 import Sandro.Colors;
 
 import java.sql.*;
