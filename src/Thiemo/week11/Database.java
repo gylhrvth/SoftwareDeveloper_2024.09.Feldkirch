@@ -8,19 +8,23 @@ import java.util.Scanner;
 public class Database {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter a Country Name");
+        System.out.println("Enter a City Name");
         String countryName = sc.nextLine();
+        String cityName = sc.nextLine();
         int minPop = ConsoleTools.readNumber("Min Pop", 1, 999999999);
 
         try {
-            Connection connenction = DriverManager.getConnection("jdbc:mysql://localhost:3306/mondial?user=Thiemo&password=thiemo");
+          Connection connenction = DriverManager.getConnection("jdbc:mysql://localhost:3306/mondial?user=Thiemo&password=thiemo");
+            // Connection connenction = DriverManager.getConnection("jdbc:mysql://localhost:3306/mondial", "Thiemo", "thiemo");
+
+
 
             PreparedStatement ps = connenction.prepareStatement("""
-                            Select distinct ci.*
-                            From city ci 
-                            Join country co on ci.country = co.code
-                            where co.name = ? and ci.population > ?
-                            """);
+                    Select distinct ci.*
+                    From city ci 
+                    Join country co on ci.country = co.code
+                    where co.name like ? and ci.population > ?
+                    """);
 //            PreparedStatement ps = connenction.prepareStatement("SELECT * FROM city Limit 10");
 //            System.out.println("""
 //                    select distinct tempT.Continent, m2.Name, m2.Height\s
@@ -38,6 +42,8 @@ public class Database {
 //                    join mountain m2 on gm2.Mountain = m2.Name
 //                    where tempT.maxH = m2.Height\s
 //                    """);
+
+
 //            PreparedStatement ps = connenction.prepareStatement("select distinct tempT.Continent, m2.Name, m2.Height \n" +
 //                    "from \n" +
 //                    "\t(\n" +
@@ -46,15 +52,16 @@ public class Database {
 //                    "\t\tjoin geo_mountain gm on m.Name = gm.Mountain \n" +
 //                    "\t\tjoin encompasses e on gm.Country = e.Country\n" +
 //                    "\t\twhere e.Percentage >= 50\n" +
-//                    "\t\tgroup by e.Continent\t\t\t\t\t\t-- Das was im 'group by' steht muss oben im select stehen mit * geht's nicht!\n" +
+//                    "\t\tgroup by e.Continent\t\t\t\t\t\t
 //                    "\t) tempT\n" +
 //                    "join encompasses e2 on tempT.continent = e2.Continent \n" +
 //                    "join geo_mountain gm2  on e2.Country = gm2.Country \n" +
 //                    "join mountain m2 on gm2.Mountain = m2.Name\n" +
 //                    "where tempT.maxH = m2.Height ");
 
-            ps.setString(1,countryName);
-            ps.setInt(2,minPop);
+
+            ps.setString(1, countryName + "%");
+            ps.setInt(2, minPop);
             ResultSet rs = ps.executeQuery();
             printResultSet(rs);
 
