@@ -7,25 +7,39 @@ public class CreateReadUpdateDelete {
      public static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mondial?user=erik&password=erik");
             PreparedStatement ps = conn.prepareStatement("select * from city c where c.Country = 'A';");
 
             ResultSet rs = ps.executeQuery();
 
-           // System.out.print("Enter a City you want to create: >> ");
-           // String city = sc.nextLine();
-            createCity(conn, "AAAAATest");
-//Todo check why forward?            rs.beforeFirst();
-            ResultSet rs2 = ps.executeQuery();
-            printQuery(rs2);
+            // Scanner:
+//            System.out.print("Enter a City you want to create: >> ");
+//            String city = sc.nextLine();
 
-//            updateCityPop(conn, "AAAAATest");
-//            printQuery(rs);
-//
-//            deleteCity(conn, "AAAAATest");
-//            printQuery(rs);
+
+            System.out.println("Aktuelle Liste");
+            printQuery(rs);
+            rs.close();
+
+
+            createCity(conn, "AAAAATest");
+            ResultSet rsCreate = ps.executeQuery();
+            printQuery(rsCreate);
+            rsCreate.close();
+
+
+            updateCityPop(conn, "AAAAATest");
+            ResultSet rsUpdate = ps.executeQuery();
+            printQuery(rsUpdate);
+            rsUpdate.close();
+
+
+            deleteCity(conn, "AAAAATest");
+            ResultSet rsDelete = ps.executeQuery();
+            printQuery(rsDelete);
+            rsDelete.close();
+
 
 
             rs.close();
@@ -82,11 +96,19 @@ public class CreateReadUpdateDelete {
         printBody(rs, metaData, optimalColWidth);
     }
 
+    public static void updateResultSet(Connection conn) throws SQLException{
+        PreparedStatement ps = conn.prepareStatement("select * from city c where c.Country = 'A';");
+        ResultSet rs = ps.executeQuery();
+        printQuery(rs);
+
+        ps.close();
+        rs.close();
+    }
+
 
     // Testing with Hardcoding
     public static void createCity(Connection conn, String city) throws SQLException {
         PreparedStatement ps = conn.prepareStatement("insert into city (Name, Country, Province) values(?, ?, ?)");
-
 
         ps.setString(1, city);
         ps.setString(2, "A");
