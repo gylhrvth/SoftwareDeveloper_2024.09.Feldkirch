@@ -1,15 +1,27 @@
 package Aylin.week11;
 
+import Gyula.ConsoleTools;
 import Sandro.Colors;
 
 import java.sql.*;
+import java.util.Scanner;
 
 public class DatabaseApp {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the name of the country: ");
+        String countryName = scanner.nextLine();
+
         try{
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mondial?user=aylin&password=aylin");               // stellt eine Verbindung zwischen der Datenbank und unserer Java Klasse
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM city WHERE name like 'B%'");                                      // vorbereitete Anweisungen für welche Daten aus der Datenbank ausgegeben werden
-
+            PreparedStatement ps = connection.prepareStatement(                                                                                     // vorbereitete Anweisungen für welche Daten aus der Datenbank ausgegeben werden
+                    """                                                                              
+                    SELECT DISTINCT ci.*
+                    FROM city ci
+                    JOIN country co on co.code = ci.country
+                    WHERE co.name = ?
+                    """);
+            ps.setString(1, countryName);
             ResultSet rs = ps.executeQuery();                                                                                                       // executeQuery: die Ausführung unserer Anweisung (z.B. run in Java)
                                                                                                                                                     // resultSet: Das Ergebnis, was wir durch die Ausführung der Anweisung erhalten
             printResultSet(rs);
