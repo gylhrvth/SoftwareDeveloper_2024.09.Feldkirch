@@ -1,8 +1,6 @@
 package Aylin.week11;
 
-import Gyula.ConsoleTools;
 import Sandro.Colors;
-
 import java.sql.*;
 import java.util.Scanner;
 
@@ -14,6 +12,7 @@ public class DatabaseApp {
 
         try{
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mondial?user=aylin&password=aylin");               // stellt eine Verbindung zwischen der Datenbank und unserer Java Klasse
+            //Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mondial", "aylin", "aylin");                         //leichte Variante
             PreparedStatement ps = connection.prepareStatement(                                                                                     // vorbereitete Anweisungen für welche Daten aus der Datenbank ausgegeben werden
                     """                                                                              
                     SELECT DISTINCT ci.*
