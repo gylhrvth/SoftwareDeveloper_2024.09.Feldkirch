@@ -29,9 +29,9 @@ public class Actor {
 public int getId(){return id;}
 
     public void addFilmAsRegie(Film f){
-if (!regieOf.contains(f)){
-    regieOf.add(f);
-}
+        if (!regieOf.contains(f)){
+            regieOf.add(f);
+        }
     }
 
     public void addFilmAsActor(Film f){

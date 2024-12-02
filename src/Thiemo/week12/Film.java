@@ -13,7 +13,15 @@ public class Film {
         this.title = title;
 
         // TODO: Initialize a film
+        regie = null;
         actorList = new Vector<>();
+    }
+
+    public void setRegie(Actor a){
+        regie = a;
+        if (regie != null){
+            regie.addFilmAsRegie(this);
+        }
     }
 
     public void addActor(Actor a) {
