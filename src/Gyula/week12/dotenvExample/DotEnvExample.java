@@ -8,9 +8,7 @@ import java.util.Scanner;
 public class DotEnvExample {
     public static void main(String[] args) {
         Dotenv dotenv = Dotenv.load();
-        String server = dotenv.get("server");
-        String port = dotenv.get("port");
-        String database = dotenv.get("database");
+        String url = dotenv.get("url");
         String user = dotenv.get("user");
         String password = dotenv.get("password");
 
@@ -18,10 +16,7 @@ public class DotEnvExample {
         Scanner scanner = new Scanner(System.in);
         String country = scanner.nextLine();
         try {
-            Connection connection = DriverManager.getConnection(
-                    "jdbc:mysql://" + server + ":" + port + "/" + database,
-                    user,
-                    password);
+            Connection connection = DriverManager.getConnection(url, user, password);
 
             PreparedStatement statement = connection.prepareStatement("""
                     select *
