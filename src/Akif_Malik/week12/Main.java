@@ -76,7 +76,4 @@ public class Main {
             imdb.addActor(actor);
         }
     }
-
-
-
 }
