@@ -73,6 +73,53 @@ public class DBManager {
         }
     }
 
+
+    public void readAllFilmActorsFromDB(IMDB imdb){
+        try{
+            Connection connection = getConnection();
+            PreparedStatement ps = connection.prepareStatement("Select * from filmactor");
+
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                Film f = imdb.getFilmByID(rs.getInt("filmId"));
+                Actor a = imdb.getActorByID(rs.getInt("actorId"));
+                if (f != null && a != null){
+                    f.addActor(a);
+                }
+            }
+
+            rs.close();
+            ps.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateFilm(Film f){
+        try{
+            Connection conn = getConnection();
+            PreparedStatement ps = conn.prepareStatement("update film set title = ?, regie = ? where id = ?");
+
+            ps.setString(1, f.getTitle());
+            ps.setInt(2, f.getRegie().getId());
+            ps.setInt(3, f.getId());
+
+            int effectedRows = ps.executeUpdate();
+            if(effectedRows == 0){
+                System.out.println("Nothing changed.");
+            }
+
+            ps.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 //    public void addActor(Actor actor) {
 //        try {
 //            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/series", "aylin", "aylin");

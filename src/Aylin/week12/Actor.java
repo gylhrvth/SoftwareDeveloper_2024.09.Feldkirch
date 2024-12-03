@@ -56,12 +56,14 @@ public class Actor {
     public void addFilmAsActor(Film f){
         if (!actorOf.contains(f)){
             actorOf.add(f);
+            f.addActor(this);
             System.out.println(firstName + " " + lastName + " was added as an Actor to the movie " + f + ".");
         }
     }
 
     public void printAll(){
         System.out.println("    " + this);
+        System.out.println("        Regie of: " + regieOf);
     }
 
     @Override

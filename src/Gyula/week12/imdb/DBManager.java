@@ -1,4 +1,4 @@
-package Gyula.week12;
+package Gyula.week12.imdb;
 
 public class DBManager {
     private static DBManager instance = null;
