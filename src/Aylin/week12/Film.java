@@ -19,7 +19,6 @@ public class Film {
         if(a != null){
             actorList.add(a);
             System.out.println(a.getFullName() + " was added to the actors List of " + title + ".");
-            //a.addFilmAsActor(this);
         }
     }
 
