@@ -32,3 +32,6 @@ bin/
 .idea/
 
 assets/
+
+### use dotenv ###
+.env
