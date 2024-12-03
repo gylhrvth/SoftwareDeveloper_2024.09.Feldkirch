@@ -9,41 +9,22 @@ public class CreateReadUpdateDelete {
     public static void main(String[] args) {
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mondial?user=erik&password=erik");
-            PreparedStatement ps = conn.prepareStatement("select * from city c where c.Country = 'A';");
-
-            ResultSet rs = ps.executeQuery();
-
-            // Scanner:
-//            System.out.print("Enter a City you want to create: >> ");
-//            String city = sc.nextLine();
-
 
             System.out.println("Aktuelle Liste");
-            printQuery(rs);
-            rs.close();
+            printQuery(conn);
 
 
-            createCity(conn, "AAAAATest");
-            ResultSet rsCreate = ps.executeQuery();
-            printQuery(rsCreate);
-            rsCreate.close();
+            // Mit Scanner      in einzelne Methoden knallen! (macht mehr Sinn)
+            createCity(conn);
+            printQuery(conn);
+
+            updateCityPop(conn);
+            printQuery(conn);
+
+            deleteCity(conn);
+            printQuery(conn);
 
 
-            updateCityPop(conn, "AAAAATest");
-            ResultSet rsUpdate = ps.executeQuery();
-            printQuery(rsUpdate);
-            rsUpdate.close();
-
-
-            deleteCity(conn, "AAAAATest");
-            ResultSet rsDelete = ps.executeQuery();
-            printQuery(rsDelete);
-            rsDelete.close();
-
-
-
-            rs.close();
-            ps.close();
             conn.close();
 
         } catch (Exception e) {
@@ -88,18 +69,15 @@ public class CreateReadUpdateDelete {
         System.out.println("-".repeat(130));
     }
 
-    public static void printQuery(ResultSet rs) throws SQLException {
+    public static void printQuery(Connection conn) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("select * from city c where c.Country = 'A';");
+        ResultSet rs = ps.executeQuery();
+
         ResultSetMetaData metaData = rs.getMetaData();
         int[] optimalColWidth = getOptimalColumnWidth(rs);
 
         printHeadLine(optimalColWidth, metaData);
         printBody(rs, metaData, optimalColWidth);
-    }
-
-    public static void updateResultSet(Connection conn) throws SQLException{
-        PreparedStatement ps = conn.prepareStatement("select * from city c where c.Country = 'A';");
-        ResultSet rs = ps.executeQuery();
-        printQuery(rs);
 
         ps.close();
         rs.close();
@@ -107,8 +85,11 @@ public class CreateReadUpdateDelete {
 
 
     // Testing with Hardcoding
-    public static void createCity(Connection conn, String city) throws SQLException {
+    public static void createCity(Connection conn) throws SQLException {
         PreparedStatement ps = conn.prepareStatement("insert into city (Name, Country, Province) values(?, ?, ?)");
+
+        System.out.print("Enter a City you want to create: >> ");
+        String city = sc.nextLine();
 
         ps.setString(1, city);
         ps.setString(2, "A");
@@ -119,24 +100,30 @@ public class CreateReadUpdateDelete {
         System.out.println("Info: New City: >> " + city + " got added to the List!");
     }
 
-    public static void updateCityPop(Connection conn, String city) throws SQLException {
+    public static void updateCityPop(Connection conn) throws SQLException {
         PreparedStatement ps = conn.prepareStatement("update city c set Population = ? where c.Name = ?");
 
-        ps.setInt(1, 20);
-        ps.setString(2, city);
+        System.out.print("Enter the Population of the City: >> ");
+        int Population = sc.nextInt();
 
-        ps.executeUpdate(); // ps.executeQuery gibt Fehler
-        ps.close();
-        System.out.println("Info: Population from the chosen City: >> " + city + " got updated!");
-    }
-
-    public static void deleteCity(Connection conn, String city) throws SQLException {
-        PreparedStatement ps = conn.prepareStatement("delete from city c where c.Name = ?");
-
-        ps.setString(1, city);
+        ps.setInt(1, Population);
+//        ps.setString(2, city);
 
         ps.executeUpdate();
         ps.close();
-        System.out.println("Chosen City: >> " + city + " got deleted from the List!");
+//        System.out.println("Info: Population from the chosen City: >> " + city + " got updated!");
+    }
+
+    public static void deleteCity(Connection conn) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("delete from city c where c.Name = ?");
+
+        System.out.print("Enter a City you want to delete: >> ");
+        String cityDelete = sc.nextLine();
+
+        ps.setString(1, cityDelete);
+
+        ps.executeUpdate();
+        ps.close();
+        System.out.println("Chosen City: >> " + cityDelete + " got deleted from the List!");
     }
 }
