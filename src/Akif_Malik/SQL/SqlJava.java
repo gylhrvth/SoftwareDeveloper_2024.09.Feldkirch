@@ -18,8 +18,8 @@ public class SqlJava {
         PreparedStatement ps = con.prepareStatement("insert into city (Name, Country, Province) value (?, ?, ?) ");
 
         ps.setString(1, city);
-        ps.setString(2, "A");
-        ps.setString(3, "Vorarlberg");
+        ps.setString(2, "TR");
+        ps.setString(3, "Adana");
 
         ps.execute();
 
@@ -58,24 +58,34 @@ public class SqlJava {
         String userInput = sc.nextLine();
         addCity(userInput);
         System.out.println("City " + userInput + " has been added to the list!");
+        showQuerry();
+        System.out.println();
 
         System.out.println("Update a cities Country!");
+        System.out.println("choose a city to change name...");
         String city = sc.nextLine();
+        System.out.println("enter a new name for this city");
         String country = sc.nextLine();
         updatecity(city, country);
         System.out.println("City " + city + " has been updated!");
+        showQuerry();
+        System.out.println();
 
         System.out.println("Delete a city from the List!");
         String userInput3 = sc.nextLine();
         deleteCity(userInput3);
         System.out.println("City " + userInput3 + " has been deleted from the list! ");
+        showQuerry();
+        System.out.println();
 
         System.out.println("Changes have been made succesfully!");
     }
 
     public static void showQuerry() throws SQLException {
-        System.out.println("Choose a Country to work on!");
-        String country = sc.nextLine();
+//        System.out.println("Choose a Country to work on!");
+//        String country = sc.nextLine();
+
+        String country = "Turkey";
 
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mondial","root","root");
 
@@ -83,7 +93,7 @@ public class SqlJava {
                     select *
                     from city
                     join country on country.code = city.country
-                    where country.name = ? 
+                    where country.name = ? order by city.Province asc
             """);
 
         ps.setString(1, country);
