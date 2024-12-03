@@ -1,8 +1,5 @@
 package Aylin.week12;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
@@ -13,7 +10,9 @@ public class Main {
         DBManager dbManager = DBManager.getInstance();
         dbManager.readAllActorFromDB(imdb);
         dbManager.readAllFilmsFromDB(imdb);
+        dbManager.readAllFilmActorsFromDB(imdb);
 
         imdb.printAll();
+        imdb.getFilmByID(4).setTitle("Friends");
     }
 }

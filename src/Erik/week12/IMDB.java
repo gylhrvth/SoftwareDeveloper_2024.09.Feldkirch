@@ -29,6 +29,7 @@ public class IMDB {
         }
     }
 
+
     public Actor getActorByID(int id){
         for (Actor actor : actorList){
             if (actor.getId() == id){
@@ -37,6 +38,7 @@ public class IMDB {
         }
         return null;
     }
+
 
     public void printInfos() {
 

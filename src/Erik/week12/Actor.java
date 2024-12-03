@@ -53,10 +53,12 @@ public class Actor {
         }
     }
 
+
     public void printStructure(){
         System.out.println("│   │   ├── Actor: " + this + "; " + age + " Jahre;");
-        System.out.println("                 Regiseur for: " + regieOf);
+        System.out.println("│   │   │   ├── Regiseur for: " + regieOf);
     }
+
 
     @Override
     public String toString() {

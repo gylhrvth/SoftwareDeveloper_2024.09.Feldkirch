@@ -27,7 +27,7 @@ public class DBManager {
     public Connection getConnection() {
         if (connection == null) {
             try {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/TVSeries?user=gyula&password=gyula");
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/TSerien?user=erik&password=erik");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -49,7 +49,7 @@ public class DBManager {
 
     public void readActorFromDB(IMDB imdb) throws SQLException {
         Connection conn = getConnection();
-        PreparedStatement ps = conn.prepareStatement("select id, CONCAT(firstname, ' ', lastname) name, age AS `alter`, weight, height from actor");
+        PreparedStatement ps = conn.prepareStatement("select * from actor");
 
         ResultSet rs = ps.executeQuery();
         createActorOOP(imdb, rs);
