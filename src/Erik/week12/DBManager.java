@@ -101,6 +101,27 @@ public class DBManager {
         }
     }
 
+    public void addActorsToMovie(IMDB imdb) throws SQLException {
+        Connection conn = getConnection();
+        PreparedStatement ps = conn.prepareStatement("select * from filmactor");
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int actorId = rs.getInt("actorid");
+            int filmId = rs.getInt("filmid");
+
+            Actor actor = imdb.getActorByID(actorId);
+            Film film = imdb.getFilmByID(filmId);
+
+            if (actor != null && film != null) {
+                film.addActor(actor);
+            }
+        }
+
+        rs.close();
+        ps.close();
+    }
 
     public void updateActor(Actor a) {
         // TODO: Create UPDATE Statement...
