@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
 
-        DBManager.getInstance().getConnection();
+        DBManager.getInstance().getConnection();  // TODO: Es ist überflüßig
 
         // Objekte zum Speichern der Daten aus der Datenbank
         IMDB imdb = new IMDB();
