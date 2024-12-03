@@ -23,4 +23,12 @@ public class Film {
         }
     }
 
+    public void printAll(){
+        System.out.println("    " + this + " (regie: " + regie + ")");
+    }
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }
