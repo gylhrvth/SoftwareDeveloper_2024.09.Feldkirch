@@ -1,5 +1,7 @@
 package Erik.week12;
 
+import Gyula.WildColors;
+
 import java.util.Vector;
 
 public class Film {
@@ -20,6 +22,12 @@ public class Film {
         actorList = new Vector<>();
     }
 
+    public void setRegie(Actor regie) {
+        this.regie = regie;
+        if (regie != null){
+            regie.addFilmAsRegie(this);
+        }
+    }
 
     // Methoden
     public void addActor(Actor a) {
@@ -29,10 +37,15 @@ public class Film {
     }
 
     public void printStructure(){
-        System.out.println("│   ├── Film: " + title + " / Regie: " + regie.getName());
+        System.out.println("│   │   ├── Film: " + this + " / Regie: " + regie);
         for (Actor a : actorList){
             a.printStructure();
         }
     }
 
+
+    @Override
+    public String toString() {
+        return WildColors.getColor("#CA66AA") + title + WildColors.resetColor();
+    }
 }

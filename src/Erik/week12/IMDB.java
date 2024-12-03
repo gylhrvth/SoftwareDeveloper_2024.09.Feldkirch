@@ -29,12 +29,27 @@ public class IMDB {
         }
     }
 
-    public Actor getActorByID(int id) {
-        for (Actor a : actorList) {
-            if (a.getId() == id) {
-                return a;
+
+    public Actor getActorByID(int id){
+        for (Actor actor : actorList){
+            if (actor.getId() == id){
+                return actor;
             }
         }
         return null;
+    }
+
+
+    public void printInfos() {
+
+        System.out.println("│   ├── All Actors: ");
+        for (Actor a : actorList) {
+            a.printStructure();
+        }
+
+        System.out.println("│   ├── All Movies: ");
+        for (Film f : filmList){
+            f.printStructure();
+        }
     }
 }
