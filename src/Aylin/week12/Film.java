@@ -19,8 +19,15 @@ public class Film {
         if(a != null){
             actorList.add(a);
             System.out.println(a.getFullName() + " was added to the actors List of " + title + ".");
-            //a.addFilmAsActor(this);
         }
     }
 
+    public void printAll(){
+        System.out.println("    " + this + " (regie: " + regie + ")");
+    }
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }

@@ -38,5 +38,9 @@ public class IMDB {
         for (Actor actor: actorList){
             actor.printAll();
         }
+        System.out.println("Films:");
+        for (Film film : filmlist){
+            film.printAll();
+        }
     }
 }
