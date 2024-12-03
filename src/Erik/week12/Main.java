@@ -8,25 +8,16 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
 
-        // Datenbank auslesen und objekte erstellen in DB Manager
+        DBManager.getInstance().getConnection();
 
+        // Objekte zum Speichern der Daten aus der Datenbank
+        IMDB imdb = new IMDB();
 
-        DBManager.getInstance().createActorOOP();
+        // Braucht Objekt für die Ausführung
+        DBManager.getInstance().readActorFromDB(imdb);
+        DBManager.getInstance().readMovieFromDB(imdb);
 
-
-
-
-        DBManager.getInstance().createMovieOOP();
-
-
-
-
-
-
-
-
-
-
+        imdb.printInfos();
 
 
 
@@ -35,46 +26,34 @@ public class Main {
 
 
         DBManager.getInstance().closeConnection();
-
-
-//        Connection conn = DBManager.getInstance().getConnection();
-//
-//        try {
-//            PreparedStatement ps = conn.prepareStatement("select * from film f");
-//
-//            ResultSet rs = ps.executeQuery();
-//
-//            Actor actorErik = new Actor(1, "Erik", 23, 200, 103);
-//            Actor actorThiemo = new Actor(1, "Thiemo", 27, 180, 80);
-//            Film lifeOfErik = new Film(1, "Life of Erik", actorThiemo);
-//
-//            // Actor hinzufügen
-//            lifeOfErik.addActor(actorThiemo);
-//            lifeOfErik.addActor(actorErik);
-//
-//            // Film Actor und Regie Hinzufügen
-//            actorThiemo.addFilmAsActor(lifeOfErik);
-//            actorThiemo.addFilmAsRegie(lifeOfErik);
-//
-//
-//            // Methoden Aufrufen
-//            System.out.println("Struktur:");
-//            lifeOfErik.printStructure();
-//            System.out.println("-".repeat(50));
-//            System.out.println("Liste:");
-//            printQuery(rs);
-//
-//
-//            ps.close();
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        DBManager.getInstance().closeConnection();
-
     }
+}
 
 /*
+            // Actor hinzufügen
+            lifeOfErik.addActor(actorThiemo);
+            lifeOfErik.addActor(actorErik);
+
+            // Film Actor und Regie Hinzufügen
+            actorThiemo.addFilmAsActor(lifeOfErik);
+            actorThiemo.addFilmAsRegie(lifeOfErik);
+
+
+            // Methoden Aufrufen
+            System.out.println("Struktur:");
+            lifeOfErik.printStructure();
+            System.out.println("-".repeat(50));
+            System.out.println("Liste:");
+            printQuery(rs);
+
+
+            ps.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        DBManager.getInstance().closeConnection();
+
     public static int[] getOptimalColumnWidth(ResultSet rs) throws SQLException {
         ResultSetMetaData metaData = rs.getMetaData();
         int[] optimalColWidth = new int[1 + metaData.getColumnCount()];
@@ -104,7 +83,4 @@ public class Main {
             System.out.println("|");
         }
     }
-
-
  */
-}

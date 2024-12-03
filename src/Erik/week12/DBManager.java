@@ -4,16 +4,18 @@ import java.sql.*;
 
 public class DBManager {
 
-
+    // Attribute
     private static DBManager instance = null;
     private Connection connection = null;
 
 
+    // Konstruktor
     private DBManager() {
-        // ...
+
     }
 
 
+    // Methoden
     public static DBManager getInstance() {
         if (instance == null) {
             instance = new DBManager();
@@ -44,12 +46,31 @@ public class DBManager {
         }
     }
 
-    public void createActorOOP() throws SQLException {
+
+    public void readActorFromDB(IMDB imdb) throws SQLException {
         Connection conn = getConnection();
         PreparedStatement ps = conn.prepareStatement("select * from actor");
 
         ResultSet rs = ps.executeQuery();
+        createActorOOP(imdb, rs);
 
+        rs.close();
+        ps.close();
+    }
+
+    public void readMovieFromDB(IMDB imdb) throws SQLException {
+        Connection conn = getConnection();
+        PreparedStatement ps = conn.prepareStatement("select * from film");
+
+        ResultSet rs = ps.executeQuery();
+        createMovieOOP(imdb, rs);
+
+        rs.close();
+        ps.close();
+    }
+
+
+    public void createActorOOP(IMDB imdb, ResultSet rs) throws SQLException {
         while (rs.next()) {
             Actor actor = new Actor(
                     rs.getInt("id"),
@@ -58,22 +79,17 @@ public class DBManager {
                     rs.getInt("weight"),
                     rs.getInt("height")
             );
-//            f.addActor(actor);
+            imdb.addActor(actor);
         }
     }
 
-    public void createMovieOOP() throws SQLException {
-        Connection conn = getConnection();
-        PreparedStatement ps = conn.prepareStatement("select * from film");
-
-        ResultSet rs = ps.executeQuery();
-
+    public void createMovieOOP(IMDB imdb, ResultSet rs) throws SQLException {
         while (rs.next()) {
             Film movie = new Film(
                     rs.getInt("id"),
                     rs.getString("title")
             );
-
+            imdb.addFilm(movie);
         }
     }
 
@@ -82,24 +98,3 @@ public class DBManager {
         // TODO: Create UPDATE Statement...
     }
 }
-
-
-
-
-
-
-
-/*
-    public static void readFromDatabaseActor(Connection conn, IMDB imdb) throws SQLException {
-        PreparedStatement ps = conn.prepareStatement("""
-                SELECT * FROM actor
-                """);
-
-        ResultSet rs = ps.executeQuery();
-        processActor(rs, imdb);
-
-        // Close everything
-        rs.close();
-        ps.close();
-    }
- */

@@ -29,10 +29,9 @@ public class Film {
     }
 
     public void printStructure(){
-        System.out.println("│   ├── Film: " + title + " / Regie: " + regie.getName());
+        System.out.println("│   ├── Film: " + title + " / Regie: " + null);
         for (Actor a : actorList){
             a.printStructure();
         }
     }
-
 }
