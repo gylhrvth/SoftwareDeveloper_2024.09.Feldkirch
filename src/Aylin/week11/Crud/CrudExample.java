@@ -9,6 +9,8 @@ public class CrudExample {
     public static void main(String[] args) {
         try{
 //            addCity();
+            //deleteCity();
+            updateCity();
             printTable();
         }catch(SQLException e){
             e.printStackTrace();
@@ -32,7 +34,42 @@ public class CrudExample {
         ps.setString(2, "A");
         ps.setString(3, "Vorarlberg");
 
-        ps.execute();
+        ps.executeUpdate();
+
+        ps.close();
+        conn.close();
+    }
+
+    public static void deleteCity() throws SQLException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the name of the city you want to delete: ");
+        String cityName = scanner.nextLine();
+
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mondial", "aylin", "aylin");
+        PreparedStatement ps = conn.prepareStatement("DELETE FROM city WHERE Name = ?");
+
+        ps.setString(1, cityName);
+
+        ps.executeUpdate();
+
+        ps.close();
+        conn.close();
+    }
+
+    public static void updateCity() throws SQLException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the name of the city to update: ");
+        String cityName = scanner.nextLine();
+        System.out.print("Enter the new name of the city: ");
+        String newCityName = scanner.nextLine();
+
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mondial", "aylin", "aylin");
+        PreparedStatement ps = conn.prepareStatement("UPDATE city SET Name = ? WHERE Name = ?");
+
+        ps.setString(1, cityName);
+        ps.setString(2, newCityName);
+
+        ps.executeUpdate();
 
         ps.close();
         conn.close();
