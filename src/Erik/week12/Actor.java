@@ -1,5 +1,7 @@
 package Erik.week12;
 
+import Gyula.WildColors;
+
 import java.util.Vector;
 
 public class Actor {
@@ -51,8 +53,16 @@ public class Actor {
         }
     }
 
+
     public void printStructure(){
-        System.out.println("│   │   ├── Actor: " + name + "; " + age + " Jahre;");
+        System.out.println("│   │   ├── Actor: " + this + "; " + age + " Jahre;");
+        System.out.println("│   │   │   ├── Regiseur for: " + regieOf);
+    }
+
+
+    @Override
+    public String toString() {
+        return WildColors.getColor("#33EE33") + name + WildColors.resetColor();
     }
 
     public void setWeight(int newWeight){

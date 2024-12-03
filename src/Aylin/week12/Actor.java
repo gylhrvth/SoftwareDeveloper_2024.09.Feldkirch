@@ -66,6 +66,6 @@ public class Actor {
 
     @Override
     public String toString() {
-        return WildColors.getColor("#FF8800") + lastName + ", " + firstName + WildColors.resetColor();
+        return WildColors.getColor("#973a57") + lastName + ", " + firstName + WildColors.resetColor();
     }
 }
