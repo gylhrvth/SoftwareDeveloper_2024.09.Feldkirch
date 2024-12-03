@@ -2,8 +2,6 @@ package Erik.week12;
 
 import java.sql.*;
 
-// TODO: Connect DB, SELECT FROM TABLE, Initialize the Object in Java
-
 public class Main {
 
     public static void main(String[] args) throws SQLException {
@@ -15,11 +13,11 @@ public class Main {
         DBManager.getInstance().readActorFromDB(imdb);
         DBManager.getInstance().readMovieFromDB(imdb);
 
+        // Info's Printen bzw. Struktur Printen
         imdb.printInfos();
 
         // ToDo: Actoren in Film hinzufügen und Filme in die Actoren hinzufügen.
-
-
+        imdb.addActorsToMovie();
 
 
 

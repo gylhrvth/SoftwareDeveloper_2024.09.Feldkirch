@@ -1,5 +1,6 @@
 package Erik.week12;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import java.sql.*;
 
 public class DBManager {
@@ -25,9 +26,14 @@ public class DBManager {
 
 
     public Connection getConnection() {
+        Dotenv dotenv = Dotenv.load();
+        String url = dotenv.get("urlTV");
+        String user = dotenv.get("user");
+        String password = dotenv.get("password");
+
         if (connection == null) {
             try {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/TSerien?user=erik&password=erik");
+                connection = DriverManager.getConnection(url, user, password);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -99,4 +105,5 @@ public class DBManager {
     public void updateActor(Actor a) {
         // TODO: Create UPDATE Statement...
     }
+
 }
