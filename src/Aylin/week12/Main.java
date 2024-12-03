@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Main {
     public Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
+        IMDB imdb = new IMDB();
 
         Actor johansson = new Actor(1, "Scarlett", "Johansson", 40);
         Actor aniston = new Actor(2, "Jennifer", "Aniston", 55);
@@ -15,6 +16,9 @@ public class Main {
         Film avengers = new Film(1, "Avengers", aniston);
 
         DBManager dbManager = DBManager.getInstance();
+        dbManager.readAllActorFromDB(imdb);
+
+        imdb.printAll();
 
         avengers.addActor(johansson);
         dbManager.addActor(johansson);

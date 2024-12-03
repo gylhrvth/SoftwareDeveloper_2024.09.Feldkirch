@@ -1,5 +1,7 @@
 package Aylin.week12;
 
+import Gyula.WildColors;
+
 import java.util.Vector;
 
 public class Actor {
@@ -56,5 +58,14 @@ public class Actor {
             actorOf.add(f);
             System.out.println(firstName + " " + lastName + " was added as an Actor to the movie " + f + ".");
         }
+    }
+
+    public void printAll(){
+        System.out.println("    " + this);
+    }
+
+    @Override
+    public String toString() {
+        return WildColors.getColor("#FF8800") + lastName + ", " + firstName + WildColors.resetColor();
     }
 }

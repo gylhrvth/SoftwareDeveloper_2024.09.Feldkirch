@@ -31,4 +31,12 @@ public class IMDB {
         }
         return null;
     }
+
+    public void printAll(){
+        System.out.println("IMDB von Aylin");
+        System.out.println("Actors:");
+        for (Actor actor: actorList){
+            actor.printAll();
+        }
+    }
 }

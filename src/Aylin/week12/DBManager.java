@@ -9,27 +9,8 @@ import java.util.Vector;
 public class DBManager {
     public Scanner scanner = new Scanner(System.in);
     private static DBManager instance = null;
-    private Vector<Film> films;
-    private Vector<Actor> actors;
-    private IMDB imdb;
 
     private DBManager(){
-        films = new Vector<>();
-        actors = new Vector<>();
-
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/series", "aylin", "aylin");
-            PreparedStatement ps = conn.prepareStatement("Select * from actor");
-
-            ResultSet rs = ps.executeQuery();
-
-            printResultSet(rs);
-
-            ps.close();
-            conn.close();
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
     }
 
     public static DBManager getInstance() {
@@ -37,6 +18,31 @@ public class DBManager {
             instance = new DBManager();
         }
         return instance;
+    }
+
+    public void readAllActorFromDB(IMDB imdb){
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/TVSeries", "gyula", "gyula");
+            PreparedStatement ps = conn.prepareStatement("Select * from actor");
+
+            ResultSet rs = ps.executeQuery();
+
+            //printResultSet(rs);
+            while (rs.next()){
+                Actor newActor = new Actor(
+                        rs.getInt("id"),
+                        rs.getString("firstname"),
+                        rs.getString("lastname"),
+                        rs.getInt("age")
+                );
+                imdb.addActor(newActor);
+            }
+
+            ps.close();
+            conn.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public static void printResultSet(ResultSet rs) throws SQLException{
