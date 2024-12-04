@@ -44,7 +44,7 @@ public class Film {
 
     public void printStructure(){
         System.out.println("│   │   ├── Film: " + this + " / Regie: " + regie);
-        System.out.println("                  Actors: " + actorList);
+        System.out.println("│   │   │   ├── Actors: " + actorList);
     }
 
     @Override

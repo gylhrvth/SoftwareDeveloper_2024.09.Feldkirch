@@ -5,7 +5,6 @@ import java.sql.*;
 // ToDo: Actoren in Film hinzufügen und Filme in die Actoren hinzufügen.
 
 public class Main {
-
     public static void main(String[] args) throws SQLException {
 
         // Objekt zum Speichern der Daten aus der Datenbank
