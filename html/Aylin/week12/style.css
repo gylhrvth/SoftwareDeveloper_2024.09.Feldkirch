@@ -1,0 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+    line-height: 1.6;
+    background-color: #111;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 1);
+    z-index: 1000;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#N{
+    width: 40px;
+    height: auto;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+h1{
+    margin-top: 150px;
+    color: rgb(186, 21, 21);
+}
+
+h2{
+    color: rgb(22, 85, 65);
+    text-decoration: dashed;
+}
+
+h3{
+    color: rgb(62, 111, 95);
+    text-decoration: dashed;
+}
+
+.text-block1, .text-block3{
+    margin-top: 20px auto;
+    margin-left: 6.5%;
+    width: 40%;
+    text-align: justify;
+}
+
+.text-block2-container{
+    display: flex;
+    align-items: flex-start;
+    margin-top: 20px;
+    margin-left: 6.5%;
+    margin-right: 6.5%;
+    gap: 50px;
+}
+
+.text-block2{
+    text-align: justify;
+}
+
+#Istanbul{
+    width: 40vw;
+    height: auto;
+
+}
+
+.text-block4-container{
+    display: flex;
+    align-items: flex-start;
+    margin-top: 20px;
+    margin-left: 6.5%;
+    margin-right: 6.5%;
+    gap: 50px;
+}
+
+.text-block4{
+    text-align: justify;
+}
+
+#Flagge{
+    width: 40vw;
+    height: auto;
+
+}
+
+footer{
+    background-color: rgb(53, 51, 51);
+    color: white;
+    padding: 20px 0;
+    text-align: left;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    flex-wrap: wrap;
+    gap: 45%;
+}
+
+.footer-column {
+    width: 10%;
+    margin-top: 10px;
+}
+
+.footer-info{
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+#socialMedia{
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#insta{
+    width: 1.5vw;
+    height: auto;
+}
+
+#x{
+    width: 2vw;
+    height: auto;
+}
+
+#facebook{
+    width: 1.5vw;
+    height: auto;
+}
+
