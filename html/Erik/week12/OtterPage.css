@@ -1,0 +1,30 @@
+body {
+    background-color: bisque;
+}
+
+
+h1 {
+    border: 5px solid rgb(204, 155, 109);
+}
+
+
+h2 {
+    color: #cc8e5b;
+}
+
+
+h3 {
+    color: hsl(125, 68%, 40%);
+}
+
+
+p{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12;
+}
+
+
+li {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 13;
+}

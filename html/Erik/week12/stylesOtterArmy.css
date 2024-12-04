@@ -1,0 +1,20 @@
+body {
+    background: linear-gradient(to bottom, lightblue, plum, lightpink, lightgreen)
+}
+
+.centeredDIV {
+    justify-content: center;
+    text-align: center;
+}
+
+img {
+    width: 200;
+    height: 200;
+    padding: 20;
+    border-radius: 50%;
+}
+
+a {
+    padding: 20;
+    color: blue;
+}
