@@ -1,0 +1,12 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: plum;
+    color: #333;
+}
+
+
+.centeredDIV{
+    display: grid;
+    justify-content: center;
+    text-align: center;
+}
