@@ -1,0 +1,77 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Float Example</title>
+    <style>
+        section {
+            box-sizing: border-box;
+            border: 2px solid blue;
+            width: 100%;
+            float: left;
+            }
+
+        div {
+            margin: 5px;
+            width: 50px;
+            height: 150px;
+            }
+
+        .left {
+            float: left;
+            background: pink;
+            }
+
+        .right {
+            float: right;
+            background: cyan;
+            }
+
+        .imgFloat {
+            margin-top: 10px;
+            border: 2px solid black;
+        }
+
+        .image_left {
+            float: left;
+            margin: 10px;
+            width: 150px;
+            height: 150px;
+            
+        }
+
+        .image_right {
+            float: right;
+            margin: 10px;
+            width: 150px;
+            height: 150px;
+            vertical-align: middle;
+        }
+
+    </style>
+</head>
+<body>
+    <section>
+        <div class="left">1</div>
+        <div class="right">2</div>
+        <h1>Float Example mit Text</h1>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+        Sed exercitationem, pariatur consectetur vitae necessitatibus commodi nostrum voluptate saepe sequi facilis consequuntur quos ex impedit sapiente. 
+        Illum ab fuga aperiam! Quis.</p>
+    </section>
+
+    <section class="imgFloat">
+        <h2>Float example with image </h2>
+        <p>Funktioniert nicht so ganz wie vorgestellt</p>
+        <p>  
+            <img src="images/spaceOtter1.jpg" alt="Space Otter Bild" class="image_left">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit, explicabo repudiandae veniam molestias magni incidunt! Accusamus, temporibus pariatur nostrum at blanditiis recusandae nobis molestiae, dolor dicta aliquam commodi soluta tempore.
+        </p>
+        <hr>
+        <p>
+            <img src="images/spaceOtter2.jpg" alt="Space Otter Bild" class="image_right">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, at quisquam temporibus, eveniet labore voluptates, tempore quia ipsam eaque debitis vitae. Eos, mollitia nemo modi laboriosam labore adipisci dignissimos quod.
+        </p>
+    </section>
+</body>
+</html>
