@@ -1,7 +1,5 @@
 package Thiemo.week12;
 
-import Aylin.week12.DBManager;
-
 import java.util.Vector;
 
 public class Film {
@@ -35,7 +33,7 @@ public class Film {
 
     public void setTitle(String title) {
         this.title = title;
-        Thiemo.week12.DBManager.getInstance().updateFilm(this);
+        DBManager.getInstance().updateFilm(this);
     }
 
     public String getTitle() {

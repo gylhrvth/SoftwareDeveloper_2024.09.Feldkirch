@@ -42,7 +42,7 @@ public class IMDB {
     }
 
     public void printAll(){
-        System.out.println("IMDB von Aylin");
+        System.out.println("IMDB von T.");
         System.out.println("Actors:");
         for (Actor actor: actorList){
             actor.printAll();
