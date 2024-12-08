@@ -16,6 +16,6 @@ public class Main {
 
         imdb.printAll();
         imdb.getFilmByID(4).setTitle("");
-
+        System.out.println();
     }
 }
