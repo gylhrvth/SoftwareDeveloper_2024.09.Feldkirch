@@ -71,7 +71,7 @@ public class Actor {
             System.out.print(regieOf.get(i));
         }
         System.out.println();
-        System.out.println();
+
     }
 
     public void printAll(){
