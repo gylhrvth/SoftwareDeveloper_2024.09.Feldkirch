@@ -32,6 +32,26 @@ public class IMDB {
         }
         return null;
     }
+    public Film getFilmByID(int id){
+        for (Film f : filmlist){
+            if(f.getId() == id){
+                return f;
+            }
+        }
+        return null;
+    }
+
+    public void printAll(){
+        System.out.println("IMDB von Aylin");
+        System.out.println("Actors:");
+        for (Actor actor: actorList){
+            actor.printAll();
+        }
+        System.out.println("Films:");
+        for (Film film : filmlist){
+            film.printAll();
+        }
+    }
 }
 
 
