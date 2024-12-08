@@ -1,6 +1,7 @@
 package Thiemo.week12;
 
 import Gyula.WildColors;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.Vector;
 
@@ -70,12 +71,14 @@ public class Actor {
             System.out.print(regieOf.get(i));
         }
         System.out.println();
+        System.out.println();
     }
 
     public void printAll(){
         System.out.println("    " + this);
         System.out.println("        Regie of: " + regieOf);
     }
+
 //    public void printAll(){
 //        System.out.println("    " + this);
 //        System.out.println("        Regie of: " + regieOf);

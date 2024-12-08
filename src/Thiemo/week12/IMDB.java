@@ -51,6 +51,7 @@ public class IMDB {
         for (Film film : filmlist){
             film.printAll();
         }
+        System.out.println();
     }
 }
 

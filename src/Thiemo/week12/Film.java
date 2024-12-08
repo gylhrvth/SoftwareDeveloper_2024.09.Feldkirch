@@ -61,5 +61,6 @@ public class Film {
         for (Actor ac : actorList) {
             ac.printStructure();
         }
+        System.out.println();
     }
 }

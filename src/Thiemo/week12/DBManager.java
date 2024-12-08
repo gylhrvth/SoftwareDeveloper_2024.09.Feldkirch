@@ -123,7 +123,7 @@ public class DBManager {
             rs.close();
             ps.close();
             connection.close();
-
+            System.out.println();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
