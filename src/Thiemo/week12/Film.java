@@ -17,9 +17,9 @@ public class Film {
         actorList = new Vector<>();
     }
 
-    public void setRegie(Actor a){
+    public void setRegie(Actor a) {
         regie = a;
-        if (regie != null){
+        if (regie != null) {
             regie.addFilmAsRegie(this);
         }
     }
@@ -27,8 +27,29 @@ public class Film {
     public void addActor(Actor a) {
         if (!actorList.contains(a)) {
             actorList.add(a);
-
+            System.out.println(a.getFirstName() + "was added to the actors of" + title);
         }
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+        DBManager.getInstance().updateFilm(this);
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Actor getRegie() {
+        return regie;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void printAll(){
+        System.out.println("    " + this + " (regie: " + regie + ")");
     }
 
     public void printResult() {
@@ -38,5 +59,6 @@ public class Film {
         for (Actor ac : actorList) {
             ac.printStructure();
         }
+        System.out.println();
     }
 }
