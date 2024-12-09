@@ -18,14 +18,14 @@ header {
     display: flex;
     width: 100%;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 1);
+    background-color: rgba(0, 0, 0, 0);
     z-index: 1000;
     justify-content: space-between;
     align-items: center;
 }
 
 #N{
-    width: 40px;
+    width: 130px;
     height: auto;
 }
 
@@ -35,18 +35,38 @@ nav ul {
     justify-content: center;
 }
 
+nav button{
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+}
+
+nav button:hover {
+    text-decoration: underline;
+}
+
+nav search{
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    border: none;
+    margin-left: 600px;
+    padding: 16px 20px;
+    text-align: right;
+}
+
 nav ul li {
     margin: 0 20px;
 }
 
-h1{
-    margin-top: 150px;
-    color: rgb(186, 21, 21);
+#htgawm{
+    width: 100%;
+    height: auto;
 }
 
-h2{
-    color: rgb(22, 85, 65);
-    text-decoration: dashed;
+.img{
+    width: 300px;
+    margin: 0 20px 0 0;
 }
 
 h3{
@@ -54,50 +74,27 @@ h3{
     text-decoration: dashed;
 }
 
-.text-block1, .text-block3{
-    margin-top: 20px auto;
-    margin-left: 6.5%;
-    width: 40%;
-    text-align: justify;
-}
-
-.text-block2-container{
+.picture-block{
     display: flex;
-    align-items: flex-start;
-    margin-top: 20px;
+    /*justify-content: space-around;
+    flex-wrap: wrap;*/
+    margin-top: 10px;
     margin-left: 6.5%;
-    margin-right: 6.5%;
-    gap: 50px;
 }
 
-.text-block2{
-    text-align: justify;
-}
-
-#Istanbul{
-    width: 40vw;
-    height: auto;
-
-}
-
-.text-block4-container{
-    display: flex;
-    align-items: flex-start;
-    margin-top: 20px;
+#h4{                                       /*Popular on Netflix */
+    color: rgb(255, 255, 255);
+    font-family: Arial;
+    margin-top: 2%;
     margin-left: 6.5%;
-    margin-right: 6.5%;
-    gap: 50px;
-}
 
-.text-block4{
-    text-align: justify;
 }
-
-#Flagge{
-    width: 40vw;
+/*
+#ga{
+    width: 10px;
     height: auto;
-
 }
+*/
 
 footer{
     background-color: rgb(53, 51, 51);
@@ -112,31 +109,97 @@ footer{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 20px;
+    gap:20px;
 }
 
 
 .footer-info{
     font-size: 14px;
     margin-top: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 #socialMedia{
+    display: flex;
+    align-items: flex-start;
     margin-top: 20px;
 }
 
 #insta{
+    margin: 0 10px;
     width: 1.5vw;
     height: auto;
+    text-align: justify;
 }
 
 #x{
-    width: 2vw;
+    margin: 0 10px;
+    width: 1.9vw;
     height: auto;
+    text-align: justify;
 }
 
 #facebook{
-    width: 1.5vw;
+    width: 1.4vw;
+    height: auto;
+    text-align: justify;
+}
+
+.separator {
+    margin: 0 5px;
+    font-size: 13px;
+    
+}
+
+.unsubscribe {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.unsubscribe:hover {
+    text-decoration: underline;
+}
+
+/* Acc Login */
+
+.header{
+    width: 130px;
     height: auto;
 }
+
+.profile h1{
+    font-size: 30px;
+    font-family: 'Arial';
+    color: #ffffff;
+    text-align: center;
+    margin: 170px 0 0 0;
+}
+
+#profile1{
+    margin: 30px 30px 0 480px;
+}
+
+#profile2{
+    margin: 0 30px 0 0;
+}
+
+.profileName{
+    display: flex;
+    font-size:25px;
+    font-family: Arial;
+    color: #555050;
+}
+
+#namep1{
+    margin: 10px 0 0 540px;
+}
+#namep2{
+    margin: 10px 0 0 158px;
+}
+
+#addp{
+    margin: 10px 0 0 150px;
+}
+
 
