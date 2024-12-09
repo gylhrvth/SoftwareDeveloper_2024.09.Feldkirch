@@ -1,9 +1,5 @@
 package Erik.week12;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Vector;
 
 public class IMDB {
@@ -32,8 +28,6 @@ public class IMDB {
             actorList.add(a);
         }
     }
-
-
 
 
     public Actor getActorByID(int id){
