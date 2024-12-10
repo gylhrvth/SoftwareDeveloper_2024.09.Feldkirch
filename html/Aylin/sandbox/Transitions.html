@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document: Hello World!</title>
+</head>
+<style>
+    .box {
+        color: white;
+        background-color: black;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        text-align: center;
+        padding: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .box:hover{
+        background-color: rgb(64, 54, 105);
+        transition: scale(1.1);
+    }
+
+    .button-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .button{
+        color: brown;
+        background-color: rgba(202, 177, 119, 0.716);
+        font-family: Verdana;
+        padding: 20px;
+        transition: all 0.7s ease;
+    }
+
+    .button:hover{
+        transform: translateX(-300px);
+        background-color: brown;
+        color: rgba(202, 177, 119, 0.716);
+        transform: scale(1.2);
+        text-align: center;
+    }
+</style>
+<body>
+    <div class="box">Hover over me!</div>
+    <hr>
+    <div class="button-container">
+        <button class="button">Whatever you do, don't click this button!</button>
+    </div>
+</body>
+</html>
