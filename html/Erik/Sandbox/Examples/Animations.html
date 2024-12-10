@@ -4,8 +4,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animations</title>
     <link rel="shortcut icon" href="images\favicon.ico" type="image/x-icon">
+    <style>
+
+        h1 {
+            grid-column: span 2; /* Überschrift über beide Spalten */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .gridcontainer {
+            display: grid;
+            grid-template-columns: auto auto;
+            grid-template-rows: auto auto;
+            grid-gap: 20px;
+            grid-template-areas: 
+                    "ExOne ExTwo"
+                    "ExThree ExThree"
+            
+        }
+
+        .Box{
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            display: flex;
+            text-align: center;
+            align-items: center;
+        }
+
+        .ExOne {
+            background-color: rgb(70, 160, 190);
+            animation-name: ExOne;
+            animation-duration: 10s;
+        }
+
+        @keyframes ExOne {
+            from {background-color: rgb(94, 230, 237);}
+            to {background-color: rgb(254, 116, 236);}
+        }
+
+        .ExTwo {
+            background-color: rgb(192, 192, 192);
+            animation-name: ExTwo;
+            animation-duration: 10s;
+        }
+
+        @keyframes ExTwo {
+            0%  {background-color: lightblue;}
+            25%  {background-color: lightpink;}
+            50%  {background-color: plum;}
+            75%  {background-color: lightgreen;}
+            100%  {background-color: lightcoral;}
+        }
+
+        .ExThree {
+            background-color: rgb(192, 192, 192);
+            position: relative;
+            animation-name: ExThree;
+            animation-duration: 10s;
+            animation-delay: 1s;            /* -1s geht auch */
+            animation-iteration-count: 2;   /* machts zweimal durch (infinite für unendlich) */
+            animation-direction: alternate; /* Geht einmal im Uhrzeiger und beim nächsten lauf gegen Uhrzeiger; alternate-reverse geht auch anders rum*/
+        }
+
+        @keyframes ExThree {
+            0%    {background-color: lightyellow; left: 0px;   top: 0px;}
+            25%   {background-color: lightcoral;  left: 100px; top: 0px;}
+            50%   {background-color: lightgreen;  left: 100px; top: 100px;}
+            75%   {background-color: lightblue;   left: 0px;   top: 100px;}
+            100%  {background-color: plum;        left: 0px;   top: 0px}
+        }
+    </style>
 </head>
 <body>
-    <h1>Hallo</h1>
+    <h1>Animation Examples</h1>
+    <div class="gridcontainer">
+        <div class="Box ExOne"> 
+            <div>
+                <p>Example 1:</p>
+                <p>ExOne: Background Color Animation</p>    
+            </div>
+        </div>
+      <div class="Box ExTwo">
+        <div>
+            <p>Example 2:</p>
+            <p>Background Color Animaton with %</p>
+        </div>
+      </div>
+      <div class="Box ExThree">
+        <div>
+            <p>Example 3:</p>
+            <p>Background Color Animation with movement, delay, repeat, usw...</p>
+        </div>
+      </div>
+    </div>
 </body>
 </html>
