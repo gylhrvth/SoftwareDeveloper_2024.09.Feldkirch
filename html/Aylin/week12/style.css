@@ -66,7 +66,18 @@ nav ul li {
 
 .img{
     width: 300px;
-    margin: 0 20px 0 0;
+    margin: 0 20px 30px 0;
+    transition: all 0.3s ease;
+    /*display: inline-block;*/
+    position: relative;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.0);
+}
+
+.img:hover{
+    transform: scale(1.2);
+    z-index: 10;
 }
 
 h3{
@@ -74,27 +85,51 @@ h3{
     text-decoration: dashed;
 }
 
-.picture-block{
+.wrapper{
+    position: relative;
+}
+
+.carousel{
     display: flex;
     /*justify-content: space-around;
     flex-wrap: wrap;*/
     margin-top: 10px;
     margin-left: 6.5%;
+    overflow: hidden;
 }
 
-#h4{                                       /*Popular on Netflix */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 30%;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    user-select: none;
+    z-index: 10;
+  }
+  
+  .prev {
+    left: 2vh;
+    border-radius: 3px 0 0 3px;
+  }
+  .next {
+    right: 2vh;
+    border-radius: 0 3px 3px 0;
+  }
+  
+  .prev:hover, .next:hover {
+    background-color: rgba(66, 63, 63, 0.8);
+  }
+
+#h4{                                       
     color: rgb(255, 255, 255);
     font-family: Arial;
-    margin-top: 2%;
     margin-left: 6.5%;
 
 }
-/*
-#ga{
-    width: 10px;
-    height: auto;
-}
-*/
 
 footer{
     background-color: rgb(53, 51, 51);
@@ -126,22 +161,9 @@ footer{
     margin-top: 20px;
 }
 
-#insta{
+#insta, #x, #facebook{
     margin: 0 10px;
     width: 1.5vw;
-    height: auto;
-    text-align: justify;
-}
-
-#x{
-    margin: 0 10px;
-    width: 1.9vw;
-    height: auto;
-    text-align: justify;
-}
-
-#facebook{
-    width: 1.4vw;
     height: auto;
     text-align: justify;
 }
@@ -159,47 +181,5 @@ footer{
 
 .unsubscribe:hover {
     text-decoration: underline;
+    transform: text-decoration 0.3s ;
 }
-
-/* Acc Login */
-
-.header{
-    width: 130px;
-    height: auto;
-}
-
-.profile h1{
-    font-size: 30px;
-    font-family: 'Arial';
-    color: #ffffff;
-    text-align: center;
-    margin: 170px 0 0 0;
-}
-
-#profile1{
-    margin: 30px 30px 0 480px;
-}
-
-#profile2{
-    margin: 0 30px 0 0;
-}
-
-.profileName{
-    display: flex;
-    font-size:25px;
-    font-family: Arial;
-    color: #555050;
-}
-
-#namep1{
-    margin: 10px 0 0 540px;
-}
-#namep2{
-    margin: 10px 0 0 158px;
-}
-
-#addp{
-    margin: 10px 0 0 150px;
-}
-
-
