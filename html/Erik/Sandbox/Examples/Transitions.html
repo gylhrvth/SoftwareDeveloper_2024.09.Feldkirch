@@ -67,6 +67,10 @@
             height: 200px;
             transform: rotate(360deg);
         }
+
+        #info {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -92,7 +96,8 @@
     <p>Example4: (Transition + Transform)</p>
     <div class="example4">
         <p>Fahre mit der Maus über das Bild</p>
-        <img src="images/spaceOtter1.jpg" alt="Space Otter">
+        <img onclick="window.location.href='http://127.0.0.1:5500/html/Erik/Sandbox/Examples/Examples_Main_Page.html'" src="images/spaceOtter1.jpg" alt="Space Otter">
+        <p id="info">Klick den Otter um auf die Example Page zurück zu kommen!</p>
     </div>
 </body>
 </html>
