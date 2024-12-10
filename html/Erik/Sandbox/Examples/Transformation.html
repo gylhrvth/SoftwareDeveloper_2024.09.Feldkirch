@@ -4,8 +4,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transformation</title>
     <link rel="shortcut icon" href="images\favicon.ico" type="image/x-icon">
+    <style>
+        h1 {
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .gridcontainer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 20px;
+        
+        }
+
+        .Box {
+            height: 200px;
+            width: 300px;
+            background-color: rgba(255, 50, 50, 0.873);
+            border: 5px solid black;
+            margin-top: 0;
+        }
+
+        .ex-text {
+            grid-column: span 2; /* text geht über beide Spalten */
+            margin-bottom: 0;
+        }
+
+        .ExOne {
+            transform: rotate(-20deg);
+            grid-column: 1;
+        }
+
+        .ExTwo {
+            grid-column: 2; /* Box in der zweiten Spalte */
+        }
+
+        .Box p {
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding-top: 20%;
+        }
+    </style>
 </head>
 <body>
-   
+   <h1>Transformation</h1>
+   <div class="gridcontainer">
+        <p class="ex-text">Example 1:</p>
+            <div class="Box ExOne">
+                <p>rotate -20deg</p>
+            </div>
+
+        <p class="ex-text">Example 2:</p>
+            <div class="Box ExTwo">
+                <p>scale</p>
+            </div>
+   </div>
 </body>
 </html>
