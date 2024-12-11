@@ -1,0 +1,103 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transitions</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        .examples1-2 div {
+            width: 100px;
+            height: 50px;
+            background: rgb(70, 160, 190); 
+            display: flex;
+            align-items: center;        /* zentriert text vertikal */ 
+            justify-content: center;    /* zentriert text horizontal */
+            text-align: center;         /* korrekt mittig container falls mehrzeilig */
+            transition: width 2s;
+        }
+
+        .example1:hover {
+            width: 300px;
+            transition-delay: 0.3ms;
+        }
+
+        .example2:hover {
+            width: 300px;
+            height: 300px;
+            transition-delay: 0.3ms;
+        }
+
+        .example3 {
+            background-color: rgb(70, 160, 190);
+            width: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            text-align: center;
+        }
+
+        .example3 div {
+            width: 100px;
+            height: 25px;
+            background: rgb(70, 160, 190);
+            transition: width 2s;
+            border: 1px solid black;
+            
+        }
+
+        .example3 div:hover {
+            width: 300px;
+            transition-delay: 0.3ms;
+        }
+
+        #div1 {transition-timing-function: linear;}
+        #div2 {transition-timing-function: ease;}
+        #div3 {transition-timing-function: ease-in;}
+        #div4 {transition-timing-function: ease-out;}
+        #div5 {transition-timing-function: ease-in-out;}
+
+        .example4 img {
+            width: 100px;
+            height: 100px;
+            transition: width 2s, height 2s, transform 2s;
+        }
+
+        .example4 img:hover {
+            width: 200px;
+            height: 200px;
+            transform: rotate(360deg);
+        }
+
+        #info {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Transition Examples</h1>
+    <p>Example 1: (just one)</p>
+    <div class="examples1-2">
+        <div class="example1">Transition width</div>
+    <hr>
+        <p>Example 2: (two in one)</p>
+        <div class="example2">Transition width/height</div>
+    </div>
+
+    <hr>
+    <p>Example 3: (Transition-Timing)</p>
+    <div class="example3">
+        <div id="div1">linear</div>
+        <div id="div2">ease</div>
+        <div id="div3">ease-in</div>
+        <div id="div4">ease-out</div>
+        <div id="div5">ease-in-out</div>
+    </div>
+    <hr>
+    <p>Example4: (Transition + Transform)</p>
+    <div class="example4">
+        <p>Fahre mit der Maus über das Bild</p>
+        <img onclick="window.location.href='http://127.0.0.1:5500/html/Erik/Sandbox/Examples/Examples_Main_Page.html'" src="images/spaceOtter1.jpg" alt="Space Otter">
+        <p id="info">Klick den Otter um auf die Example Page zurück zu kommen!</p>
+    </div>
+</body>
+</html>
