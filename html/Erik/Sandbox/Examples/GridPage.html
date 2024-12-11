@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grids in Grids and Positions</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grids Nebeneinander</title>
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Zwei gleich breite Spalten */
+            gap: 20px; /* Abstand zwischen den Grids */
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Drei Spalten im Inneren jedes Grids */
+            gap: 10px; /* Abstand zwischen den Zellen im Grid */
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .grid div {
+            background-color: lightblue;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="grid">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+    </div>
+    <div class="grid">
+        <div>A</div>
+        <div>B</div>
+        <div>C</div>
+        <div>D</div>
+        <div>E</div>
+        <div>F</div>
+    </div>
+</div>
+
+</body>
+</html>
+
+</body>
+</html>

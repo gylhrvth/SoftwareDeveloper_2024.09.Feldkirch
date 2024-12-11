@@ -87,18 +87,19 @@ h3{
 
 .wrapper{
     position: relative;
+    overflow: hidden;
 }
 
 .carousel{
     display: flex;
     /*justify-content: space-around;
     flex-wrap: wrap;*/
-    margin-top: 10px;
+    margin-top: 15px;
     margin-left: 6.5%;
-    overflow: hidden;
+    overflow: visible;
 }
 
-.prev, .next {
+.prevPon, .nextPon, .prevS, .nextS, .prevOrigin, .nextOrigin, .prevHorror, .nextHorror {
     cursor: pointer;
     position: absolute;
     top: 30%;
@@ -111,16 +112,17 @@ h3{
     z-index: 10;
   }
   
-  .prev {
-    left: 2vh;
+  .prevPon, .prevS, .prevOrigin, .prevHorror{
+    left: 13.5vh;
     border-radius: 3px 0 0 3px;
   }
-  .next {
-    right: 2vh;
+
+  .nextPon, .nextS, .nextOrigin, .nextHorror {
+    right: 12.4vh;
     border-radius: 0 3px 3px 0;
   }
   
-  .prev:hover, .next:hover {
+  .prevPon:hover, .prevS:hover, .nextPon:hover, .nextS:hover, .prevOrigin:hover, .nextOrigin:hover, .prevHorror:hover, .nextHorror:hover {
     background-color: rgba(66, 63, 63, 0.8);
   }
 
