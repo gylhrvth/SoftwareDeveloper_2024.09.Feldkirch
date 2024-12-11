@@ -1,6 +1,6 @@
 package Aylin.week12;
 
-import Sandro.Colors;
+import io.github.cdimascio.dotenv.Dotenv;
 
 import java.sql.*;
 import java.util.Scanner;
@@ -8,12 +8,30 @@ import java.util.Scanner;
 public class DBManager {
     public Scanner scanner = new Scanner(System.in);
     private static DBManager instance = null;
+    private Connection connection = null;
 
     private DBManager(){
     }
 
     private Connection getConnection()throws SQLException{
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/Series", "aylin", "aylin");
+        if(connection == null) {
+            Dotenv dotenv = Dotenv.load();
+            String url = dotenv.get("urlSeries");
+            String user = dotenv.get("user");
+            String password = dotenv.get("password");
+            connection = DriverManager.getConnection(url, user, password);
+        }
+        return connection;
+    }
+
+    public void closeConnection(){
+        if(connection != null){
+           try {
+               connection.close();
+           } catch (SQLException e) {
+           }
+            connection = null;
+        }
     }
 
     public static DBManager getInstance() {
@@ -42,7 +60,6 @@ public class DBManager {
 
             rs.close();
             ps.close();
-            conn.close();
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -66,7 +83,6 @@ public class DBManager {
 
             rs.close();
             ps.close();
-            connection.close();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -91,7 +107,6 @@ public class DBManager {
 
             rs.close();
             ps.close();
-            connection.close();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -111,9 +126,7 @@ public class DBManager {
             if(effectedRows == 0){
                 System.out.println("Nothing changed.");
             }
-
             ps.close();
-            conn.close();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
