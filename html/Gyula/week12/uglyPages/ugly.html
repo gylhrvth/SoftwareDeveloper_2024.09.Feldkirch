@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Playwrite+HR+Lijeva:wght@100..400&display=swap" rel="stylesheet">
+<style>
+    .snow1{
+        left: 10vh;
+        width: 15vh;
+        height: 15vh;
+        animation: snow 3s ease-in-out infinite;
+    }
+    .snow2{
+        left: 20vh;
+        width: 10vh;
+        height: 10vh;
+        animation: snow2 3.7s linear infinite;
+    }
+    .snow3{
+        left: 30vh;
+        width: 20vh;
+        height: 20vh;
+        animation: snow3 0.83s linear infinite;
+    }
+    .snow4{
+        left: 60vh;
+        width: 5vh;
+        height: 5vh;
+        animation: snow4 2.23s linear infinite;
+    }
+    .snow {
+        position: fixed;
+        pointer-events: none;
+        filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(0deg) brightness(199%) contrast(119%);
+    }
+
+@keyframes snow {
+    0% {
+        transform: translateY(-15vh) rotateZ(0deg);
+    }
+    25% {
+        filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(0deg) brightness(199%) contrast(119%);
+    }
+    50% {
+        filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(120deg) brightness(199%) contrast(119%);
+    }
+    100% {
+        transform: translateY(100vh) rotateZ(180deg);
+    }    
+}
+@keyframes snow2 {
+    0% {
+        transform: translateY(40vh) translateX(-20vh);
+    }
+    25% {
+        filter: invert(22%) sepia(93%) saturate(1352%) hue-rotate(120deg) brightness(199%) contrast(119%);
+    }
+    50% {
+        filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(60deg) brightness(199%) contrast(119%);
+    }
+    100% {
+        transform: translateY(40vh) translateX(100vw);
+    }    
+}    
+@keyframes snow3 {
+    0% {
+        transform: scale(1.0);
+    }
+    25% {
+        transform: scale(0.2);
+    }
+    100% {
+        transform: scale(1.2);
+    }    
+}
+@keyframes snow4 {
+    0% {
+        transform: scale(1.0) translateY(0vh);
+    }
+    100% {
+        transform: scale(2.0) translateY(100vh);
+    }    
+}     
+
+.titleText {
+  font-family: "Bad Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+  text-align: right;
+  animation: titleAnimation 3.234s linear infinite;
+}
+@keyframes titleAnimation {
+  0% {
+    transform: rotateY(0deg);
+  }
+  40% {
+    transform: rotateY(360deg) rotateX(0deg);
+  }
+  100% {
+    transform: rotateY(360deg) rotateX(360deg);
+  }   
+}
+.magicText {
+  font-family: "Playwrite HR Lijeva", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  animation: magicTextAnimation 3.77s linear infinite;
+  width: 50%;
+}
+@keyframes magicTextAnimation {
+  0% {
+    transform: rotateZ(360deg);
+  }
+  100% {
+    transform: rotateZ(0deg);
+  }
+    
+}
+</style>
+</head>
+<body>
+    <div class="snow snow1">
+        <img src="nsturk-201118-svg-snowflake-01.svg" alt="" srcset="">
+    </div>
+    <div class="snow snow2">
+        <img src="nsturk-201118-svg-snowflake-02.svg" alt="" srcset="">
+    </div>
+    <div class="snow snow3">
+        <img src="nsturk-201118-svg-snowflake-03.svg" alt="" srcset="">
+    </div>
+    <div class="snow snow4">
+        <img src="nsturk-201118-svg-snowflake-04.svg" alt="" srcset="">
+    </div>
+    <h1 class="titleText">Happy new Year!</h1>
+    <p style="color:blueviolet">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse optio dolor quae eligendi? Fugit placeat, accusantium nihil hic incidunt harum, dicta ullam natus velit quisquam vitae quam quia a est.</p>
+    <h2>We wish you</h2>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque a ut, vel repellat id, voluptates iste illum aliquid reiciendis facere nesciunt fuga. Ducimus dolor provident sapiente modi laborum incidunt perspiciatis?
+    Consequuntur maiores facilis blanditiis hic? Ullam nam reprehenderit voluptatem commodi, suscipit culpa. Sit corporis molestias autem dolorem, sint minus consectetur laudantium tempora? Harum porro, minima natus nostrum optio ut maxime?</p>
+    <p>Lorem ipsum</p>
+    <h2>We wish you</h2>
+    <ul>
+        <li>item 1</li>
+        <li style="color: orangered; font-size: 2.2em; text-decoration: underline;">item 2</li>
+        <li style="color: green; font-size:3em;">item 3</li>
+        <li>item 4</li>
+    </ul>
+    <h2>We wish you</h2>
+    <h2>We wish you</h2>
+    <h2 class="magicText">A happy new year</h2>
+</body>
+</html>
