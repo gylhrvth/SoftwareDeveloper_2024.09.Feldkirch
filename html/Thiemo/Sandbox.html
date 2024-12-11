@@ -1,0 +1,318 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        table {
+            width: 50%;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid black;
+        }
+
+        .div1, .div2, .div3 {
+            float: left;
+            padding: 25px;
+            width: 25%; /* To make sure each div takes 25% of the width */
+            margin-right: 10px; /* Space between divs */
+        }
+
+        .div1 {
+            background: red;
+        }
+
+        .div2 {
+            background: yellow;
+        }
+
+        .div3 {
+            background: green;
+        }
+
+        .bordered {
+            border: 2px solid black;
+            padding: 20px;
+        }
+
+        /* Clearfix for containing floated elements */
+        .container::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .flex-container {
+            margin: 10px;
+         display:flex;
+         background-color: DodgerBlue;
+        
+        }
+
+        .flex-container > div {
+        border: 2px solid black;
+        background-color: #f1f1f1;
+        margin: 10px;
+        padding: 20px;
+        font-size: 30px;
+        }
+
+        /* .grid-container{
+            display: grid;
+  gap: 50px;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+        }
+
+        .grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 3px solid rgba(0, 0, 0, 0.8);
+  padding: 30px;
+  font-size: 20px;
+  text-align: center;
+} */
+
+/* .item1 { grid-area: header; }
+.item2 { grid-area: menu; }
+.item3 { grid-area: main; }
+.item4 { grid-area: right; }
+.item5 { grid-area: footer; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'menu main main main right right'
+    'menu footer footer footer footer footer';
+  gap: 10px;
+  grid-template-rows: 80px 200px 100px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+} */
+
+.grid-container1 {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.grid-container1 > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+ .item8{
+  grid-area: 1 / 2 / 5 / 6;
+}
+
+div.grid-container1 > div:nth-child(5n){
+    background-color: pink;
+}
+
+div.grid-container1 > div::first-letter{
+    font-size: 200%;
+        font-weight: bold;
+        color: #8A2BE2;
+}
+
+.grid-containermaxwidth {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.grid-containermaxwidth > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+
+.grid-containermaxwidth{
+@media only screen and (max-width: 2000px) {
+  .item1 { grid-area: 1 / span 3 / 2 / 4; }
+  .item2 { grid-area: 3 / 3 / 4 / 4; }
+  .item3 { grid-area: 2 / 1 / 3 / 2; }
+  .item4 { grid-area: 2 / 2 / span 2 / 3; }
+  .item5 { grid-area: 3 / 1 / 4 / 2; }
+  .item6 { grid-area: 2 / 3 / 3 / 4; }
+}
+}
+
+.hoover{
+    width: 100px;
+height: 50px;
+text-align: center;
+transition: width 2s, height 4s;
+}
+h2:hover{
+    background-color: white;
+display: white; /* Change text color to black for visibility */
+ width: 300px;
+height: 200px;
+background-image: url('https://i.pinimg.com/originals/85/4b/22/854b2242cf28190b813ea83e4e4521e0.png');
+background-size: cover; /* Ensures the image covers the entire area */
+background-position: center; /* Centers the image */
+opacity: 0.7; /* Optional: Make the image semi-transparent */
+z-index: 1; 
+transition-timing-function: linear;
+transition-delay: 0.3ms;
+}
+
+
+
+
+        </style>
+        </head>
+
+        <body class="bordered" style="background-color: lightblue;">
+
+    <h1>Hello World!</h1>
+    <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae maxime, velit cum minus aliquid doloremque dignissimos mollitia, quod blanditiis, quis neque soluta fugiat reprehenderit! Illo et minima consectetur ipsam ratione!</div>
+    <div>Odit aliquam magnam sunt officia molestias aliquid voluptatum praesentium unde deleniti, excepturi numquam et ullam non iure sequi rerum hic. Cum explicabo eum, saepe perferendis voluptate veniam similique reiciendis fugit?</div>
+    <div>Nihil unde doloremque voluptatum voluptate delectus ipsam adipisci libero? Consequatur maiores repudiandae asperiores sint, magni unde earum tempora ducimus modi, vero facilis ullam assumenda? Velit, harum officia. Tempore, pariatur reiciendis!</div>
+    <p>just for fun seeing what it can do and what not? i guess</p>
+    <hr>
+    <p>just for fun seeing what it can do and what not? i guess</p>
+    <hr>
+
+    <h1>WARUM?</h1>
+    <p>This is a line breaker <br> it <br>should<br> be</p>
+
+    <h1 style="font-size:30px;"> with (style="font-size:50px;">) u can change the size of ? everything</h1>
+    <h2 style="font-size:30px;"> gg </h2>
+    <h3> i dont watch tv series</h3>
+
+    <ul>
+        <li> <strong> (ul) </strong> </li>
+        <li> stands </li>
+        <li> for </li>
+        <li> unordered list </li>
+        <li> without numbers </li>
+        <li> just points </li>
+    </ul>
+
+    <ol>
+        <li> <strong> (ol) </strong> </li>
+        <li> stands </li>
+        <li> for </li>
+        <li> ordered list </li>
+        <li> with numbers </li>
+    </ol>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Damage Type</th>
+            <th>Range</th>
+        </tr>
+        <tr>
+            <td>Lissandra</td>
+            <td>Magic</td>
+            <td>600</td>
+        </tr>
+        <tr>
+            <td>Orianna</td>
+            <td>Magic</td>
+            <td>650</td>
+        </tr>
+        <tr>
+            <td>Jhin</td>
+            <td>Physical</td>
+            <td>700</td>
+        </tr>
+    </table>
+
+    <br><br><br><br><br>
+
+    <div class="container">
+        <div class="div1">Div 1</div>
+        <div class="div2">Div 2</div>
+        <div class="div3">Div 3</div>
+    </div>
+
+    <div class="flex-container">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>  
+      </div>
+
+      <!-- <div class="grid-container">
+        <div class="grid-item">1</div>
+        <div class="grid-item">2</div>
+        <div class="grid-item">3</div>  
+        <div class="grid-item">4</div>
+        <div class="grid-item">5</div>
+        <div class="grid-item">6</div>  
+        <div class="grid-item">7</div>
+        <div class="grid-item">8</div>
+        <div class="grid-item">9</div>  
+      </div> -->
+
+      <!-- <div class="grid-container">
+        <div class="item1">Header</div>
+        <div class="item2">Menu</div>
+        <div class="item3">Main</div>  
+        <div class="item4">Right</div>
+        <div class="item5">Footer</div>
+      </div> -->
+
+      <div class="grid-container1">
+        <div class="item1">1</div>
+        <div class="item2">2</div>
+        <div class="item3">3</div>  
+        <div class="item4">4</div>
+        <div class="item5">5</div>
+        <div class="item6">6</div>
+        <div class="item7">7</div>
+        <div class="item8">8</div>  
+        <div class="item9">9</div>
+        <div class="item10">10</div>
+        <div class="item11">11</div>
+        <div class="item12">12</div>
+        <div class="item13">13</div>
+        <div class="item14">14</div>
+        <div class="item15">15</div>
+      </div>
+
+<br><br><br>
+
+      <div class="grid-containermaxwidth">
+        <div class="item1">1</div>
+        <div class="item2">2</div>
+        <div class="item3">3</div>  
+        <div class="item4">4</div>
+        <div class="item5">5</div>
+        <div class="item6">6</div>
+      </div>
+
+
+    <div class="hoover">
+        <h2 id="h1">this is an example i guess</h2>
+        <br><br><br>
+    </div>
+</body>
+
+</html>
