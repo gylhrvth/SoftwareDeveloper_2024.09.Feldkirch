@@ -1,0 +1,74 @@
+
+/* Alles was im Body steht */
+body {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;   /* Schriftart ändern */
+    background: linear-gradient(to bottom, lightblue,plum);                     /*Linear-gradient mehrere Farben in einander mischen*/
+    margin: 20;        
+    padding: 20;       
+    text-align: center;                                                             /* Horizontal Ausrichtung des Textes */
+}
+
+
+/* Wird verwendet, um andere Elemente zu gruppieren und zu organisieren */
+.container {
+    width: 80%;                                 /* Breite */
+    max-width: 800px;                           /* Maximale Breite */
+    margin: auto;                               /* Abstand zum Rand und anderen Elementen */
+    background-color: white;                  /* Hintergrubd Farbe */
+    padding: 20px;                              /* Raum zwischen dem Inhalt und seinem Rahmen */
+    border: 3px, solid, black;                /* 3px großer Rahmen */
+    border-radius: 20px;                        /* Radius um das Bild / den Container */
+    box-shadow: 10px 5px 5px lightslategrey;  /* Fügt ein Schatten Effekt zum Rahmen hinzu */
+}
+
+
+/* Alles was im Header steht */
+header {
+    margin-bottom: 30px;
+}
+
+
+/* Jedes h1 Element im Header */
+header h1 {
+    font-size: 36px;    /* Größe der h1 Überschrift */
+    margin: 0;          /* 0px Abstand zu den anderen Elementen / Rand */
+}
+
+
+/* Jedes p Element im Header */
+header p {
+    font-size: 20px;
+    color: lightslategrey;
+}
+
+
+/* Alles was im profile steht */
+.profile {
+    margin-bottom: 20px;
+}
+
+
+/* Jeder Inhalt vom ul */
+ul {
+    list-style-type: none;  /* Definiert die Darstellung der Markierungen von der Liste (zb. Punkt, Zeichen, Nummern, usw.) */
+    padding: 0;
+}
+
+
+/* Jeder li Inhalt */
+li {
+    font-size: 18px;
+}
+
+
+/* Jeder Link */
+a {
+    text-decoration: none; /* Definiert die Darstellung der Linie unter dem Text zb. von dem Link */
+    color: #007bff;
+}
+
+
+/* Pseudoklasse in dem bsp. a (Links) */
+a:hover {
+    text-decoration: underline; /* Bekommt eine Linie sobald man mit dem Maus Coursor drüber fährt */
+}

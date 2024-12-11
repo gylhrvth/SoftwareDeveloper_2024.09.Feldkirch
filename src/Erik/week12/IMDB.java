@@ -39,6 +39,15 @@ public class IMDB {
         return null;
     }
 
+    public Film getFilmByID(int id){
+        for (Film film : filmList){
+            if (film.getId() == id){
+                return film;
+            }
+        }
+        return null;
+    }
+
 
     public void printInfos() {
 

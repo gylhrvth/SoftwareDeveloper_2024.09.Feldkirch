@@ -1,7 +1,6 @@
 package Erik.week12;
 
 import Gyula.WildColors;
-
 import java.util.Vector;
 
 public class Actor {
@@ -50,6 +49,7 @@ public class Actor {
     public void addFilmAsActor(Film f) {
         if (!actorOf.contains(f)){
             actorOf.add(f);
+            f.addActor(this);
         }
     }
 
@@ -57,6 +57,7 @@ public class Actor {
     public void printStructure(){
         System.out.println("│   │   ├── Actor: " + this + "; " + age + " Jahre;");
         System.out.println("│   │   │   ├── Regiseur for: " + regieOf);
+        System.out.println("│   │   │   ├── Actor in: " + actorOf);
     }
 
 

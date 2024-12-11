@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    ul.firstList {
+        background-color: lightblue;
+        padding: 10px 20px;
+    }
+    ul.firstList > li:first-child{
+        font-size: 2em;
+    }
+    ul.firstList > li:nth-child(2n){
+        background-color: lightgray;
+    }
+
+    ul.secondList li::first-letter {
+        font-size: 200%;
+        font-weight: bold;
+        color: #8A2BE2;
+    }
+</style>
+</head>
+<body>
+    <h1>CSS Selectors</h1>
+    <ul class="firstList">
+        <li>Menü Item 1</li>
+        <li>Menü Item 2</li>
+        <li>Menü Item 3</li>
+        <li>Menü Item 4</li>
+        <li>Menü Item 5</li>
+        <li>Menü Item 6</li>
+        <li>Menü Item 7</li>
+    </ul>
+    <ul class="secondList">
+        <li>Menü Item 1</li>
+        <li>Menü Item 2</li>
+        <li>Menü Item 3</li>
+        <li>Menü Item 4</li>
+        <li>Menü Item 5</li>
+        <li>Menü Item 6</li>
+        <li>Menü Item 7</li>
+    </ul>
+
+    <div id="myMagicId">
+        Hello World!
+    </div>
+
+<script>
+    let myMagicId = document.getElementById("myMagicId");
+    let count = 1;
+    
+    setInterval(() => {
+        let divE = document.createElement("div");
+        divE.innerText = "Hello World! " + count++;
+        myMagicId.appendChild(divE);
+    }, 1000);
+</script>
+</body>
+</html>

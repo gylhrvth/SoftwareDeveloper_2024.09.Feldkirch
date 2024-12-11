@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Example</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+
+        .normalButton button {
+            font-size: 18px;
+        }
+
+        .designButton button {
+            color: rgb(0, 0, 0);
+            background-color: rgb(0, 183, 255);
+            font-size: 18px;
+            padding: 8px, 15px; /* Oben, Unten / Rechts, Links */
+        }
+
+        .functionButton button {
+            color: rgb(0, 0, 0);
+            background-color: rgb(0, 255, 76);
+            font-size: 18px;
+            transition: transform 0.3s ease;        /* Verzögerung der Bewegung */
+            
+        }
+
+        .functionButton button:hover {
+            transform: skew(20deg, -20deg);     /* Dreht den button beim hover */
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Button Example:</h1>
+    <h2>So sieht ein normaler Button aus</h2>
+    <p>Ohne Verbindung</p>
+        <div class="normalButton">
+            <button>Click me</button>
+        </div>
+    <h2>So sieht ein Button mit design aus</h2>
+    <p>Mit Verbindung zurück zur Example Page (in HTML mit a href)</p>
+        <div class="designButton">
+            <a href="http://127.0.0.1:5500/html/Erik/Sandbox/Examples/Examples_Main_Page.html">
+                <button>Click me</button>
+            </a>
+        </div>
+    <h2>Button mit Funktion</h2>
+    <p>Mit Verbindung zurück zur Example Page (JavaScript)</p>
+        <div class="functionButton">
+            <button onclick="window.location.href='http://127.0.0.1:5500/html/Erik/Sandbox/Examples/Examples_Main_Page.html'">Click me</button>
+        </div>
+</body>
+</html>

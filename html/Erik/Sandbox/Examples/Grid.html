@@ -1,0 +1,99 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Example</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        .body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .grid-container1 {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            background-color: lightblue;
+            padding: 10;
+        }
+
+        .grid-item {
+            border: 1px, solid black;
+            padding: 20;
+            font-size: 30;
+            text-align: center;
+        }
+
+        .grid-container2 {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;
+            grid-template-rows: auto 1fr auto;
+            grid-template-areas: 
+                    "header header header"
+                    "nav main aside"
+                    "footer footer footer";
+            gap: 10px;
+            height: 200px;
+        }
+
+        .header {
+            grid-area: header;
+            background-color: rgba(255, 166, 0, 0.568);
+            padding: 20;
+            text-align: center;
+        }
+
+        .nav {
+            grid-area: nav;
+            background-color: rgba(144, 238, 144, 0.679);
+            padding: 20;
+        }
+
+        .main {
+            grid-area: main;
+            background-color: rgba(255, 255, 0, 0.452);
+            padding: 20;
+        }
+
+        .aside {
+            background-color: rgb(140, 144, 222);
+            padding: 20;
+        }
+
+        .footer {
+            grid-area: footer;
+            background-color: lightpink;
+            text-align: center;
+            padding: 20;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Grid Examples</h1>
+    <p>Example 1:</p>
+    <div class="grid-container1">
+        <div class="grid-item">1</div>
+        <div class="grid-item">2</div>
+        <div class="grid-item">3</div>
+        <div class="grid-item">4</div>
+        <div class="grid-item">5</div>
+        <div class="grid-item">6</div>
+        <div class="grid-item">7</div>
+        <div class="grid-item">8</div>
+        <div class="grid-item">9</div>
+    </div>
+<hr>
+    <p>Example 2:</p>
+    <div class="grid-container2">
+        <header class="header">Header</header>
+        <nav class="nav">Navigation</nav>
+        <main class="main">Hauptinhalt</main>
+        <aside class="aside">Seitenleiste</aside>
+        <footer class="footer">Footer</footer>
+    </div>
+<hr>
+    <p>Example 3:</p>
+
+
+</body>
+</html>
