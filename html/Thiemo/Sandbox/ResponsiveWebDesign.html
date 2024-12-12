@@ -4,11 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+body {
+  background-image: url('../Images/GIF/NiceGIF.webp'); /* Corrected the path */
+  background-size: contain;
+  background-repeat: repeat;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#rotatingImg{
+  animation: imgRotate 1.8s linear infinite
+}
+
+@keyframes imgRotate {
+  0% {
+    transform: scale(1.0) rotate3d(1, 2, 1, 0deg);
+  }
+  50% {
+    transform: scale(4.0) rotate3d(1, 2, 1, 180deg);
+  }
+  100% {
+    transform: scale(1.0) rotate3d(1, 2, 1, 360deg);
+  }
+
+}
+    
+.centercenter{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+    </style>
 </head>
 <body>
 
-        <h2>Displaying a GeekforGeeks GIF using the <code><img></code> tag:</h2>
-        <img src="https://media.giphy.com/media/kp8xp7w2CsLSJ1i1M9/giphy.gif" width="159" height="159" />
+  <h2>Displaying a GeekforGeeks GIF using the <code><imgsrc="https://media.giphy.com/media/kp8xp7w2CsLSJ1i1M9/giphy.gif" width="159" height="159" />
+      </code> tag:</h2>
+  <div class="centercenter">
+    <img id="rotatingImg" src="https://media.giphy.com/media/kp8xp7w2CsLSJ1i1M9/giphy.gif" width="159" height="159" />
+  </div>
 
 </body>
+
+ 
+
 </html>
