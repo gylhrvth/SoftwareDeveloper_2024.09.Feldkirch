@@ -1,0 +1,82 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selektoren</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        ul {font-size: 2em;}
+        p {font-size: 2em;}
+
+        ul.FirstList {
+            background-color: lightblue;
+            padding: 10px, 20px;
+            list-style-type: none;
+        }
+
+        ul.FirstList > li:first-child{
+        font-size: 2em;
+        }
+
+        ul.FirstList > li:hover {
+            font-size: 2em;
+            transform: skew(20deg);
+        }
+
+        ul.SecondList > ::marker { /*Markiert den Punkt bei der Liste*/
+            color: red;
+        }
+
+        ul.SecondList :last-child {
+            color: plum;
+        }
+        ul.SecondList ::first-letter {
+            color: rgb(0, 255, 64);
+        }
+        ul.ThirdList ::before {
+            content: " 💥 Lies das --> ";
+            text-align: center;
+        }
+        ::grammar-error {
+            text-decoration: underline red;
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1>CSS Selectoren Sandbox</h1>
+    <ul class="FirstList">
+        <li>Eins</li>
+        <li>Eins</li>
+        <li>Eins</li>
+        <li>Eins</li>
+        <li>Eins</li>
+    </ul>
+
+    <ul class="SecondList">
+        <li>Zwei</li>
+        <li>Zwei</li>
+        <li>Zwei</li>
+        <li>Zwei</li>
+        <li>Zwei</li>
+    </ul>
+
+    <ul class="ThirdList">
+        <li>Drei</li>
+        <li>Drei</li>
+        <li>Drei</li>
+        <li>Drei</li>
+        <li>Drei</li>
+    </ul>
+
+    <div class="test">
+        <p>::grammar-error funktioniert nur wenn du mit der maus reinklickst?</p>
+        
+        <textarea spellcheck="true">grammaticall</textarea>
+        <p>mooon</p>
+    </div>
+    
+
+</body>
+</html>
