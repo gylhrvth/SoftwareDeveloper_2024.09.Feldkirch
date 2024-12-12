@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    .imageDiv{
+        display: none;
+        justify-content: center;
+    }
+    .imageDiv img{
+        height: 10vh;
+    }
+    .textDiv{
+        text-align: center;
+    }
+    .hoverContainer:hover .imageDiv{
+        display: grid;
+    }
+    .hoverContainer:hover .textDiv{
+        display: none;
+    }
+
+</style>
+</head>
+<body>
+    <h1>Hover example</h1>
+    <div class="hoverContainer">
+        <div class="imageDiv">
+            <img src="uglyPages/nsturk-201118-svg-snowflake-01.svg" alt="placeholder">
+        </div>
+        <div class="textDiv">
+            <h2>Hover over me</h2>
+            <p>Some text</p>
+        </div>
+    </div>
+</body>
+</html>

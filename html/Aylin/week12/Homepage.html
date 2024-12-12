@@ -3,23 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document: Hello World!</title>
+    <title>Document: Netflix!</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
-<style>
-   
-</style>
-
-
-
 <body>
     <header>
         <nav>
             <div>
                 <ul>
                     <img id="N" src="Images/netflix.webp" alt="Netflix Logo">
-                    <button onclick="window.location.href='Sakarya.html';">Home</button>
+                    <button onclick="window.location.href='Homepage.html';">Home</button>
                     <button onclick="">Movies</button>
                     <button onclick="">Series</button>
                     <button onclick="">My List</button>
@@ -39,24 +32,31 @@
     <section>
         <img id="htgawm" src="Images/htgawm.jpg" alt="how to get away with murder">
         <h4 id="h4">Popular on Netflix</h4>
-        <div class="picture-block">
-            <a href="#">
-                <img class="img" src="Images/ga.jpg" alt="Grey's Anatomy">
-            </a>
-            <a href="#">
-                <img class="img" src="Images/strangerthings.jpg" alt="Stranger Things">
-            </a>
-            <a href="#">
-                <img class="img" src="Images/supernatural.jpg" alt="Supernatural">
-            </a>
-            <a href="#">
-                <img class="img" src="Images/got.jpg" alt="Game of Thrones">
-            </a>
-            <br>
-        </div>
-        <div class="text-block2">
-            <h4 id="h4">Series</h4>
-            <div class="picture-block">
+        <div class="wrapper">
+            <div class="carousel carousel001">
+                <a href="">
+                    <img class="img" src="Images/ga.jpg" alt="Grey's Anatomy">
+                </a>
+                <a href="#">
+                    <img class="img" src="Images/strangerthings.jpg" alt="Stranger Things">
+                </a>
+                <a href="#">
+                    <img class="img" src="Images/supernatural.jpg" alt="Supernatural">
+                </a>
+                <a href="#">
+                    <img class="img" src="Images/got.jpg" alt="Game of Thrones">
+                </a>
+                <a href="#">
+                    <img class="img" src="Images/sg.jpg" alt="Squid Game">
+                </a>
+                <br>
+            </div>
+            <a class="prevPon" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="nextPon" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+        <h4 id="h4">Series</h4>
+        <div class="wrapper">
+            <div class="carousel carousel002">
                 <a href="#">
                     <img class="img" src="Images/himym.jpg" alt="how I met yor mother">
                 </a>
@@ -70,11 +70,13 @@
                     <img class="img" src="Images/modernf.png" alt="Modern Family">
                 </a>
             </div>
+            <a class="prevS" onclick="plusSlidesSerie(-1)">&#10094;</a>
+            <a class="nextS" onclick="plusSlidesSerie(1)">&#10095;</a>
         </div>
         <br>
-        <div class="text-block3">
-            <h4 id="h4">Netflix Originals</h4>
-            <div class="picture-block">
+        <h4 id="h4">Netflix Originals</h4>
+        <div class="wrapper">
+            <div class="carousel carousel003">
                 <a href="#">
                     <img class="img" src="Images/blackm.png" alt="Black Mirror">
                 </a>
@@ -88,24 +90,28 @@
                     <img class="img" src="Images/hohh.jpg" alt="Hounting of Hill House">
                 </a>
             </div>
+            <a class="prevOrigin" onclick="plusSlidesOrigin(-1)">&#10094;</a>
+            <a class="nextOrigin" onclick="plusSlidesOrigin(1)">&#10095;</a>
         </div>
         <div class="text-block4">
             <h4 id="h4">Horror Movies</h4>
-            <div class="picture-block">
-                <a href="#">
-                    <img class="img" src="Images/conjuring.png" alt="Conjuring">
-                </a>
-                <a href="#">
-                    <img class="img" src="Images/halloween.jpg" alt="Halloween">
-                </a>
-                <a href="#">
-                    <img class="img" src="Images/insidious.jpg" alt="insidious">
-                </a>
-                <a href="#">
-                    <img class="img" src="Images/orphan.jpg" alt="Orphan">
-                </a>
+            <div class="wrapper">
+                <div class="carousel carousel004">
+                    <a href="#">
+                        <img class="img" src="Images/conjuring.png" alt="Conjuring">
+                    </a>
+                    <a href="#">
+                        <img class="img" src="Images/halloween.jpg" alt="Halloween">
+                    </a>
+                    <a href="#">
+                        <img class="img" src="Images/insidious.jpg" alt="insidious">
+                    </a>
+                    <a href="#">
+                        <img class="img" src="Images/orphan.jpg" alt="Orphan">
+                    </a>
             </div>
-        </div>
+            <a class="prevHorror" onclick="plusSlidesHorror(-1)">&#10094;</a>
+            <a class="nextHorror" onclick="plusSlidesHorror(1)">&#10095;</a></div></div>
     </section>
     <footer>
         <div class="footer-container">
@@ -126,7 +132,7 @@
                 <div class="socialMedia">
                     <a class="insta" href="https://www.instagram.com/netflix/"><img id=insta src="Images/instagram.png" alt="Instagram"></a>
                     <a class="facebook" href="https://www.facebook.com/netflix/?locale=tr_TR"><img id=facebook src="Images/face.png" alt="Facebook"></a>
-                    <a class="x" href="https://x.com/netflix"><img id=x src="Images/x.webp" alt="x"></a>
+                    <a class="x" href="https://x.com/netflix"><img id=x src="Images/x.png" alt="x"></a>
                 </div>
             </div>
         </div>
@@ -136,5 +142,6 @@
             <a class="unsubscribe" href="#">unsubscribe</a>
         </div>
     </footer>
+    <script src="../carussel.js"></script>
 </body>
 </html>
