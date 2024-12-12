@@ -1,6 +1,7 @@
 package Gyula.week09.zoo;
 
 import Gyula.WildColors;
+import Gyula.week12.zoowithdatabase.DBManager;
 
 import java.util.Random;
 
@@ -46,11 +47,16 @@ public class Animal {
             } else {
                 System.out.println(" " + victim + " RIP.");
             }
+            DBManager.getInstance().updateAnimalHealth(victim);
         }
     }
 
     public String getSpecies() {
         return species;
+    }
+
+    public int getHealth() {
+        return health;
     }
 
     @Override
