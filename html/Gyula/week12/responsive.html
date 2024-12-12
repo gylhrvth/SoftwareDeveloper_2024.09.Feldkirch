@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+header, nav, main, .right, footer {
+    padding: 10px;
+    text-align: center;
+}
+header {
+    background-color: lightblue;
+    font-size: clamp(5px, 3vw, 24px);
+}
+nav {
+    background-color: lightgreen;
+}
+main {
+    background-color: greenyellow;
+}
+.right {
+    background-color: orange;
+    display: none;
+}
+footer {
+    background-color: pink;
+}
+h1{
+    font-size: 2vw;
+}   
+@media screen and (min-width: 800px) {
+    .right {
+        display: block;
+    }
+    .mainContent{
+        display: grid;
+        grid-template-columns: 1fr 5fr;
+    }
+    .firstRow{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }    
+}
+</style>
+</head>
+<body>
+    <h1>Grid Example</h1>
+
+    <header>Header</header>
+    <div class="mainContent">
+        <nav>Menü</nav>
+        <div class="rightSide">
+            <div class="firstRow">
+                <main>Main</main>
+                <div class="right">Right</div>
+            </div>
+            <footer>Footer</footer>
+        </div>    
+    </div>
+</body>
+</html>
