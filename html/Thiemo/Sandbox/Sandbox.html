@@ -161,12 +161,7 @@ div.grid-container1 > div::first-letter{
 }
 }
 
-.hoover{
-    width: 100px;
-height: 50px;
-text-align: center;
-transition: width 2s, height 4s;
-}
+
 h2:hover{
     background-color: white;
 display: white; /* Change text color to black for visibility */
@@ -176,12 +171,122 @@ background-image: url('https://i.pinimg.com/originals/85/4b/22/854b2242cf28190b8
 background-size: cover; /* Ensures the image covers the entire area */
 background-position: center; /* Centers the image */
 opacity: 0.7; /* Optional: Make the image semi-transparent */
-z-index: 1; 
-transition-timing-function: linear;
+z-index: -10; 
+transition: all 2s ease;
 transition-delay: 0.3ms;
+} 
+
+
+.hoover {
+    width: 100px;
+    text-align: center;
+    transition: all 2s ease; /* Smoothly transitions all properties over 2 seconds */
 }
 
+.hoover:hover {
+    width: 300px; /* The new width on hover */
+    height: 200px; /* The new height on hover */
+    background-image: url('https://i.pinimg.com/originals/85/4b/22/854b2242cf28190b813ea83e4e4521e0.png');
+    background-size: cover; /* Ensures the image covers the entire area */
+    background-position: center; /* Centers the image */
+    opacity: 0.7; /* Optional: Makes the image semi-transparent */
+    transition: all 2s ease; /* Ensures the growth happens smoothly */
+    z-index: 10; 
+}
 
+.GIF img {
+    position: relative; /* Allows movement */
+    animation: moveAndRotate 10s infinite linear; /* Combine movement and rotation */
+  }
+
+  @keyframes moveAndRotate {
+    0% {
+      transform: translateX(100px) rotate(0deg); /* Start position */
+    }
+    25% {
+      transform: translateX(2000px) rotate(90deg); /* Moves to the right */
+    }
+    50% {
+      transform: translateX(100px) translateY(1000px) rotate(180deg); /* Moves down */
+    }
+    75% {
+      transform: translateX(100px) translateY(1000px) rotate(270deg); /* Moves left */
+    }
+    100% {
+      transform: translateX(100px) translateY(0px) rotate(360deg); /* Returns to the start */
+    }
+    
+  }
+  .GIF1 img {
+    position: relative; /* Allows movement */
+    animation: moveAndRotate1 5s infinite linear; /* Combine movement and rotation */
+  }
+
+  @keyframes moveAndRotate1 {
+    0% {
+      transform: translateX(2000px) rotate(0deg); /* Start position */
+    }
+    25% {
+      transform: translateX(1000px) rotate(90deg); /* Moves to the right */
+    }
+    50% {
+      transform: translateX(100px) translateY(1000px) rotate(180deg); /* Moves down */
+    }
+    75% {
+      transform: translateX(100px) translateY(1000px) rotate(270deg); /* Moves left */
+    }
+    100% {
+      transform: translateX(100px) translateY(0px) rotate(360deg); /* Returns to the start */
+    }
+    
+  }
+
+  .GIF2 img {
+    position: relative; /* Allows movement */
+    animation: moveAndRotate2 1s infinite linear; /* Combine movement and rotation */
+  }
+
+  @keyframes moveAndRotate2 {
+    0% {
+      transform: translateX(500px) rotate(0deg); /* Start position */
+    }
+    25% {
+      transform: translateX(1500px) rotate(90deg); /* Moves to the right */
+    }
+    50% {
+      transform: translateX(100px) translateY(1000px) rotate(180deg); /* Moves down */
+    }
+    75% {
+      transform: translateX(1000px) translateY(1000px) rotate(360deg); /* Moves left */
+    }
+    100% {
+      transform: translateX(100px) translateY(0px) rotate(270deg); /* Returns to the start */
+    }
+    
+  }
+  .GIF3 img {
+    position: relative; /* Allows movement */
+    animation: moveAndRotate3 20s infinite linear; /* Combine movement and rotation */
+  }
+
+  @keyframes moveAndRotate3 {
+    0% {
+      transform: translateX(100px) rotate(0deg); /* Start position */
+    }
+    25% {
+      transform: translateX(200px) rotate(90deg); /* Moves to the right */
+    }
+    50% {
+      transform: translateX(100px) translateY(100px) rotate(180deg); /* Moves down */
+    }
+    75% {
+      transform: translateX(100px) translateY(100px) rotate(270deg); /* Moves left */
+    }
+    100% {
+      transform: translateX(100px) translateY(0px) rotate(360deg); /* Returns to the start */
+    }
+    
+  }
 
 
         </style>
@@ -197,7 +302,9 @@ transition-delay: 0.3ms;
     <hr>
     <p>just for fun seeing what it can do and what not? i guess</p>
     <hr>
-
+    <div class="GIF">
+      <img src="https://media.giphy.com/media/kp8xp7w2CsLSJ1i1M9/giphy.gif" width="159" height="159" />
+    </div>
     <h1>WARUM?</h1>
     <p>This is a line breaker <br> it <br>should<br> be</p>
 
@@ -213,7 +320,9 @@ transition-delay: 0.3ms;
         <li> without numbers </li>
         <li> just points </li>
     </ul>
-
+    <div class="GIF1">
+      <img src="https://media.giphy.com/media/kp8xp7w2CsLSJ1i1M9/giphy.gif" width="159" height="159" />
+    </div>
     <ol>
         <li> <strong> (ol) </strong> </li>
         <li> stands </li>
@@ -244,7 +353,9 @@ transition-delay: 0.3ms;
             <td>700</td>
         </tr>
     </table>
-
+    <div class="GIF2">
+      <img src="https://media.giphy.com/media/kp8xp7w2CsLSJ1i1M9/giphy.gif" width="159" height="159" />
+    </div>
     <br><br><br><br><br>
 
     <div class="container">
@@ -278,7 +389,9 @@ transition-delay: 0.3ms;
         <div class="item4">Right</div>
         <div class="item5">Footer</div>
       </div> -->
-
+      <div class="GIF3">
+        <img src="https://media.giphy.com/media/kp8xp7w2CsLSJ1i1M9/giphy.gif" width="159" height="159" />
+      </div>
       <div class="grid-container1">
         <div class="item1">1</div>
         <div class="item2">2</div>
@@ -311,8 +424,9 @@ transition-delay: 0.3ms;
 
     <div class="hoover">
         <h2 id="h1">this is an example i guess</h2>
-        <br><br><br>
     </div>
+
+
 </body>
 
 </html>

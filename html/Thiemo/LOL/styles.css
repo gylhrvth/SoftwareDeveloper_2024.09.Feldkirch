@@ -2,7 +2,7 @@
 body{
      /* text-align: center; */
       background-color: aliceblue;
-    background-image: url('../Thiemo/Picture/Summoners\ Rift.jpg');
+    background-image: url('Picture/Summoners\ Rift.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
