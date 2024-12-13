@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document: RockPaperScissors</title>
+    <link rel="stylesheet" href="Rps.css">
+    <script src="RockPaperScissors.js" defer></script>
+</head>
+
+<body>
+    <h1>Rock Paper Scissors</h1>
+    <div class="button-container">
+        <Button onclick="
+            playGame('rock');
+        "><img src="Images/r.png" alt="Rock"></Button>
+        <button onclick="
+            playGame('paper');
+        "><img src="Images/p.png" alt="Paper"></button>
+        <button onclick="
+            playGame('scissors');
+        "><img src="Images/s.jpg" alt="Scissors"></button>
+    </div>
+    <p class="js-move"></p>
+    <p class="js-result"></p>
+    <p class="js-score"></p>
+    <button onclick="
+            resetScore();
+        ">Reset Score</button>
+</body>
+
+</HTML>
