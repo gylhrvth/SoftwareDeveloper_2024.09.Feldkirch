@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Design</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        header, nav, main, .aside, footer {
+            padding: 5px;
+            text-align: center;
+            font-size: clamp(20px, 3vw, 24px);
+        }
+
+        header {background-color: rgba(255, 166, 0, 0.614);     }
+        nav {background-color: lightgreen;                      }
+        main {background-color: rgba(255, 255, 73, 0.63);       }
+        .aside {background-color: rgba(75, 75, 238, 0.601);     }
+        footer {background-color: rgba(240, 128, 128, 0.693);   }
+        h1 {font-size: 2em;}
+        @media screen and (min-width: 600px){
+            .aside {
+                display: block;
+            }
+            .main {
+                display: grid;
+                grid-template-columns: auto auto;
+
+            }
+            .firstRow {
+                display: grid;
+                grid-template-columns: auto auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Responsive Design Example</h1>
+
+    <header>Header</header>
+    <div class="main">
+        <nav>Navigation</nav>
+        <div class="RightSide">
+            <div class="firstRow">
+                <main>Hauptinhalt</main>
+                <div class="aside">Seitenleiste</div>
+            </div>
+            <footer>Footer</footer>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grids in Grids and Positions</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grids Nebeneinander</title>
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Zwei gleich breite Spalten */
+            gap: 20px; /* Abstand zwischen den Grids */
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Drei Spalten im Inneren jedes Grids */
+            gap: 10px; /* Abstand zwischen den Zellen im Grid */
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .grid div {
+            background-color: lightblue;
+            padding: 20px;
+            text-align: center;
+        }
+
+
+                /* Grid Container für exContainer */
+                .exContainer {
+            display: grid;  /* Grid statt Flexbox */
+            grid-template-columns: repeat(3, 1fr); /* Drei Spalten */
+            gap: 10px;  /* Abstand zwischen den Elementen */
+            background-color: dodgerblue;
+        }
+
+        .exContainer div {
+            background-color: #f1f1f1;
+            padding: 20px;
+            font-size: 30px;
+        }
+
+        /* Grid Header */
+        .exHeader {
+            display: grid;
+            grid-template-columns: repeat(6, auto); /* Sechs Spalten */
+            gap: 10px;
+        }
+
+        .exHeader div {
+            color: rgb(0, 0, 169);
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        /* Grid Footer */
+        .exFooter {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr; /* Drei Spalten: links, Mitte, rechts */
+            padding: 10px;
+            gap: 10px;
+        }
+
+        .socialMedia {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* Fünf Spalten für die Icons */
+            gap: 10px;
+        }
+
+        #pinterest, #insta, #facebook, #x, #youtube {
+            height: 50px;
+            width: 50px;
+        }
+
+        .left-column {
+            padding-left: 15px;
+        }
+
+        .middle-column {
+            padding-top: 15px;
+            padding-left: 25px;
+        }
+
+        .right-column {
+            padding-top: 15px;
+            padding-left: 200px;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="grid">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+    </div>
+    <div class="grid">
+        <div>A</div>
+        <div>B</div>
+        <div>C</div>
+        <div>D</div>
+        <div>E</div>
+        <div>F</div>
+    </div>
+</div>
+
+<h1>Grid Container Example</h1>
+    
+<div class="exContainer">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+</div>
+
+<h2>Grid Header Example</h2>
+
+<header class="exHeader">
+    <div>Home</div>
+    <div>Unternehmen</div>
+    <div>Kompetenz</div>
+    <div>Beiträge</div>
+    <div>Karriere</div>
+    <div>Kontakt</div>
+</header>
+
+<h3>Grid Footer Example</h3>
+
+<footer class="exFooter">
+    <div class="left-column">
+        <ul class="socialMedia">
+            <li><a class="pinterest" href="https://www.pinterest.com/pinterest/">   <img id="pinterest" src="images/pinterest.png" alt="pinterest Logo"></a></li>
+            <li><a class="insta" href="https://www.instagram.com/">                 <img id="insta"     src="images/insta.png"     alt="insta Logo"></a></li>
+            <li><a class="facebook" href="https://de-de.facebook.com/">             <img id="facebook"  src="images/facebook.png"  alt="facebook Logo"></a></li>
+            <li><a class="x" href="https://x.com">                                  <img id="X"         src="images/x.png"         alt="X Logo"></a></li>
+            <li><a class="youtube" href="https://www.youtube.com/">                 <img id="youtube"   src="images/youtube.png"   alt="youtube Logo"></a></li>
+        </ul>
+    </div>
+
+    <div class="middle-column">
+        <ul class="footer-links">
+            <li><a href="#">Legal Notice</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">AGB</a></li>
+            <li><a href="#">Shop</a></li>
+        </ul>
+    </div>
+
+    <div class="right-column">
+        <p>email@gmx.at</p>
+        <button onclick="window.location.href='http://127.0.0.1:5500/html/Erik/Sandbox/Examples/Examples_Main_Page.html'">Zurück zur Example Page</button>
+    </div>
+</footer>
+
+</body>
+</html>
+
+</body>
+</html>

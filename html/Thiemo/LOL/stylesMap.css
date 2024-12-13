@@ -1,0 +1,120 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: black;
+  height: 100vh;
+}
+
+/* Layout container */
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0 2%; /* Padding left and right */
+  box-sizing: border-box;
+}
+
+/* Header and Footer */
+h1, h2 {
+  margin: 0;
+  text-align: center;
+  height: 5%; /* 5% of the screen height */
+}
+
+/* Link Styling */
+a {
+  color: #00aaff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Map Wrapper */
+.map-wrapper {
+  position: relative;
+  flex-grow: 1; /* Take up remaining space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Prevent overflow */
+  width: 100%;
+  height: 90%; /* Take up 90% of the screen height */
+}
+
+/* Map Image */
+.map-image {
+  position: relative;
+  width: 100%;
+  height: auto;
+  object-fit: contain; /* Fit the image while maintaining its aspect ratio */
+  max-height: 100%;
+}
+
+/* Position Markers */
+.position {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 1vw; /* Use viewport width for scaling the position marker size */
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  transform: translate(-50%, -50%); /* Center the marker on the position */
+  z-index: 1; /* Ensure markers are on top */
+}
+
+/* Custom Positions (Percentage-based for fixed map location) */
+.top {
+  top: 17%;  /* Fixed relative position */
+  left: 34%; /* Fixed relative position */
+}
+
+.jungle-top {
+  top: 34%;
+  left: 40%;
+}
+
+.mid {
+  top: 48%;
+  left: 49%;
+}
+
+.jungle-bot {
+  top: 61%;
+  left: 58%;
+}
+
+.bot {
+  top: 79%;
+  left: 65%;
+}
+
+/* Tooltip Styling */
+.tooltip {
+  display: none;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  width: 200px;
+  z-index: 2;
+  top: 110%; /* Position below the marker */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.position:hover .tooltip {
+  display: block;
+}
+
+/* Hover Effect */
+.position:hover {
+  background: rgba(255, 255, 255, 0.8);
+  color: black;
+}

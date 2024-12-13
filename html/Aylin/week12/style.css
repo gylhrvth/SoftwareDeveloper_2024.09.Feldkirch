@@ -18,14 +18,14 @@ header {
     display: flex;
     width: 100%;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 1);
+    background-color: rgba(0, 0, 0, 0);
     z-index: 1000;
     justify-content: space-between;
     align-items: center;
 }
 
 #N{
-    width: 40px;
+    width: 130px;
     height: auto;
 }
 
@@ -35,18 +35,49 @@ nav ul {
     justify-content: center;
 }
 
+nav button{
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+}
+
+nav button:hover {
+    text-decoration: underline;
+}
+
+nav search{
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    border: none;
+    margin-left: 600px;
+    padding: 16px 20px;
+    text-align: right;
+}
+
 nav ul li {
     margin: 0 20px;
 }
 
-h1{
-    margin-top: 150px;
-    color: rgb(186, 21, 21);
+#htgawm{
+    width: 100%;
+    height: auto;
 }
 
-h2{
-    color: rgb(22, 85, 65);
-    text-decoration: dashed;
+.img{
+    width: 300px;
+    margin: 0 20px 30px 0;
+    transition: all 0.3s ease;
+    /*display: inline-block;*/
+    position: relative;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.0);
+}
+
+.img:hover{
+    transform: scale(1.2);
+    z-index: 10;
 }
 
 h3{
@@ -54,48 +85,51 @@ h3{
     text-decoration: dashed;
 }
 
-.text-block1, .text-block3{
-    margin-top: 20px auto;
-    margin-left: 6.5%;
-    width: 40%;
-    text-align: justify;
+.wrapper{
+    position: relative;
+    overflow: hidden;
 }
 
-.text-block2-container{
+.carousel{
     display: flex;
-    align-items: flex-start;
-    margin-top: 20px;
+    /*justify-content: space-around;
+    flex-wrap: wrap;*/
+    margin-top: 15px;
     margin-left: 6.5%;
-    margin-right: 6.5%;
-    gap: 50px;
+    overflow: visible;
 }
 
-.text-block2{
-    text-align: justify;
-}
+.prevPon, .nextPon, .prevS, .nextS, .prevOrigin, .nextOrigin, .prevHorror, .nextHorror {
+    cursor: pointer;
+    position: absolute;
+    top: 30%;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    user-select: none;
+    z-index: 10;
+  }
+  
+  .prevPon, .prevS, .prevOrigin, .prevHorror{
+    left: 13.5vh;
+    border-radius: 3px 0 0 3px;
+  }
 
-#Istanbul{
-    width: 40vw;
-    height: auto;
+  .nextPon, .nextS, .nextOrigin, .nextHorror {
+    right: 12.4vh;
+    border-radius: 0 3px 3px 0;
+  }
+  
+  .prevPon:hover, .prevS:hover, .nextPon:hover, .nextS:hover, .prevOrigin:hover, .nextOrigin:hover, .prevHorror:hover, .nextHorror:hover {
+    background-color: rgba(66, 63, 63, 0.8);
+  }
 
-}
-
-.text-block4-container{
-    display: flex;
-    align-items: flex-start;
-    margin-top: 20px;
+#h4{                                       
+    color: rgb(255, 255, 255);
+    font-family: Arial;
     margin-left: 6.5%;
-    margin-right: 6.5%;
-    gap: 50px;
-}
-
-.text-block4{
-    text-align: justify;
-}
-
-#Flagge{
-    width: 40vw;
-    height: auto;
 
 }
 
@@ -112,31 +146,42 @@ footer{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 20px;
+    gap:20px;
 }
 
 
 .footer-info{
     font-size: 14px;
     margin-top: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 #socialMedia{
+    display: flex;
+    align-items: flex-start;
     margin-top: 20px;
 }
 
-#insta{
+#insta, #x, #facebook{
+    margin: 0 10px;
     width: 1.5vw;
     height: auto;
+    text-align: justify;
 }
 
-#x{
-    width: 2vw;
-    height: auto;
+.separator {
+    margin: 0 5px;
+    font-size: 13px;
+    
 }
 
-#facebook{
-    width: 1.5vw;
-    height: auto;
+.unsubscribe {
+    color: #ffffff;
+    text-decoration: none;
 }
 
+.unsubscribe:hover {
+    text-decoration: underline;
+    transform: text-decoration 0.3s ;
+}

@@ -1,0 +1,41 @@
+
+body{
+     /* text-align: center; */
+      background-color: aliceblue;
+    background-image: url('Picture/Summoners\ Rift.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    }
+      
+
+h1{  
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: blueviolet;
+    }
+
+h2{
+    text-align: center;
+}
+
+.pmid{color: tomato;}
+
+p{color: tomato;
+font-size: 30px;}
+
+/* #ol1{text-align: center;
+    color: burlywood;} */
+
+/* ol{text-align: center;
+    color: chartreuse;} */
+
+li{color: red;
+font-size: 20px;}
+
+
+.underline{
+    text-decoration: underline;
+}
+
+.border{border: 2px solid powderblue;}

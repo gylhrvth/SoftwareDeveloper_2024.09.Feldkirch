@@ -64,6 +64,7 @@ public class Actor {
     public void printAll(){
         System.out.println("    " + this);
         System.out.println("        Regie of: " + regieOf);
+        System.out.println();
     }
 
     @Override

@@ -1,0 +1,105 @@
+
+
+h1{
+    background-color: pink;
+    display: flex;
+    justify-content: center;
+}
+
+
+button {
+    position: absolute;
+    padding: 10px 20px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button1 {
+    top: 10px;
+    left: 10px;
+}
+
+.button2 {
+    top: 10px;
+    right: 10px;
+}
+
+.button3 {
+    bottom: 10px;
+    left: 10px;
+}
+
+.button4 {
+    bottom: 10px;
+    right: 10px;
+}
+
+.button5 {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+p{
+    background-color: crimson;
+    font-size: 50px;
+    display: flex;
+    justify-content: left;
+}
+
+h4{
+    background-color: blueviolet;
+    font-size: 30px;
+    display: flex;
+    justify-content: right;
+}
+
+h3{
+    background-color: yellow;
+}
+p5{
+    display: flex;
+    justify-content: right;
+}
+p6{
+    display: flex;
+    justify-content: left;
+}
+
+h5 {
+    background-color: darkgreen;
+    font-size: 50px;
+    display: grid;
+    justify-content: center;
+    color: white;
+    transition: all 0.3s ease;
+    position: relative; /* To position the pseudo-element correctly */
+    padding: 20px;
+    overflow: hidden;
+}
+
+h5:hover {
+    background-color: white;
+    color: white; /* Change text color to black for visibility */
+    transition: width 2s, height 4s;
+}
+
+h5:hover::after {
+    content: ''; /* Needed to make the pseudo-element appear */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://i.pinimg.com/originals/85/4b/22/854b2242cf28190b813ea83e4e4521e0.png'); /* Specify the image URL */
+    background-size: cover; /* Ensures the image covers the entire area */
+    background-position: center; /* Centers the image */
+    opacity: 0.7; /* Optional: Make the image semi-transparent */
+    z-index: 1; /* Bring the image in front of the text */
+    transition: width 2s, height 4s;
+
+}

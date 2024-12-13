@@ -3,8 +3,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flex Example</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        .exContainer {
+            display: flex;  /*stellt alles nebeneinander*/
+            background-color: dodgerblue;
+        }
+
+        .exContainer div {
+            background-color: #f1f1f1;
+            margin: 10px;
+            padding: 20px;
+            font-size: 30px;
+        }
+
+        .exHeader {
+            display: flex;
+        }
+
+        .exHeader div {
+            color: rgb(0, 0, 169);
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .exFooter {
+            font-size: 16px;
+            flex-direction: row;
+            display: flex;
+            padding: 10px;
+        }
+
+        .socialMedia {
+           display: flex;
+           padding: 10px;
+           margin: 10px;
+        }
+
+        #pinterest {
+            height: 50px;
+            width: 50px;
+        }
+
+        #insta {
+            height: 50px;
+            width: 50px;
+        }
+        #facebook {
+            height: 50px;
+            width: 50px;
+        }
+        #x {
+            height: 50px;
+            width: 50px;
+        }
+        #youtube {
+            height: 50px;
+            width: 50px;
+        }
+
+        .left-column {
+            padding-left: 15px;
+        }
+
+        .middle-column {
+            padding-top: 15px;
+            padding-left: 25px;
+        }
+
+        .right-column {
+            padding-top: 15px;
+            padding-left: 200px;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+    </style>
 </head>
 <body>
+    <h1>Flex Container Example</h1>
     
+<div class="exContainer">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+</div>
+
+<h2>Flex Header example</h2>
+
+<header class="exHeader">
+    <div>Home</div>
+    <div>Unternehmen</div>
+    <div>Kompetenz</div>
+    <div>Beiträge</div>
+    <div>Karriere</div>
+    <div>Kontakt</div>
+</header>
+
+<h3>Flex Footer example</h3>
+
+<footer class="exFooter">
+    <div class="left-column">
+        <ul class="socialMedia">
+            <li><a class="pinterest" href="https://www.pinterest.com/pinterest/">   <img id="pinterest" src="images\pinterest.png" alt="pinterest Logo"></a></li>
+            <li><a class="insta" href="https://www.instagram.com/">                 <img id="insta"     src="images\insta.png"     alt="insta Logo"></a></li>
+            <li><a class="facebook" href="https://de-de.facebook.com/">             <img id="facebook"  src="images\facebook.png"  alt="facebook Logo"></a></li>
+            <li><a class="x" href="https://x.com">                                  <img id="X"         src="images\x.png"         alt="X Logo"></a></li>
+            <li><a class="youtube" href="https://www.youtube.com/">                 <img id="youtube"   src="images\youtube.png"   alt="youtube Logo"></a></li>
+        </ul>
+    </div>
+
+    <div class="middle-column">
+            <ul class="footer-links">
+                <li><a href="#">Legal Notice</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">AGB</a></li>
+                <li><a href="#">Shop</a></li>
+            </ul>
+    </div>
+
+    <div class="right-column">
+        <p>email@gmx.at</p>
+        <button onclick="window.location.href='http://127.0.0.1:5500/html/Erik/Sandbox/Examples/Examples_Main_Page.html'">Zurück zur Example Page</button>
+    </div>
+</footer>
 </body>
 </html>

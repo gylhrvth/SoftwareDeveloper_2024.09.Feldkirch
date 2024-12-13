@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    .gridcontainer {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 10px;
+    }
+    img {
+        width: 100%;
+    }
+
+
+    .centercenter {
+        background-color: lightcoral;
+        height: 60vh;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+    }
+    .centercenter img {
+        width: 200px;
+    }
+</style>
+</head>
+<body>
+    <h1>My Webpage</h1>
+    <div class="gridcontainer">
+        <div>
+            <img src="https://www.digitalcampusvorarlberg.at/fileadmin/_processed_/a/5/csm_team-meeting-digital-campus-vorarlberg-2_d6f9990863.webp" alt="Team Campus" srcset="">
+        </div>
+        <div>
+            <h3>Produkt C</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus sequi rem distinctio eligendi eos, minima quidem repellendus mollitia, qui debitis sapiente nam quo quam atque minus et laborum molestiae! Quibusdam.</p>    
+        </div>
+    </div>
+    <div class="centercenter">
+        <img src="https://www.digitalcampusvorarlberg.at/fileadmin/_processed_/a/5/csm_team-meeting-digital-campus-vorarlberg-2_d6f9990863.webp" alt="Team Campus" srcset="">
+    </div>
+</body>
+</html>
