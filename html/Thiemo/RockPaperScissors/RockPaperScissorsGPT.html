@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>(: Schere Stein Papier :)</h1>
+
+    <div class="button-container">
+        <button onclick="playGame('Rock')">Rock</button>
+        <button onclick="playGame('Paper')">Paper</button>
+        <button onclick="playGame('Scissors')">Scissors</button>
+    </div>
+
+    <p class="result js-move" id="result"></p>
+
+    <script>
+        function getAIMove() {
+            const moves = ['Rock', 'Paper', 'Scissors'];
+            return moves[Math.floor(Math.random() * 3)];
+        }
+
+        function determineWinner(playerMove, aiMove) {
+            if (playerMove === aiMove) {
+                return "It's a tie!";
+            }
+            if (
+                (playerMove === 'Rock' && aiMove === 'Scissors') ||
+                (playerMove === 'Paper' && aiMove === 'Rock') ||
+                (playerMove === 'Scissors' && aiMove === 'Paper')
+            ) {
+                return "You win!";
+            }
+            return "AI wins!";
+        }
+
+        function playGame(playerMove) {
+            const aiMove = getAIMove();
+            const result = determineWinner(playerMove, aiMove);
+            document.getElementById('result').innerHTML = `
+                You chose: <b>${playerMove}</b><br>
+                AI chose: <b>${aiMove}</b><br>
+                <b>${result}</b>
+            `;
+        }
+    </script>
+</body>
+</html>

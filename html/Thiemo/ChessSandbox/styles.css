@@ -1,0 +1,23 @@
+/* styleschess.css */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+#chess-board {
+    display: grid;
+    grid-template-columns: repeat(8, 125px);
+    grid-template-rows: repeat(8, 125px);
+    width: 1000px;
+    height: 1000px;
+    border: 2px solid black;
+  }
+  
+.para{
+  font-size: 3em;
+  color: blueviolet;
+}

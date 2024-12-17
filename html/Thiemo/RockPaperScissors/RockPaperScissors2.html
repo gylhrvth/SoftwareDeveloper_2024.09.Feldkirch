@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="RockPaperScissorsJS.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>Rock Paper Scissors</h1>
+<div>    
+    <button onclick="playGame('Rock')">Rock</button>
+
+    <button onclick="playGame('Paper')">Paper</button>
+
+    <button onclick="playGame('Scissors')">Scissors</button>
+
+</div>
+<br>
+<p class="js-move"></p>
+<p class="js-result"></p>
+<p class="js-score"></p>
+<br>
+ 
+    <button onclick="resetScore()">ResetScore</button>
+    
+</body>
+
+
+</html>
