@@ -1,19 +1,33 @@
+import { minmax } from "./minmaxalphabeta.js";
+
 // Pieces
 
 
 class Pawn {    //Pawn with (constructor, getPossibleMoves)
     constructor(isWhite) {
+        this.__type = 'Pawn';
 
         this.currentRow = null
         this.currentCol = null
         this.isWhite = isWhite
         if (isWhite) {
-            this.label = "♙";
-        } else {
             this.label = "♟"
+        } else {
+            this.label = "♙";
         }
-
     }
+
+    restoreData(value){
+        this.currentRow = value.currentRow
+        this.currentCol = value.currentCol
+        this.isWhite = value.isWhite
+        if (value.isWhite) {
+            this.label = "♟"
+        } else {
+            this.label = "♙";
+        }
+    }
+
 
     getPossibleMoves(chess) {
         let moves = [];
@@ -120,6 +134,8 @@ class Pawn {    //Pawn with (constructor, getPossibleMoves)
 // chessboard with (initGameField, addNewChessPiece, moveChessPiece, getChessPiece, printGameField, getAllPossibleMoves)
 class ChessGame {
     constructor() {
+        this.__type = 'ChessGame';
+        this.history = []
         // Define an 8x8 empty chessboard array
         this.boardArray = [
             [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
@@ -131,6 +147,28 @@ class ChessGame {
             [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
             [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
         ];
+    }
+
+    restoreData(value){
+        this.history = value.history
+        this.boardArray = value.boardArray
+    }
+
+    cloneChessGame() {
+        return JSON.parse(JSON.stringify(this), (key, value) =>{
+            if (typeof(value) === 'object' && value != undefined && value.__type === 'Pawn') {
+                let p = new Pawn(value.isWhite)
+                p.restoreData(value)
+                return p
+            }
+            if (typeof(value) === 'object' && value != undefined && value.__type === 'ChessGame') {
+                let c = new ChessGame()
+                c.restoreData(value)
+                return c
+            }
+
+            return value;
+    })
     }
 
     initGameField() {
@@ -147,10 +185,32 @@ class ChessGame {
     }
 
     moveChessPiece(piece, newRow, newColumn) {
+        this.saveGameField()
+        this.boardArray[newRow][newColumn] = this.boardArray[piece.currentRow][piece.currentCol];
         this.boardArray[piece.currentRow][piece.currentCol] = undefined
-        this.boardArray[newRow][newColumn] = piece;
-        piece.currentRow = newRow;
-        piece.currentCol = newColumn;
+        this.boardArray[newRow][newColumn].currentRow = newRow;
+        this.boardArray[newRow][newColumn].currentCol = newColumn;
+    }
+
+    saveGameField(){
+        this.history.push(JSON.stringify(this.boardArray))
+        //console.log("Save: ", this.boardArray, JSON.stringify(this.boardArray))
+    }   
+    
+    undoGameField(){
+        if (this.history.length > 0){
+            this.boardArray = JSON.parse(this.history.pop(), (key, value) => {
+                if (typeof(value) === 'object' && value != undefined && value.__type === 'Pawn') {
+                    let p = new Pawn(value.isWhite)
+                    p.restoreData(value)
+                    return p
+                }
+                return value;
+            })
+            //console.log("Undo: ", this.boardArray)
+        } else {
+            console.log("No more history")
+        }
     }
 
     getChessPiece(row, column) {
@@ -185,8 +245,8 @@ class ChessGame {
                 }
                                
             }
-        }          
-          console.log("Score is " + score)
+        }
+        return score
     }
 
     // possible moves white
@@ -214,7 +274,7 @@ class ChessGame {
                 }
             }
         }
-        console.log("All Moves: ", allPossibleMoves)
+        //console.log("All Moves: ", allPossibleMoves)
 
         // TODO 005/f: return allPossibleMoves
         return allPossibleMoves;
@@ -229,7 +289,7 @@ chess.initGameField()
 chess.printGameField()
 
 let allMoves = chess.getAllPossibleMoves(true)
-let allMovesBlack = allMoves
+let allMovesBlack = ["no empty"]
 let stepLeft = 100
 let moves = 0
 
@@ -241,13 +301,19 @@ while (allMoves.length > 0 && allMovesBlack.length > 0 && stepLeft > 0) {
 
     chess.moveChessPiece(randomMove.piece, randomMove.newRow, randomMove.newColumn);
     chess.printGameField()
+    console.log("Score is " + chess.calculateScore())
+
     //    console.log(chess)
 
     // Teil SCHWARZ
     allMovesBlack = chess.getAllPossibleMoves(false)
     if (allMovesBlack.length > 0) {
-        randomIndex = Math.floor(Math.random() * allMovesBlack.length);
-        randomMove = allMovesBlack[randomIndex];
+//        randomIndex = Math.floor(Math.random() * allMovesBlack.length);
+//        randomMove = allMovesBlack[randomIndex];
+        let minmaxresult = minmax(chess, 5, false, -Infinity, Infinity)
+        console.log("MinMaxResult: ", minmaxresult)
+        randomMove = minmaxresult.move
+
         chess.moveChessPiece(randomMove.piece, randomMove.newRow, randomMove.newColumn);
         chess.printGameField()
 
@@ -256,7 +322,8 @@ while (allMoves.length > 0 && allMovesBlack.length > 0 && stepLeft > 0) {
         allMoves = chess.getAllPossibleMoves(true)
 
     }
-    chess.calculateScore()
+    console.log("Score is " + chess.calculateScore())
+
     --stepLeft
     moves++
     console.log("Moves done",moves)
