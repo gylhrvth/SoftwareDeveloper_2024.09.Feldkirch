@@ -11,20 +11,20 @@ class Pawn {    //Pawn with (constructor, getPossibleMoves)
         this.currentCol = null
         this.isWhite = isWhite
         if (isWhite) {
-            this.label = "♟"
+            this.label = "♙"
         } else {
-            this.label = "♙";
+            this.label = "♟";
         }
     }
 
-    restoreData(value){
+    restoreData(value) {
         this.currentRow = value.currentRow
         this.currentCol = value.currentCol
         this.isWhite = value.isWhite
         if (value.isWhite) {
-            this.label = "♟"
+            this.label = "♙"
         } else {
-            this.label = "♙";
+            this.label = "♟";
         }
     }
 
@@ -55,7 +55,9 @@ class Pawn {    //Pawn with (constructor, getPossibleMoves)
             }
             // Add option to HIT an other figure
             // hits left
-            if (this.currentCol > 0 && this.currentRow < 7 && chess.getChessPiece(this.currentRow + 1, this.currentCol - 1) != undefined && chess.getChessPiece(this.currentRow + 1, this.currentCol - 1).isWhite != this.isWhite) {
+            if (this.currentCol > 0 && this.currentRow < 7 && 
+                chess.getChessPiece(this.currentRow + 1, this.currentCol - 1) != undefined &&
+                chess.getChessPiece(this.currentRow + 1, this.currentCol - 1).isWhite != this.isWhite) {
                 moves.push(
                     {
                         newRow: this.currentRow + 1,
@@ -67,7 +69,9 @@ class Pawn {    //Pawn with (constructor, getPossibleMoves)
 
             // Add option to HIT an other figure
             // hits right
-            if (this.currentCol < 7 && this.currentRow < 7 && chess.getChessPiece(this.currentRow + 1, this.currentCol + 1) != undefined && chess.getChessPiece(this.currentRow + 1, this.currentCol + 1).isWhite != this.isWhite) {
+            if (this.currentCol < 7 && this.currentRow < 7 && 
+                chess.getChessPiece(this.currentRow + 1, this.currentCol + 1) != undefined && 
+                chess.getChessPiece(this.currentRow + 1, this.currentCol + 1).isWhite != this.isWhite) {
                 moves.push(
                     {
                         newRow: this.currentRow + 1,
@@ -104,7 +108,9 @@ class Pawn {    //Pawn with (constructor, getPossibleMoves)
 
             // Add option to HIT an other figure
             // hits left
-            if (this.currentCol > 0 && this.currentRow > 0 && chess.getChessPiece(this.currentRow - 1, this.currentCol - 1) != undefined && chess.getChessPiece(this.currentRow - 1, this.currentCol - 1).isWhite != this.isWhite) {
+            if (this.currentCol > 0 && this.currentRow > 0 &&
+                 chess.getChessPiece(this.currentRow - 1, this.currentCol - 1) != undefined && 
+                 chess.getChessPiece(this.currentRow - 1, this.currentCol - 1).isWhite != this.isWhite) {
                 moves.push(
                     {
                         newRow: this.currentRow - 1,
@@ -116,7 +122,9 @@ class Pawn {    //Pawn with (constructor, getPossibleMoves)
 
             // Add option to HIT an other figure
             // hits right
-            if (this.currentCol < 8 && this.currentRow > 0 && chess.getChessPiece(this.currentRow - 1, this.currentCol + 1) != undefined && chess.getChessPiece(this.currentRow - 1, this.currentCol + 1).isWhite != this.isWhite) {
+            if (this.currentCol < 8 && this.currentRow > 0 && 
+                chess.getChessPiece(this.currentRow - 1, this.currentCol + 1) != undefined && 
+                chess.getChessPiece(this.currentRow - 1, this.currentCol + 1).isWhite != this.isWhite) {
                 moves.push(
                     {
                         newRow: this.currentRow - 1,
@@ -130,8 +138,68 @@ class Pawn {    //Pawn with (constructor, getPossibleMoves)
     }
 
 }
+/*class Knight {
+    constructor(isWhite) {
+        this.__type = 'Knight';
 
-// chessboard with (initGameField, addNewChessPiece, moveChessPiece, getChessPiece, printGameField, getAllPossibleMoves)
+        this.currentRow = null
+        this.currentCol = null
+        this.isWhite = isWhite
+        if (isWhite) {
+            this.label = "♘"
+        } else {
+            this.label = "♞";
+        }
+    }
+
+    restoreData(value) {
+        this.currentRow = value.currentRow
+        this.currentCol = value.currentCol
+        this.isWhite = value.isWhite
+        if (value.isWhite) {
+            this.label = "♘"
+        } else {
+            this.label = "♞";
+        }
+    }
+    getPossibleMoves(chess) {
+        let moves = []
+        // Black pieces
+        if (!this.isWhite) {
+            if (this.currentRow < 7 && chess.getChessPiece(this.currentRow + 1, this.currentCol) == undefined) {
+                moves.push(
+                    {
+                        newRow: this.currentRow + 1,
+                        newColumn: this.currentCol,
+                        piece: this
+                    }
+                )
+            }
+
+            //.....
+        }
+
+        // White Pieces
+        if(this.isWhite) {
+            if(this.currentRow < 7 && chess.getChessPiece(this.currentRow + 1, this.currentCol) == undefined) {
+                moves.push(
+                    {
+                        newRow: this.currentRow + 1,
+                        newColumn: this.currentCol,
+                        piece: this
+                    }
+                )
+            }
+
+            //.....
+        }
+        return moves
+    }
+}*/
+
+
+// chessboard with (restoreData, cloneChessGame, initGameField, addNewChessPiece, moveChessPiece, saveGameField, 
+//                  undoGameField getChessPiece, printGameField, calculateScore, getAllPossibleMoves)
 class ChessGame {
     constructor() {
         this.__type = 'ChessGame';
@@ -149,32 +217,36 @@ class ChessGame {
         ];
     }
 
-    restoreData(value){
+    restoreData(value) {
         this.history = value.history
         this.boardArray = value.boardArray
     }
 
     cloneChessGame() {
-        return JSON.parse(JSON.stringify(this), (key, value) =>{
-            if (typeof(value) === 'object' && value != undefined && value.__type === 'Pawn') {
+        return JSON.parse(JSON.stringify(this), (key, value) => {
+            if (typeof (value) === 'object' && value != undefined && value.__type === 'Pawn') {
                 let p = new Pawn(value.isWhite)
                 p.restoreData(value)
                 return p
             }
-            if (typeof(value) === 'object' && value != undefined && value.__type === 'ChessGame') {
+            if (typeof (value) === 'object' && value != undefined && value.__type === 'ChessGame') {
                 let c = new ChessGame()
                 c.restoreData(value)
                 return c
             }
 
             return value;
-    })
+        })
     }
 
     initGameField() {
         for (let column = 0; column < this.boardArray[0].length; ++column) {
             this.addNewChessPiece(1, column, new Pawn(false))
             this.addNewChessPiece(6, column, new Pawn(true))
+/*             this.addNewChessPiece(0,1,new Knight(false))
+             this.addNewChessPiece(0,6,new Knight(false))
+             this.addNewChessPiece(7,1,new Knight(true))
+             this.addNewChessPiece(7,6,new Knight(true))*/
         }
     }
 
@@ -192,15 +264,15 @@ class ChessGame {
         this.boardArray[newRow][newColumn].currentCol = newColumn;
     }
 
-    saveGameField(){
+    saveGameField() {
         this.history.push(JSON.stringify(this.boardArray))
         //console.log("Save: ", this.boardArray, JSON.stringify(this.boardArray))
-    }   
-    
-    undoGameField(){
-        if (this.history.length > 0){
+    }
+
+    undoGameField() {
+        if (this.history.length > 0) {
             this.boardArray = JSON.parse(this.history.pop(), (key, value) => {
-                if (typeof(value) === 'object' && value != undefined && value.__type === 'Pawn') {
+                if (typeof (value) === 'object' && value != undefined && value.__type === 'Pawn') {
                     let p = new Pawn(value.isWhite)
                     p.restoreData(value)
                     return p
@@ -236,14 +308,14 @@ class ChessGame {
         let score = 0.0
         for (let row = 0; row < this.boardArray.length; row++) {
             for (let column = 0; column < this.boardArray[row].length; column++) {
-                if (this.boardArray[row][column] != undefined){
+                if (this.boardArray[row][column] != undefined) {
                     if (this.boardArray[row][column].isWhite == true) {
                         score += 1.0
                     } else {
                         score -= 1.0
                     }
                 }
-                               
+
             }
         }
         return score
@@ -264,7 +336,7 @@ class ChessGame {
 
                     // TODO 005/d: Get possible moves from the single piece
                     let possibleMovesOfPiece = this.boardArray[row][column].getPossibleMoves(chess)
-
+    
                     // console.log(`Possible moves for piece at row ${row}, column ${column}:`, possibleMovesOfPiece);
 
                     // TODO 005/e: Push possible moves into allPossibleMoves
@@ -308,8 +380,8 @@ while (allMoves.length > 0 && allMovesBlack.length > 0 && stepLeft > 0) {
     // Teil SCHWARZ
     allMovesBlack = chess.getAllPossibleMoves(false)
     if (allMovesBlack.length > 0) {
-//        randomIndex = Math.floor(Math.random() * allMovesBlack.length);
-//        randomMove = allMovesBlack[randomIndex];
+        //        randomIndex = Math.floor(Math.random() * allMovesBlack.length);
+        //        randomMove = allMovesBlack[randomIndex];
         let minmaxresult = minmax(chess, 5, false, -Infinity, Infinity)
         console.log("MinMaxResult: ", minmaxresult)
         randomMove = minmaxresult.move
@@ -326,7 +398,7 @@ while (allMoves.length > 0 && allMovesBlack.length > 0 && stepLeft > 0) {
 
     --stepLeft
     moves++
-    console.log("Moves done",moves)
+    console.log("Moves done", moves)
 }
 
 
