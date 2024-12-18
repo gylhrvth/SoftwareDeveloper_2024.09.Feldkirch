@@ -1,7 +1,9 @@
-// chess.js
+// Pieces
 
-class Pawn {
+
+class Pawn {    //Pawn with (constructor, getPossibleMoves)
     constructor(isWhite) {
+
         this.currentRow = null
         this.currentCol = null
         this.isWhite = isWhite
@@ -10,11 +12,59 @@ class Pawn {
         } else {
             this.label = "♟"
         }
+
     }
 
     getPossibleMoves(chess) {
         let moves = [];
 
+        // Black pieces
+        if (!this.isWhite) {
+            if (this.currentRow < 7 && chess.getChessPiece(this.currentRow + 1, this.currentCol) == undefined) {
+                moves.push(
+                    {
+                        newRow: this.currentRow + 1,
+                        newColumn: this.currentCol,
+                        piece: this
+                    }
+                )
+            }
+            if (this.currentRow == 1 && chess.getChessPiece(this.currentRow + 2, this.currentCol) == undefined &&
+                chess.getChessPiece(this.currentRow + 1, this.currentCol) == undefined) {
+                moves.push(
+                    {
+                        newRow: this.currentRow + 2,
+                        newColumn: this.currentCol,
+                        piece: this
+                    }
+                )
+            }
+            // Add option to HIT an other figure
+            // hits left
+            if (this.currentCol > 0 && this.currentRow < 7 && chess.getChessPiece(this.currentRow + 1, this.currentCol - 1) != undefined && chess.getChessPiece(this.currentRow + 1, this.currentCol - 1).isWhite != this.isWhite) {
+                moves.push(
+                    {
+                        newRow: this.currentRow + 1,
+                        newColumn: this.currentCol - 1,
+                        piece: this
+                    }
+                )
+            }
+
+            // Add option to HIT an other figure
+            // hits right
+            if (this.currentCol < 7 && this.currentRow < 7 && chess.getChessPiece(this.currentRow + 1, this.currentCol + 1) != undefined && chess.getChessPiece(this.currentRow + 1, this.currentCol + 1).isWhite != this.isWhite) {
+                moves.push(
+                    {
+                        newRow: this.currentRow + 1,
+                        newColumn: this.currentCol + 1,
+                        piece: this
+                    }
+                )
+            }
+        }
+
+        // White pieces
         if (this.isWhite) {
             if (this.currentRow > 0 && chess.getChessPiece(this.currentRow - 1, this.currentCol) == undefined) {
                 moves.push(
@@ -62,16 +112,12 @@ class Pawn {
                 )
             }
         }
-
-
-
-
-
         return moves;
     }
+
 }
 
-
+// chessboard with (initGameField, addNewChessPiece, moveChessPiece, getChessPiece, printGameField, getAllPossibleMoves)
 class ChessGame {
     constructor() {
         // Define an 8x8 empty chessboard array
@@ -125,7 +171,25 @@ class ChessGame {
         }
     }
 
+    // TODO : Calculae score for every eaten Piece(pawn +1, (knight +3,bishop +3, rook +5, queen +9, king +100)) 
+    calculateScore() {
+        let score = 0.0
+        for (let row = 0; row < this.boardArray.length; row++) {
+            for (let column = 0; column < this.boardArray[row].length; column++) {
+                if (this.boardArray[row][column] != undefined){
+                    if (this.boardArray[row][column].isWhite == true) {
+                        score += 1.0
+                    } else {
+                        score -= 1.0
+                    }
+                }
+                               
+            }
+        }          
+          console.log("Score is " + score)
+    }
 
+    // possible moves white
     // TODO 005: Add new Function for getAllPossibleMoves(isWhite) to collect all moves possible for player X.
     getAllPossibleMoves(isWhite) {
         // TODO 005/a: Create a variable allPossibleMoves as an empty array
@@ -135,26 +199,26 @@ class ChessGame {
             for (let column = 0; column < this.boardArray[row].length; column++) {
                 // TODO 005/c: If position not empty and piece on position is acording "isWhite"
                 if (this.boardArray[row][column] != undefined && this.boardArray[row][column].isWhite == isWhite) {
-                 // TODO 005/d: Get possible moves from the single piece
+
+                    // console.log(`Inspecting piece at row ${row}, column ${column}`);
+
+                    // TODO 005/d: Get possible moves from the single piece
                     let possibleMovesOfPiece = this.boardArray[row][column].getPossibleMoves(chess)
+
+                    // console.log(`Possible moves for piece at row ${row}, column ${column}:`, possibleMovesOfPiece);
+
+                    // TODO 005/e: Push possible moves into allPossibleMoves
                     possibleMovesOfPiece.forEach(move => {
                         allPossibleMoves.push(move)
                     });
                 }
             }
         }
+        console.log("All Moves: ", allPossibleMoves)
 
-
-
-        
-        // TODO 005/e: Push possible moves into allPossibleMoves
-        //console.log("All Moves: ", allPossibleMoves)
         // TODO 005/f: return allPossibleMoves
         return allPossibleMoves;
     }
-
-
-
 }
 
 
@@ -165,32 +229,39 @@ chess.initGameField()
 chess.printGameField()
 
 let allMoves = chess.getAllPossibleMoves(true)
-let stepLeft = 32
+let allMovesBlack = allMoves
+let stepLeft = 100
+let moves = 0
 
-while (allMoves.length > 0 && stepLeft > 0) {
+while (allMoves.length > 0 && allMovesBlack.length > 0 && stepLeft > 0) {
+    // Teil WEISS
     let randomIndex = Math.floor(Math.random() * allMoves.length);
     let randomMove = allMoves[randomIndex];
     //console.log(randomMove, randomIndex);
 
     chess.moveChessPiece(randomMove.piece, randomMove.newRow, randomMove.newColumn);
     chess.printGameField()
-    //console.log(chess)
-    allMoves = chess.getAllPossibleMoves(true)
+    //    console.log(chess)
+
+    // Teil SCHWARZ
+    allMovesBlack = chess.getAllPossibleMoves(false)
+    if (allMovesBlack.length > 0) {
+        randomIndex = Math.floor(Math.random() * allMovesBlack.length);
+        randomMove = allMovesBlack[randomIndex];
+        chess.moveChessPiece(randomMove.piece, randomMove.newRow, randomMove.newColumn);
+        chess.printGameField()
+
+
+        // Vorbereitung WEISS
+        allMoves = chess.getAllPossibleMoves(true)
+
+    }
+    chess.calculateScore()
     --stepLeft
+    moves++
+    console.log("Moves done",moves)
 }
+
 
 console.log("Game over")
 
-// move function
-// get position function
-// 1 class for figures but i need a function for different colors????
-
-
-//  let divE = document.getElementById("chess-board")
-
-//  for (let i = 1; i <= 64; ++i){
-//      let paragraphE = document.createElement("h2")
-//      paragraphE.classList.add("para")
-//      paragraphE.innerText = "Lorem ipsum " + i
-//      divE.appendChild(paragraphE)
-//  }
