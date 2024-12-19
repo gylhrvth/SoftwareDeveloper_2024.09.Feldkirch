@@ -1,7 +1,9 @@
 import { minmax } from "../minmaxalphabeta.js";
 import { Pawn } from "../Pieces/Pawn.js";
 import { Knight } from "../Pieces/Knight.js";
- 
+import { Bishop } from "../Pieces/Bishop.js";
+
+
 // chessboard with (restoreData, cloneChessGame, initGameField, addNewChessPiece, moveChessPiece, saveGameField, 
 //                  undoGameField getChessPiece, printGameField, calculateScore, getAllPossibleMoves)
 class ChessGame {
@@ -27,23 +29,31 @@ class ChessGame {
     }
 
     cloneChessGame() {
-
-        // Pawn 
         return JSON.parse(JSON.stringify(this), (key, value) => {
+
+            // Pawn 
             if (typeof (value) === 'object' && value != undefined && value.__type === 'Pawn') {
                 let p = new Pawn(value.isWhite)
                 p.restoreData(value)
                 return p
             }
-            
+
             //Knight
             if (typeof (value) === 'object' && value != undefined && value.__type === 'Knight') {
                 let k = new Knight(value.isWhite)
                 k.restoreData(value)
                 return k
+            }
+
+            //Bishop
+            if (typeof (value) === 'object' && value != undefined && value.__type === 'Bishop') {
+                let b = new Bishop(value.isWhite)
+                b.restoreData(value)
+                return b
+            }
+
 
             // Chessboard
-            }
             if (typeof (value) === 'object' && value != undefined && value.__type === 'ChessGame') {
                 let c = new ChessGame()
                 c.restoreData(value)
@@ -56,12 +66,16 @@ class ChessGame {
 
     initGameField() {
         for (let column = 0; column < this.boardArray[0].length; ++column) {
-           //   this.addNewChessPiece(1, column, new Pawn(false))
-           //   this.addNewChessPiece(6, column, new Pawn(true))
-             this.addNewChessPiece(0,1,new Knight(false))
-             this.addNewChessPiece(0,6,new Knight(false))
-             this.addNewChessPiece(7,1,new Knight(true))
-             this.addNewChessPiece(7,6,new Knight(true))
+            this.addNewChessPiece(1, column, new Pawn(false))
+            this.addNewChessPiece(6, column, new Pawn(true))
+            this.addNewChessPiece(0, 1, new Knight(false))
+            this.addNewChessPiece(0, 6, new Knight(false))
+            this.addNewChessPiece(7, 1, new Knight(true))
+            this.addNewChessPiece(7, 6, new Knight(true))
+            this.addNewChessPiece(0, 2, new Bishop(false))
+            this.addNewChessPiece(0, 5, new Bishop(false))
+            this.addNewChessPiece(7, 2, new Bishop(true))
+            this.addNewChessPiece(7, 5, new Bishop(true))
         }
     }
 
@@ -77,7 +91,7 @@ class ChessGame {
         this.boardArray[piece.currentRow][piece.currentCol] = undefined
         this.boardArray[newRow][newColumn].currentRow = newRow;
         this.boardArray[newRow][newColumn].currentCol = newColumn;
-        
+
     }
 
     saveGameField() {
@@ -92,18 +106,24 @@ class ChessGame {
                 if (typeof (value) === 'object' && value != undefined && value.__type === 'Pawn') {
                     let p = new Pawn(value.isWhite)
                     p.restoreData(value)
-                    return p                
+                    return p
                 }
                 //Knight
                 if (typeof (value) === 'object' && value != undefined && value.__type === 'Knight') {
                     let k = new Knight(value.isWhite)
                     k.restoreData(value)
-                    return k                
+                    return k
+                }
+                //Bishop
+                if (typeof (value) === 'object' && value != undefined && value.__type === 'Bishop') {
+                    let b = new Bishop(value.isWhite)
+                    b.restoreData(value)
+                    return b
                 }
                 return value;
             }
-        
-        )
+
+            )
             //console.log("Undo: ", this.boardArray)
         } else {
             console.log("No more history")
@@ -135,15 +155,15 @@ class ChessGame {
             for (let column = 0; column < this.boardArray[row].length; column++) {
                 if (this.boardArray[row][column] != undefined) {
 
-                    if(this.boardArray[row][column].__type == 'Pawn'){
+                    if (this.boardArray[row][column].__type == 'Pawn') {
                         if (this.boardArray[row][column].isWhite == true) {
                             score += 1.0
                         } else {
                             score -= 1.0
                         }
                     }
-                    if(this.boardArray[row][column].__type == 'Knight'){
-                        if(this.boardArray[row][column].isWhite == true){
+                    if (this.boardArray[row][column].__type == 'Knight' || this.boardArray[row][column].__type == 'Bishop') {
+                        if (this.boardArray[row][column].isWhite == true) {
                             score += 3.0
                         } else {
                             score -= 3.0
@@ -169,10 +189,10 @@ class ChessGame {
                     // console.log(`Inspecting piece at row ${row}, column ${column}`);
 
                     // TODO 005/d: Get possible moves from the single piece
-                    
+
                     let possibleMovesOfPiece = this.boardArray[row][column].getPossibleMoves(chess)
 
-    
+
                     // console.log(`Possible moves for piece at row ${row}, column ${column}:`, possibleMovesOfPiece);
 
                     // TODO 005/e: Push possible moves into allPossibleMoves
@@ -180,9 +200,9 @@ class ChessGame {
                         allPossibleMoves.push(move)
                     });
                 }
-            }        
+            }
         }
- //console.log("All Moves: ", allPossibleMoves)
+        //console.log("All Moves: ", allPossibleMoves)
 
         // TODO 005/f: return allPossibleMoves
         return allPossibleMoves;
@@ -197,45 +217,58 @@ chess.initGameField()
 chess.printGameField()
 
 let allMoves = chess.getAllPossibleMoves(true)
-let allMovesBlack = ["no empty"]
-let stepLeft = 100
-let moves = 0
+// let allMovesBlack = ["no empty"]
+let allMovesBlack = chess.getAllPossibleMoves(false)
+let stepLeft = 50
+let movesDone = 0
+let randomIndex
+let randomMove
+let minmaxresult
 
-while (allMoves.length > 0 && allMovesBlack.length > 0 && stepLeft > 0) {
+
+while (allMoves.length > 0 && /*allMovesBlack.length > 0 &&*/ stepLeft > 0) {
     // Teil WEISS
-    let randomIndex = Math.floor(Math.random() * allMoves.length);
-    let randomMove = allMoves[randomIndex];
+    randomIndex = Math.floor(Math.random() * allMoves.length);
+    randomMove = allMoves[randomIndex];
     //console.log(randomMove, randomIndex);
 
-    chess.moveChessPiece(randomMove.piece, randomMove.newRow, randomMove.newColumn);
-    chess.printGameField()
-    console.log("Score is " + chess.calculateScore())
+    //   minmaxresult = minmax(chess, 4, true, -Infinity, Infinity)
+    //    randomMove = minmaxresult.move
+    console.log("MinMaxResult: ", minmaxresult)
 
-        console.log(chess)
+
+
+    chess.moveChessPiece(randomMove.piece, randomMove.newRow, randomMove.newColumn);
+    console.log("White" , allMoves)
+    chess.printGameField()
+    console.log("Score is ", chess.calculateScore())
+
+    console.log(chess)
 
     // Teil SCHWARZ
-    allMovesBlack = chess.getAllPossibleMoves(false)
+ //   allMovesBlack = chess.getAllPossibleMoves(false)
     if (allMovesBlack.length > 0) {
-                randomIndex = Math.floor(Math.random() * allMovesBlack.length);
-                randomMove = allMovesBlack[randomIndex];
-    //    let minmaxresult = minmax(chess, 5, false, -Infinity, Infinity)
-    //    console.log("MinMaxResult: ", minmaxresult)
-    //    randomMove = minmaxresult.move
+        //   randomIndex = Math.floor(Math.random() * allMovesBlack.length);
+        //   randomMove = allMovesBlack[randomIndex];
+
+        minmaxresult = minmax(chess, 4, false, -Infinity, Infinity)
+        console.log("MinMaxResult: ", minmaxresult)
+        randomMove = minmaxresult.move
 
         chess.moveChessPiece(randomMove.piece, randomMove.newRow, randomMove.newColumn);
+        console.log("Black", allMovesBlack)
         chess.printGameField()
 
 
         // Vorbereitung WEISS
         allMoves = chess.getAllPossibleMoves(true)
-
+        console.log("Score is ", chess.calculateScore())
+        
     }
-    console.log("Score is " + chess.calculateScore())
-
     --stepLeft
-    moves++
-    console.log("Moves done", moves)
-
+    movesDone++
+    console.log("Moves done", movesDone)
+    
 }
 
 

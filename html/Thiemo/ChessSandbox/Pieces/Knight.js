@@ -30,7 +30,7 @@ class Knight {     // Knight class with(constructor, restoreData??, getPossibleM
         let newRow = this.currentRow + rowCount;
         let newCol = this.currentCol + colCount;
 
-        // Return true if newRow or newCol are out of bounds
+        // Return true if newRow or newCol are out of bounds (its like a boolean without creating one?? )
         return newRow < 0 || newRow > 7 || newCol < 0 || newCol > 7;
     }
 
@@ -139,8 +139,8 @@ class Knight {     // Knight class with(constructor, restoreData??, getPossibleM
                         chess.getChessPiece(this.currentRow - 1, this.currentCol - 2).isWhite != this.isWhite) {
                         moves.push(
                             {
-                                newRow: this.currentRow - 2,
-                                newColumn: this.currentCol - 1,
+                                newRow: this.currentRow - 1,
+                                newColumn: this.currentCol - 2,
                                 piece: this
                             }
                         )
@@ -248,8 +248,8 @@ class Knight {     // Knight class with(constructor, restoreData??, getPossibleM
                         chess.getChessPiece(this.currentRow - 1, this.currentCol - 2).isWhite != this.isWhite) {
                         moves.push(
                             {
-                                newRow: this.currentRow - 2,
-                                newColumn: this.currentCol - 1,
+                                newRow: this.currentRow - 1,
+                                newColumn: this.currentCol - 2,
                                 piece: this
                             }
                         )
@@ -257,6 +257,7 @@ class Knight {     // Knight class with(constructor, restoreData??, getPossibleM
                 }
             }
         }
+     //   console.log("Knight", moves)
         return moves;
     }
 }

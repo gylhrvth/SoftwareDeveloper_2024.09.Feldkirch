@@ -131,6 +131,7 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
                 )
             }
         }
+      //  console.log("Pawn", moves)
         return moves;
     }
 
