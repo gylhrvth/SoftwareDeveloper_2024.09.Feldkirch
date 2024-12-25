@@ -37,18 +37,138 @@ class Bishop {
     getPossibleMoves(chess) {
         let moves = []
 
-              if (!this.isWhite) {
-                  if (this.currentRow <= 7 && this.currentRow >= 0 && this.currentCol <= 7 && this.currentCol >= 0) {
-      
-                  }
-              }
-              else {
-                  if (this.currentRow <= 7 && this.currentRow >= 0 && this.currentCol <= 7 && this.currentCol >= 0) {
-      
-                  }
-              }
+        if (!this.isWhite) {
+            if (this.currentRow <= 7 && this.currentRow >= 0 && this.currentCol <= 7 && this.currentCol >= 0) {
+                while (!this.testOutOfBounds) {
+                    let bishopmove = 1;
+                    // if (chess.getChessPiece(this.currentRow + 2, this.currentCol + 1) == undefined ||
+                    // chess.getChessPiece(this.currentRow + 2, this.currentCol + 1).isWhite != this.isWhite) {
+                    // moves.push(
+                    if (chess.getChesspiece(this.currentRow + bishopmove, this.currentCol + bishopmove) == undefined ||
+                        chess.getChessPiece(this.currentRow + bishopmove, this.currentCol + bishopmove).isWhite != this.isWhite) {
+                        moves.push(
+                            {
+                                newRow: this.currentRow + bishopmove,
+                                newColumn: this.currentCol + bishopmove,
+                                piece: this
 
-       // console.log("Bishop", moves)
+                            }
+                        )
+                    }
+                    bishopmove++;
+                }
+                while (!this.testOutOfBounds) {
+                    let bishopmove = 1;
+                    if (chess.getChesspiece(this.currentRow - bishopmove, this.currentCol - bishopmove) == undefined ||
+                        chess.getChessPiece(this.currentRow - bishopmove, this.currentCol - bishopmove).isWhite != this.isWhite) {
+                        moves.push(
+                            {
+                                newRow: this.currentRow - bishopmove,
+                                newColumn: this.currentCol - bishopmove,
+                                piece: this
+
+                            }
+                        )
+                    }
+                    bishopmove++;
+                }
+                while (!this.testOutOfBounds) {
+                    let bishopmove = 1;
+                    if (chess.getChesspiece(this.currentRow + bishopmove, this.currentCol - bishopmove) == undefined ||
+                        chess.getChessPiece(this.currentRow + bishopmove, this.currentCol - bishopmove).isWhite != this.isWhite) {
+                        moves.push(
+                            {
+                                newRow: this.currentRow + bishopmove,
+                                newColumn: this.currentCol - bishopmove,
+                                piece: this
+
+                            }
+                        )
+                    }
+                    bishopmove++;
+                }
+                while (!this.testOutOfBounds) {
+                    let bishopmove = 1;
+                    if (chess.getChesspiece(this.currentRow - bishopmove, this.currentCol + bishopmove) == undefined ||
+                        chess.getChessPiece(this.currentRow - bishopmove, this.currentCol + bishopmove).isWhite != this.isWhite) {
+                        moves.push(
+                            {
+                                newRow: this.currentRow - bishopmove,
+                                newColumn: this.currentCol + bishopmove,
+                                piece: this
+
+                            }
+                        )
+                    }
+                    bishopmove++;
+                }
+            }
+        }
+        else {
+            if (this.currentRow <= 7 && this.currentRow >= 0 && this.currentCol <= 7 && this.currentCol >= 0) {
+                while (!this.testOutOfBounds) {
+                    let bishopmove = 1;
+                    if (chess.getChesspiece(this.currentRow + bishopmove, this.currentCol + bishopmove) == undefined ||
+                        chess.getChessPiece(this.currentRow + bishopmove, this.currentCol + bishopmove).isWhite != this.isWhite) {
+                        moves.push(
+                            {
+                                newRow: this.currentRow + bishopmove,
+                                newColumn: this.currentCol + bishopmove,
+                                piece: this
+
+                            }
+                        )
+                    }
+                    bishopmove++;
+                }
+                while (!this.testOutOfBounds) {
+                    let bishopmove = 1;
+                    if (chess.getChesspiece(this.currentRow - bishopmove, this.currentCol + bishopmove) == undefined ||
+                        chess.getChessPiece(this.currentRow - bishopmove, this.currentCol + bishopmove).isWhite != this.isWhite) {
+                        moves.push(
+                            {
+                                newRow: this.currentRow - bishopmove,
+                                newColumn: this.currentCol + bishopmove,
+                                piece: this
+
+                            }
+                        )
+                    }
+                    bishopmove++;
+                }
+                while (!this.testOutOfBounds) {
+                    if (chess.getChesspiece(this.currentRow - bishopmove, this.currentCol - bishopmove) == undefined ||
+                        chess.getChessPiece(this.currentRow - bishopmove, this.currentCol - bishopmove).isWhite != this.isWhite) {
+                        moves.push(
+                            {
+                                newRow: this.currentRow - bishopmove,
+                                newColumn: this.currentCol - bishopmove,
+                                piece: this
+
+                            }
+                        )
+                    }
+                    bishopmove++;
+                }
+                while (!this.testOutOfBounds) {
+                    let bishopmove = 1;
+                    if (chess.getChesspiece(this.currentRow + bishopmove, this.currentCol - bishopmove) == undefined ||
+                        chess.getChessPiece(this.currentRow + bishopmove, this.currentCol - bishopmove).isWhite != this.isWhite) {
+                        moves.push(
+                            {
+                                newRow: this.currentRow + bishopmove,
+                                newColumn: this.currentCol - bishopmove,
+                                piece: this
+
+                            }
+                        )
+                    }
+                    bishopmove++;
+                }
+            }
+        }
+        
+        // console.log("Bishop", moves)
         return moves;
-    } 
+    }
 }

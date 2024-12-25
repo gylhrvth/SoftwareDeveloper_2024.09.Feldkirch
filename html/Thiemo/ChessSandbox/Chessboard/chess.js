@@ -66,12 +66,12 @@ class ChessGame {
 
     initGameField() {
         for (let column = 0; column < this.boardArray[0].length; ++column) {
-            this.addNewChessPiece(1, column, new Pawn(false))
+ /*           this.addNewChessPiece(1, column, new Pawn(false))
             this.addNewChessPiece(6, column, new Pawn(true))
             this.addNewChessPiece(0, 1, new Knight(false))
             this.addNewChessPiece(0, 6, new Knight(false))
             this.addNewChessPiece(7, 1, new Knight(true))
-            this.addNewChessPiece(7, 6, new Knight(true))
+            this.addNewChessPiece(7, 6, new Knight(true)) */
             this.addNewChessPiece(0, 2, new Bishop(false))
             this.addNewChessPiece(0, 5, new Bishop(false))
             this.addNewChessPiece(7, 2, new Bishop(true))
