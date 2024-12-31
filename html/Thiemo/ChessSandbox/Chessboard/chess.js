@@ -219,12 +219,13 @@ chess.printGameField()
 let allMoves = chess.getAllPossibleMoves(true)
 // let allMovesBlack = ["no empty"]
 let allMovesBlack = chess.getAllPossibleMoves(false)
-let stepLeft = 50
+let stepLeft = 5
 let movesDone = 0
 let randomIndex
 let randomMove
 let minmaxresult
-
+let oldPositionWhiteRow
+let oldPositionWhiteCol
 
 while (allMoves.length > 0 && /*allMovesBlack.length > 0 &&*/ stepLeft > 0) {
     // Teil WEISS
@@ -236,17 +237,20 @@ while (allMoves.length > 0 && /*allMovesBlack.length > 0 &&*/ stepLeft > 0) {
     //    randomMove = minmaxresult.move
     console.log("MinMaxResult: ", minmaxresult)
 
-
+    oldPositionWhiteRow = randomMove.piece.currentRow
+    oldPositionWhiteCol = randomMove.piece.currentCol
 
     chess.moveChessPiece(randomMove.piece, randomMove.newRow, randomMove.newColumn);
-    console.log("White" , allMoves)
+    console.log("White", allMoves)
     chess.printGameField()
+     console.log("White", randomMove.piece.__type,"From ",oldPositionWhiteRow,oldPositionWhiteCol ,"to ", randomMove.newRow, randomMove.newColumn)
     console.log("Score is ", chess.calculateScore())
+
 
     console.log(chess)
 
     // Teil SCHWARZ
- //   allMovesBlack = chess.getAllPossibleMoves(false)
+    //   allMovesBlack = chess.getAllPossibleMoves(false)
     if (allMovesBlack.length > 0) {
         //   randomIndex = Math.floor(Math.random() * allMovesBlack.length);
         //   randomMove = allMovesBlack[randomIndex];
@@ -258,17 +262,17 @@ while (allMoves.length > 0 && /*allMovesBlack.length > 0 &&*/ stepLeft > 0) {
         chess.moveChessPiece(randomMove.piece, randomMove.newRow, randomMove.newColumn);
         console.log("Black", allMovesBlack)
         chess.printGameField()
-
+        console.log("Black", randomMove.piece.__type, "From ", randomMove.piece.currentRow, randomMove.piece.currentCol, "to ", randomMove.newRow, randomMove.newColumn)
 
         // Vorbereitung WEISS
         allMoves = chess.getAllPossibleMoves(true)
         console.log("Score is ", chess.calculateScore())
-        
+
     }
     --stepLeft
     movesDone++
     console.log("Moves done", movesDone)
-    
+
 }
 
 
