@@ -36,18 +36,24 @@ class Bishop {
 
     getPossibleMoves(chess) {
         let moves = []
+        let bishopmove
+        let validMove = true
 
         if (!this.isWhite) {
             if (this.currentRow <= 7 && this.currentRow >= 0 && this.currentCol <= 7 && this.currentCol >= 0) {
-                while (true) {
-                    let bishopmove = 1;
+                bishopmove = 1;
+                while (validMove) {
 
+                    /*
+                    if White bishopmove +n/-n is white == break
+                    
+                    if white bishopmove +n/-n is !white == +n/ break
+                    
+                    same for black
+                    */
                     if (!this.testOutOfBounds(bishopmove, bishopmove)) {
-                        // if (chess.getChessPiece(this.currentRow + 2, this.currentCol + 1) == undefined ||
-                        // chess.getChessPiece(this.currentRow + 2, this.currentCol + 1).isWhite != this.isWhite) {
-                        // moves.push(
-                        if (chess.getChesspiece(this.currentRow + bishopmove, this.currentCol + bishopmove) == undefined ||
-                            chess.getChessPiece(this.currentRow + bishopmove, this.currentCol + bishopmove).isWhite != this.isWhite) {
+
+                        if (chess.getChessPiece(this.currentRow + bishopmove, this.currentCol + bishopmove) == undefined) {
                             moves.push(
                                 {
                                     newRow: this.currentRow + bishopmove,
@@ -57,16 +63,16 @@ class Bishop {
                                 }
                             )
                         }
-                    } else { return false; }
-                    
+                    } else { validMove = false; }
+
                     bishopmove++;
                 }
-                while (true) {
-                    let bishopmove = 1;
+                bishopmove = 1;
+                while (validMove) {
+
 
                     if (!this.testOutOfBounds(-bishopmove, -bishopmove)) {
-                        if (chess.getChesspiece(this.currentRow - bishopmove, this.currentCol - bishopmove) == undefined ||
-                            chess.getChessPiece(this.currentRow - bishopmove, this.currentCol - bishopmove).isWhite != this.isWhite) {
+                        if (chess.getChessPiece(this.currentRow - bishopmove, this.currentCol - bishopmove) == undefined) {
                             moves.push(
                                 {
                                     newRow: this.currentRow - bishopmove,
@@ -76,15 +82,15 @@ class Bishop {
                                 }
                             )
                         }
-                    } else { return false; }
+                    } else {validMove = false; }
                     bishopmove++;
                 }
-                while (true) {
-                    let bishopmove = 1;
+                bishopmove = 1;
+                while (validMove) {
+
 
                     if (!this.testOutOfBounds(bishopmove, -bishopmove)) {
-                        if (chess.getChesspiece(this.currentRow + bishopmove, this.currentCol - bishopmove) == undefined ||
-                            chess.getChessPiece(this.currentRow + bishopmove, this.currentCol - bishopmove).isWhite != this.isWhite) {
+                        if (chess.getChessPiece(this.currentRow + bishopmove, this.currentCol - bishopmove) == undefined) {
                             moves.push(
                                 {
                                     newRow: this.currentRow + bishopmove,
@@ -94,15 +100,16 @@ class Bishop {
                                 }
                             )
                         }
-                    } else { return false; }
+                    } else {validMove = false; }
+
                     bishopmove++;
                 }
-                while (true) {
-                    let bishopmove = 1;
+                bishopmove = 1;
+                while (validMove) {
+
 
                     if (!this.testOutOfBounds(-bishopmove, bishopmove)) {
-                        if (chess.getChesspiece(this.currentRow - bishopmove, this.currentCol + bishopmove) == undefined ||
-                            chess.getChessPiece(this.currentRow - bishopmove, this.currentCol + bishopmove).isWhite != this.isWhite) {
+                        if (chess.getChessPiece(this.currentRow - bishopmove, this.currentCol + bishopmove) == undefined) {
                             moves.push(
                                 {
                                     newRow: this.currentRow - bishopmove,
@@ -112,19 +119,19 @@ class Bishop {
                                 }
                             )
                         }
-                    } else { return false; }
+                    } else {validMove = false; }
                     bishopmove++;
                 }
             }
         }
         else {
             if (this.currentRow <= 7 && this.currentRow >= 0 && this.currentCol <= 7 && this.currentCol >= 0) {
-                while (true) {
-                    let bishopmove = 1;
+                bishopmove = 1;
+                while (validMove) {
+
 
                     if (!this.testOutOfBounds(bishopmove, bishopmove)) {
-                        if (chess.getChesspiece(this.currentRow + bishopmove, this.currentCol + bishopmove) == undefined ||
-                            chess.getChessPiece(this.currentRow + bishopmove, this.currentCol + bishopmove).isWhite != this.isWhite) {
+                        if (chess.getChessPiece(this.currentRow + bishopmove, this.currentCol + bishopmove) == undefined) {
                             moves.push(
                                 {
                                     newRow: this.currentRow + bishopmove,
@@ -134,15 +141,15 @@ class Bishop {
                                 }
                             )
                         }
-                    } else { return false; }
+                    } else { validMove = false;}
                     bishopmove++;
                 }
-                while (true) {
-                    let bishopmove = 1;
+                bishopmove = 1;
+                while (validMove) {
+
 
                     if (!this.testOutOfBounds(-bishopmove, bishopmove)) {
-                        if (chess.getChesspiece(this.currentRow - bishopmove, this.currentCol + bishopmove) == undefined ||
-                            chess.getChessPiece(this.currentRow - bishopmove, this.currentCol + bishopmove).isWhite != this.isWhite) {
+                        if (chess.getChessPiece(this.currentRow - bishopmove, this.currentCol + bishopmove) == undefined) {
                             moves.push(
                                 {
                                     newRow: this.currentRow - bishopmove,
@@ -152,15 +159,15 @@ class Bishop {
                                 }
                             )
                         }
-                    } else { return false; }
+                    } else { validMove = false; }
                     bishopmove++;
                 }
-                while (true) {
-                    let bishopmove = 1;
+                bishopmove = 1;
+                while (validMove) {
+
 
                     if (!this.testOutOfBounds(-bishopmove, -bishopmove)) {
-                        if (chess.getChesspiece(this.currentRow - bishopmove, this.currentCol - bishopmove) == undefined ||
-                            chess.getChessPiece(this.currentRow - bishopmove, this.currentCol - bishopmove).isWhite != this.isWhite) {
+                        if (chess.getChessPiece(this.currentRow - bishopmove, this.currentCol - bishopmove) == undefined) {
                             moves.push(
                                 {
                                     newRow: this.currentRow - bishopmove,
@@ -170,15 +177,15 @@ class Bishop {
                                 }
                             )
                         }
-                    } else { return false; }
+                    } else { validMove = false; }
                     bishopmove++;
                 }
-                while (true) {
-                    let bishopmove = 1;
+                bishopmove = 1;
+                while (validMove) {
+
                     if (!this.testOutOfBounds(bishopmove, -bishopmove)) {
 
-                        if (chess.getChesspiece(this.currentRow + bishopmove, this.currentCol - bishopmove) == undefined ||
-                            chess.getChessPiece(this.currentRow + bishopmove, this.currentCol - bishopmove).isWhite != this.isWhite) {
+                        if (chess.getChessPiece(this.currentRow + bishopmove, this.currentCol - bishopmove) == undefined) {
                             moves.push(
                                 {
                                     newRow: this.currentRow + bishopmove,
@@ -188,7 +195,7 @@ class Bishop {
                                 }
                             )
                         }
-                    } else { return false; }
+                    } else {validMove = false; }
                     bishopmove++;
                 }
             }

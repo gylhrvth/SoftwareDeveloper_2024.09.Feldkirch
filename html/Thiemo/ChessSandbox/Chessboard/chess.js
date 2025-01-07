@@ -66,9 +66,9 @@ class ChessGame {
 
     initGameField() {
         for (let column = 0; column < this.boardArray[0].length; ++column) {
- /*           this.addNewChessPiece(1, column, new Pawn(false))
+            this.addNewChessPiece(1, column, new Pawn(false))
             this.addNewChessPiece(6, column, new Pawn(true))
-            this.addNewChessPiece(0, 1, new Knight(false))
+ /*           this.addNewChessPiece(0, 1, new Knight(false))
             this.addNewChessPiece(0, 6, new Knight(false))
             this.addNewChessPiece(7, 1, new Knight(true))
             this.addNewChessPiece(7, 6, new Knight(true)) */
@@ -219,7 +219,7 @@ chess.printGameField()
 let allMoves = chess.getAllPossibleMoves(true)
 // let allMovesBlack = ["no empty"]
 let allMovesBlack = chess.getAllPossibleMoves(false)
-let stepLeft = 5
+let stepLeft = 20
 let movesDone = 0
 let randomIndex
 let randomMove
