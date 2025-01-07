@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    .profile-picture {
+        border-radius: 999px;
+    }
+    .female {
+        border: 20px solid pink;
+    }
+    .male {
+        border: 20px solid blue;
+    }
+</style>
+</head>
+<body>
+    <div id="result"></div>
+    <button onclick="loadNextImg();">New user</button>
+    <script>
+async function loadNextImg() {
+        fetch('https://randomuser.me/api/')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            const user = data.results[0];
+            const name = user.name.first + ' ' + user.name.last;
+            const email = user.email;
+            const picture = user.picture.large;
+
+            const result = document.getElementById('result');
+            result.innerHTML = '';
+
+            let img = document.createElement('img');
+            img.classList.add('profile-picture');
+            img.classList.add(user.gender);
+            img.src = picture;
+            result.appendChild(img);
+            let h2 = document.createElement('h2');
+            h2.innerText = name;
+            result.appendChild(h2);
+            let p = document.createElement('p');
+            let a = document.createElement('a');
+            a.href = 'mailto:' + email;
+            a.innerText = email;
+            p.appendChild(a);
+            result.appendChild(p);
+        });
+    }
+    </script>
+</body>
+</html>
