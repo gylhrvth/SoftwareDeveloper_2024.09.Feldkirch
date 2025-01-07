@@ -8,9 +8,9 @@ class Bishop {
         this.currentCol = null
         this.isWhite = isWhite
         if (isWhite) {
-            this.label = '♗'
+            this.label = 'B'
         } else {
-            this.label = '♝'
+            this.label = 'b'
         }
     }
 
@@ -20,9 +20,9 @@ class Bishop {
         this.currentCol = value.currentCol
         this.isWhite = value.isWhite
         if (value.isWhite) {
-            this.label = '♗'
+            this.label = 'B'
         } else {
-            this.label = '♝'
+            this.label = 'b'
         }
     }
 
@@ -36,167 +36,53 @@ class Bishop {
 
     getPossibleMoves(chess) {
         let moves = []
-        let bishopmove
-        let validMove = true
+        let topRight = true
+        let topLeft = true
+        let bottomRight = true
+        let bottomLeft = true
 
-        if (!this.isWhite) {
-            if (this.currentRow <= 7 && this.currentRow >= 0 && this.currentCol <= 7 && this.currentCol >= 0) {
-                bishopmove = 1;
-                while (validMove) {
-
-                    /*
-                    if White bishopmove +n/-n is white == break
-                    
-                    if white bishopmove +n/-n is !white == +n/ break
-                    
-                    same for black
-                    */
-                    if (!this.testOutOfBounds(bishopmove, bishopmove)) {
-
-                        if (chess.getChessPiece(this.currentRow + bishopmove, this.currentCol + bishopmove) == undefined) {
-                            moves.push(
-                                {
-                                    newRow: this.currentRow + bishopmove,
-                                    newColumn: this.currentCol + bishopmove,
-                                    piece: this
-
-                                }
-                            )
-                        }
-                    } else { validMove = false; }
-
-                    bishopmove++;
-                }
-                bishopmove = 1;
-                while (validMove) {
-
-
-                    if (!this.testOutOfBounds(-bishopmove, -bishopmove)) {
-                        if (chess.getChessPiece(this.currentRow - bishopmove, this.currentCol - bishopmove) == undefined) {
-                            moves.push(
-                                {
-                                    newRow: this.currentRow - bishopmove,
-                                    newColumn: this.currentCol - bishopmove,
-                                    piece: this
-
-                                }
-                            )
-                        }
-                    } else {validMove = false; }
-                    bishopmove++;
-                }
-                bishopmove = 1;
-                while (validMove) {
-
-
-                    if (!this.testOutOfBounds(bishopmove, -bishopmove)) {
-                        if (chess.getChessPiece(this.currentRow + bishopmove, this.currentCol - bishopmove) == undefined) {
-                            moves.push(
-                                {
-                                    newRow: this.currentRow + bishopmove,
-                                    newColumn: this.currentCol - bishopmove,
-                                    piece: this
-
-                                }
-                            )
-                        }
-                    } else {validMove = false; }
-
-                    bishopmove++;
-                }
-                bishopmove = 1;
-                while (validMove) {
-
-
-                    if (!this.testOutOfBounds(-bishopmove, bishopmove)) {
-                        if (chess.getChessPiece(this.currentRow - bishopmove, this.currentCol + bishopmove) == undefined) {
-                            moves.push(
-                                {
-                                    newRow: this.currentRow - bishopmove,
-                                    newColumn: this.currentCol + bishopmove,
-                                    piece: this
-
-                                }
-                            )
-                        }
-                    } else {validMove = false; }
-                    bishopmove++;
+        for (let distance = 1; distance < 8; distance++) {
+            if (topRight && !this.testOutOfBounds(-distance, distance)) {
+                if (chess.getChessPiece(this.currentRow - distance, this.currentCol + distance) == undefined) {
+                    moves.push({ newRow: this.currentRow - distance, newColumn: this.currentCol + distance, piece: this })
+                } else if (chess.getChessPiece(this.currentRow - distance, this.currentCol + distance).isWhite != this.isWhite) {
+                    moves.push({ newRow: this.currentRow - distance, newColumn: this.currentCol + distance, piece: this })
+                    topRight = false
+                } else {
+                    topRight = false
                 }
             }
-        }
-        else {
-            if (this.currentRow <= 7 && this.currentRow >= 0 && this.currentCol <= 7 && this.currentCol >= 0) {
-                bishopmove = 1;
-                while (validMove) {
 
-
-                    if (!this.testOutOfBounds(bishopmove, bishopmove)) {
-                        if (chess.getChessPiece(this.currentRow + bishopmove, this.currentCol + bishopmove) == undefined) {
-                            moves.push(
-                                {
-                                    newRow: this.currentRow + bishopmove,
-                                    newColumn: this.currentCol + bishopmove,
-                                    piece: this
-
-                                }
-                            )
-                        }
-                    } else { validMove = false;}
-                    bishopmove++;
+            if (topLeft && !this.testOutOfBounds(-distance, -distance)) {
+                if (chess.getChessPiece(this.currentRow - distance, this.currentCol - distance) == undefined) {
+                    moves.push({ newRow: this.currentRow - distance, newColumn: this.currentCol - distance, piece: this })
+                } else if (chess.getChessPiece(this.currentRow - distance, this.currentCol - distance).isWhite != this.isWhite) {
+                    moves.push({ newRow: this.currentRow - distance, newColumn: this.currentCol - distance, piece: this })
+                    topLeft = false
+                } else {
+                    topLeft = false
                 }
-                bishopmove = 1;
-                while (validMove) {
+            }
 
-
-                    if (!this.testOutOfBounds(-bishopmove, bishopmove)) {
-                        if (chess.getChessPiece(this.currentRow - bishopmove, this.currentCol + bishopmove) == undefined) {
-                            moves.push(
-                                {
-                                    newRow: this.currentRow - bishopmove,
-                                    newColumn: this.currentCol + bishopmove,
-                                    piece: this
-
-                                }
-                            )
-                        }
-                    } else { validMove = false; }
-                    bishopmove++;
+            if (bottomRight && !this.testOutOfBounds(distance, distance)) {
+                if (chess.getChessPiece(this.currentRow + distance, this.currentCol + distance) == undefined) {
+                    moves.push({ newRow: this.currentRow + distance, newColumn: this.currentCol + distance, piece: this })
+                } else if (chess.getChessPiece(this.currentRow + distance, this.currentCol + distance).isWhite != this.isWhite) {
+                    moves.push({ newRow: this.currentRow + distance, newColumn: this.currentCol + distance, piece: this })
+                    bottomRight = false
+                } else {
+                    bottomRight = false
                 }
-                bishopmove = 1;
-                while (validMove) {
+            }
 
-
-                    if (!this.testOutOfBounds(-bishopmove, -bishopmove)) {
-                        if (chess.getChessPiece(this.currentRow - bishopmove, this.currentCol - bishopmove) == undefined) {
-                            moves.push(
-                                {
-                                    newRow: this.currentRow - bishopmove,
-                                    newColumn: this.currentCol - bishopmove,
-                                    piece: this
-
-                                }
-                            )
-                        }
-                    } else { validMove = false; }
-                    bishopmove++;
-                }
-                bishopmove = 1;
-                while (validMove) {
-
-                    if (!this.testOutOfBounds(bishopmove, -bishopmove)) {
-
-                        if (chess.getChessPiece(this.currentRow + bishopmove, this.currentCol - bishopmove) == undefined) {
-                            moves.push(
-                                {
-                                    newRow: this.currentRow + bishopmove,
-                                    newColumn: this.currentCol - bishopmove,
-                                    piece: this
-
-                                }
-                            )
-                        }
-                    } else {validMove = false; }
-                    bishopmove++;
+            if (bottomLeft && !this.testOutOfBounds(distance, -distance)) {
+                if (chess.getChessPiece(this.currentRow + distance, this.currentCol - distance) == undefined) {
+                    moves.push({ newRow: this.currentRow + distance, newColumn: this.currentCol - distance, piece: this })
+                } else if (chess.getChessPiece(this.currentRow + distance, this.currentCol - distance).isWhite != this.isWhite) {
+                    moves.push({ newRow: this.currentRow + distance, newColumn: this.currentCol - distance, piece: this })
+                    bottomLeft = false
+                } else {
+                    bottomLeft = false
                 }
             }
         }
