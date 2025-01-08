@@ -8,9 +8,9 @@ class Knight {     // Knight class with(constructor, restoreData??, getPossibleM
         this.currentCol = null
         this.isWhite = isWhite
         if (isWhite) {
-            this.label = "♘"
+            this.label = "K"
         } else {
-            this.label = "♞";
+            this.label = "k";
         }
     }
 
@@ -19,9 +19,9 @@ class Knight {     // Knight class with(constructor, restoreData??, getPossibleM
         this.currentCol = value.currentCol
         this.isWhite = value.isWhite
         if (value.isWhite) {
-            this.label = "♘"
+            this.label = "K"
         } else {
-            this.label = "♞";
+            this.label = "k";
         }
     }
 
@@ -38,7 +38,30 @@ class Knight {     // Knight class with(constructor, restoreData??, getPossibleM
 
     getPossibleMoves(chess) {
         let moves = [];
+        let distance = [
+            {col: -1, row: -2},
+            {col:  1, row: -2},
+            {col:  2, row: -1},
+            {col:  2, row:  1},
+            {col:  1, row:  2},
+            {col: -1, row:  2},
+            {col: -2, row:  1},
+            {col: -2, row: -1}
+        ];
 
+        for (let d of distance) {
+            if (!this.testOutOfBounds(d.row, d.col)){
+                let piece = chess.getChessPiece(this.currentRow + d.row, this.currentCol + d.col)
+                if (piece == undefined || piece.isWhite != this.isWhite){
+                    moves.push({
+                        newRow: this.currentRow + d.row,
+                        newColumn: this.currentCol + d.col,
+                        piece: this
+                    })
+                }
+            }
+        }
+/*
         // Black pieces
         if (!this.isWhite) {
             if (this.currentRow <= 7 && this.currentRow >= 0 && this.currentCol <= 7 && this.currentCol >= 0) {
@@ -154,7 +177,7 @@ class Knight {     // Knight class with(constructor, restoreData??, getPossibleM
 
                 if (!this.testOutOfBounds(2, 1)) {
                     if (chess.getChessPiece(this.currentRow + 2, this.currentCol + 1) == undefined ||
-                        chess.getChessPiece(this.currentRow + 2, this.currentCol + 1).isWhite != this.isWhite) {
+                        chess.getChessPiece(this.currentRow + 2, this.currentCol + 1).isWhite == this.isWhite) {
                         moves.push(
                             {
                                 newRow: this.currentRow + 2,
@@ -206,7 +229,7 @@ class Knight {     // Knight class with(constructor, restoreData??, getPossibleM
 
                 if (!this.testOutOfBounds(1, 2)) {
                     if (chess.getChessPiece(this.currentRow + 1, this.currentCol + 2) == undefined ||
-                        chess.getChessPiece(this.currentRow + 1, this.currentCol + 2).isWhite != this.isWhite) {
+                        chess.getChessPiece(this.currentRow + 1, this.currentCol + 2).isWhite == this.isWhite) {
                         moves.push(
                             {
                                 newRow: this.currentRow + 1,
@@ -219,7 +242,7 @@ class Knight {     // Knight class with(constructor, restoreData??, getPossibleM
 
                 if (!this.testOutOfBounds(1, -2)) {
                     if (chess.getChessPiece(this.currentRow + 1, this.currentCol - 2) == undefined ||
-                        chess.getChessPiece(this.currentRow + 1, this.currentCol - 2).isWhite != this.isWhite) {
+                        chess.getChessPiece(this.currentRow + 1, this.currentCol - 2).isWhite == this.isWhite) {
                         moves.push(
                             {
                                 newRow: this.currentRow + 1,
@@ -232,7 +255,7 @@ class Knight {     // Knight class with(constructor, restoreData??, getPossibleM
 
                 if (!this.testOutOfBounds(-1, 2)) {
                     if (chess.getChessPiece(this.currentRow - 1, this.currentCol + 2) == undefined ||
-                        chess.getChessPiece(this.currentRow - 1, this.currentCol + 2).isWhite != this.isWhite) {
+                        chess.getChessPiece(this.currentRow - 1, this.currentCol + 2).isWhite == this.isWhite) {
                         moves.push(
                             {
                                 newRow: this.currentRow - 1,
@@ -245,7 +268,7 @@ class Knight {     // Knight class with(constructor, restoreData??, getPossibleM
 
                 if (!this.testOutOfBounds(-1, -2)) {
                     if (chess.getChessPiece(this.currentRow - 1, this.currentCol - 2) == undefined ||
-                        chess.getChessPiece(this.currentRow - 1, this.currentCol - 2).isWhite != this.isWhite) {
+                        chess.getChessPiece(this.currentRow - 1, this.currentCol - 2).isWhite == this.isWhite) {
                         moves.push(
                             {
                                 newRow: this.currentRow - 1,
@@ -257,6 +280,7 @@ class Knight {     // Knight class with(constructor, restoreData??, getPossibleM
                 }
             }
         }
+*/
      //   console.log("Knight", moves)
         return moves;
     }

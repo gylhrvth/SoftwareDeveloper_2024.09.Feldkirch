@@ -8,9 +8,9 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
         this.currentCol = null
         this.isWhite = isWhite
         if (isWhite) {
-            this.label = "♙"
+            this.label = "P"
         } else {
-            this.label = "♟";
+            this.label = "p";
         }
     }
 
@@ -19,9 +19,9 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
         this.currentCol = value.currentCol
         this.isWhite = value.isWhite
         if (value.isWhite) {
-            this.label = "♙"
+            this.label = "P"
         } else {
-            this.label = "♟";
+            this.label = "p";
         }
     }
 
