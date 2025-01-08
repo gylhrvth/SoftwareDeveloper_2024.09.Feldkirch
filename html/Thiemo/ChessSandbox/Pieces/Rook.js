@@ -55,8 +55,8 @@ class Rook {
 
         return moves;
     }
-}
-*/
+}*/
+
 
 
 export { Rook };

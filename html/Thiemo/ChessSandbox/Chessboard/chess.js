@@ -3,9 +3,13 @@ import { Pawn } from "../Pieces/Pawn.js";
 import { Knight } from "../Pieces/Knight.js";
 import { Bishop } from "../Pieces/Bishop.js";
 import { Rook } from "../Pieces/Rook.js";
+import { Queen } from "../Pieces/Queen.js"
+import { King } from "../Pieces/King.js"
 
 // chessboard with (restoreData, cloneChessGame, initGameField, addNewChessPiece, moveChessPiece, saveGameField, 
 //                  undoGameField getChessPiece, printGameField, calculateScore, getAllPossibleMoves)
+
+
 class ChessGame {
     constructor() {
         this.__type = 'ChessGame';
@@ -59,6 +63,19 @@ class ChessGame {
                 return r
             }
 
+            //Queen
+            if (typeof (value) === 'object' && value != undefined && value.__type === 'Queen') {
+                let q = new Queen(value.isWhite)
+                q.restoreData(value)
+                return q
+            }
+
+            if (typeof (value) === 'object' && value != undefined && value.__type === 'King') {
+                let k = new King(value.isWhite)
+                k.restoreData(value)
+                return k
+            }
+
             // Chessboard
             if (typeof (value) === 'object' && value != undefined && value.__type === 'ChessGame') {
                 let c = new ChessGame()
@@ -87,7 +104,11 @@ class ChessGame {
         this.addNewChessPiece(0, 0, new Rook(false))
         this.addNewChessPiece(0, 7, new Rook(false))
         this.addNewChessPiece(7, 0, new Rook(true))
-        this.addNewChessPiece(7, 7, new Rook(true))
+        this.addNewChessPiece(7, 7, new Rook(true)) 
+        this.addNewChessPiece(0, 3, new Queen(false))
+        this.addNewChessPiece(7, 3, new Queen(true))
+        this.addNewChessPiece(0, 4, new King(false))
+        this.addNewChessPiece(7, 4, new King(true))
 
  /*       this.addNewChessPiece(1, 2, new Rook(false))
         this.addNewChessPiece(6, 5, new Rook(false))
@@ -137,10 +158,22 @@ class ChessGame {
                     return b
                 }
 
-                if (typeof (value) === 'object' && value != undefined && value.__type === 'Rookp') {
+                if (typeof (value) === 'object' && value != undefined && value.__type === 'Rook') {
                     let r = new Rook(value.isWhite)
                     r.restoreData(value)
                     return r
+                }
+
+                if (typeof (value) === 'object' && value != undefined && value.__type === 'Queen') {
+                    let q = new Queen(value.isWhite)
+                    q.restoreData(value)
+                    return q
+                }
+
+                if (typeof (value) === 'object' && value != undefined && value.__type === 'King') {
+                    let q = new King(value.isWhite)
+                    q.restoreData(value)
+                    return q
                 }
                 return value;
             }
@@ -201,6 +234,22 @@ class ChessGame {
                             score += 5.0
                         } else {
                             score -= 5.0
+                        }
+                    }
+
+                    if (this.boardArray[row][column].__type == 'Queen') {
+                        if (this.boardArray[row][column].isWhite == true) {
+                            score += 9.0
+                        } else {
+                            score -= 9.0
+                        }
+                    }
+
+                    if (this.boardArray[row][column].__type == 'King') {
+                        if (this.boardArray[row][column].isWhite == true) {
+                            score += 99.0
+                        } else {
+                            score -= 99.0
                         }
                     }
                 }
@@ -269,7 +318,7 @@ let minmaxresult
 let oldPositionRow
 let oldPositionCol
 
-while (allMoves.length > 0 && allMovesBlack.length > 0 && stepLeft > 0) {
+while (allMoves.length > 0 && allMovesBlack.length > 0 && stepLeft > 0 && movesDone <=50) {
     // Teil WEISS
     randomIndex = Math.floor(Math.random() * allMoves.length);
     randomMove = allMoves[randomIndex];
