@@ -8,9 +8,9 @@ class Knight {     // Knight class with(constructor, restoreData??, getPossibleM
         this.currentCol = null
         this.isWhite = isWhite
         if (isWhite) {
-            this.label = "K"
+            this.label = "♘"
         } else {
-            this.label = "k";
+            this.label = "♞";
         }
     }
 
@@ -19,13 +19,14 @@ class Knight {     // Knight class with(constructor, restoreData??, getPossibleM
         this.currentCol = value.currentCol
         this.isWhite = value.isWhite
         if (value.isWhite) {
-            this.label = "K"
+            this.label = "♘"
         } else {
-            this.label = "k";
+            this.label = "♞";
         }
     }
 
-
+//Black ♝,♞,♟,♜,♛,♚
+//White ♗,♘,♙,♖,♕,♔
     testOutOfBounds(rowCount, colCount) {
         let newRow = this.currentRow + rowCount;
         let newCol = this.currentCol + colCount;

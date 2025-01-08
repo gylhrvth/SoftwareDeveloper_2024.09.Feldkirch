@@ -2,7 +2,7 @@ import { minmax } from "../minmaxalphabeta.js";
 import { Pawn } from "../Pieces/Pawn.js";
 import { Knight } from "../Pieces/Knight.js";
 import { Bishop } from "../Pieces/Bishop.js";
-
+import { Rook } from "../Pieces/Rook.js";
 
 // chessboard with (restoreData, cloneChessGame, initGameField, addNewChessPiece, moveChessPiece, saveGameField, 
 //                  undoGameField getChessPiece, printGameField, calculateScore, getAllPossibleMoves)
@@ -52,6 +52,12 @@ class ChessGame {
                 return b
             }
 
+            //Rook
+            if (typeof (value) === 'object' && value != undefined && value.__type === 'Rook') {
+                let r = new Rook(value.isWhite)
+                r.restoreData(value)
+                return r
+            }
 
             // Chessboard
             if (typeof (value) === 'object' && value != undefined && value.__type === 'ChessGame') {
@@ -65,7 +71,7 @@ class ChessGame {
     }
 
     initGameField() {
-        
+
         for (let column = 0; column < this.boardArray[0].length; ++column) {
             this.addNewChessPiece(1, column, new Pawn(false))
             this.addNewChessPiece(6, column, new Pawn(true))
@@ -73,11 +79,20 @@ class ChessGame {
         this.addNewChessPiece(0, 1, new Knight(false))
         this.addNewChessPiece(0, 6, new Knight(false))
         this.addNewChessPiece(7, 1, new Knight(true))
-        this.addNewChessPiece(7, 6, new Knight(true))
+        this.addNewChessPiece(7, 6, new Knight(true)) 
         this.addNewChessPiece(0, 2, new Bishop(false))
         this.addNewChessPiece(0, 5, new Bishop(false))
         this.addNewChessPiece(7, 2, new Bishop(true))
-        this.addNewChessPiece(7, 5, new Bishop(true))
+        this.addNewChessPiece(7, 5, new Bishop(true)) 
+        this.addNewChessPiece(0, 0, new Rook(false))
+        this.addNewChessPiece(0, 7, new Rook(false))
+        this.addNewChessPiece(7, 0, new Rook(true))
+        this.addNewChessPiece(7, 7, new Rook(true))
+
+ /*       this.addNewChessPiece(1, 2, new Rook(false))
+        this.addNewChessPiece(6, 5, new Rook(false))
+        this.addNewChessPiece(6, 3, new Rook(true))
+        this.addNewChessPiece(5, 4, new Rook(true)) */
     }
 
     addNewChessPiece(row, column, piece) {
@@ -121,8 +136,15 @@ class ChessGame {
                     b.restoreData(value)
                     return b
                 }
+
+                if (typeof (value) === 'object' && value != undefined && value.__type === 'Rookp') {
+                    let r = new Rook(value.isWhite)
+                    r.restoreData(value)
+                    return r
+                }
                 return value;
             }
+            
 
             )
             //console.log("Undo: ", this.boardArray)
@@ -174,6 +196,13 @@ class ChessGame {
                             score -= 3.0
                         }
                     }
+                    if (this.boardArray[row][column].__type == 'Rook') {
+                        if (this.boardArray[row][column].isWhite == true) {
+                            score += 5.0
+                        } else {
+                            score -= 5.0
+                        }
+                    }
                 }
             }
         }
@@ -213,11 +242,11 @@ class ChessGame {
         return allPossibleMoves;
     }
 
-    printMove(player, move, oldPositionCol, oldPositionRow){
-        if (this.getChessPiece(move.newRow, move.newColumn) == undefined){
-            console.log(player, "MOVE", move.piece.__type ,"from",String.fromCharCode(65 + oldPositionCol) + (1+oldPositionRow) ,"to", String.fromCharCode(65 + move.newColumn) + (1+move.newRow))
+    printMove(player, move, oldPositionCol, oldPositionRow) {
+        if (this.getChessPiece(move.newRow, move.newColumn) == undefined) {
+            console.log(player, "MOVE", move.piece.__type, "from", String.fromCharCode(65 + oldPositionCol) + (8 - oldPositionRow), "to", String.fromCharCode(65 + move.newColumn) + (8 - move.newRow))
         } else {
-            console.log(player, "HIT ", move.piece.__type,"from",String.fromCharCode(65 + oldPositionCol) + (1+oldPositionRow) ,"to", String.fromCharCode(65 + move.newColumn) + (1+move.newRow))
+            console.log(player, "HIT ", move.piece.__type, "from", String.fromCharCode(65 + oldPositionCol) + (8 - oldPositionRow), "to", String.fromCharCode(65 + move.newColumn) + (8 - move.newRow))
         }
     }
 }
@@ -232,7 +261,7 @@ chess.printGameField()
 let allMoves = chess.getAllPossibleMoves(true)
 // let allMovesBlack = ["no empty"]
 let allMovesBlack = allMoves
-let stepLeft = 20
+let stepLeft = 10
 let movesDone = 0
 let randomIndex
 let randomMove
@@ -252,12 +281,14 @@ while (allMoves.length > 0 && allMovesBlack.length > 0 && stepLeft > 0) {
 
     oldPositionRow = randomMove.piece.currentRow
     oldPositionCol = randomMove.piece.currentCol
+    console.log("White", allMoves)
     chess.printMove("White", randomMove, oldPositionCol, oldPositionRow)
 
     chess.moveChessPiece(randomMove.piece, randomMove.newRow, randomMove.newColumn);
-    //console.log("White", allMoves)
-    //chess.printGameField()
-    //console.log("Score is ", chess.calculateScore())
+
+    chess.printGameField()
+ //   chess.printMove("White", randomMove, oldPositionCol, oldPositionRow)
+    console.log("Score is ", chess.calculateScore())
 
 
     //console.log(chess)
@@ -273,20 +304,21 @@ while (allMoves.length > 0 && allMovesBlack.length > 0 && stepLeft > 0) {
         randomMove = minmaxresult.move
         oldPositionRow = randomMove.piece.currentRow
         oldPositionCol = randomMove.piece.currentCol
+        console.log("Black", allMovesBlack)
         chess.printMove("Black", randomMove, oldPositionCol, oldPositionRow)
-    
-        chess.moveChessPiece(randomMove.piece, randomMove.newRow, randomMove.newColumn);
-        //console.log("Black", allMovesBlack)
-        //chess.printGameField()
 
+        chess.moveChessPiece(randomMove.piece, randomMove.newRow, randomMove.newColumn);
+
+        chess.printGameField()
+ //       chess.printMove("Black", randomMove, oldPositionCol, oldPositionRow)
         // Vorbereitung WEISS
         allMoves = chess.getAllPossibleMoves(true)
-        //console.log("Score is ", chess.calculateScore())
+        console.log("Score is ", chess.calculateScore())
 
     }
     --stepLeft
     movesDone++
-    //console.log("Moves done", movesDone)
+    console.log("Moves done", movesDone)
 
 }
 

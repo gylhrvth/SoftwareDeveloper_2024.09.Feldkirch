@@ -8,9 +8,9 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
         this.currentCol = null
         this.isWhite = isWhite
         if (isWhite) {
-            this.label = "P"
+            this.label = "♙"
         } else {
-            this.label = "p";
+            this.label = "♟";
         }
     }
 
@@ -19,13 +19,14 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
         this.currentCol = value.currentCol
         this.isWhite = value.isWhite
         if (value.isWhite) {
-            this.label = "P"
+            this.label = "♙"
         } else {
-            this.label = "p";
+            this.label = "♟";
         }
     }
-
-
+    
+//Black ♝,♞,♟,♜,♛,♚
+//White ♗,♘,♙,♖,♕,♔
     getPossibleMoves(chess) {
         let moves = [];
 

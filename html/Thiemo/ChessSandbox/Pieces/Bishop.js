@@ -8,9 +8,9 @@ class Bishop {
         this.currentCol = null
         this.isWhite = isWhite
         if (isWhite) {
-            this.label = 'B'
+            this.label = '♗'
         } else {
-            this.label = 'b'
+            this.label = '♝'
         }
     }
 
@@ -20,12 +20,13 @@ class Bishop {
         this.currentCol = value.currentCol
         this.isWhite = value.isWhite
         if (value.isWhite) {
-            this.label = 'B'
+            this.label = '♗'
         } else {
-            this.label = 'b'
+            this.label = '♝'
         }
     }
-
+//Black ♝,♞,♟,♜,♛,♚
+//White ♗,♘,♙,♖,♕,♔
     testOutOfBounds(rowCount, colCount) {
         let newRow = this.currentRow + rowCount;
         let newCol = this.currentCol + colCount;
@@ -41,12 +42,16 @@ class Bishop {
         let bottomRight = true
         let bottomLeft = true
 
+        let row = this.currentRow
+        let col = this.currentCol
+
+
         for (let distance = 1; distance < 8; distance++) {
             if (topRight && !this.testOutOfBounds(-distance, distance)) {
-                if (chess.getChessPiece(this.currentRow - distance, this.currentCol + distance) == undefined) {
-                    moves.push({ newRow: this.currentRow - distance, newColumn: this.currentCol + distance, piece: this })
-                } else if (chess.getChessPiece(this.currentRow - distance, this.currentCol + distance).isWhite != this.isWhite) {
-                    moves.push({ newRow: this.currentRow - distance, newColumn: this.currentCol + distance, piece: this })
+                if (chess.getChessPiece(row - distance, col + distance) == undefined) {
+                    moves.push({ newRow: row - distance, newColumn: col + distance, piece: this })
+                } else if (chess.getChessPiece(row - distance, col + distance).isWhite != this.isWhite) {
+                    moves.push({ newRow: row - distance, newColumn: col + distance, piece: this })
                     topRight = false
                 } else {
                     topRight = false
@@ -54,10 +59,10 @@ class Bishop {
             }
 
             if (topLeft && !this.testOutOfBounds(-distance, -distance)) {
-                if (chess.getChessPiece(this.currentRow - distance, this.currentCol - distance) == undefined) {
-                    moves.push({ newRow: this.currentRow - distance, newColumn: this.currentCol - distance, piece: this })
-                } else if (chess.getChessPiece(this.currentRow - distance, this.currentCol - distance).isWhite != this.isWhite) {
-                    moves.push({ newRow: this.currentRow - distance, newColumn: this.currentCol - distance, piece: this })
+                if (chess.getChessPiece(row - distance, col - distance) == undefined) {
+                    moves.push({ newRow: row - distance, newColumn: col - distance, piece: this })
+                } else if (chess.getChessPiece(row - distance, col - distance).isWhite != this.isWhite) {
+                    moves.push({ newRow: row - distance, newColumn: col - distance, piece: this })
                     topLeft = false
                 } else {
                     topLeft = false
@@ -65,10 +70,10 @@ class Bishop {
             }
 
             if (bottomRight && !this.testOutOfBounds(distance, distance)) {
-                if (chess.getChessPiece(this.currentRow + distance, this.currentCol + distance) == undefined) {
-                    moves.push({ newRow: this.currentRow + distance, newColumn: this.currentCol + distance, piece: this })
-                } else if (chess.getChessPiece(this.currentRow + distance, this.currentCol + distance).isWhite != this.isWhite) {
-                    moves.push({ newRow: this.currentRow + distance, newColumn: this.currentCol + distance, piece: this })
+                if (chess.getChessPiece(row + distance, col + distance) == undefined) {
+                    moves.push({ newRow: row + distance, newColumn: col + distance, piece: this })
+                } else if (chess.getChessPiece(row + distance, col + distance).isWhite != this.isWhite) {
+                    moves.push({ newRow: row + distance, newColumn: col + distance, piece: this })
                     bottomRight = false
                 } else {
                     bottomRight = false
@@ -76,10 +81,10 @@ class Bishop {
             }
 
             if (bottomLeft && !this.testOutOfBounds(distance, -distance)) {
-                if (chess.getChessPiece(this.currentRow + distance, this.currentCol - distance) == undefined) {
-                    moves.push({ newRow: this.currentRow + distance, newColumn: this.currentCol - distance, piece: this })
-                } else if (chess.getChessPiece(this.currentRow + distance, this.currentCol - distance).isWhite != this.isWhite) {
-                    moves.push({ newRow: this.currentRow + distance, newColumn: this.currentCol - distance, piece: this })
+                if (chess.getChessPiece(row + distance, col - distance) == undefined) {
+                    moves.push({ newRow: row + distance, newColumn: col - distance, piece: this })
+                } else if (chess.getChessPiece(row + distance, col - distance).isWhite != this.isWhite) {
+                    moves.push({ newRow: row + distance, newColumn: col - distance, piece: this })
                     bottomLeft = false
                 } else {
                     bottomLeft = false
