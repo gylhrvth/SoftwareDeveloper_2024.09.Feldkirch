@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+
+    <script>
+        generate()
+
+
+        async function generate() {
+            const rootElement = document.getElementById('root')
+            for (let count = 1; count < 50; ++count) {
+                let h1 = document.createElement('H1')
+                h1.innerText = 'Hello ' + count
+
+                await sleep(1000);
+      
+                rootElement.appendChild(h1)
+            }
+
+        }
+
+        const DEF_DELAY = 1000;
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms || DEF_DELAY));
+        }
+
+
+    </script>
+</body>
+
+</html>

@@ -27,6 +27,7 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
     
 //Black ♝,♞,♟,♜,♛,♚
 //White ♗,♘,♙,♖,♕,♔
+
     getPossibleMoves(chess) {
         let moves = [];
 
@@ -78,6 +79,35 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
                     }
                 )
             }
+
+
+ /*          // En Passant try 1 Hit Left Black
+            if (this.currentCol > 0 && this.currentRow == 4 && 
+              chess.
+                chess.getChessPiece(this.currentRow + 1, this.currentCol - 1) != undefined &&
+                chess.getChessPiece(this.currentRow + 1, this.currentCol - 1).isWhite != this.isWhite) {
+                moves.push(
+                    {
+                        newRow: this.currentRow + 1,
+                        newColumn: this.currentCol - 1,
+                        piece: this
+                    }
+                )
+            }
+
+            // En Passant Hit Right Black
+            if (this.currentCol < 7 && this.currentRow == 4 && 
+
+                chess.getChessPiece(this.currentRow + 1, this.currentCol + 1) != undefined && 
+                chess.getChessPiece(this.currentRow + 1, this.currentCol + 1).isWhite != this.isWhite) {
+                moves.push(
+                    {
+                        newRow: this.currentRow + 1,
+                        newColumn: this.currentCol + 1,
+                        piece: this
+                    }
+                )
+            } */
         }
 
         // White pieces
