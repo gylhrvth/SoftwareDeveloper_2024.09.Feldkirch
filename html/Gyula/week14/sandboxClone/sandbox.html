@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+class TestElement{
+    constructor(name){
+        this.name = name;
+        this.value = Math.floor(100 * Math.random());
+    }
+}
+
+class TestContainer{
+    constructor(){
+        this.test = "test";
+        this.elements = []
+    }
+
+    addElement(element){
+        this.elements.push(element);
+    }
+}
+
+let container = new TestContainer();
+for(let i = 0; i < 10; i++){
+    container.addElement(new TestElement("element" + i));
+}
+
+console.log(container);
+
+let clone = Object.assign(Object.create(Object.getPrototypeOf(container)), structuredClone(container));
+for (let i = 0; i < clone.elements.length; i++){
+    clone.elements[i] = Object.assign(Object.create(Object.getPrototypeOf(container.elements[i])), container.elements[i]);
+}
+clone.elements[0].name = "clone";
+console.log(clone);
+console.log(container);
+
+
+
+    </script>
+</body>
+</html>
