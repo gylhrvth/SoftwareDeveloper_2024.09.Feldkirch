@@ -37,9 +37,24 @@ class ChessGame {
     restoreData(value) {
         this.history = value.history
         this.boardArray = value.boardArray
+        //console.log('Restored ChessGame', this.boardArray)
     }
 
     cloneChessGame() {
+        let clone = structuredClone(this)
+        Object.setPrototypeOf(clone, Object.getPrototypeOf(this))
+        for (let i = 0; i < this.boardArray.length; i++) {
+            for (let j = 0; j < this.boardArray[i].length; j++) {
+                if (this.boardArray[i][j] != undefined) {
+                    Object.setPrototypeOf(clone.boardArray[i][j], Object.getPrototypeOf(this.boardArray[i][j]))
+                } else {
+                    clone.boardArray[i][j] = undefined
+                }
+            }
+        }
+        return clone
+
+        /*
         return JSON.parse(JSON.stringify(this), (key, value) => {
 
             // Pawn 
@@ -92,6 +107,7 @@ class ChessGame {
 
             return value;
         })
+        */
     }
 
     initGameField() {
@@ -144,12 +160,26 @@ class ChessGame {
     }
 
     saveGameField() {
-        this.history.push(JSON.stringify(this.boardArray))
-        //console.log("Save: ", this.boardArray, JSON.stringify(this.boardArray))
+        let cloneBoard = structuredClone(this.boardArray)
+        Object.setPrototypeOf(cloneBoard, Object.getPrototypeOf(this.boardArray))
+        for (let i = 0; i < cloneBoard.length; i++) {
+            for (let j = 0; j < cloneBoard[i].length; j++) {
+                if (this.boardArray[i][j] != undefined) {
+                    Object.setPrototypeOf(cloneBoard[i][j], Object.getPrototypeOf(this.boardArray[i][j]))
+                } else {
+                    cloneBoard[i][j] = undefined
+                }
+            }
+        }
+        this.history.push(cloneBoard)
+        //console.log("History: ", this.history)
     }
 
     undoGameField() {
+        //console.log("Before Undo: ", this.boardArray)
         if (this.history.length > 0) {
+            this.boardArray = this.history.pop()
+            /*
             this.boardArray = JSON.parse(this.history.pop(), (key, value) => {
                 //Pawn
                 if (typeof (value) === 'object' && value != undefined && value.__type === 'Pawn') {
@@ -192,6 +222,7 @@ class ChessGame {
 
 
             )
+            */
             //console.log("Undo: ", this.boardArray)
         } else {
             console.log("No more history")
@@ -233,6 +264,10 @@ class ChessGame {
                 } else {
                     figure.classList.add('blackFigure')
                 }
+
+                square.addEventListener('click', () => {
+                    console.log("Clicked on", row, col, this.boardArray[row][col].getPossibleMoves(this))
+                })
             }
             square.appendChild(figure)
 
@@ -322,7 +357,6 @@ class ChessGame {
                     // console.log(`Inspecting piece at row ${row}, column ${column}`);
 
                     // TODO 005/d: Get possible moves from the single piece
-
                     let possibleMovesOfPiece = this.boardArray[row][column].getPossibleMoves(chess)
 
 
@@ -360,7 +394,7 @@ chess.printGameField()
 let allMoves = chess.getAllPossibleMoves(true)
 // let allMovesBlack = ["no empty"]
 let allMovesBlack = allMoves
-let stepLeft = 1
+let stepLeft = 10
 let movesDone = 0
 let randomIndex
 let randomMove
@@ -371,12 +405,12 @@ let oldPositionCol
 
 while (allMoves.length > 0 && allMovesBlack.length > 0 && stepLeft > 0) {
     // Teil WEISS
-    randomIndex = Math.floor(Math.random() * allMoves.length);
-    randomMove = allMoves[randomIndex];
+    //randomIndex = Math.floor(Math.random() * allMoves.length);
+    //randomMove = allMoves[randomIndex];
     //console.log(randomMove, randomIndex);
 
-    //   minmaxresult = minmax(chess, 4, true, -Infinity, Infinity)
-    //    randomMove = minmaxresult.move
+    minmaxresult = minmax(chess, 4, true, -Infinity, Infinity)
+    randomMove = minmaxresult.move
     //console.log("MinMaxResult: ", minmaxresult)
 
     oldPositionRow = randomMove.piece.currentRow

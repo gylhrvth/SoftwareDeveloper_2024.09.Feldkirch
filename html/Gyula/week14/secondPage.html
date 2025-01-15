@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=#, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    .rosaText {
+        color: rgb(234, 128, 146);
+        font-size: 1.5em;
+    }
+
+</style>
+</head>
+<body>
+    <h1 onclick="myClick()">Diese ist meine zweite Seite...</h1>
+    <div id="counter"></div>
+    <div id="myContent"></div>
+
+    <script>
+        let currentCounter = 1
+        let x = 1
+        x = 2 + 3
+        console.log('x:', x)
+
+        for (let i = 0; i < 10; ++i){
+            if (i < 5){
+                console.log('Hello World!', i)
+            } else {
+                console.log('Software Development macht Spaß!')
+            }
+        }
+        createMyRosaText(3, ' Wie geht\'s?')
+        createMyRosaText(2, ' Software Development macht richtig Spaß!')
+
+        setInterval(tickCounter, 1000)
+        addTable3x3()
+
+        async function tickCounter(){
+            let counterElement = document.getElementById('counter')
+            counterElement.innerText = 'Count: ' + currentCounter;
+            ++currentCounter
+        }
+
+        async function myClick(){
+            createMyRosaText(1, 'Ich bin ein neuer Text')
+        }
+
+        function createMyRosaText(count, text){
+            let myContent = document.getElementById('myContent')
+            for (let i = 0; i < count; ++i){
+                let paragraph = document.createElement('p')
+                paragraph.innerText = i + ' ' + text
+                if (i % 3 == 0){
+                    paragraph.classList.add('rosaText')
+                }
+                myContent.appendChild(paragraph)
+            }
+        }
+
+    </script>
+</body>
+</html>

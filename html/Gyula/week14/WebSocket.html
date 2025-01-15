@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #msg {
+            width: 100%;
+        }
+        .ownMessage {
+            text-align: right;
+            padding: 2px;
+            margin: 2px;
+        }
+        .externalMessage {
+            text-align: left;
+            padding: 2px;
+            margin: 2px;
+        }
+    </style>
+</head>
+<body>
+    <h1>WebSocket Example</h1>
+    <div>
+        <input type="text" name="msg" id="msg" onkeyup="sendMsg(event)">
+    </div>
+    <div id="messageLog"></div>
+
+
+<script>
+function sendMsg(event) {
+    if (event.key !== 'Enter') return;
+    const msg = document.getElementById('msg').value;
+    socket.send(JSON.stringify({ message: msg }));
+    putMsgInMessageLog(true, msg);
+
+    document.getElementById('msg').value = '';
+}  
+
+function putMsgInMessageLog(ownMessage, msg){
+    let pElement = document.createElement('p');
+    if (ownMessage){
+        pElement.classList.add('ownMessage');
+    } else {
+        pElement.classList.add('externalMessage');
+    }
+    pElement.innerText = msg;
+    let messageLog = document.getElementById('messageLog');
+    if (messageLog.firstChild != undefined){
+        messageLog.insertBefore(pElement, messageLog.firstChild);
+    } else {
+        messageLog.appendChild(pElement);
+    }
+}
+
+    // filepath: /path/to/client.js
+const socket = new WebSocket('ws://172.22.23.29:8080');
+
+socket.addEventListener('open', (event) => {
+    console.log('Connected to WebSocket server');
+});
+
+socket.addEventListener('message', (event) => {
+    const data = JSON.parse(event.data);
+    console.log('Message from server:', data.message);
+    putMsgInMessageLog(false, data.message);
+});
+
+socket.addEventListener('close', (event) => {
+    console.log('Disconnected from WebSocket server');
+});
+
+// Send a message to the server
+socket.addEventListener('open', (event) => {
+    //socket.send(JSON.stringify({ message: 'Hello from client' }));
+});
+</script>
+</body>
+</html>
