@@ -18,12 +18,20 @@
             padding: 2px;
             margin: 2px;
         }
+        .user {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.6em;
+            color: gray;
+        }
     </style>
 </head>
 <body>
     <h1>WebSocket Example</h1>
     <div>
-        <input type="text" name="msg" id="msg" onkeyup="sendMsg(event)">
+        <label>User: </label><input type="text" name="user" id="user">
+    </div>
+    <div>
+        <label>Message: </label><input type="text" name="msg" id="msg" onkeyup="sendMsg(event)">
     </div>
     <div id="messageLog"></div>
 
@@ -31,26 +39,39 @@
 <script>
 function sendMsg(event) {
     if (event.key !== 'Enter') return;
+    const user = document.getElementById('user').value;
     const msg = document.getElementById('msg').value;
-    socket.send(JSON.stringify({ message: msg }));
-    putMsgInMessageLog(true, msg);
+    socket.send(JSON.stringify(
+        { 
+            user: user, 
+            message: msg 
+        }));
+    putMsgInMessageLog(true, { message: msg});
 
     document.getElementById('msg').value = '';
 }  
 
-function putMsgInMessageLog(ownMessage, msg){
+function putMsgInMessageLog(ownMessage, data){
+    let divElement = document.createElement('div');
+    if (!ownMessage){
+        let divUserElement = document.createElement('div');
+        divUserElement.innerText = data.user;
+        divUserElement.classList.add('user');
+        divElement.appendChild(divUserElement);
+    }
     let pElement = document.createElement('p');
     if (ownMessage){
         pElement.classList.add('ownMessage');
     } else {
         pElement.classList.add('externalMessage');
     }
-    pElement.innerText = msg;
+    pElement.innerText = data.message;
+    divElement.appendChild(pElement);
     let messageLog = document.getElementById('messageLog');
     if (messageLog.firstChild != undefined){
-        messageLog.insertBefore(pElement, messageLog.firstChild);
+        messageLog.insertBefore(divElement, messageLog.firstChild);
     } else {
-        messageLog.appendChild(pElement);
+        messageLog.appendChild(divElement);
     }
 }
 
@@ -63,8 +84,8 @@ socket.addEventListener('open', (event) => {
 
 socket.addEventListener('message', (event) => {
     const data = JSON.parse(event.data);
-    console.log('Message from server:', data.message);
-    putMsgInMessageLog(false, data.message);
+    console.log('Message from server:', data);
+    putMsgInMessageLog(false, data);
 });
 
 socket.addEventListener('close', (event) => {

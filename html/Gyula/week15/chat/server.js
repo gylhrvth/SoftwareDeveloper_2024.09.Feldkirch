@@ -17,7 +17,11 @@ app.ws('/chat', function(ws, req) {
         let data = JSON.parse(String(message));
         allWS.forEach((client) => {
             if (client !== ws) {
-                client.send(JSON.stringify({ message: data.message }));
+                client.send(JSON.stringify(
+                    {
+                        user: data.user,
+                        message: data.message 
+                    }));
             }
         });
     });
