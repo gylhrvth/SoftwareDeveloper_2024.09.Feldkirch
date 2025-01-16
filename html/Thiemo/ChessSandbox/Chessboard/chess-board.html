@@ -26,7 +26,26 @@
       position: relative;
     }
 
+    .coordinateRank {
+    position: absolute;
+    top: -40px; /* Top-left corner */
+    left: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #333; /* Make it visible on both white and black squares */
+}
+
+.coordinateFile {
+    position: absolute;
+    bottom: -40px; /* Bottom-right corner */
+    right: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #333; /* Make it visible on both white and black squares */
+}
+
     .square {
+      position: relative; /* Required for absolute positioning of coordinates */
       height: 125px;
       display: grid;
       justify-content: center;

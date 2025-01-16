@@ -36,36 +36,36 @@ class King {
     }
 
 
-    getPossibleMoves(chess) {
-        const moves = [];
-        const directions = [
-            { dRow: -1, dCol: 0 },   // Up
-            { dRow: 1, dCol: 0 },    // Down
-            { dRow: 0, dCol: 1 },    // Right
-            { dRow: 0, dCol: -1 },   // Left
-            { dRow: -1, dCol: 1 },   // Top-right
-            { dRow: -1, dCol: -1 },  // Top-left
-            { dRow: 1, dCol: 1 },    // Bottom-right
-            { dRow: 1, dCol: -1 }    // Bottom-left
-        ];
-    
-        for (const dir of directions) {
-            let newRow = this.currentRow + dir.dRow;
-            let newCol = this.currentCol + dir.dCol;
-    
-            if (!this.testOutOfBounds(dir.dRow, dir.dCol)) {
-                const targetPiece = chess.getChessPiece(newRow, newCol);
-                
-                if (targetPiece === undefined || targetPiece.isWhite !== this.isWhite) {
-                    moves.push({newRow: newRow, newColumn: newCol, piece: this });
-                }
-            }
-        }
-    
-        return moves;
-    }
+    // getPossibleMoves(chess) {
+    //     const moves = [];
+    //     const directions = [
+    //         { dRow: -1, dCol: 0 },   // Up
+    //         { dRow: 1, dCol: 0 },    // Down
+    //         { dRow: 0, dCol: 1 },    // Right
+    //         { dRow: 0, dCol: -1 },   // Left
+    //         { dRow: -1, dCol: 1 },   // Top-right
+    //         { dRow: -1, dCol: -1 },  // Top-left
+    //         { dRow: 1, dCol: 1 },    // Bottom-right
+    //         { dRow: 1, dCol: -1 }    // Bottom-left
+    //     ];
 
- /*   getPossibleMoves(chess) {
+    //     for (const dir of directions) {
+    //         let newRow = this.currentRow + dir.dRow;
+    //         let newCol = this.currentCol + dir.dCol;
+
+    //         if (!this.testOutOfBounds(dir.dRow, dir.dCol)) {
+    //             const targetPiece = chess.getChessPiece(newRow, newCol);
+
+    //             if (targetPiece === undefined || targetPiece.isWhite !== this.isWhite) {
+    //                 moves.push({newRow: newRow, newColumn: newCol, piece: this });
+    //             }
+    //         }
+    //     }
+
+    //     return moves;
+    // }
+
+    getPossibleMoves(chess) {
         let moves = []
         let up = true
         let down = true
@@ -83,96 +83,80 @@ class King {
         let col = this.currentCol
 
 
-            if (up && !this.testOutOfBounds(-distance, 0)) {
-                if (chess.getChessPiece(row - distance, col) == undefined) {
-                    moves.push({ newRow: row - distance, newColumn: col, piece: this })
-                } else if (chess.getChessPiece(row - distance, col ).isWhite != this.isWhite) {
-                    moves.push({ newRow: row - distance,newColumn: col ,  piece: this })
-                    up = false
-                } else {
-                   up = false
-                }
+        if (up && !this.testOutOfBounds(-distance, 0)) {
+            if (chess.getChessPiece(row - distance, col) == undefined ||
+                chess.getChessPiece(row - distance, col).isWhite != this.isWhite) {
+                moves.push({ newRow: row - distance, newColumn: col, piece: this })
+            } else {
+                up = false
             }
+        }
 
-           else if (down && !this.testOutOfBounds(distance, 0)) {
-                if (chess.getChessPiece(row + distance, col) == undefined) {
-                    moves.push({ newRow: row + distance,newColumn: col , piece: this })
-                } else if (chess.getChessPiece(row + distance, col ).isWhite != this.isWhite) {
-                    moves.push({ newRow: row + distance,newColumn: col , piece: this })
-                    down = false
-                } else {
-                    down = false
-                }
+        if (down && !this.testOutOfBounds(distance, 0)) {
+            if (chess.getChessPiece(row + distance, col) == undefined ||
+                chess.getChessPiece(row + distance, col).isWhite != this.isWhite) {
+                moves.push({ newRow: row + distance, newColumn: col, piece: this })
+            } else {
+                down = false
             }
+        }
 
-           else if (right && !this.testOutOfBounds(0, distance)) {
-                if (chess.getChessPiece(row , col + distance) == undefined) {
-                    moves.push( {newRow: row , newColumn: col + distance, piece: this })
-                } else if (chess.getChessPiece(row , col + distance).isWhite != this.isWhite) {
-                    moves.push({ newRow: row , newColumn: col + distance, piece: this })
-                    right = false
-                } else {
-                    right = false
-                }
+        if (right && !this.testOutOfBounds(0, distance)) {
+            if (chess.getChessPiece(row, col + distance) == undefined ||
+                chess.getChessPiece(row, col + distance).isWhite != this.isWhite) {
+                moves.push({ newRow: row, newColumn: col + distance, piece: this })
+            } else {
+                right = false
             }
+        }
 
-          else  if (left && !this.testOutOfBounds(0, -distance)) {
-                if (chess.getChessPiece(row , col - distance) == undefined) {
-                    moves.push({ newRow: row ,  newColumn: col - distance, piece: this })
-                } else if (chess.getChessPiece(row, col - distance).isWhite != this.isWhite) {
-                    moves.push({ newRow: row ,  newColumn: col - distance, piece: this })
-                    left = false
-                } else {
-                    left = false
-                }
+        if (left && !this.testOutOfBounds(0, -distance)) {
+            if (chess.getChessPiece(row, col - distance) == undefined ||
+                chess.getChessPiece(row, col - distance).isWhite != this.isWhite) {
+                moves.push({ newRow: row, newColumn: col - distance, piece: this })
+            } else {
+                left = false
             }
+        }
 
-          else  if (topRight && !this.testOutOfBounds(-distance, distance)) {
-                if (chess.getChessPiece(row - distance, col + distance) == undefined) {
-                    moves.push({ newRow: row - distance, newColumn: col + distance, piece: this })
-                } else if (chess.getChessPiece(row - distance, col + distance).isWhite != this.isWhite) {
-                    moves.push({ newRow: row - distance, newColumn: col + distance, piece: this })
-                    topRight = false
-                } else {
-                    topRight = false
-                }
+        if (topRight && !this.testOutOfBounds(-distance, distance)) {
+            if (chess.getChessPiece(row - distance, col + distance) == undefined ||
+                chess.getChessPiece(row - distance, col + distance).isWhite != this.isWhite) {
+                moves.push({ newRow: row - distance, newColumn: col + distance, piece: this })
+            } else {
+                topRight = false
             }
+        }
 
-           else if (topLeft && !this.testOutOfBounds(-distance, -distance)) {
-                if (chess.getChessPiece(row - distance, col - distance) == undefined) {
-                    moves.push({ newRow: row - distance, newColumn: col - distance, piece: this })
-                } else if (chess.getChessPiece(row - distance, col - distance).isWhite != this.isWhite) {
-                    moves.push({ newRow: row - distance, newColumn: col - distance, piece: this })
-                    topLeft = false
-                } else {
-                    topLeft = false
-                }
+        if (topLeft && !this.testOutOfBounds(-distance, -distance)) {
+            if (chess.getChessPiece(row - distance, col - distance) == undefined ||
+                chess.getChessPiece(row - distance, col - distance).isWhite != this.isWhite) {
+                moves.push({ newRow: row - distance, newColumn: col - distance, piece: this })
+            } else {
+                topLeft = false
             }
+        }
 
-           else if (bottomRight && !this.testOutOfBounds(distance, distance)) {
-                if (chess.getChessPiece(row + distance, col + distance) == undefined) {
-                    moves.push({ newRow: row + distance, newColumn: col + distance, piece: this })
-                } else if (chess.getChessPiece(row + distance, col + distance).isWhite != this.isWhite) {
-                    moves.push({ newRow: row + distance, newColumn: col + distance, piece: this })
-                    bottomRight = false
-                } else {
-                    bottomRight = false
-                }
+        if (bottomRight && !this.testOutOfBounds(distance, distance)) {
+            if (chess.getChessPiece(row + distance, col + distance) == undefined ||
+                chess.getChessPiece(row + distance, col + distance).isWhite != this.isWhite) {
+                moves.push({ newRow: row + distance, newColumn: col + distance, piece: this })
+            } else {
+                bottomRight = false
             }
+        }
 
-           else if (bottomLeft && !this.testOutOfBounds(distance, -distance)) {
-                if (chess.getChessPiece(row + distance, col - distance) == undefined) {
-                    moves.push({ newRow: row + distance, newColumn: col - distance, piece: this })
-                } else if (chess.getChessPiece(row + distance, col - distance).isWhite != this.isWhite) {
-                    moves.push({ newRow: row + distance, newColumn: col - distance, piece: this })
-                    bottomLeft = false
-                } else {
-                    bottomLeft = false
-                }
+        if (bottomLeft && !this.testOutOfBounds(distance, -distance)) {
+            if (chess.getChessPiece(row + distance, col - distance) == undefined ||
+                chess.getChessPiece(row + distance, col - distance).isWhite != this.isWhite) {
+                moves.push({ newRow: row + distance, newColumn: col - distance, piece: this })
+            } else {
+                bottomLeft = false
             }
-        
+        }
+
         // console.log("Queen", moves)
         return moves;
-    }*/
+    }
 }
 

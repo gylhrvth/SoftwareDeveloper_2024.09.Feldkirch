@@ -240,16 +240,10 @@ class ChessGame {
         const chessBoard = document.getElementById('chess-board');
         chessBoard.innerText = ''
 
-        let selectedPiece = null;  // Variable to track the selected piece
-
         // Loop to create 64 squares
         for (let i = 0; i < 64; i++) {
             const square = document.createElement('div');
             const figure = document.createElement('div');
-            const coordinateLetter = document.createElement('div')
-            const coordinateRank = document.createElement('div')
-            //const coordinate =document.createElement('div');
-
 
             // Alternating black and white squares
             const row = Math.floor(i / 8); // Determine row number
@@ -260,6 +254,22 @@ class ChessGame {
             } else {
                 square.classList.add('square', 'blackSquare');
             }
+
+        // Add rank numbers on the leftmost squares
+        if (col === 0) {
+            const rank = document.createElement('div');
+            rank.classList.add('coordinateRank');
+            rank.innerText = 8 - row; // Numbers from 8 (top) to 1 (bottom)
+            square.appendChild(rank);
+        }
+
+        // Add file letters on the bottom row
+        if (row === 7) {
+            const file = document.createElement('div');
+            file.classList.add('coordinateFile');
+            file.innerText = String.fromCharCode(65 + col); // A-H
+            square.appendChild(file);
+        }
 
             if (this.boardArray[row][col] != undefined) {
                 figure.innerText = this.boardArray[row][col].label
@@ -291,10 +301,10 @@ class ChessGame {
                 }
 
                 console.log("Clicked on", this.boardArray[row][col].__type,
-                    String.fromCharCode(65 + col), 8 - row  , this.boardArray[row][col].getPossibleMoves(this));
+                    String.fromCharCode(65 + col), 8 - row, this.boardArray[row][col].getPossibleMoves(this));
             });
-            
-            square.appendChild(figure)
+
+            square.appendChild(figure);
             chessBoard.appendChild(square);
         }
 
@@ -426,7 +436,7 @@ let allMoves = chess.getAllPossibleMoves(true)
 let allMovesBlack = allMoves
 let allMovesDone = [];
 
-let stepLeft = 4
+let stepLeft = 10
 let movesDone = 0
 let randomIndex
 let randomMove
