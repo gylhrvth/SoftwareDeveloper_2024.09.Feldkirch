@@ -1,63 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Empty Chessboard</title>
   <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
 
-   body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
- }
- 
- #chess-board {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    width: 1000px;
-    height: 1000px;
-    border: 2px solid black;
-    justify-content:right;
-  } 
+    #chess-board {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      width: 1000px;
+      height: 1000px;
+      border: 2px solid black;
+      justify-content: right;
+      position: relative;
+    }
 
-  .whiteSquare{
-    background-color: rgba(218, 205, 179, 0.911);
-  }
+    .square {
+      height: 125px;
+      display: grid;
+      justify-content: center;
+      align-items: end;
+      font-size: 110px;
+      line-height: 1em;
+    }
 
-  .blackSquare{
-    background-color: rgba(50, 110, 39, 0.773);
-  }
+    .whiteSquare {
+      background-color: rgba(218, 205, 179, 0.911);
+    }
 
-  .square{
-    height: 125px;
-    display: grid;
-    justify-content: center;
-    align-items: end;
-    font-size: 110px;
-    line-height: 1em;
-  }
+    .blackSquare {
+      background-color: rgba(50, 110, 39, 0.773);
+    }
 
-.whiteFigure{
-  color: whitesmoke;
-}
+    .whiteFigure {
+      color: whitesmoke;
+    }
 
-.blackFigure{
-  color: black;
-}
-  
-   </style>
+    .blackFigure {
+      color: black;
+    }
+
+    .highlightSquare {
+      position: relative;
+    }
+
+    .highlightSquare::before {
+      content: '';
+      position: absolute;
+      top: 25%;
+      /* Position to use 50% of the square */
+      left: 25%;
+      /* Center horizontally */
+      width: 50%;
+      /* Circle diameter = 50% of the square */
+      height: 50%;
+      /* Circle diameter = 50% of the square */
+      background-color: rgba(255, 255, 255, 0.4);
+      /* Semi-transparent yellow */
+      border-radius: 50%;
+      /* Makes it a circle */
+      pointer-events: none;
+      /* Prevent interaction with the circle */
+      z-index: -0.5;
+    }
+
+    @media (min-width: 800px) {
+      .chessboard {
+        width: 800px;
+        height: 800px;
+      }
+
+    }
+  </style>
 </head>
+
 <body>
 
   <div id="chess-board"></div>
+  <br>
 
   <script type="module" src="chess.js"></script>
-  
+
 </body>
 
 </html>

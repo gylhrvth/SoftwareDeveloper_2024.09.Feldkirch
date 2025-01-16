@@ -92,7 +92,7 @@ class Bishop {
             }
         }
 
-        // console.log("Bishop", moves)
+      //   console.log("Bishop", moves)
         return moves;
     }
 }

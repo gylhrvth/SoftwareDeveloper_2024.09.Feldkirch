@@ -17,6 +17,7 @@ function setupBoardSquares() {
         square.id = column + row;
     }
 }
+
 function setupPieces() {
     for (let i = 0; i < pieces.length; i++) {
         pieces[i].addEventListener("dragstart", drag);

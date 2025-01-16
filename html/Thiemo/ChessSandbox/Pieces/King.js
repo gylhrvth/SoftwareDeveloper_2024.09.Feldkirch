@@ -37,6 +37,35 @@ class King {
 
 
     getPossibleMoves(chess) {
+        const moves = [];
+        const directions = [
+            { dRow: -1, dCol: 0 },   // Up
+            { dRow: 1, dCol: 0 },    // Down
+            { dRow: 0, dCol: 1 },    // Right
+            { dRow: 0, dCol: -1 },   // Left
+            { dRow: -1, dCol: 1 },   // Top-right
+            { dRow: -1, dCol: -1 },  // Top-left
+            { dRow: 1, dCol: 1 },    // Bottom-right
+            { dRow: 1, dCol: -1 }    // Bottom-left
+        ];
+    
+        for (const dir of directions) {
+            let newRow = this.currentRow + dir.dRow;
+            let newCol = this.currentCol + dir.dCol;
+    
+            if (!this.testOutOfBounds(dir.dRow, dir.dCol)) {
+                const targetPiece = chess.getChessPiece(newRow, newCol);
+                
+                if (targetPiece === undefined || targetPiece.isWhite !== this.isWhite) {
+                    moves.push({newRow: newRow, newColumn: newCol, piece: this });
+                }
+            }
+        }
+    
+        return moves;
+    }
+
+ /*   getPossibleMoves(chess) {
         let moves = []
         let up = true
         let down = true
@@ -144,6 +173,6 @@ class King {
         
         // console.log("Queen", moves)
         return moves;
-    }
+    }*/
 }
 
