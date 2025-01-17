@@ -32,6 +32,11 @@ class ChessGame {
             [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
             [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined],
         ];
+
+        this.isWhiteTurn = true;
+        this.isWhiteHuman = true;
+        this.isBlackHuman = false;
+        this.computerIsThinking = false;
     }
 
     restoreData(value) {
@@ -233,7 +238,6 @@ class ChessGame {
         return this.boardArray[row][column]
     }
 
-    isWhiteTurn = true;
     printGameField() {
         const chessBoard = document.getElementById('chess-board');
         chessBoard.innerText = '';
@@ -286,52 +290,55 @@ class ChessGame {
                 const piece = this.boardArray[row][col];
 
                 // If a piece of the current turn's color is clicked
-                if (piece && piece.isWhite === this.isWhiteTurn) {
-                    selectedPiece = piece;
+                if ((this.isWhiteTurn && this.isWhiteHuman) || (!this.isWhiteTurn && this.isBlackHuman)) {
+                    if (piece && piece.isWhite === this.isWhiteTurn) {
+                        selectedPiece = piece;
 
-                    // Highlight possible moves
-                    document.querySelectorAll('.highlightSquare').forEach(sq => {
-                        sq.classList.remove('highlightSquare');
-                    });
+                        // Highlight possible moves
+                        document.querySelectorAll('.highlightSquare').forEach(sq => {
+                            sq.classList.remove('highlightSquare');
+                        });
 
-                    const possibleMoves = piece.getPossibleMoves(this);
-                    possibleMoves.forEach(move => {
-                        const targetSquare = chessBoard.children[move.newRow * 8 + move.newColumn];
-                        targetSquare.classList.add('highlightSquare');
-                    });
+                        const possibleMoves = piece.getPossibleMoves(this);
+                        possibleMoves.forEach(move => {
+                            const targetSquare = chessBoard.children[move.newRow * 8 + move.newColumn];
+                            targetSquare.classList.add('highlightSquare');
+                        });
 
-                    console.log(`Selected piece: ${piece.label} at ${String.fromCharCode(65 + col)}${8 - row}`);
-                }
+                        console.log(`Selected piece: ${piece.label} at ${String.fromCharCode(65 + col)}${8 - row}`);
+                    }
 
-                // If a highlighted square is clicked
-                else if (selectedPiece && square.classList.contains('highlightSquare')) {
-                    const targetRow = Math.floor(i / 8);
-                    const targetCol = i % 8;
+                    // If a highlighted square is clicked
+                    else if (selectedPiece && square.classList.contains('highlightSquare')) {
+                        const targetRow = Math.floor(i / 8);
+                        const targetCol = i % 8;
 
-                    const oldPositionRow = selectedPiece.currentRow;
-                    const oldPositionCol = selectedPiece.currentCol;
+                        const oldPositionRow = selectedPiece.currentRow;
+                        const oldPositionCol = selectedPiece.currentCol;
 
-                    // Get the state of the target square before the move
-                    const targetSquare = this.boardArray[targetRow][targetCol];
+                        // Get the state of the target square before the move
+                        const targetSquare = this.boardArray[targetRow][targetCol];
 
-                    // Move the piece
-                    this.moveChessPiece(selectedPiece, targetRow, targetCol);
+                        // Move the piece
+                        this.moveChessPiece(selectedPiece, targetRow, targetCol);
 
-                    // Switch turns
-                    this.isWhiteTurn = !this.isWhiteTurn;
+                        // Switch turns
+                        this.isWhiteTurn = !this.isWhiteTurn;
 
-                    // Re-render the board
-                    this.printGameField();
+                        // Re-render the board
+                        this.printGameField();
 
-                    // Print the move
-                    this.printMove(
-                        this.isWhiteTurn ? "Black" : "White",
-                        { piece: selectedPiece, newRow: targetRow, newColumn: targetCol },
-                        oldPositionCol,
-                        oldPositionRow,
-                        targetSquare
-                    );
-                    console.log("Score is ", chess.calculateScore())
+                        // Print the move
+                        this.printMove(
+                            this.isWhiteTurn ? "Black" : "White",
+                            { piece: selectedPiece, newRow: targetRow, newColumn: targetCol },
+                            oldPositionCol,
+                            oldPositionRow,
+                            targetSquare
+                        );
+                        console.log("Score is ", chess.calculateScore())
+
+                    }
                 }
             });
 
@@ -458,12 +465,44 @@ class ChessGame {
                 String.fromCharCode(65 + move.newColumn) + (8 - move.newRow));
         }
     }
+
+    
+
+    tryToMoveAI() {
+        if (!this.computerIsThinking) {
+            if ((this.isWhiteTurn && !this.isWhiteHuman) || (!this.isWhiteTurn && !this.isBlackHuman)) {
+                console.log('Try to move AI')
+                this.computerIsThinking = true;
+                let minmaxresult = minmax(this, 4, this.isWhiteTurn, -Infinity, Infinity)
+                let bestMove = minmaxresult.move
+
+                let oldPositionRow = bestMove.piece.currentRow
+                let oldPositionCol = bestMove.piece.currentCol
+                this.printMove(this.isWhiteTurn ? "White" : "Black", bestMove, oldPositionCol, oldPositionRow)
+                this.moveChessPiece(bestMove.piece, bestMove.newRow, bestMove.newColumn);
+
+                // Switch turns
+                this.isWhiteTurn = !this.isWhiteTurn;
+                this.printGameField()
+                this.computerIsThinking = false
+            }
+        }
+    }
+
 }
+
+
 
 
 let chess = new ChessGame()
 chess.initGameField()
+chess.printGameField()
 
+
+setInterval(() => chess.tryToMoveAI(), 1000)
+
+
+/*
 let allMoves = chess.getAllPossibleMoves(true)
 // let allMovesBlack = ["no empty"]
 let allMovesBlack = allMoves
@@ -534,3 +573,4 @@ while (allMoves.length > 0 && allMovesBlack.length > 0 && stepLeft > 0) {
 chess.printGameField()
 console.log("Game over")
 
+*/
