@@ -255,7 +255,8 @@ class ChessGame {
                 square.classList.add('square', 'blackSquare');
             }
 
-        // Add rank numbers on the leftmost squares
+        // White
+/*        // Add rank numbers on the leftmost squares
         if (col === 0) {
             const rank = document.createElement('div');
             rank.classList.add('coordinateRank');
@@ -269,7 +270,7 @@ class ChessGame {
             file.classList.add('coordinateFile');
             file.innerText = String.fromCharCode(65 + col); // A-H
             square.appendChild(file);
-        }
+        }  */
 
             if (this.boardArray[row][col] != undefined) {
                 figure.innerText = this.boardArray[row][col].label
@@ -299,6 +300,8 @@ class ChessGame {
                         targetSquare.classList.add('highlightSquare');
                     });
                 }
+
+                // if klick on highlighted square move piece to the selected square?
 
                 console.log("Clicked on", this.boardArray[row][col].__type,
                     String.fromCharCode(65 + col), 8 - row, this.boardArray[row][col].getPossibleMoves(this));
