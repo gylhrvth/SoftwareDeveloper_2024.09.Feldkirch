@@ -133,10 +133,6 @@ class ChessGame {
         this.addNewChessPiece(0, 4, new King(false))
         this.addNewChessPiece(7, 4, new King(true))
 
-        /*       this.addNewChessPiece(1, 2, new Rook(false))
-               this.addNewChessPiece(6, 5, new Rook(false))
-               this.addNewChessPiece(6, 3, new Rook(true))
-               this.addNewChessPiece(5, 4, new Rook(true)) */
     }
 
     addNewChessPiece(row, column, piece) {
@@ -243,19 +239,37 @@ class ChessGame {
         // chess.js
         const chessBoard = document.getElementById('chess-board');
         chessBoard.innerText = ''
+
         // Loop to create 64 squares
         for (let i = 0; i < 64; i++) {
             const square = document.createElement('div');
-            const figure = document.createElement('div')
+            const figure = document.createElement('div');
 
             // Alternating black and white squares
             const row = Math.floor(i / 8); // Determine row number
             const col = i % 8;            // Determine column number
+
             if ((row + col) % 2 === 0) {
                 square.classList.add('square', 'whiteSquare');
             } else {
                 square.classList.add('square', 'blackSquare');
             }
+
+        // Add rank numbers on the leftmost squares
+        if (col === 0) {
+            const rank = document.createElement('div');
+            rank.classList.add('coordinateRank');
+            rank.innerText = 8 - row; // Numbers from 8 (top) to 1 (bottom)
+            square.appendChild(rank);
+        }
+
+        // Add file letters on the bottom row
+        if (row === 7) {
+            const file = document.createElement('div');
+            file.classList.add('coordinateFile');
+            file.innerText = String.fromCharCode(65 + col); // A-H
+            square.appendChild(file);
+        }
 
             if (this.boardArray[row][col] != undefined) {
                 figure.innerText = this.boardArray[row][col].label
@@ -264,16 +278,35 @@ class ChessGame {
                 } else {
                     figure.classList.add('blackFigure')
                 }
-
-                square.addEventListener('click', () => {
-                    console.log("Clicked on", row, col, this.boardArray[row][col].getPossibleMoves(this))
-                })
             }
-            square.appendChild(figure)
 
+            // Add event listener for each square
+            square.addEventListener('click', () => {
+                document.querySelectorAll('.highlightSquare').forEach(sq => {
+                    sq.classList.remove('highlightSquare');
+                });
+
+                // Get possible moves for the clicked piece
+                const piece = this.boardArray[row][col];
+
+                if (piece) {
+                    //  if (this.boardArray[row][col]) {
+                    const possibleMoves = this.boardArray[row][col].getPossibleMoves(this);
+
+                    // Highlight the squares for the possible moves
+                    possibleMoves.forEach(move => {
+                        const targetSquare = chessBoard.children[move.newRow * 8 + move.newColumn];
+                        targetSquare.classList.add('highlightSquare');
+                    });
+                }
+
+                console.log("Clicked on", this.boardArray[row][col].__type,
+                    String.fromCharCode(65 + col), 8 - row, this.boardArray[row][col].getPossibleMoves(this));
+            });
+
+            square.appendChild(figure);
             chessBoard.appendChild(square);
         }
-
 
         for (let i = 0; i < this.boardArray.length; ++i) {
             let line = " "
@@ -285,12 +318,19 @@ class ChessGame {
                 }
             }
             console.log(line)
+
         }
+        console.log(" ");
+
+        // Remove highlights when clicking outside the chessboard
+        document.addEventListener('click', (event) => {
+            if (!chessBoard.contains(event.target)) {
+                document.querySelectorAll('.highlightSquare').forEach(sq => {
+                    sq.classList.remove('highlightSquare');
+                });
+            }
+        });
     }
-
-
-
-
 
 
     // TODO : Calculae score for every eaten Piece(pawn +1, (knight +3,bishop +3, rook +5, queen +9, king +100)) 
@@ -394,6 +434,8 @@ chess.printGameField()
 let allMoves = chess.getAllPossibleMoves(true)
 // let allMovesBlack = ["no empty"]
 let allMovesBlack = allMoves
+let allMovesDone = [];
+
 let stepLeft = 10
 let movesDone = 0
 let randomIndex
@@ -405,12 +447,12 @@ let oldPositionCol
 
 while (allMoves.length > 0 && allMovesBlack.length > 0 && stepLeft > 0) {
     // Teil WEISS
-    //randomIndex = Math.floor(Math.random() * allMoves.length);
-    //randomMove = allMoves[randomIndex];
+    randomIndex = Math.floor(Math.random() * allMoves.length);
+    randomMove = allMoves[randomIndex];
     //console.log(randomMove, randomIndex);
 
-    minmaxresult = minmax(chess, 4, true, -Infinity, Infinity)
-    randomMove = minmaxresult.move
+    //  minmaxresult = minmax(chess, 4, true, -Infinity, Infinity)
+    //  randomMove = minmaxresult.move
     //console.log("MinMaxResult: ", minmaxresult)
 
     oldPositionRow = randomMove.piece.currentRow
@@ -430,12 +472,12 @@ while (allMoves.length > 0 && allMovesBlack.length > 0 && stepLeft > 0) {
     // Teil SCHWARZ
     allMovesBlack = chess.getAllPossibleMoves(false)
     if (allMovesBlack.length > 0) {
-        //   randomIndex = Math.floor(Math.random() * allMovesBlack.length);
-        //   randomMove = allMovesBlack[randomIndex];
+        randomIndex = Math.floor(Math.random() * allMovesBlack.length);
+        randomMove = allMovesBlack[randomIndex];
 
-        minmaxresult = minmax(chess, 4, false, -Infinity, Infinity)
-        console.log("MinMaxResult: ", minmaxresult)
-        randomMove = minmaxresult.move
+        //minmaxresult = minmax(chess, 4, false, -Infinity, Infinity)
+        // console.log("MinMaxResult: ", minmaxresult)
+        // randomMove = minmaxresult.move
         oldPositionRow = randomMove.piece.currentRow
         oldPositionCol = randomMove.piece.currentCol
         console.log("Black", allMovesBlack)
@@ -453,6 +495,7 @@ while (allMoves.length > 0 && allMovesBlack.length > 0 && stepLeft > 0) {
     --stepLeft
     movesDone++
     console.log("Moves done", movesDone)
+
 
 }
 
