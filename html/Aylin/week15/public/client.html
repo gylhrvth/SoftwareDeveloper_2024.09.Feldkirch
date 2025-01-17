@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player</title>
+</head>
+<body>
+    <h2>Connecting with Player</h2>
+    <div id="player"></div>
+    <script>
+
+        const socket = new WebSocket('ws://' + window.location.hostname + ':5040/player');
+
+        socket.addEventListener ('open', () => {
+            console.log('Connected to the WebSocket-Server');
+        });
+
+        socket.addEventListener('message', (event) => {
+            const data = JSON.parse(event.data);
+            console.log('Message from server ', data);
+            displayMessage(data.message);
+        });
+
+        socket.addEventListener('close', (event) => {
+            console.log('Disconnected from WebSocket-Server', event);
+        })
+    </script>
+</body>
+</html>
