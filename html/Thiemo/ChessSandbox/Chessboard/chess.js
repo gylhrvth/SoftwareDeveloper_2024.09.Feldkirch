@@ -233,101 +233,133 @@ class ChessGame {
         return this.boardArray[row][column]
     }
 
-
+    isWhiteTurn = true;
     printGameField() {
-
-        // chess.js
         const chessBoard = document.getElementById('chess-board');
-        chessBoard.innerText = ''
+        chessBoard.innerText = '';
+
+        let selectedPiece = null; // To track the selected piece
 
         // Loop to create 64 squares
         for (let i = 0; i < 64; i++) {
             const square = document.createElement('div');
             const figure = document.createElement('div');
 
-            // Alternating black and white squares
-            const row = Math.floor(i / 8); // Determine row number
-            const col = i % 8;            // Determine column number
+            // Determine row and column
+            const row = Math.floor(i / 8);
+            const col = i % 8;
 
+            // Alternating black and white squares
             if ((row + col) % 2 === 0) {
                 square.classList.add('square', 'whiteSquare');
             } else {
                 square.classList.add('square', 'blackSquare');
             }
 
-        // Add rank numbers on the leftmost squares
-        if (col === 0) {
-            const rank = document.createElement('div');
-            rank.classList.add('coordinateRank');
-            rank.innerText = 8 - row; // Numbers from 8 (top) to 1 (bottom)
-            square.appendChild(rank);
-        }
+            // Add rank numbers on the leftmost squares
+            if (col === 0) {
+                const rank = document.createElement('div');
+                rank.classList.add('coordinateRank');
+                rank.innerText = 8 - row;
+                square.appendChild(rank);
+            }
 
-        // Add file letters on the bottom row
-        if (row === 7) {
-            const file = document.createElement('div');
-            file.classList.add('coordinateFile');
-            file.innerText = String.fromCharCode(65 + col); // A-H
-            square.appendChild(file);
-        }
+            // Add file letters on the bottom row
+            if (row === 7) {
+                const file = document.createElement('div');
+                file.classList.add('coordinateFile');
+                file.innerText = String.fromCharCode(65 + col); // A-H
+                square.appendChild(file);
+            }
 
             if (this.boardArray[row][col] != undefined) {
-                figure.innerText = this.boardArray[row][col].label
+                figure.innerText = this.boardArray[row][col].label;
                 if (this.boardArray[row][col].isWhite) {
-                    figure.classList.add('whiteFigure')
+                    figure.classList.add('whiteFigure');
                 } else {
-                    figure.classList.add('blackFigure')
+                    figure.classList.add('blackFigure');
                 }
             }
 
             // Add event listener for each square
             square.addEventListener('click', () => {
-                document.querySelectorAll('.highlightSquare').forEach(sq => {
-                    sq.classList.remove('highlightSquare');
-                });
-
-                // Get possible moves for the clicked piece
                 const piece = this.boardArray[row][col];
 
-                if (piece) {
-                    //  if (this.boardArray[row][col]) {
-                    const possibleMoves = this.boardArray[row][col].getPossibleMoves(this);
+                // If a piece of the current turn's color is clicked
+                if (piece && piece.isWhite === this.isWhiteTurn) {
+                    selectedPiece = piece;
 
-                    // Highlight the squares for the possible moves
+                    // Highlight possible moves
+                    document.querySelectorAll('.highlightSquare').forEach(sq => {
+                        sq.classList.remove('highlightSquare');
+                    });
+
+                    const possibleMoves = piece.getPossibleMoves(this);
                     possibleMoves.forEach(move => {
                         const targetSquare = chessBoard.children[move.newRow * 8 + move.newColumn];
                         targetSquare.classList.add('highlightSquare');
                     });
+
+                    console.log(`Selected piece: ${piece.label} at ${String.fromCharCode(65 + col)}${8 - row}`);
                 }
 
-                console.log("Clicked on", this.boardArray[row][col].__type,
-                    String.fromCharCode(65 + col), 8 - row, this.boardArray[row][col].getPossibleMoves(this));
+                // If a highlighted square is clicked
+                else if (selectedPiece && square.classList.contains('highlightSquare')) {
+                    const targetRow = Math.floor(i / 8);
+                    const targetCol = i % 8;
+
+                    const oldPositionRow = selectedPiece.currentRow;
+                    const oldPositionCol = selectedPiece.currentCol;
+
+                    // Get the state of the target square before the move
+                    const targetSquare = this.boardArray[targetRow][targetCol];
+
+                    // Move the piece
+                    this.moveChessPiece(selectedPiece, targetRow, targetCol);
+
+                    // Switch turns
+                    this.isWhiteTurn = !this.isWhiteTurn;
+
+                    // Re-render the board
+                    this.printGameField();
+
+                    // Print the move
+                    this.printMove(
+                        this.isWhiteTurn ? "Black" : "White",
+                        { piece: selectedPiece, newRow: targetRow, newColumn: targetCol },
+                        oldPositionCol,
+                        oldPositionRow,
+                        targetSquare
+                    );
+                    console.log("Score is ", chess.calculateScore())
+                }
             });
 
             square.appendChild(figure);
             chessBoard.appendChild(square);
         }
 
+        // Print the board state to the console
         for (let i = 0; i < this.boardArray.length; ++i) {
-            let line = " "
+            let line = " ";
             for (let j = 0; j < this.boardArray[i].length; ++j) {
                 if (this.boardArray[i][j] == undefined) {
-                    line += ". "
+                    line += ". ";
                 } else {
-                    line += this.boardArray[i][j].label
+                    line += this.boardArray[i][j].label;
                 }
             }
-            console.log(line)
-
+            console.log(line);
         }
         console.log(" ");
 
-        // Remove highlights when clicking outside the chessboard
+        // Remove highlights and clear selection when clicking outside the chessboard
         document.addEventListener('click', (event) => {
             if (!chessBoard.contains(event.target)) {
                 document.querySelectorAll('.highlightSquare').forEach(sq => {
                     sq.classList.remove('highlightSquare');
                 });
+                selectedPiece = null;
             }
         });
     }
@@ -415,28 +447,28 @@ class ChessGame {
         return allPossibleMoves;
     }
 
-    printMove(player, move, oldPositionCol, oldPositionRow) {
-        if (this.getChessPiece(move.newRow, move.newColumn) == undefined) {
-            console.log(player, "MOVE", move.piece.__type, "from", String.fromCharCode(65 + oldPositionCol) + (8 - oldPositionRow), "to", String.fromCharCode(65 + move.newColumn) + (8 - move.newRow))
+    printMove(player, move, oldPositionCol, oldPositionRow, targetSquare) {
+        if (targetSquare == undefined) {
+            console.log(player, "MOVE", move.piece.__type, "from",
+                String.fromCharCode(65 + oldPositionCol) + (8 - oldPositionRow), "to",
+                String.fromCharCode(65 + move.newColumn) + (8 - move.newRow));
         } else {
-            console.log(player, "HIT ", move.piece.__type, "from", String.fromCharCode(65 + oldPositionCol) + (8 - oldPositionRow), "to", String.fromCharCode(65 + move.newColumn) + (8 - move.newRow))
+            console.log(player, "HIT", move.piece.__type, "from",
+                String.fromCharCode(65 + oldPositionCol) + (8 - oldPositionRow), "to",
+                String.fromCharCode(65 + move.newColumn) + (8 - move.newRow));
         }
     }
 }
 
 
-
-
 let chess = new ChessGame()
 chess.initGameField()
-chess.printGameField()
 
 let allMoves = chess.getAllPossibleMoves(true)
 // let allMovesBlack = ["no empty"]
 let allMovesBlack = allMoves
 let allMovesDone = [];
-
-let stepLeft = 10
+let stepLeft = 0
 let movesDone = 0
 let randomIndex
 let randomMove
