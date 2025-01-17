@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button>New Question</button>
+    <div id="result"></div>
+    <script>
+        getQuestion();
+
+        async function getQuestion() {
+            fetch('/api/test')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                const country = data.data[0];
+                const countryName = country.name;
+                const cityName = country.city;
+
+                const result = document.getElementById('result');
+                result.innerHTML = '';
+
+                let h1 = document.createElement('h1');
+                h1.innerText = countryName;
+                result.appendChild(h1);
+
+                let h2 = document.createElement('h2');
+                h2.innerText = `City: ${cityName}`;
+                result.appendChild(h2);
+            });
+        }
+    </script>
+</body>
+</html>
