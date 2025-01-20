@@ -58,61 +58,6 @@ class ChessGame {
             }
         }
         return clone
-
-        /*
-        return JSON.parse(JSON.stringify(this), (key, value) => {
-
-            // Pawn 
-            if (typeof (value) === 'object' && value != undefined && value.__type === 'Pawn') {
-                let p = new Pawn(value.isWhite)
-                p.restoreData(value)
-                return p
-            }
-
-            //Knight
-            if (typeof (value) === 'object' && value != undefined && value.__type === 'Knight') {
-                let k = new Knight(value.isWhite)
-                k.restoreData(value)
-                return k
-            }
-
-            //Bishop
-            if (typeof (value) === 'object' && value != undefined && value.__type === 'Bishop') {
-                let b = new Bishop(value.isWhite)
-                b.restoreData(value)
-                return b
-            }
-
-            //Rook
-            if (typeof (value) === 'object' && value != undefined && value.__type === 'Rook') {
-                let r = new Rook(value.isWhite)
-                r.restoreData(value)
-                return r
-            }
-
-            //Queen
-            if (typeof (value) === 'object' && value != undefined && value.__type === 'Queen') {
-                let q = new Queen(value.isWhite)
-                q.restoreData(value)
-                return q
-            }
-
-            if (typeof (value) === 'object' && value != undefined && value.__type === 'King') {
-                let k = new King(value.isWhite)
-                k.restoreData(value)
-                return k
-            }
-
-            // Chessboard
-            if (typeof (value) === 'object' && value != undefined && value.__type === 'ChessGame') {
-                let c = new ChessGame()
-                c.restoreData(value)
-                return c
-            }
-
-            return value;
-        })
-        */
     }
 
     initGameField() {
@@ -159,13 +104,21 @@ class ChessGame {
         piece.currentCol = column;
     }
 
-    moveChessPiece(piece, newRow, newColumn) {
+    moveChessPiece(piece, newRow, newColumn, enPassant) {
         this.saveGameField(piece, newRow, newColumn);
         this.boardArray[newRow][newColumn] = this.boardArray[piece.currentRow][piece.currentCol];
         this.boardArray[piece.currentRow][piece.currentCol] = undefined;
         this.boardArray[newRow][newColumn].currentRow = newRow;
         this.boardArray[newRow][newColumn].currentCol = newColumn;
 
+        if (enPassant){
+            console.log("moveChessPiece: En passant")
+            let deletePawnInRow = -1
+            if (piece.isWhite) {
+                deletePawnInRow = 1
+            }
+            this.boardArray[piece.currentRow + deletePawnInRow][piece.currentCol] = undefined;
+        }
 
     }
 
@@ -194,7 +147,6 @@ class ChessGame {
                 toCol: newColumn
             }
         })
-        console.log("History: ", this.history)
     }
 
     undoGameField() {
@@ -278,6 +230,9 @@ class ChessGame {
                         possibleMoves.forEach(move => {
                             const targetSquare = chessBoard.children[move.newRow * 8 + move.newColumn];
                             targetSquare.classList.add('highlightSquare');
+                            if (move.enPassant && move.enPassant === true) {
+                                targetSquare.setAttribute('enPassant', move.enPassant);
+                            }
                         });
 
                         console.log(`Selected piece: ${piece.label} at ${String.fromCharCode(65 + col)}${8 - row}`, piece.getPossibleMoves(this));
@@ -294,9 +249,14 @@ class ChessGame {
 
                         // Get the state of the target square before the move
                         const targetSquare = this.boardArray[targetRow][targetCol];
+                        let enPassant = false;
+                        if (square.getAttribute('enPassant') === 'true') {
+                            enPassant = true                     
+                        }
+                        console.log("En passant?: ", enPassant)
 
                         // Move the piece
-                        this.moveChessPiece(selectedPiece, targetRow, targetCol);
+                        this.moveChessPiece(selectedPiece, targetRow, targetCol, enPassant);
 
                         // Switch turns
                         this.isWhiteTurn = !this.isWhiteTurn;
@@ -451,11 +411,15 @@ class ChessGame {
                 this.computerIsThinking = true;
                 let minmaxresult = minmax(this, 4, this.isWhiteTurn, -Infinity, Infinity)
                 let bestMove = minmaxresult.move
+                let enPassant = false
+                if (bestMove.enPassant && bestMove.enPassant === true) {
+                    enPassant = true
+                }
 
                 let oldPositionRow = bestMove.piece.currentRow
                 let oldPositionCol = bestMove.piece.currentCol
                 this.printMove(this.isWhiteTurn ? "White" : "Black", bestMove, oldPositionCol, oldPositionRow)
-                this.moveChessPiece(bestMove.piece, bestMove.newRow, bestMove.newColumn);
+                this.moveChessPiece(bestMove.piece, bestMove.newRow, bestMove.newColumn, enPassant);
 
                 // Switch turns
                 this.isWhiteTurn = !this.isWhiteTurn;

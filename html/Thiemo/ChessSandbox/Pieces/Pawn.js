@@ -28,83 +28,78 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
     //Black ♝,♞,♟,♜,♛,♚
     //White ♗,♘,♙,♖,♕,♔
 
+    addPosibleMoveEnPassant(chess, moves) {
+        // En Passant Logic for Black Pawn (on the 4th row)
+        if (!this.isWhite && this.currentRow === 4) {
+            const lastMove = chess.history[chess.history.length - 1];
+
+            // Ensure lastMove exists and has the necessary structure
+            if (lastMove && lastMove.move && lastMove.move.piece === "Pawn" && Math.abs(lastMove.move.toRow - lastMove.move.fromRow) === 2) {
+                const lastMovedPiece = chess.getChessPiece(lastMove.move.toRow, lastMove.move.toCol);
+
+                // Check for en passant on the left
+                if (this.currentCol > 0 && lastMove.move.toRow === this.currentRow && lastMove.move.toCol === this.currentCol - 1) {
+                    moves.push({
+                        newRow: this.currentRow + 1,
+                        newColumn: this.currentCol - 1,
+                        piece: this,
+                        enPassant: true  // Mark this move as en passant
+                    });
+                }
+
+                // Check for en passant on the right
+                if (this.currentCol < 7 && lastMove.move.toRow === this.currentRow && lastMove.move.toCol === this.currentCol + 1) {
+                    moves.push({
+                        newRow: this.currentRow + 1,
+                        newColumn: this.currentCol + 1,
+                        piece: this,
+                        enPassant: true  // Mark this move as en passant
+                    });
+                }
+            } else {
+                // Debug log if lastMove doesn't have the expected structure
+                console.log("Invalid lastMove for en passant:", lastMove);
+            }
+        }
+
+        // En Passant Logic for White Pawn (on the 3rd row)
+        if (this.isWhite && this.currentRow === 3) {
+            const lastMove = chess.history[chess.history.length - 1];
+
+            // Ensure lastMove exists and has the necessary structure
+            if (lastMove && lastMove.move && lastMove.move.piece === "Pawn" && Math.abs(lastMove.move.toRow - lastMove.move.fromRow) === 2) {
+                const lastMovedPiece = chess.getChessPiece(lastMove.move.toRow, lastMove.move.toCol);
+
+                // Check for en passant on the left
+                if (this.currentCol > 0 && lastMove.move.toRow === this.currentRow && lastMove.move.toCol === this.currentCol - 1) {
+                    moves.push({
+                        newRow: this.currentRow - 1,
+                        newColumn: this.currentCol - 1,
+                        piece: this,
+                        enPassant: true  // Mark this move as en passant
+                    });
+                }
+
+                // Check for en passant on the right
+                if (this.currentCol < 7 && lastMove.move.toRow === this.currentRow && lastMove.move.toCol === this.currentCol + 1) {
+                    moves.push({
+                        newRow: this.currentRow - 1,
+                        newColumn: this.currentCol + 1,
+                        piece: this,
+                        enPassant: true  // Mark this move as en passant
+                    });
+                }
+            } else {
+                // Debug log if lastMove doesn't have the expected structure
+                //console.log("Invalid lastMove for en passant:", lastMove);
+            }
+        }
+    }
+
     getPossibleMoves(chess) {
         let moves = [];
 
-
-
-    // En Passant Logic for Black Pawn (on the 4th row)
-    if (!this.isWhite && this.currentRow === 4) {
-        const lastMove = chess.history[chess.history.length - 1];
-
-        // Ensure lastMove exists and has the necessary structure
-        if (lastMove && lastMove.move && lastMove.move.piece === "Pawn" && Math.abs(lastMove.move.toRow - lastMove.move.fromRow) === 2) {
-            const lastMovedPiece = chess.getChessPiece(lastMove.move.toRow, lastMove.move.toCol);
-
-            // Ensure the last moved piece exists
-            if (lastMovedPiece && lastMovedPiece.__type === "Pawn") {
-                // Check for en passant on the left
-                if (this.currentCol > 0 && lastMove.move.toRow === this.currentRow && lastMove.move.toCol === this.currentCol - 1) {
-                    moves.push({
-                        newRow: this.currentRow + 1,
-                        newColumn: this.currentCol - 1,
-                        piece: this,
-                        enPassant: true  // Mark this move as en passant
-                    });
-                }
-
-                // Check for en passant on the right
-                if (this.currentCol < 7 && lastMove.move.toRow === this.currentRow && lastMove.move.toCol === this.currentCol + 1) {
-                    moves.push({
-                        newRow: this.currentRow + 1,
-                        newColumn: this.currentCol + 1,
-                        piece: this,
-                        enPassant: true  // Mark this move as en passant
-                    });
-                }
-            }
-        } else {
-            // Debug log if lastMove doesn't have the expected structure
-            console.log("Invalid lastMove for en passant:", lastMove);
-        }
-    }
-
-    // En Passant Logic for White Pawn (on the 3rd row)
-    if (this.isWhite && this.currentRow === 3) {
-        const lastMove = chess.history[chess.history.length - 1];
-
-        // Ensure lastMove exists and has the necessary structure
-        if (lastMove && lastMove.move && lastMove.move.piece === "Pawn" && Math.abs(lastMove.move.toRow - lastMove.move.fromRow) === 2) {
-            const lastMovedPiece = chess.getChessPiece(lastMove.move.toRow, lastMove.move.toCol);
-
-            // Ensure the last moved piece exists
-            if (lastMovedPiece && lastMovedPiece.__type === "Pawn") {
-                // Check for en passant on the left
-                if (this.currentCol > 0 && lastMove.move.toRow === this.currentRow && lastMove.move.toCol === this.currentCol - 1) {
-                    moves.push({
-                        newRow: this.currentRow - 1,
-                        newColumn: this.currentCol - 1,
-                        piece: this,
-                        enPassant: true  // Mark this move as en passant
-                    });
-                }
-
-                // Check for en passant on the right
-                if (this.currentCol < 7 && lastMove.move.toRow === this.currentRow && lastMove.move.toCol === this.currentCol + 1) {
-                    moves.push({
-                        newRow: this.currentRow - 1,
-                        newColumn: this.currentCol + 1,
-                        piece: this,
-                        enPassant: true  // Mark this move as en passant
-                    });
-                }
-            }
-        } else {
-            // Debug log if lastMove doesn't have the expected structure
-            console.log("Invalid lastMove for en passant:", lastMove);
-        }
-    }
-
+        this.addPosibleMoveEnPassant(chess, moves);
 
         // Black pieces
         if (!this.isWhite) {
