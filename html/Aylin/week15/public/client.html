@@ -8,6 +8,7 @@
 <body>
     <h2 id="welcomeMsg">Please enter a Team name</h2>
     <div id="player"></div>
+    <div id="turn-message"></div>
     <div id="Form">
         <form onsubmit="registerPlayer(event)" action="#" method="get">
             <label for="Name">Name:</label>
@@ -21,12 +22,13 @@
         let myName = sessionStorage.getItem("myName");
 
         const socket = new WebSocket('ws://' + window.location.hostname + ':5400/player');
+
+        const welcomeMsg = document.getElementById('welcomeMsg');
+        const turnMessageDiv = document.getElementById('turn-message');
         
         function displayMessage(message) {
             const log = document.getElementById('result');
-            const newMessage = document.createElement('div');
-            newMessage.textContent = message;
-            log.appendChild(newMessage);
+            log.innerText = message; 
         }
     
         socket.addEventListener ('open', () => {
@@ -36,7 +38,11 @@
         socket.addEventListener('message', (event) => {
             const data = JSON.parse(event.data);
             console.log('Message from server ', data);
-            displayMessage(data.message);
+
+            if (data.message) {
+                displayMessage(data.message);
+            }
+
         });
 
         socket.addEventListener('close', (event) => {

@@ -37,6 +37,8 @@ app.ws('/game', function (ws, req) {
                     type: 'gameStarted',
                     message: 'The game has started!',
                 });
+
+                updateActivePlayer();
             } else {
                 gameMaster.send(
                     JSON.stringify({
@@ -52,6 +54,21 @@ app.ws('/game', function (ws, req) {
         gameMaster = null;
     });
 });
+
+function broadcastToPlayers(message) {
+    playerWS.forEach((player, index) => {
+        const isActivePlayer = index === activePlayerIndex;
+
+        const playerMessage = {
+            ...message,
+            type: isActivePlayer ? 'yourTurn' : 'otherPlayerTurn',
+            message: isActivePlayer
+                ? "Your turn"
+                : `${playerWS[activePlayerIndex]?.name || 'Unknown'}'s turn`,
+        };
+        player.ws.send(JSON.stringify(playerMessage));
+    });
+}
 
 // Player - Clients
 app.ws('/player', function(ws, req) {
@@ -113,20 +130,18 @@ app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
 
-function broadcastToPlayers(message) {
-    playerWS.forEach((player) => {
-        player.ws.send(JSON.stringify(message));
-    });
-}
-
 // Active Player
 let activePlayerIndex = 0;
 
-function updateActivePlayer () {
-    if(playerWS.length === 0) return;
+function updateActivePlayer() {
+    if (playerWS.length === 0) return;
 
     activePlayerIndex = (activePlayerIndex + 1) % playerWS.length;
     const activePlayer = playerWS[activePlayerIndex];
+
+    broadcastToPlayers({
+        activePlayerName: activePlayer.name,
+    });
 
     if (activeTriviaSocket) {
         activeTriviaSocket.send(
