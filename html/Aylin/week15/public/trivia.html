@@ -43,7 +43,7 @@
 </head>
 <body>
     <header>
-        <div id="player-name"></div>
+    <div id="player-name"></div>
     </header>
     <div class="wrapper">
         <div class="categorie-container">
@@ -69,16 +69,13 @@
 
         socket.addEventListener('message', (event) => {
             const data = JSON.parse(event.data);
+            console.log('Message from server:', event.data);
             
             //active Player
-            if(data.messageType == 'activePlayer') {
-                const activePlayerDiv = document.getElementById('player-name')
-                if(playerNameDiv) {
-                    playerNameDiv.textContent = data.playerName;
-                }
-                displayMessage(data.playerName);
+            if (data.type === 'activePlayer') {
+                const activePlayerName = data.playerName;
+                playerNameDiv.textContent = activePlayerName;
             }
-            console.log('Message from server:', event.data);
         });
 
         socket.addEventListener('close', () => {
@@ -88,10 +85,6 @@
         socket.addEventListener('error', (error) => {
             console.error('WebSocket error:', error);
         });
-
-        function updateActivePlayer(playerName) {
-            playerNameDiv = playerName;
-        }
     </script>
 </body>
 </html>

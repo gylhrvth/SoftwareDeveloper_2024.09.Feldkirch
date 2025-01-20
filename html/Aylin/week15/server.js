@@ -33,12 +33,10 @@ app.ws('/game', function (ws, req) {
             if (playerWS.length >= 2 && playerWS.length <= 4) {
                 gameState.gameStarted = true;
 
-                // Oyun başlıyor mesajını tüm oyunculara gönder
                 broadcastToPlayers({
                     type: 'gameStarted',
                     message: 'The game has started!',
                 });
-
             } else {
                 gameMaster.send(
                     JSON.stringify({
@@ -53,7 +51,7 @@ app.ws('/game', function (ws, req) {
         console.log('Game Master disconnected.');
         gameMaster = null;
     });
-})
+});
 
 // Player - Clients
 app.ws('/player', function(ws, req) {
@@ -67,12 +65,10 @@ app.ws('/player', function(ws, req) {
             const playerName = data.playerName;
 
             if (playerName) {
-                // Eğer oyuncu zaten kayıtlıysa ekleme yapma
                 const existingPlayer = playerWS.find(player => player.ws === ws && player.name === playerName);
                 if (!existingPlayer) {
-                    // Kayıtlı oyuncu olarak ekleniyor
                     const player = { ws: ws, name: playerName };
-                    playerWS = playerWS.filter(p => p.ws !== ws);  // Önceki verileri temizle
+                    playerWS = playerWS.filter(p => p.ws !== ws);
                     playerWS.push(player);
                 }
             
@@ -83,8 +79,8 @@ app.ws('/player', function(ws, req) {
                         JSON.stringify({
                             messageType: 'newPlayer',
                             message: `${playerName} has joined.`,
-                            currentPlayers: playerWS.filter(p => p.name).length, // Sadece kayıtlı oyuncuları say
-                            playerNames: playerWS.map((player) => player.name).filter(Boolean), // Boş olmayan isimleri göster
+                            currentPlayers: playerWS.filter(p => p.name).length,
+                            playerNames: playerWS.map((player) => player.name).filter(Boolean),
                         })
                     );
                 }
@@ -123,7 +119,7 @@ function broadcastToPlayers(message) {
     });
 }
 
-//Active Player
+// Active Player
 let activePlayerIndex = 0;
 
 function updateActivePlayer () {
@@ -132,14 +128,14 @@ function updateActivePlayer () {
     activePlayerIndex = (activePlayerIndex + 1) % playerWS.length;
     const activePlayer = playerWS[activePlayerIndex];
 
-    playerWS.forEach((player) => {
-        player.ws.send(
+    if (activeTriviaSocket) {
+        activeTriviaSocket.send(
             JSON.stringify({
                 type: 'activePlayer',
                 playerName: activePlayer.name,
             })
         );
-    })
+    }
 
     if (gameMaster) {
         gameMaster.send(
@@ -154,12 +150,26 @@ function updateActivePlayer () {
 
 setInterval(updateActivePlayer, 10000);
 
-//Trivia
+// Trivia 
+let activeTriviaSocket = null;
+
 app.ws('/trivia', function(ws, req) {
     console.log('Trivia WebSocket connection established');
+    activeTriviaSocket = ws;
 
     ws.on('message', (message) => {
-        console.log('Message received:', message);
+        const data = JSON.parse(message);
+
+        if (data.action === 'getGameState') {
+            const gameState = {
+                players: playerWS.map((player) => player.name),
+                currentPlayers: activePlayerIndex
+            };
+            ws.send(JSON.stringify({
+                type: 'gameState',
+                gameState: gameState
+            }));
+        }
     });
 
     ws.on('close', () => {
@@ -170,4 +180,3 @@ app.ws('/trivia', function(ws, req) {
         console.error('WebSocket error:', err);
     });
 });
-
