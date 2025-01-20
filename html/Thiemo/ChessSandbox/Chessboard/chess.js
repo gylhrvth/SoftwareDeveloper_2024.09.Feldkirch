@@ -188,21 +188,21 @@ class ChessGame {
                 square.classList.add('square', 'blackSquare');
             }
 
-        // Add rank numbers on the leftmost squares
-        if (col === 0) {
-            const rank = document.createElement('div');
-            rank.classList.add('coordinateRank');
-            rank.innerText = 8 - row; // Numbers from 8 (top) to 1 (bottom)
-            square.appendChild(rank);
-        }
+            // Add rank numbers on the leftmost squares
+            if (col === 0) {
+                const rank = document.createElement('div');
+                rank.classList.add('coordinateRank');
+                rank.innerText = 8 - row;
+                square.appendChild(rank);
+            }
 
-        // Add file letters on the bottom row
-        if (row === 7) {
-            const file = document.createElement('div');
-            file.classList.add('coordinateFile');
-            file.innerText = String.fromCharCode(65 + col); // A-H
-            square.appendChild(file);
-        }
+            // Add file letters on the bottom row
+            if (row === 7) {
+                const file = document.createElement('div');
+                file.classList.add('coordinateFile');
+                file.innerText = String.fromCharCode(65 + col); // A-H
+                square.appendChild(file);
+            }
 
             if (this.boardArray[row][col] != undefined) {
                 figure.innerText = this.boardArray[row][col].label;
@@ -227,22 +227,59 @@ class ChessGame {
                             sq.classList.remove('highlightSquare');
                         });
 
-                // Get possible moves for the clicked piece
-                const piece = this.boardArray[row][col];
+                        const possibleMoves = piece.getPossibleMoves(this);
+                        possibleMoves.forEach(move => {
+                            const targetSquare = chessBoard.children[move.newRow * 8 + move.newColumn];
+                            targetSquare.classList.add('highlightSquare');
+                            if (move.enPassant && move.enPassant === true) {
+                                targetSquare.setAttribute('enPassant', move.enPassant);
+                            }
+                        });
 
-                if (piece) {
-                    //  if (this.boardArray[row][col]) {
-                    const possibleMoves = this.boardArray[row][col].getPossibleMoves(this);
+                        console.log(`Selected piece: ${piece.label} at ${String.fromCharCode(65 + col)}${8 - row}`, piece.getPossibleMoves(this));
+                        //     console.log("possible Moves: ",piece.getPossibleMoves(this))
+                    }
 
-                    // Highlight the squares for the possible moves
-                    possibleMoves.forEach(move => {
-                        const targetSquare = chessBoard.children[move.newRow * 8 + move.newColumn];
-                        targetSquare.classList.add('highlightSquare');
-                    });
+                    // If a highlighted square is clicked
+                    else if (selectedPiece && square.classList.contains('highlightSquare')) {
+                        const targetRow = Math.floor(i / 8);
+                        const targetCol = i % 8;
+
+                        const oldPositionRow = selectedPiece.currentRow;
+                        const oldPositionCol = selectedPiece.currentCol;
+
+                        // Get the state of the target square before the move
+                        const targetSquare = this.boardArray[targetRow][targetCol];
+                        let enPassant = false;
+                        if (square.getAttribute('enPassant') === 'true') {
+                            enPassant = true
+                        }
+                        if (enPassant) {
+                            console.log("En passant?: ", enPassant)
+                        }
+
+                        // Move the piece
+                        this.moveChessPiece(selectedPiece, targetRow, targetCol, enPassant);
+
+                        // Switch turns
+                        this.isWhiteTurn = !this.isWhiteTurn;
+
+                        // Re-render the board
+                        this.printGameField();
+                        console.log("History ", this.history)
+
+                        // Print the move
+                        this.printMove(
+                            this.isWhiteTurn ? "Black" : "White",
+                            { piece: selectedPiece, newRow: targetRow, newColumn: targetCol },
+                            oldPositionCol,
+                            oldPositionRow,
+                            targetSquare
+                        );
+                        console.log("Score is ", chess.calculateScore())
+
+                    }
                 }
-
-                console.log("Clicked on", this.boardArray[row][col].__type,
-                    String.fromCharCode(65 + col), 8 - row, this.boardArray[row][col].getPossibleMoves(this));
             });
 
             square.appendChild(figure);
