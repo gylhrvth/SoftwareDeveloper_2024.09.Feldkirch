@@ -42,7 +42,17 @@
             if (data.message) {
                 displayMessage(data.message);
             }
+            if (data.type === 'gameStarted') {
+                if (welcomeMsg) {
+                    welcomeMsg.style.display = 'none';
+                }
+            }
 
+            if (data.type === 'yourTurn' || data.type === 'otherPlayerTurn') {
+                if (welcomeMsg) {
+                    welcomeMsg.style.display = 'none';
+                }
+            }
         });
 
         socket.addEventListener('close', (event) => {
