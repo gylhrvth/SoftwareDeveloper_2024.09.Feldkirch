@@ -11,12 +11,9 @@
 </head>
 <body>
     <h1>Game Master Console</h1>
-    
-    <div>
-        <h2>Connected Players</h2>
-        <div id="playersCount">Players connected: 0</div>
-        <button id="startButton">Start Game</button>
-    </div>
+    <h2>Connected Players</h2>
+    <div id="playersCount">Players connected: 0</div>
+    <button id="startButton">Start Game</button>
     <div id="messageLog"></div>
 
     <div id="statusText"></div>
@@ -28,31 +25,26 @@
             log.appendChild(newMessage);
         }
 
-        const socket = new WebSocket('ws://' + window.location.hostname + ':5040/game');
-        const readyButton = document.getElementById('readyButton');
+        const socket = new WebSocket('ws://' + window.location.hostname + ':5400/game');
+        const startButton = document.getElementById('startButton');
         const playersCountElement = document.getElementById('playersCount');
 
         startButton.addEventListener('click', () => {
             socket.send(JSON.stringify({ action: 'startGame' }));
-            console.log('Game start signal sent');
+            window.location.href = 'http://' + window.location.hostname + ':5400/trivia.html';
         });
 
-        //WebSocket Open Event
         socket.addEventListener('open', () => {
-            console.log('Connected to the WebSocket-Server');
+            console.log('Connected to the WebSocket');
         });
 
-        //WebSocket Message Event
         socket.addEventListener('message', (event) => {
             const data = JSON.parse(event.data);
-
-            console.log('Message from server:', data);
-
             //Players connected
             if (data.messageType === 'gameState') {
                 playersCountElement.textContent = `Players connected: ${data.gameState.currentPlayers}`;
                 startButton.disabled = data.gameState.currentPlayers < 2;
-            }
+                }
 
             //New Player
             if (data.messageType === 'newPlayer') {
@@ -63,6 +55,7 @@
             //Game started
             if (data.messageType === 'gameStart') {
                 alert(data.message);
+                window.location.href = 'http//' + window.location.hostname +':5400/trivia.html';
             }
 
             if (data.message) {
@@ -77,9 +70,14 @@
             pElement.innerText = 'Connection closed: ' + event.reason 
             document.getElementById('statusText').appendChild(pElement)
             setTimeout(() => {
-                document.getElementById('statusText').removeChild(pElement)
+                document.getElementById('statusText').removeChild(pElement);
             }, 2000)
         })
+
+        socket.addEventListener('error', (event) =>{
+            console.log('WebSoket Error', event);
+            alert('A connection error occurred');
+        });
     </script>
 </body>
 </html>
