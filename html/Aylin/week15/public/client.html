@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player</title>
+</head>
+<body>
+    <h2 id="welcomeMsg">Please enter a Team name</h2>
+    <div id="player"></div>
+    <div id="turn-message"></div>
+    <div id="Form">
+        <form onsubmit="registerPlayer(event)" action="#" method="get">
+            <label for="Name">Name:</label>
+            <input type="text" id="name" name="name"><br><br>
+            <input type="submit" value="Submit"><br><br>
+        </form>
+    </div>
+    <div id="result"></div>
+    <script>
+        let playerNames = [];
+        let myName = sessionStorage.getItem("myName");
+
+        const socket = new WebSocket('ws://' + window.location.hostname + ':5400/player');
+
+        const welcomeMsg = document.getElementById('welcomeMsg');
+        const turnMessageDiv = document.getElementById('turn-message');
+        
+        function displayMessage(message) {
+            const log = document.getElementById('result');
+            log.innerText = message; 
+        }
+    
+        socket.addEventListener ('open', () => {
+            console.log('Connected to the WebSocket-Server');
+        });
+
+        socket.addEventListener('message', (event) => {
+            const data = JSON.parse(event.data);
+            console.log('Message from server ', data);
+
+            if (data.message) {
+                displayMessage(data.message);
+            }
+
+        });
+
+        socket.addEventListener('close', (event) => {
+            console.log('Disconnected from WebSocket-Server', event);
+        })
+
+        async function registerPlayer(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            console.log('Registering player:', name);
+
+            if (!name) {
+                alert('Please enter a name!');
+                return;
+            }
+
+            // Send player registration message to WebSocket server
+            socket.send(
+                JSON.stringify({
+                    action: 'registerPlayer',
+                    playerName: name,
+                })
+            );
+
+            document.getElementById('Form').style.display = 'none';
+
+            //Welcome message
+            const welcomeMsg = document.getElementById('welcomeMsg');
+            if(welcomeMsg) {
+                welcomeMsg.innerHTML = `Welcome, ${name}!`;
+            }
+            
+            //Name is saved to sessionStorage
+            sessionStorage.setItem('myName', name);
+        }
+    </script>
+</body>
+</html>

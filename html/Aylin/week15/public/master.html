@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Master</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+       
+    </style>
+</head>
+<body>
+    <h1>Game Master Console</h1>
+    <h2>Connected Players</h2>
+    <div id="playersCount">Players connected: 0</div>
+    <button id="startButton">Start Game</button>
+    <div id="messageLog"></div>
+
+    <div id="statusText"></div>
+    <script>
+        function displayMessage(message) {
+            const log = document.getElementById('messageLog');
+            const newMessage = document.createElement('div');
+            newMessage.textContent = message;
+            log.appendChild(newMessage);
+        }
+
+        const socket = new WebSocket('ws://' + window.location.hostname + ':5400/game');
+        const startButton = document.getElementById('startButton');
+        const playersCountElement = document.getElementById('playersCount');
+
+        startButton.addEventListener('click', () => {
+            socket.send(JSON.stringify({ action: 'startGame' }));
+            window.location.href = 'http://' + window.location.hostname + ':5400/trivia.html';
+        });
+
+        socket.addEventListener('open', () => {
+            console.log('Connected to the WebSocket');
+        });
+
+        socket.addEventListener('message', (event) => {
+            const data = JSON.parse(event.data);
+            //Players connected
+            if (data.messageType === 'gameState') {
+                playersCountElement.textContent = `Players connected: ${data.gameState.currentPlayers}`;
+                startButton.disabled = data.gameState.currentPlayers < 2;
+                }
+
+            //New Player
+            if (data.messageType === 'newPlayer') {
+                playersCountElement.textContent = `Players connected: ${data.currentPlayers}`;
+                startButton.disabled = data.currentPlayers < 2;
+            }
+
+            //Game started
+            if (data.messageType === 'gameStart') {
+                alert(data.message);
+                window.location.href = 'http//' + window.location.hostname +':5400/trivia.html';
+            }
+
+            if (data.message) {
+                displayMessage(data.message);
+            }
+        });
+
+        socket.addEventListener('close', (event) => {
+            console.log('Disconnected from WebSocket-Server', event);
+
+            let pElement = document.createElement('p')
+            pElement.innerText = 'Connection closed: ' + event.reason 
+            document.getElementById('statusText').appendChild(pElement)
+            setTimeout(() => {
+                document.getElementById('statusText').removeChild(pElement);
+            }, 2000)
+        })
+
+        socket.addEventListener('error', (event) =>{
+            console.log('WebSoket Error', event);
+            alert('A connection error occurred');
+        });
+    </script>
+</body>
+</html>
