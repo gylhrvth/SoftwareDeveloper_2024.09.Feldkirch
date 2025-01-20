@@ -24,15 +24,91 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
             this.label = "♟";
         }
     }
-    
-//Black ♝,♞,♟,♜,♛,♚
-//White ♗,♘,♙,♖,♕,♔
+
+    //Black ♝,♞,♟,♜,♛,♚
+    //White ♗,♘,♙,♖,♕,♔
 
     getPossibleMoves(chess) {
         let moves = [];
 
+
+
+    // En Passant Logic for Black Pawn (on the 4th row)
+    if (!this.isWhite && this.currentRow === 4) {
+        const lastMove = chess.history[chess.history.length - 1];
+
+        // Ensure lastMove exists and has the necessary structure
+        if (lastMove && lastMove.move && lastMove.move.piece === "Pawn" && Math.abs(lastMove.move.toRow - lastMove.move.fromRow) === 2) {
+            const lastMovedPiece = chess.getChessPiece(lastMove.move.toRow, lastMove.move.toCol);
+
+            // Ensure the last moved piece exists
+            if (lastMovedPiece && lastMovedPiece.__type === "Pawn") {
+                // Check for en passant on the left
+                if (this.currentCol > 0 && lastMove.move.toRow === this.currentRow && lastMove.move.toCol === this.currentCol - 1) {
+                    moves.push({
+                        newRow: this.currentRow + 1,
+                        newColumn: this.currentCol - 1,
+                        piece: this,
+                        enPassant: true  // Mark this move as en passant
+                    });
+                }
+
+                // Check for en passant on the right
+                if (this.currentCol < 7 && lastMove.move.toRow === this.currentRow && lastMove.move.toCol === this.currentCol + 1) {
+                    moves.push({
+                        newRow: this.currentRow + 1,
+                        newColumn: this.currentCol + 1,
+                        piece: this,
+                        enPassant: true  // Mark this move as en passant
+                    });
+                }
+            }
+        } else {
+            // Debug log if lastMove doesn't have the expected structure
+            console.log("Invalid lastMove for en passant:", lastMove);
+        }
+    }
+
+    // En Passant Logic for White Pawn (on the 3rd row)
+    if (this.isWhite && this.currentRow === 3) {
+        const lastMove = chess.history[chess.history.length - 1];
+
+        // Ensure lastMove exists and has the necessary structure
+        if (lastMove && lastMove.move && lastMove.move.piece === "Pawn" && Math.abs(lastMove.move.toRow - lastMove.move.fromRow) === 2) {
+            const lastMovedPiece = chess.getChessPiece(lastMove.move.toRow, lastMove.move.toCol);
+
+            // Ensure the last moved piece exists
+            if (lastMovedPiece && lastMovedPiece.__type === "Pawn") {
+                // Check for en passant on the left
+                if (this.currentCol > 0 && lastMove.move.toRow === this.currentRow && lastMove.move.toCol === this.currentCol - 1) {
+                    moves.push({
+                        newRow: this.currentRow - 1,
+                        newColumn: this.currentCol - 1,
+                        piece: this,
+                        enPassant: true  // Mark this move as en passant
+                    });
+                }
+
+                // Check for en passant on the right
+                if (this.currentCol < 7 && lastMove.move.toRow === this.currentRow && lastMove.move.toCol === this.currentCol + 1) {
+                    moves.push({
+                        newRow: this.currentRow - 1,
+                        newColumn: this.currentCol + 1,
+                        piece: this,
+                        enPassant: true  // Mark this move as en passant
+                    });
+                }
+            }
+        } else {
+            // Debug log if lastMove doesn't have the expected structure
+            console.log("Invalid lastMove for en passant:", lastMove);
+        }
+    }
+
+
         // Black pieces
         if (!this.isWhite) {
+            /*
             if (this.currentRow < 7 && chess.getChessPiece(this.currentRow + 1, this.currentCol) == undefined) {
                 moves.push(
                     {
@@ -41,7 +117,7 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
                         piece: this
                     }
                 )
-            }
+            } */
             if (this.currentRow == 1 && chess.getChessPiece(this.currentRow + 2, this.currentCol) == undefined &&
                 chess.getChessPiece(this.currentRow + 1, this.currentCol) == undefined) {
                 moves.push(
@@ -54,7 +130,7 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
             }
             // Add option to HIT an other figure
             // hits left
-            if (this.currentCol > 0 && this.currentRow < 7 && 
+            if (this.currentCol > 0 && this.currentRow < 7 &&
                 chess.getChessPiece(this.currentRow + 1, this.currentCol - 1) != undefined &&
                 chess.getChessPiece(this.currentRow + 1, this.currentCol - 1).isWhite != this.isWhite) {
                 moves.push(
@@ -68,8 +144,8 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
 
             // Add option to HIT an other figure
             // hits right
-            if (this.currentCol < 7 && this.currentRow < 7 && 
-                chess.getChessPiece(this.currentRow + 1, this.currentCol + 1) != undefined && 
+            if (this.currentCol < 7 && this.currentRow < 7 &&
+                chess.getChessPiece(this.currentRow + 1, this.currentCol + 1) != undefined &&
                 chess.getChessPiece(this.currentRow + 1, this.currentCol + 1).isWhite != this.isWhite) {
                 moves.push(
                     {
@@ -79,35 +155,6 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
                     }
                 )
             }
-
-
- /*          // En Passant try 1 Hit Left Black
-            if (this.currentCol > 0 && this.currentRow == 4 && 
-              chess.
-                chess.getChessPiece(this.currentRow + 1, this.currentCol - 1) != undefined &&
-                chess.getChessPiece(this.currentRow + 1, this.currentCol - 1).isWhite != this.isWhite) {
-                moves.push(
-                    {
-                        newRow: this.currentRow + 1,
-                        newColumn: this.currentCol - 1,
-                        piece: this
-                    }
-                )
-            }
-
-            // En Passant Hit Right Black
-            if (this.currentCol < 7 && this.currentRow == 4 && 
-
-                chess.getChessPiece(this.currentRow + 1, this.currentCol + 1) != undefined && 
-                chess.getChessPiece(this.currentRow + 1, this.currentCol + 1).isWhite != this.isWhite) {
-                moves.push(
-                    {
-                        newRow: this.currentRow + 1,
-                        newColumn: this.currentCol + 1,
-                        piece: this
-                    }
-                )
-            } */
         }
 
         // White pieces
@@ -137,8 +184,8 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
             // Add option to HIT an other figure
             // hits left
             if (this.currentCol > 0 && this.currentRow > 0 &&
-                 chess.getChessPiece(this.currentRow - 1, this.currentCol - 1) != undefined && 
-                 chess.getChessPiece(this.currentRow - 1, this.currentCol - 1).isWhite != this.isWhite) {
+                chess.getChessPiece(this.currentRow - 1, this.currentCol - 1) != undefined &&
+                chess.getChessPiece(this.currentRow - 1, this.currentCol - 1).isWhite != this.isWhite) {
                 moves.push(
                     {
                         newRow: this.currentRow - 1,
@@ -150,8 +197,8 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
 
             // Add option to HIT an other figure
             // hits right
-            if (this.currentCol < 7 && this.currentRow > 0 && 
-                chess.getChessPiece(this.currentRow - 1, this.currentCol + 1) != undefined && 
+            if (this.currentCol < 7 && this.currentRow > 0 &&
+                chess.getChessPiece(this.currentRow - 1, this.currentCol + 1) != undefined &&
                 chess.getChessPiece(this.currentRow - 1, this.currentCol + 1).isWhite != this.isWhite) {
                 moves.push(
                     {
@@ -162,7 +209,7 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
                 )
             }
         }
-      //  console.log("Pawn", moves)
+        //  console.log("Pawn", moves)
         return moves;
     }
 

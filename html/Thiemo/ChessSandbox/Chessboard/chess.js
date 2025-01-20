@@ -117,26 +117,39 @@ class ChessGame {
 
     initGameField() {
 
-        for (let column = 0; column < this.boardArray[0].length; ++column) {
-            this.addNewChessPiece(1, column, new Pawn(false))
-            this.addNewChessPiece(6, column, new Pawn(true))
-        }
-        this.addNewChessPiece(0, 1, new Knight(false))
-        this.addNewChessPiece(0, 6, new Knight(false))
-        this.addNewChessPiece(7, 1, new Knight(true))
-        this.addNewChessPiece(7, 6, new Knight(true))
-        this.addNewChessPiece(0, 2, new Bishop(false))
-        this.addNewChessPiece(0, 5, new Bishop(false))
-        this.addNewChessPiece(7, 2, new Bishop(true))
-        this.addNewChessPiece(7, 5, new Bishop(true))
-        this.addNewChessPiece(0, 0, new Rook(false))
-        this.addNewChessPiece(0, 7, new Rook(false))
-        this.addNewChessPiece(7, 0, new Rook(true))
-        this.addNewChessPiece(7, 7, new Rook(true))
-        this.addNewChessPiece(0, 3, new Queen(false))
-        this.addNewChessPiece(7, 3, new Queen(true))
-        this.addNewChessPiece(0, 4, new King(false))
-        this.addNewChessPiece(7, 4, new King(true))
+        /*       for (let column = 0; column < this.boardArray[0].length; ++column) {
+                   this.addNewChessPiece(1, column, new Pawn(false))
+                   this.addNewChessPiece(6, column, new Pawn(true))
+                   
+               }
+               this.addNewChessPiece(0, 1, new Knight(false))
+               this.addNewChessPiece(0, 6, new Knight(false))
+               this.addNewChessPiece(7, 1, new Knight(true))
+               this.addNewChessPiece(7, 6, new Knight(true))
+               this.addNewChessPiece(0, 2, new Bishop(false))
+               this.addNewChessPiece(0, 5, new Bishop(false))
+               this.addNewChessPiece(7, 2, new Bishop(true))
+               this.addNewChessPiece(7, 5, new Bishop(true))
+               this.addNewChessPiece(0, 0, new Rook(false))
+               this.addNewChessPiece(0, 7, new Rook(false))
+               this.addNewChessPiece(7, 0, new Rook(true))
+               this.addNewChessPiece(7, 7, new Rook(true))
+               this.addNewChessPiece(0, 3, new Queen(false))
+               this.addNewChessPiece(7, 3, new Queen(true))
+               this.addNewChessPiece(0, 4, new King(false))
+               this.addNewChessPiece(7, 4, new King(true))  */
+
+        this.addNewChessPiece(1, 0, new Pawn(false))
+        this.addNewChessPiece(1, 2, new Pawn(false))
+        this.addNewChessPiece(1, 4, new Pawn(false))
+        this.addNewChessPiece(1, 6, new Pawn(false))
+        this.addNewChessPiece(3, 1, new Pawn(true))
+        this.addNewChessPiece(3, 3, new Pawn(true))
+        this.addNewChessPiece(3, 5, new Pawn(true))
+        this.addNewChessPiece(3, 7, new Pawn(true))
+
+        this.addNewChessPiece(6, 0, new Pawn(true))
+        this.addNewChessPiece(6, 2, new Pawn(true))
 
     }
 
@@ -147,18 +160,17 @@ class ChessGame {
     }
 
     moveChessPiece(piece, newRow, newColumn) {
-        this.saveGameField(piece, newRow, newColumn)
+        this.saveGameField(piece, newRow, newColumn);
         this.boardArray[newRow][newColumn] = this.boardArray[piece.currentRow][piece.currentCol];
-        this.boardArray[piece.currentRow][piece.currentCol] = undefined
+        this.boardArray[piece.currentRow][piece.currentCol] = undefined;
         this.boardArray[newRow][newColumn].currentRow = newRow;
         this.boardArray[newRow][newColumn].currentCol = newColumn;
 
-        /*     if(this.boardArray[newRow][newColumn].piece.__type === 'Pawn'){
-              let lastMovePawn = this.boardArray[newRow][newColumn];
-             
-             }
-             console.log(lastMovePawn)*/
+
     }
+
+
+
 
     saveGameField(piece, newRow, newColumn) {
         let cloneBoard = structuredClone(this.boardArray)
@@ -268,7 +280,8 @@ class ChessGame {
                             targetSquare.classList.add('highlightSquare');
                         });
 
-                        console.log(`Selected piece: ${piece.label} at ${String.fromCharCode(65 + col)}${8 - row}`);
+                        console.log(`Selected piece: ${piece.label} at ${String.fromCharCode(65 + col)}${8 - row}`, piece.getPossibleMoves(this));
+                        //       console.log("possible Moves: ",piece.getPossibleMoves(this))
                     }
 
                     // If a highlighted square is clicked
@@ -429,7 +442,7 @@ class ChessGame {
         }
     }
 
-    
+
 
     tryToMoveAI() {
         if (!this.computerIsThinking) {
@@ -451,7 +464,6 @@ class ChessGame {
             }
         }
     }
-
 }
 
 
