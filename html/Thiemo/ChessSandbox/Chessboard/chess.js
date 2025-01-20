@@ -147,7 +147,7 @@ class ChessGame {
     }
 
     moveChessPiece(piece, newRow, newColumn) {
-        this.saveGameField()
+        this.saveGameField(piece, newRow, newColumn)
         this.boardArray[newRow][newColumn] = this.boardArray[piece.currentRow][piece.currentCol];
         this.boardArray[piece.currentRow][piece.currentCol] = undefined
         this.boardArray[newRow][newColumn].currentRow = newRow;
@@ -160,7 +160,7 @@ class ChessGame {
              console.log(lastMovePawn)*/
     }
 
-    saveGameField() {
+    saveGameField(piece, newRow, newColumn) {
         let cloneBoard = structuredClone(this.boardArray)
         Object.setPrototypeOf(cloneBoard, Object.getPrototypeOf(this.boardArray))
         for (let i = 0; i < cloneBoard.length; i++) {
@@ -172,59 +172,22 @@ class ChessGame {
                 }
             }
         }
-        this.history.push(cloneBoard)
-        //console.log("History: ", this.history)
+        this.history.push({
+            board: cloneBoard,
+            move: {
+                piece: piece.__type,
+                fromRow: piece.currentRow,
+                fromColumn: piece.currentCol,
+                toRow: newRow,
+                toCol: newColumn
+            }
+        })
+        console.log("History: ", this.history)
     }
 
     undoGameField() {
-        //console.log("Before Undo: ", this.boardArray)
         if (this.history.length > 0) {
-            this.boardArray = this.history.pop()
-            /*
-            this.boardArray = JSON.parse(this.history.pop(), (key, value) => {
-                //Pawn
-                if (typeof (value) === 'object' && value != undefined && value.__type === 'Pawn') {
-                    let p = new Pawn(value.isWhite)
-                    p.restoreData(value)
-                    return p
-                }
-                //Knight
-                if (typeof (value) === 'object' && value != undefined && value.__type === 'Knight') {
-                    let k = new Knight(value.isWhite)
-                    k.restoreData(value)
-                    return k
-                }
-                //Bishop
-                if (typeof (value) === 'object' && value != undefined && value.__type === 'Bishop') {
-                    let b = new Bishop(value.isWhite)
-                    b.restoreData(value)
-                    return b
-                }
-
-                if (typeof (value) === 'object' && value != undefined && value.__type === 'Rook') {
-                    let r = new Rook(value.isWhite)
-                    r.restoreData(value)
-                    return r
-                }
-
-                if (typeof (value) === 'object' && value != undefined && value.__type === 'Queen') {
-                    let q = new Queen(value.isWhite)
-                    q.restoreData(value)
-                    return q
-                }
-
-                if (typeof (value) === 'object' && value != undefined && value.__type === 'King') {
-                    let q = new King(value.isWhite)
-                    q.restoreData(value)
-                    return q
-                }
-                return value;
-            }
-
-
-            )
-            */
-            //console.log("Undo: ", this.boardArray)
+            this.boardArray = this.history.pop().board
         } else {
             console.log("No more history")
         }
