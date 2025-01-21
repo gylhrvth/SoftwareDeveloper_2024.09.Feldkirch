@@ -39,29 +39,22 @@
             color: blue;
             margin-top: 10px;
         }
-        
-        #turn-message {
-            font-size: 20px;
-            font-weight: bold;
-            color: green;
-        }
     </style>
 </head>
 <body>
     <header>
         <div id="player-name"></div>
-        <div id="turn-message"></div>
     </header>
     <div class="wrapper">
         <div class="categorie-container">
             <h2>Musik</h2>
-            <button class="q100" id="m100" onclick="selectCategory('Musik', 100)">100</button>
-            <button class="q200" id="m200" onclick="selectCategory('Musik', 200)">200</button>
+            <button class="q100" id="m100">100</button>
+            <button class="q200" id="m200">200</button>
         </div>
         <div class="categorie2-container">
             <h2>Serie</h2>
-            <button class="q100" id="s100" onclick="selectCategory('Serie', 100)">100</button>
-            <button class="q200" id="s200" onclick="selectCategory('Serie', 200)">200</button>
+            <button class="q100" id="s100">100</button>
+            <button class="q200" id="s200">200</button>
         </div>
     </div>
     <script src="script/triviaQ.js"></script>
@@ -72,6 +65,13 @@
         // Handle WebSocket connection opening
         socket.addEventListener('open', () => {
             console.log('Connected to trivia WebSocket!');
+        });
+        document.getElementById('m100').addEventListener('click', function(){
+            selectCategory('Musik', 100);
+        });
+
+        document.getElementById('m200').addEventListener('click', function(){
+            selectCategory('Musik', 200);
         });
 
         socket.addEventListener('message', (event) => {

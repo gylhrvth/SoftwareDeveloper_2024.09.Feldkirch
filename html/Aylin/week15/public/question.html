@@ -135,6 +135,12 @@
                     playerNameDiv.textContent = `Current Player: ${currentPlayerName}`;
                 }
             }
+
+            // Active Player
+            if (data.type === 'activePlayer') {
+                const activePlayerName = data.playerName;
+                playerNameDiv.textContent = `Current Player: ${activePlayerName}`;
+            }
         });
 
         socket.addEventListener('close', () => {
