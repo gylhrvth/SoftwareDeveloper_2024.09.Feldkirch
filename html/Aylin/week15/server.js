@@ -72,6 +72,25 @@ function broadcastToPlayers(message) {
 
 // Player - Clients
 app.ws('/player', function(ws, req) {
+    if (gameState.gameStarted) {
+        console.log('Game already started! Cannot join.');
+        ws.send(JSON.stringify({
+            messageType: 'error',
+            message: 'The game has already started. Cannot join the game.',
+        }));
+        ws.close(1000, 'Game already started');
+        return;
+    }
+    
+    if(playerWS.length > 4) {
+        console.log('Maximum player limit reached!');
+        ws.send(JSON.stringify({
+            messageType: 'error',
+            message: 'Maximum player limit reached. Cannot join the game.',
+        }));
+        ws.close(1000, 'Maximum player limit reached');
+        return;
+    }
     console.log('Player connected');
     playerWS.push({ ws: ws, name: null });
 
@@ -195,3 +214,32 @@ app.ws('/trivia', function(ws, req) {
         console.error('WebSocket error:', err);
     });
 });
+
+//Question
+ app.ws('question', function(ws, req) {
+    console.log('Question WebSocket connection established');
+    activeQuestionSocket = ws;
+
+    ws.on('message', (message) => {
+        const data = JSON.parse(message);
+
+        if (data.action === 'getGameState') {
+            const gameState = {
+                players: playerWS.map((player) => player.name),
+                currentPlayers: activePlayerIndex
+            };
+            ws.send(JSON.stringify({
+                type: 'gameState',
+                gameState: gameState
+            }));
+        }
+    });
+
+    ws.on('close', () => {
+        console.log('Questioon WebSocket connection closed');
+    });
+
+    ws.on('error', (err) => {
+        console.error('WebSocket error:', err);
+    });
+})

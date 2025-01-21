@@ -79,13 +79,13 @@
 
             document.getElementById('Form').style.display = 'none';
 
-            //Welcome message
+            // Welcome message
             const welcomeMsg = document.getElementById('welcomeMsg');
             if(welcomeMsg) {
                 welcomeMsg.innerHTML = `Welcome, ${name}!`;
             }
             
-            //Name is saved to sessionStorage
+            // Name is saved to sessionStorage
             sessionStorage.setItem('myName', name);
         }
     </script>

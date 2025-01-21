@@ -49,8 +49,8 @@
 </head>
 <body>
     <header>
-    <div id="player-name"></div>
-    <div id="turn-message"></div>
+        <div id="player-name"></div>
+        <div id="turn-message"></div>
     </header>
     <div class="wrapper">
         <div class="categorie-container">
@@ -66,8 +66,8 @@
     </div>
     <script src="script/triviaQ.js"></script>
     <script>
-         const socket = new WebSocket('ws://' + window.location.hostname + ':5400/trivia');
-         const playerNameDiv = document.getElementById('player-name');
+        const socket = new WebSocket('ws://' + window.location.hostname + ':5400/trivia');
+        const playerNameDiv = document.getElementById('player-name');
 
         // Handle WebSocket connection opening
         socket.addEventListener('open', () => {
@@ -78,7 +78,7 @@
             const data = JSON.parse(event.data);
             console.log('Message from server:', event.data);
             
-            //active Player
+            // Active Player
             if (data.type === 'activePlayer') {
                 const activePlayerName = data.playerName;
                 playerNameDiv.textContent = `${activePlayerName}'s turn`;
