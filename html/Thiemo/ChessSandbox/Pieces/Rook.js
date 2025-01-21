@@ -1,61 +1,4 @@
-/*
-export { Rook };
 
-class Rook {
-    constructor(isWhite) {
-        this.__type = 'Rook';
-        this.currentRow = null;
-        this.currentCol = null;
-        this.isWhite = isWhite;
-        this.label = isWhite ? "♖" : "♜";
-    }
-
-    restoreData(value) {
-        this.currentRow = value.currentRow;
-        this.currentCol = value.currentCol;
-        this.isWhite = value.isWhite;
-        this.label = value.isWhite ? "♖" : "♜";
-    }
-
-    testOutOfBounds(rowOffset, colOffset) {
-        let newRow = this.currentRow + rowOffset;
-        let newCol = this.currentCol + colOffset;
-        return newRow < 0 || newRow > 7 || newCol < 0 || newCol > 7;
-    }
-
-    getPossibleMoves(chess) {
-        let moves = [];
-        let directions = [
-            { rowOffset: -1, colOffset: 0 },  // Up
-            { rowOffset: 1, colOffset: 0 },   // Down
-            { rowOffset: 0, colOffset: 1 },   // Right
-            { rowOffset: 0, colOffset: -1 }   // Left
-        ];
-
-        for (let direction of directions) {
-            let distance = 1;
-            while (true) {
-                let newRow = this.currentRow + direction.rowOffset * distance;
-                let newCol = this.currentCol + direction.colOffset * distance;
-
-                if (this.testOutOfBounds(direction.rowOffset * distance, direction.colOffset * distance)) break;
-
-                let piece = chess.getChessPiece(newRow, newCol);
-                if (!piece) {
-                    moves.push({ newRow, newCol, piece: this });
-                } else {
-                    if (piece.isWhite !== this.isWhite) {
-                        moves.push({ newRow, newCol, piece: this });
-                    }
-                    break; // Stop further movement in this direction
-                }
-                distance++;
-            }
-        }
-
-        return moves;
-    }
-}*/
 
 
 
@@ -64,7 +7,7 @@ export { Rook };
 class Rook {
     constructor(isWhite) {
         this.__type = 'Rook';
-
+this.hasMoved = false;
         this.currentRow = null
         this.currentCol = null
         this.isWhite = isWhite
@@ -77,6 +20,7 @@ class Rook {
     //Black ♝,♞,♟,♜,♛,♚
     //White ♗,♘,♙,♖,♕,♔
     restoreData(value) {
+        this.hasMoved = value.hasMoved
         this.currentRow = value.currentRow
         this.currentCol = value.currentCol
         this.isWhite = value.isWhite

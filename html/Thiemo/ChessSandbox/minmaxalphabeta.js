@@ -9,13 +9,13 @@ export function minmax(chessOriginal, depth, isWhite, alpha, beta){
     if (moves.length == 0){
         return {score: chess.calculateScore(), move: null};
     }
-    if (depth == 10){
-        console.log("Possible Moves: ", moves);
-    }
     let bestMove = null;
     if(isWhite){
         let maxEval = -Infinity;
         for(let move of moves){
+            if (move.piece === undefined){
+                console.log('move.piece is undefined', move, moves)
+            }
             chess.moveChessPiece(move.piece, move.newRow, move.newColumn);
             let evalResult = minmax(chess, depth-1, !isWhite, alpha, beta);
             chess.undoGameField();
