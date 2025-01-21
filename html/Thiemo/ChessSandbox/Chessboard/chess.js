@@ -10,8 +10,10 @@ import { King } from "../Pieces/King.js"
 // chessboard with (restoreData, cloneChessGame, initGameField, addNewChessPiece, moveChessPiece, saveGameField, 
 //                  undoGameField getChessPiece, printGameField, calculateScore, getAllPossibleMoves)
 
-//  TODO : Pawn == en passant + what happens if the pawn reaches the end ==> pawn ===Queen/Rook/Knight/Bishop
-//  TODO : variable for the last moved pawn ???????
+//  TODO : en passant === CHECK!!!!! 
+//  TODO : variable for the last moved pawn ??????? === CHECK!!!!
+
+//  TODO : Pawn what happens if the pawn reaches the end ==> pawn ===Queen/Rook/Knight/Bishop
 //  TODO : King == rochade + what happens when the King is in check ==>  FORCED MOVE or BLOCK
 //  TODO : 50 Move Rule === if no pawn moved or no piece got captured in the last 50 moves(player1Move +Player2Move)
 
@@ -62,10 +64,10 @@ class ChessGame {
 
     initGameField() {
 
-        /*       for (let column = 0; column < this.boardArray[0].length; ++column) {
+               for (let column = 0; column < this.boardArray[0].length; ++column) {
                    this.addNewChessPiece(1, column, new Pawn(false))
                    this.addNewChessPiece(6, column, new Pawn(true))
-                   
+       
                }
                this.addNewChessPiece(0, 1, new Knight(false))
                this.addNewChessPiece(0, 6, new Knight(false))
@@ -82,19 +84,18 @@ class ChessGame {
                this.addNewChessPiece(0, 3, new Queen(false))
                this.addNewChessPiece(7, 3, new Queen(true))
                this.addNewChessPiece(0, 4, new King(false))
-               this.addNewChessPiece(7, 4, new King(true))  */
+               this.addNewChessPiece(7, 4, new King(true)) 
 
-        this.addNewChessPiece(1, 0, new Pawn(false))
-        this.addNewChessPiece(1, 2, new Pawn(false))
-        this.addNewChessPiece(1, 4, new Pawn(false))
-        this.addNewChessPiece(1, 6, new Pawn(false))
-        this.addNewChessPiece(3, 1, new Pawn(true))
-        this.addNewChessPiece(3, 3, new Pawn(true))
-        this.addNewChessPiece(3, 5, new Pawn(true))
-        this.addNewChessPiece(3, 7, new Pawn(true))
+   /*     this.addNewChessPiece(4, 0, new Pawn(false))
+        this.addNewChessPiece(4, 2, new Pawn(false))
+        this.addNewChessPiece(4, 4, new Pawn(false))
+        this.addNewChessPiece(4, 6, new Pawn(false))
+        this.addNewChessPiece(6, 1, new Pawn(true))
+        this.addNewChessPiece(6, 3, new Pawn(true))
+        this.addNewChessPiece(6, 5, new Pawn(true))
+        this.addNewChessPiece(6, 7, new Pawn(true)) */
 
-        this.addNewChessPiece(6, 0, new Pawn(true))
-        this.addNewChessPiece(6, 2, new Pawn(true))
+
 
     }
 
@@ -111,7 +112,7 @@ class ChessGame {
         this.boardArray[newRow][newColumn].currentRow = newRow;
         this.boardArray[newRow][newColumn].currentCol = newColumn;
 
-        if (enPassant){
+        if (enPassant) {
             console.log("moveChessPiece: En passant")
             let deletePawnInRow = -1
             if (piece.isWhite) {
@@ -236,7 +237,7 @@ class ChessGame {
                         });
 
                         console.log(`Selected piece: ${piece.label} at ${String.fromCharCode(65 + col)}${8 - row}`, piece.getPossibleMoves(this));
-                        //       console.log("possible Moves: ",piece.getPossibleMoves(this))
+                        //     console.log("possible Moves: ",piece.getPossibleMoves(this))
                     }
 
                     // If a highlighted square is clicked
@@ -251,9 +252,11 @@ class ChessGame {
                         const targetSquare = this.boardArray[targetRow][targetCol];
                         let enPassant = false;
                         if (square.getAttribute('enPassant') === 'true') {
-                            enPassant = true                     
+                            enPassant = true
                         }
-                        console.log("En passant?: ", enPassant)
+                        if (enPassant) {
+                            console.log("En passant?: ", enPassant)
+                        }
 
                         // Move the piece
                         this.moveChessPiece(selectedPiece, targetRow, targetCol, enPassant);
@@ -263,6 +266,7 @@ class ChessGame {
 
                         // Re-render the board
                         this.printGameField();
+                        console.log("History ", this.history)
 
                         // Print the move
                         this.printMove(
@@ -409,6 +413,27 @@ class ChessGame {
             if ((this.isWhiteTurn && !this.isWhiteHuman) || (!this.isWhiteTurn && !this.isBlackHuman)) {
                 console.log('Try to move AI')
                 this.computerIsThinking = true;
+
+            // Collect all possible moves for the AI
+            const possibleMovesByPiece = [];
+            this.boardArray.forEach((row) => {
+                row.forEach((piece) => {
+                    if (piece && piece.isWhite === this.isWhiteTurn) {
+                        const possibleMoves = piece.getPossibleMoves(this);
+                        if (possibleMoves.length > 0) {
+                            possibleMovesByPiece.push({
+                                pieceType: piece.__type,
+                                position: { row: piece.currentRow, col: piece.currentCol },
+                                moves: possibleMoves.map((move) => ({ row: move.newRow, col: move.newColumn })),
+                            });
+                        }
+                    }
+                });
+            });
+
+            // Log the structured array of possible moves
+            console.log("AI's Possible Moves by Piece:", possibleMovesByPiece);
+
                 let minmaxresult = minmax(this, 4, this.isWhiteTurn, -Infinity, Infinity)
                 let bestMove = minmaxresult.move
                 let enPassant = false
@@ -425,6 +450,8 @@ class ChessGame {
                 this.isWhiteTurn = !this.isWhiteTurn;
                 this.printGameField()
                 this.computerIsThinking = false
+
+                console.log("History ", this.history)
             }
         }
     }

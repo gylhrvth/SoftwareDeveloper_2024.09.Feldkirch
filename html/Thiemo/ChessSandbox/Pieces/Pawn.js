@@ -58,7 +58,7 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
                 }
             } else {
                 // Debug log if lastMove doesn't have the expected structure
-                console.log("Invalid lastMove for en passant:", lastMove);
+             //   console.log("Invalid lastMove for en passant:", lastMove);
             }
         }
 
@@ -103,7 +103,7 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
 
         // Black pieces
         if (!this.isWhite) {
-            /*
+            
             if (this.currentRow < 7 && chess.getChessPiece(this.currentRow + 1, this.currentCol) == undefined) {
                 moves.push(
                     {
@@ -112,7 +112,7 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
                         piece: this
                     }
                 )
-            } */
+            } 
             if (this.currentRow == 1 && chess.getChessPiece(this.currentRow + 2, this.currentCol) == undefined &&
                 chess.getChessPiece(this.currentRow + 1, this.currentCol) == undefined) {
                 moves.push(
