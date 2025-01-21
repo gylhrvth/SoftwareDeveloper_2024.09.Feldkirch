@@ -15,6 +15,7 @@ import { King } from "../Pieces/King.js"
 // That process turns "copying" into learning.
 
 
+// TODO: 
 
 class ChessGame {
     constructor() {
@@ -34,7 +35,7 @@ class ChessGame {
 
         this.isWhiteTurn = true;
         this.isWhiteHuman = true;
-        this.isBlackHuman = true;
+        this.isBlackHuman = false;
         this.computerIsThinking = false;
     }
 
@@ -65,7 +66,7 @@ class ChessGame {
             this.addNewChessPiece(1, column, new Pawn(false))
             this.addNewChessPiece(6, column, new Pawn(true))
         }
-/*
+
         this.addNewChessPiece(0, 1, new Knight(false))
         this.addNewChessPiece(0, 6, new Knight(false))
         this.addNewChessPiece(7, 1, new Knight(true))
@@ -74,10 +75,8 @@ class ChessGame {
         this.addNewChessPiece(0, 5, new Bishop(false))
         this.addNewChessPiece(7, 2, new Bishop(true))
         this.addNewChessPiece(7, 5, new Bishop(true))
-
         this.addNewChessPiece(0, 3, new Queen(false))
         this.addNewChessPiece(7, 3, new Queen(true))
-            */
         this.addNewChessPiece(0, 4, new King(false))
         this.addNewChessPiece(7, 4, new King(true))
         this.addNewChessPiece(0, 0, new Rook(false))
@@ -104,7 +103,7 @@ class ChessGame {
         piece.currentCol = column;
     }
 
-    moveChessPiece(piece, newRow, newColumn, enPassant) {
+    moveChessPiece(piece, newRow, newColumn, enPassant, castling) {
         this.saveGameField(piece, newRow, newColumn);
         this.boardArray[newRow][newColumn] = this.boardArray[piece.currentRow][piece.currentCol];
         this.boardArray[piece.currentRow][piece.currentCol] = undefined;
@@ -120,7 +119,38 @@ class ChessGame {
             }
             this.boardArray[piece.currentRow + deletePawnInRow][piece.currentCol] = undefined;
         }
+     //  console.log(castling)
 
+        // Castling logic
+        if (castling) {
+            console.log("moveChessPiece: Castling");
+
+            let rookOldCol, rookNewCol;
+            if (newColumn === 6) { // Kingside castling
+                rookOldCol = 7;
+                rookNewCol = 5;
+            } else if (newColumn === 2) { // Queenside castling
+                rookOldCol = 0;
+                rookNewCol = 3;
+            }
+
+            // Ensure the rook exists at the correct position before attempting castling
+            let rook = this.boardArray[newRow][rookOldCol];
+            if (!rook) {
+                console.error("Rook not found for castling at column ", rookOldCol);
+                return;
+            }
+
+            // Move the rook to its new position
+            this.boardArray[newRow][rookNewCol] = rook;
+            this.boardArray[newRow][rookOldCol] = undefined;
+
+            // Update the rook's position
+            rook.currentRow = newRow;
+            rook.currentCol = rookNewCol;
+
+            console.log(`Rook moved from column ${rookOldCol} to column ${rookNewCol}`);
+        }
     }
 
     saveGameField(piece, newRow, newColumn) {
@@ -231,6 +261,9 @@ class ChessGame {
                             if (move.enPassant && move.enPassant === true) {
                                 targetSquare.setAttribute('enPassant', move.enPassant);
                             }
+                            if (move.castling) {
+                                targetSquare.setAttribute('castling', move.castling);
+                            }
                         });
 
                         console.log(`Selected piece: ${piece.label} at ${String.fromCharCode(65 + col)}${8 - row}`, piece.getPossibleMoves(this));
@@ -255,8 +288,16 @@ class ChessGame {
                             console.log("En passant?: ", enPassant)
                         }
 
+                        let castling = false;
+                        if (square.getAttribute('castling') !== undefined) {
+                            castling = square.getAttribute('castling')
+                        }
+
+                      //  console.log("castling?: ", castling)
+
+
                         // Move the piece
-                        this.moveChessPiece(selectedPiece, targetRow, targetCol, enPassant);
+                        this.moveChessPiece(selectedPiece, targetRow, targetCol, enPassant, castling);
 
                         // Switch turns
                         this.isWhiteTurn = !this.isWhiteTurn;
@@ -302,6 +343,8 @@ class ChessGame {
             if (!chessBoard.contains(event.target)) {
                 document.querySelectorAll('.highlightSquare').forEach(sq => {
                     sq.classList.remove('highlightSquare');
+                    //     sq.removeAttribute('enPassant');
+                    //     sq.removeAttribute('castling');
                 });
                 selectedPiece = null;
             }
@@ -437,18 +480,22 @@ class ChessGame {
                 if (bestMove.enPassant && bestMove.enPassant === true) {
                     enPassant = true
                 }
+                let castling = false;
+                if (bestMove.castling && bestMove.castling === true) {
+                    castling = true
+                    }
 
                 let oldPositionRow = bestMove.piece.currentRow
                 let oldPositionCol = bestMove.piece.currentCol
                 this.printMove(this.isWhiteTurn ? "White" : "Black", bestMove, oldPositionCol, oldPositionRow)
-                this.moveChessPiece(bestMove.piece, bestMove.newRow, bestMove.newColumn, enPassant);
+                this.moveChessPiece(bestMove.piece, bestMove.newRow, bestMove.newColumn, enPassant, castling);
 
                 // Switch turns
                 this.isWhiteTurn = !this.isWhiteTurn;
                 this.printGameField()
                 this.computerIsThinking = false
 
-                console.log("History ", this.history)
+              //  console.log("History ", this.history)
             }
         }
     }

@@ -15,6 +15,21 @@
       background-color: #f0f0f0;
     }
 
+    #game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 20px; /* Optional: Adds space above the container */
+}
+
+#turn-display {
+    font-size: 50px;
+    margin-bottom: 10px;  /* Adds space between the turn display and the chessboard */
+    
+}
+
     #chess-board {
       display: grid;
       grid-template-columns: repeat(8, 1fr);
@@ -27,25 +42,30 @@
     }
 
     .coordinateRank {
-    position: absolute;
-    top: -40px; /* Top-left corner */
-    left: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333; /* Make it visible on both white and black squares */
-}
+      position: absolute;
+      top: -40px;
+      /* Top-left corner */
+      left: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      /* Make it visible on both white and black squares */
+    }
 
-.coordinateFile {
-    position: absolute;
-    bottom: -40px; /* Bottom-right corner */
-    right: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333; /* Make it visible on both white and black squares */
-}
+    .coordinateFile {
+      position: absolute;
+      bottom: -40px;
+      /* Bottom-right corner */
+      right: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      /* Make it visible on both white and black squares */
+    }
 
     .square {
-      position: relative; /* Required for absolute positioning of coordinates */
+      position: relative;
+      /* Required for absolute positioning of coordinates */
       height: 125px;
       display: grid;
       justify-content: center;
@@ -105,8 +125,11 @@
 </head>
 
 <body>
+  <div id="game-container">
+    <div id="turn-display">White's Turn</div>
+    <div id="chess-board"></div>
+  </div>
 
-  <div id="chess-board"></div>
   <br>
 
   <script type="module" src="chess.js"></script>
