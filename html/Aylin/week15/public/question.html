@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Questions</title>
-    <link rel="icon" href="/public/ressources/fb.png">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
 </head>
 <style>
     #player-name {
@@ -132,14 +132,8 @@
                 const currentPlayerName = gameState.players[gameState.currentPlayer];
 
                 if (playerNameDiv) {
-                    playerNameDiv.textContent = `Current Player: ${currentPlayerName}`;
+                    playerNameDiv.textContent = `${currentPlayerName}'s turn`;
                 }
-            }
-
-            // Active Player
-            if (data.type === 'activePlayer') {
-                const activePlayerName = data.playerName;
-                playerNameDiv.textContent = `Current Player: ${activePlayerName}`;
             }
         });
 

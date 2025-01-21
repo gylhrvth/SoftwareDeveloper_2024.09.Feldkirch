@@ -205,7 +205,7 @@ app.ws('/trivia', function(ws, req) {
         if (data.action === 'getGameState') {
             const gameState = {
                 players: playerWS.map((player) => player.name),
-                currentPlayers: activePlayerIndex
+                currentPlayer: activePlayerIndex
             };
             ws.send(JSON.stringify({
                 type: 'gameState',
@@ -226,7 +226,7 @@ app.ws('/trivia', function(ws, req) {
 //Question
 let activeQuestionSocket = null;
 
- app.ws('question', function(ws, req) {
+ app.ws('/question', function(ws, req) {
     console.log('Question WebSocket connection established');
     activeQuestionSocket = ws;
 
@@ -236,7 +236,7 @@ let activeQuestionSocket = null;
         if (data.action === 'getGameState') {
             const gameState = {
                 players: playerWS.map((player) => player.name),
-                currentPlayers: activePlayerIndex
+                currentPlayer: activePlayerIndex
             };
             ws.send(JSON.stringify({
                 type: 'gameState',
