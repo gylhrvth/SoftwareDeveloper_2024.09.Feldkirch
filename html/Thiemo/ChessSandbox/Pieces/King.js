@@ -104,10 +104,18 @@ class King {
 
         if (this.canCastle(chess)) {
             if (chess.boardArray[row][0] && chess.boardArray[row][0].hasMoved === false) {
-                moves.push({ newRow: row, newColumn: 2, castling: 'left' });
+                moves.push({ 
+                    piece: this, 
+                    newRow: row, 
+                    newColumn: 2, 
+                    castling: 'left' });
             }
             if (chess.boardArray[row][7] && chess.boardArray[row][7].hasMoved === false) {
-                moves.push({ newRow: row, newColumn: 6, castling: 'right' });
+                moves.push({
+                    piece: this, 
+                    newRow: row, 
+                    newColumn: 6, 
+                    castling: 'right' });
             }
         }
 
@@ -115,7 +123,10 @@ class King {
         if (up && !this.testOutOfBounds(-distance, 0)) {
             if (chess.getChessPiece(row - distance, col) == undefined ||
                 chess.getChessPiece(row - distance, col).isWhite != this.isWhite) {
-                moves.push({ newRow: row - distance, newColumn: col, piece: this })
+                moves.push({ 
+                    newRow: row - distance, 
+                    newColumn: col, 
+                    piece: this })
             } else {
                 up = false
             }
@@ -124,7 +135,10 @@ class King {
         if (down && !this.testOutOfBounds(distance, 0)) {
             if (chess.getChessPiece(row + distance, col) == undefined ||
                 chess.getChessPiece(row + distance, col).isWhite != this.isWhite) {
-                moves.push({ newRow: row + distance, newColumn: col, piece: this })
+                moves.push({ 
+                    newRow: row + distance, 
+                    newColumn: col, 
+                    piece: this })
             } else {
                 down = false
             }
