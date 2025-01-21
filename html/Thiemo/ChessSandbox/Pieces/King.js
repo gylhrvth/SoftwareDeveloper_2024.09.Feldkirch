@@ -36,51 +36,58 @@ class King {
         return newRow < 0 || newRow > 7 || newCol < 0 || newCol > 7;
     }
 
+
+    // Method to check if castling is possible
     canCastle(chess) {
         if (this.hasMoved) return false;  // Can't castle if the King has moved
 
         let row = this.currentRow;
         let col = this.currentCol;
 
+        // Check both left and right castling
+        return this.canCastleLeft(chess, row, col) || this.canCastleRight(chess, row, col);
+    }
 
-        // Check for left and right castling (both White and Black)
-        if (this.isWhite && row === 7 && col === 4) {
-            // Check left castling
-            let rook = chess.boardArray[row][0];
-            if (!rook || rook.hasMoved) return false; // Rook has moved
-            for (let c = 1; c < 4; c++) {
+    // Method to check left castling
+    canCastleLeft(chess, row, col) {
+        const rookColumn = 0; // Leftmost column for the rook
+        const castlingRow = this.isWhite ? 7 : 0; // Row depends on the color
+
+        if (row === castlingRow && col === 4) { // Ensure king is in its initial position
+            let rook = chess.boardArray[row][rookColumn];
+            if (!rook || rook.hasMoved) {
+                console.log("Left castling not possible: Rook moved or missing.");
+                return false;
+            }
+            for (let c = rookColumn + 1; c < col; c++) {
                 if (chess.boardArray[row][c] !== undefined) {
                     return false; // Path blocked
                 }
             }
-            // Check right castling
-            rook = chess.boardArray[row][7];
-            if (!rook || rook.hasMoved) return false; // Rook has moved
-            for (let c = 5; c < 7; c++) {
-                if (chess.boardArray[row][c] !== undefined) {
-                    return false; // Path blocked
-                }
-            }
-        } else if (!this.isWhite && row === 0 && col === 4) {
-            // Check left castling
-            let rook = chess.boardArray[row][0];
-            if (!rook || rook.hasMoved) return false; // Rook has moved
-            for (let c = 1; c < 4; c++) {
-                if (chess.boardArray[row][c] !== undefined) {
-                    return false; // Path blocked
-                }
-            }
-            // Check right castling
-            rook = chess.boardArray[row][7];
-            if (!rook || rook.hasMoved) return false; // Rook has moved
-            for (let c = 5; c < 7; c++) {
-                if (chess.boardArray[row][c] !== undefined) {
-                    return false; // Path blocked
-                }
-            }
+            return true; // Left castling possible
         }
+        return false;
+    }
 
-        return true;
+    // Method to check right castling
+    canCastleRight(chess, row, col) {
+        const rookColumn = 7; // Rightmost column for the rook
+        const castlingRow = this.isWhite ? 7 : 0; // Row depends on the color
+
+        if (row === castlingRow && col === 4) { // Ensure king is in its initial position
+            let rook = chess.boardArray[row][rookColumn];
+            if (!rook || rook.hasMoved) {
+                console.log("Right castling not possible: Rook moved or missing.");
+                return false;
+            }
+            for (let c = col + 1; c < rookColumn; c++) {
+                if (chess.boardArray[row][c] !== undefined) {
+                    return false; // Path blocked
+                }
+            }
+            return true; // Right castling possible
+        }
+        return false;
     }
 
 
@@ -102,31 +109,34 @@ class King {
         let row = this.currentRow
         let col = this.currentCol
 
-        if (this.canCastle(chess)) {
-            if (chess.boardArray[row][0] && chess.boardArray[row][0].hasMoved === false) {
-                moves.push({ 
-                    piece: this, 
-                    newRow: row, 
-                    newColumn: 2, 
-                    castling: 'left' });
-            }
-            if (chess.boardArray[row][7] && chess.boardArray[row][7].hasMoved === false) {
-                moves.push({
-                    piece: this, 
-                    newRow: row, 
-                    newColumn: 6, 
-                    castling: 'right' });
-            }
+        // Check castling conditions
+        if (this.canCastleLeft(chess, row, col)) {
+            moves.push({
+                piece: this,
+                newRow: row,
+                newColumn: 2,
+                castling: 'left'
+            });
+        }
+
+        if (this.canCastleRight(chess, row, col)) {
+            moves.push({
+                piece: this,
+                newRow: row,
+                newColumn: 6,
+                castling: 'right'
+            });
         }
 
 
         if (up && !this.testOutOfBounds(-distance, 0)) {
             if (chess.getChessPiece(row - distance, col) == undefined ||
                 chess.getChessPiece(row - distance, col).isWhite != this.isWhite) {
-                moves.push({ 
-                    newRow: row - distance, 
-                    newColumn: col, 
-                    piece: this })
+                moves.push({
+                    newRow: row - distance,
+                    newColumn: col,
+                    piece: this
+                })
             } else {
                 up = false
             }
@@ -135,10 +145,11 @@ class King {
         if (down && !this.testOutOfBounds(distance, 0)) {
             if (chess.getChessPiece(row + distance, col) == undefined ||
                 chess.getChessPiece(row + distance, col).isWhite != this.isWhite) {
-                moves.push({ 
-                    newRow: row + distance, 
-                    newColumn: col, 
-                    piece: this })
+                moves.push({
+                    newRow: row + distance,
+                    newColumn: col,
+                    piece: this
+                })
             } else {
                 down = false
             }

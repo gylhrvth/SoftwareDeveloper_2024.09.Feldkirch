@@ -7,6 +7,15 @@ import { Queen } from "../Pieces/Queen.js"
 import { King } from "../Pieces/King.js"
 
 
+
+// The next time you use code I suggest, 
+// pause and ask yourself: “What does each line do? 
+// Why is it written this way?” 
+// Break it apart and test your understanding.
+// That process turns "copying" into learning.
+
+
+
 class ChessGame {
     constructor() {
         this.__type = 'ChessGame';
@@ -25,7 +34,7 @@ class ChessGame {
 
         this.isWhiteTurn = true;
         this.isWhiteHuman = true;
-        this.isBlackHuman = false;
+        this.isBlackHuman = true;
         this.computerIsThinking = false;
     }
 
@@ -52,36 +61,38 @@ class ChessGame {
 
     initGameField() {
 
-               for (let column = 0; column < this.boardArray[0].length; ++column) {
-                   this.addNewChessPiece(1, column, new Pawn(false))
-                   this.addNewChessPiece(6, column, new Pawn(true))
-       
-               }
-               this.addNewChessPiece(0, 1, new Knight(false))
-               this.addNewChessPiece(0, 6, new Knight(false))
-               this.addNewChessPiece(7, 1, new Knight(true))
-               this.addNewChessPiece(7, 6, new Knight(true))
-               this.addNewChessPiece(0, 2, new Bishop(false))
-               this.addNewChessPiece(0, 5, new Bishop(false))
-               this.addNewChessPiece(7, 2, new Bishop(true))
-               this.addNewChessPiece(7, 5, new Bishop(true))
-               this.addNewChessPiece(0, 0, new Rook(false))
-               this.addNewChessPiece(0, 7, new Rook(false))
-               this.addNewChessPiece(7, 0, new Rook(true))
-               this.addNewChessPiece(7, 7, new Rook(true))
-               this.addNewChessPiece(0, 3, new Queen(false))
-               this.addNewChessPiece(7, 3, new Queen(true))
-               this.addNewChessPiece(0, 4, new King(false))
-               this.addNewChessPiece(7, 4, new King(true)) 
+        for (let column = 0; column < this.boardArray[0].length; ++column) {
+            this.addNewChessPiece(1, column, new Pawn(false))
+            this.addNewChessPiece(6, column, new Pawn(true))
+        }
+/*
+        this.addNewChessPiece(0, 1, new Knight(false))
+        this.addNewChessPiece(0, 6, new Knight(false))
+        this.addNewChessPiece(7, 1, new Knight(true))
+        this.addNewChessPiece(7, 6, new Knight(true))
+        this.addNewChessPiece(0, 2, new Bishop(false))
+        this.addNewChessPiece(0, 5, new Bishop(false))
+        this.addNewChessPiece(7, 2, new Bishop(true))
+        this.addNewChessPiece(7, 5, new Bishop(true))
 
-   /*     this.addNewChessPiece(4, 0, new Pawn(false))
-        this.addNewChessPiece(4, 2, new Pawn(false))
-        this.addNewChessPiece(4, 4, new Pawn(false))
-        this.addNewChessPiece(4, 6, new Pawn(false))
-        this.addNewChessPiece(6, 1, new Pawn(true))
-        this.addNewChessPiece(6, 3, new Pawn(true))
-        this.addNewChessPiece(6, 5, new Pawn(true))
-        this.addNewChessPiece(6, 7, new Pawn(true)) */
+        this.addNewChessPiece(0, 3, new Queen(false))
+        this.addNewChessPiece(7, 3, new Queen(true))
+            */
+        this.addNewChessPiece(0, 4, new King(false))
+        this.addNewChessPiece(7, 4, new King(true))
+        this.addNewChessPiece(0, 0, new Rook(false))
+        this.addNewChessPiece(0, 7, new Rook(false))
+        this.addNewChessPiece(7, 0, new Rook(true))
+        this.addNewChessPiece(7, 7, new Rook(true))
+
+        /*     this.addNewChessPiece(4, 0, new Pawn(false))
+             this.addNewChessPiece(4, 2, new Pawn(false))
+             this.addNewChessPiece(4, 4, new Pawn(false))
+             this.addNewChessPiece(4, 6, new Pawn(false))
+             this.addNewChessPiece(6, 1, new Pawn(true))
+             this.addNewChessPiece(6, 3, new Pawn(true))
+             this.addNewChessPiece(6, 5, new Pawn(true))
+             this.addNewChessPiece(6, 7, new Pawn(true)) */
 
 
 
@@ -99,6 +110,7 @@ class ChessGame {
         this.boardArray[piece.currentRow][piece.currentCol] = undefined;
         this.boardArray[newRow][newColumn].currentRow = newRow;
         this.boardArray[newRow][newColumn].currentCol = newColumn;
+
 
         if (enPassant) {
             console.log("moveChessPiece: En passant")
@@ -399,25 +411,25 @@ class ChessGame {
                 console.log('Try to move AI')
                 this.computerIsThinking = true;
 
-            // Collect all possible moves for the AI
-            const possibleMovesByPiece = [];
-            this.boardArray.forEach((row) => {
-                row.forEach((piece) => {
-                    if (piece && piece.isWhite === this.isWhiteTurn) {
-                        const possibleMoves = piece.getPossibleMoves(this);
-                        if (possibleMoves.length > 0) {
-                            possibleMovesByPiece.push({
-                                pieceType: piece.__type,
-                                position: { row: piece.currentRow, col: piece.currentCol },
-                                moves: possibleMoves.map((move) => ({ row: move.newRow, col: move.newColumn })),
-                            });
+                // Collect all possible moves for the AI
+                const possibleMovesByPiece = [];
+                this.boardArray.forEach((row) => {
+                    row.forEach((piece) => {
+                        if (piece && piece.isWhite === this.isWhiteTurn) {
+                            const possibleMoves = piece.getPossibleMoves(this);
+                            if (possibleMoves.length > 0) {
+                                possibleMovesByPiece.push({
+                                    pieceType: piece.__type,
+                                    position: { row: piece.currentRow, col: piece.currentCol },
+                                    moves: possibleMoves.map((move) => ({ row: move.newRow, col: move.newColumn })),
+                                });
+                            }
                         }
-                    }
+                    });
                 });
-            });
 
-            // Log the structured array of possible moves
-            console.log("AI's Possible Moves by Piece:", possibleMovesByPiece);
+                // Log the structured array of possible moves
+                console.log("AI's Possible Moves by Piece:", possibleMovesByPiece);
 
                 let minmaxresult = minmax(this, 4, this.isWhiteTurn, -Infinity, Infinity)
                 let bestMove = minmaxresult.move
