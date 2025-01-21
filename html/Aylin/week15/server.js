@@ -32,13 +32,14 @@ app.ws('/game', function (ws, req) {
         if (data.action === 'startGame') {
             if (playerWS.length >= 2 && playerWS.length <= 4) {
                 gameState.gameStarted = true;
+                gameState.currentPlayers = playerWS.length;
+
+                startActivePlayerCycle();
 
                 broadcastToPlayers({
                     type: 'gameStarted',
                     message: 'The game has started!',
                 });
-
-                updateActivePlayer();
             } else {
                 gameMaster.send(
                     JSON.stringify({
@@ -151,6 +152,15 @@ app.listen(port, () => {
 
 // Active Player
 let activePlayerIndex = 0;
+let activePlayerCycle = null;
+
+function startActivePlayerCycle() {
+    if (activePlayerCycle) {
+        clearInterval(activePlayerCycle);
+    }
+    updateActivePlayer();
+    activePlayerCycle = setInterval(updateActivePlayer, 10000);
+}
 
 function updateActivePlayer() {
     if (playerWS.length === 0) return;
@@ -181,8 +191,6 @@ function updateActivePlayer() {
     }
     console.log(`Active Player: ${activePlayer.name}`);
 }
-
-setInterval(updateActivePlayer, 10000);
 
 // Trivia 
 let activeTriviaSocket = null;
@@ -216,6 +224,8 @@ app.ws('/trivia', function(ws, req) {
 });
 
 //Question
+let activeQuestionSocket = null;
+
  app.ws('question', function(ws, req) {
     console.log('Question WebSocket connection established');
     activeQuestionSocket = ws;
