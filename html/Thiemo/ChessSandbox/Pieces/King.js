@@ -3,7 +3,7 @@ export { King };
 class King {
     constructor(isWhite) {
         this.__type = 'King';
-
+        this.hasMoved = false;  // Tracks if the King has moved
         this.currentRow = null
         this.currentCol = null
         this.isWhite = isWhite
@@ -19,6 +19,7 @@ class King {
     restoreData(value) {
         this.currentRow = value.currentRow
         this.currentCol = value.currentCol
+        this.hasMoved = value.hasMoved;  // Restore the moved status
         this.isWhite = value.isWhite
         if (value.isWhite) {
             this.label = "♔"
@@ -35,35 +36,54 @@ class King {
         return newRow < 0 || newRow > 7 || newCol < 0 || newCol > 7;
     }
 
+    canCastle(chess) {
+        if (this.hasMoved) return false;  // Can't castle if the King has moved
 
-    // getPossibleMoves(chess) {
-    //     const moves = [];
-    //     const directions = [
-    //         { dRow: -1, dCol: 0 },   // Up
-    //         { dRow: 1, dCol: 0 },    // Down
-    //         { dRow: 0, dCol: 1 },    // Right
-    //         { dRow: 0, dCol: -1 },   // Left
-    //         { dRow: -1, dCol: 1 },   // Top-right
-    //         { dRow: -1, dCol: -1 },  // Top-left
-    //         { dRow: 1, dCol: 1 },    // Bottom-right
-    //         { dRow: 1, dCol: -1 }    // Bottom-left
-    //     ];
+        let row = this.currentRow;
+        let col = this.currentCol;
 
-    //     for (const dir of directions) {
-    //         let newRow = this.currentRow + dir.dRow;
-    //         let newCol = this.currentCol + dir.dCol;
 
-    //         if (!this.testOutOfBounds(dir.dRow, dir.dCol)) {
-    //             const targetPiece = chess.getChessPiece(newRow, newCol);
+        // Check for left and right castling (both White and Black)
+        if (this.isWhite && row === 7 && col === 4) {
+            // Check left castling
+            let rook = chess.boardArray[row][0];
+            if (!rook || rook.hasMoved) return false; // Rook has moved
+            for (let c = 1; c < 4; c++) {
+                if (chess.boardArray[row][c] !== undefined) {
+                    return false; // Path blocked
+                }
+            }
+            // Check right castling
+            rook = chess.boardArray[row][7];
+            if (!rook || rook.hasMoved) return false; // Rook has moved
+            for (let c = 5; c < 7; c++) {
+                if (chess.boardArray[row][c] !== undefined) {
+                    return false; // Path blocked
+                }
+            }
+        } else if (!this.isWhite && row === 0 && col === 4) {
+            // Check left castling
+            let rook = chess.boardArray[row][0];
+            if (!rook || rook.hasMoved) return false; // Rook has moved
+            for (let c = 1; c < 4; c++) {
+                if (chess.boardArray[row][c] !== undefined) {
+                    return false; // Path blocked
+                }
+            }
+            // Check right castling
+            rook = chess.boardArray[row][7];
+            if (!rook || rook.hasMoved) return false; // Rook has moved
+            for (let c = 5; c < 7; c++) {
+                if (chess.boardArray[row][c] !== undefined) {
+                    return false; // Path blocked
+                }
+            }
+        }
 
-    //             if (targetPiece === undefined || targetPiece.isWhite !== this.isWhite) {
-    //                 moves.push({newRow: newRow, newColumn: newCol, piece: this });
-    //             }
-    //         }
-    //     }
+        return true;
+    }
 
-    //     return moves;
-    // }
+
 
     getPossibleMoves(chess) {
         let moves = []
@@ -81,6 +101,15 @@ class King {
 
         let row = this.currentRow
         let col = this.currentCol
+
+        if (this.canCastle(chess)) {
+            if (chess.boardArray[row][0] && chess.boardArray[row][0].hasMoved === false) {
+                moves.push({ newRow: row, newColumn: 2, castling: 'left' });
+            }
+            if (chess.boardArray[row][7] && chess.boardArray[row][7].hasMoved === false) {
+                moves.push({ newRow: row, newColumn: 6, castling: 'right' });
+            }
+        }
 
 
         if (up && !this.testOutOfBounds(-distance, 0)) {
@@ -159,4 +188,7 @@ class King {
         return moves;
     }
 }
+
+
+
 

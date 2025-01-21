@@ -16,6 +16,7 @@ export function minmax(chessOriginal, depth, isWhite, alpha, beta){
     if(isWhite){
         let maxEval = -Infinity;
         for(let move of moves){
+            console.log(move.piece)
             chess.moveChessPiece(move.piece, move.newRow, move.newColumn);
             let evalResult = minmax(chess, depth-1, !isWhite, alpha, beta);
             chess.undoGameField();

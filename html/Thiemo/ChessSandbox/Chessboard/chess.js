@@ -7,18 +7,6 @@ import { Queen } from "../Pieces/Queen.js"
 import { King } from "../Pieces/King.js"
 
 
-// chessboard with (restoreData, cloneChessGame, initGameField, addNewChessPiece, moveChessPiece, saveGameField, 
-//                  undoGameField getChessPiece, printGameField, calculateScore, getAllPossibleMoves)
-
-//  TODO : en passant === CHECK!!!!! 
-//  TODO : variable for the last moved pawn ??????? === CHECK!!!!
-
-//  TODO : Pawn what happens if the pawn reaches the end ==> pawn ===Queen/Rook/Knight/Bishop
-//  TODO : King == rochade + what happens when the King is in check ==>  FORCED MOVE or BLOCK
-//  TODO : 50 Move Rule === if no pawn moved or no piece got captured in the last 50 moves(player1Move +Player2Move)
-
-
-
 class ChessGame {
     constructor() {
         this.__type = 'ChessGame';
@@ -122,9 +110,6 @@ class ChessGame {
         }
 
     }
-
-
-
 
     saveGameField(piece, newRow, newColumn) {
         let cloneBoard = structuredClone(this.boardArray)
