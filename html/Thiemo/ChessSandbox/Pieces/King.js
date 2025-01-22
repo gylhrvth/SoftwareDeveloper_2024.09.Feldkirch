@@ -4,7 +4,6 @@ class King {
     constructor(isWhite) {
         this.__type = 'King';
         this.hasMoved = false; // Tracks if the King has moved
-        this.isInCheck = false; 
         this.currentRow = null;
         this.currentCol = null;
         this.isWhite = isWhite
@@ -21,7 +20,6 @@ class King {
         this.currentRow = value.currentRow;
         this.currentCol = value.currentCol;
         this.hasMoved = value.hasMoved;  // Restore the moved status
-        this.isInCheck = value.isInCheck;
         this.isWhite = value.isWhite;
         if (value.isWhite) {
             this.label = "♔"
