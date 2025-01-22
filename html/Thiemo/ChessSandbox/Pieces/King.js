@@ -3,9 +3,10 @@ export { King };
 class King {
     constructor(isWhite) {
         this.__type = 'King';
-        this.hasMoved = false;  // Tracks if the King has moved
-        this.currentRow = null
-        this.currentCol = null
+        this.hasMoved = false; // Tracks if the King has moved
+        this.isInCheck = false; 
+        this.currentRow = null;
+        this.currentCol = null;
         this.isWhite = isWhite
         if (isWhite) {
             this.label = "♔"
@@ -17,10 +18,11 @@ class King {
     //Black ♝,♞,♟,♜,♛,♚
     //White ♗,♘,♙,♖,♕,♔
     restoreData(value) {
-        this.currentRow = value.currentRow
-        this.currentCol = value.currentCol
+        this.currentRow = value.currentRow;
+        this.currentCol = value.currentCol;
         this.hasMoved = value.hasMoved;  // Restore the moved status
-        this.isWhite = value.isWhite
+        this.isInCheck = value.isInCheck;
+        this.isWhite = value.isWhite;
         if (value.isWhite) {
             this.label = "♔"
         } else {
@@ -56,7 +58,7 @@ class King {
         if (row === castlingRow && col === 4) { // Ensure king is in its initial position
             let rook = chess.boardArray[row][rookColumn];
             if (!rook || rook.hasMoved) {
-                console.log("Left castling not possible: Rook moved or missing.");
+              //  console.log("Left castling not possible: Rook moved or missing.");
                 return false;
             }
             for (let c = rookColumn + 1; c < col; c++) {
@@ -77,7 +79,7 @@ class King {
         if (row === castlingRow && col === 4) { // Ensure king is in its initial position
             let rook = chess.boardArray[row][rookColumn];
             if (!rook || rook.hasMoved) {
-                console.log("Right castling not possible: Rook moved or missing.");
+           //     console.log("Right castling not possible: Rook moved or missing.");
                 return false;
             }
             for (let c = col + 1; c < rookColumn; c++) {
@@ -109,7 +111,9 @@ class King {
         let row = this.currentRow
         let col = this.currentCol
 
-        // Check castling conditions
+
+    // Check if castling is possible (left or right)
+    if (this.canCastle(chess)) {
         if (this.canCastleLeft(chess, row, col)) {
             moves.push({
                 piece: this,
@@ -118,7 +122,6 @@ class King {
                 castling: 'left'
             });
         }
-
         if (this.canCastleRight(chess, row, col)) {
             moves.push({
                 piece: this,
@@ -127,6 +130,7 @@ class King {
                 castling: 'right'
             });
         }
+    }
 
 
         if (up && !this.testOutOfBounds(-distance, 0)) {
@@ -209,7 +213,7 @@ class King {
             }
         }
 
-        // console.log("Queen", moves)
+        // console.log("King", moves)
         return moves;
     }
 }
