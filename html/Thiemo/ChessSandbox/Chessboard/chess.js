@@ -63,28 +63,28 @@ class ChessGame {
 
     initGameField() {
 
-        /*        for (let column = 0; column < this.boardArray[0].length; ++column) {
-                  this.addNewChessPiece(1, column, new Pawn(false))
-                  this.addNewChessPiece(6, column, new Pawn(true))
-              }
-      
-                  this.addNewChessPiece(0, 1, new Knight(false))
-                    this.addNewChessPiece(0, 6, new Knight(false))
-                    this.addNewChessPiece(7, 1, new Knight(true))
-                    this.addNewChessPiece(7, 6, new Knight(true))
-                    this.addNewChessPiece(0, 2, new Bishop(false))
-                    this.addNewChessPiece(0, 5, new Bishop(false))
-                    this.addNewChessPiece(7, 2, new Bishop(true))
-                    this.addNewChessPiece(7, 5, new Bishop(true))
-                    this.addNewChessPiece(0, 3, new Queen(false))
-                    this.addNewChessPiece(7, 3, new Queen(true))
-            
-                    this.addNewChessPiece(0, 4, new King(false))
-                    this.addNewChessPiece(7, 4, new King(true))
-                    this.addNewChessPiece(0, 0, new Rook(false))
-                    this.addNewChessPiece(0, 7, new Rook(false))
-                    this.addNewChessPiece(7, 0, new Rook(true))
-                    this.addNewChessPiece(7, 7, new Rook(true)) */
+        for (let column = 0; column < this.boardArray[0].length; ++column) {
+            this.addNewChessPiece(1, column, new Pawn(false))
+            this.addNewChessPiece(6, column, new Pawn(true))
+        }
+
+        this.addNewChessPiece(0, 1, new Knight(false))
+        this.addNewChessPiece(0, 6, new Knight(false))
+        this.addNewChessPiece(7, 1, new Knight(true))
+        this.addNewChessPiece(7, 6, new Knight(true))
+        this.addNewChessPiece(0, 2, new Bishop(false))
+        this.addNewChessPiece(0, 5, new Bishop(false))
+        this.addNewChessPiece(7, 2, new Bishop(true))
+        this.addNewChessPiece(7, 5, new Bishop(true))
+        this.addNewChessPiece(0, 3, new Queen(false))
+        this.addNewChessPiece(7, 3, new Queen(true))
+
+        this.addNewChessPiece(0, 4, new King(false))
+        this.addNewChessPiece(7, 4, new King(true))
+        this.addNewChessPiece(0, 0, new Rook(false))
+        this.addNewChessPiece(0, 7, new Rook(false))
+        this.addNewChessPiece(7, 0, new Rook(true))
+        this.addNewChessPiece(7, 7, new Rook(true))
 
         /*     this.addNewChessPiece(4, 0, new Pawn(false))
              this.addNewChessPiece(4, 2, new Pawn(false))
@@ -95,12 +95,12 @@ class ChessGame {
              this.addNewChessPiece(6, 5, new Pawn(true))
              this.addNewChessPiece(6, 7, new Pawn(true)) */
 
-        this.addNewChessPiece(6, 4, new King(false))
-        this.addNewChessPiece(1, 4, new King(true))
-        this.addNewChessPiece(0, 0, new Rook(false))
-        this.addNewChessPiece(0, 7, new Rook(false))
-        this.addNewChessPiece(7, 0, new Rook(true))
-        this.addNewChessPiece(7, 7, new Rook(true))
+        /*    this.addNewChessPiece(6, 4, new King(false))
+            this.addNewChessPiece(1, 4, new King(true))
+            this.addNewChessPiece(0, 0, new Rook(false))
+            this.addNewChessPiece(0, 7, new Rook(false))
+            this.addNewChessPiece(7, 0, new Rook(true))
+            this.addNewChessPiece(7, 7, new Rook(true)) */
 
     }
 
@@ -314,8 +314,8 @@ class ChessGame {
                             castling = square.getAttribute('castling')
                         }
 
-                        let isOpponentInCheck = this.checkHitKing(!this.isWhiteTurn)
-                        console.log("isBlackinCheck? ", isOpponentInCheck)
+                      //  let isOpponentInCheck = this.checkHitKing(!this.isWhiteTurn)
+                      //  console.log("isBlackinCheck? ", isOpponentInCheck)
 
                         // Move the piece
                         this.moveChessPiece(selectedPiece, targetRow, targetCol, enPassant, castling);
@@ -458,44 +458,44 @@ class ChessGame {
 
     //Todo: 004: array filter research with chatGPT
 
-  /*  searchMyKing(isWhite) {
-        for (let row = 0; row < this.boardArray.length; row++) {
-            for (let column = 0; column < this.boardArray[row].length; column++) {
-                const piece = this.boardArray[row][column];
-                if (piece && piece.__type === 'King' && piece.isWhite === isWhite) {
-                    // If the piece is a King and matches the isWhite color, return its position
-                    return { row, column };
-                }
-            }
-        }
-        // If no King is found, return null or an error
-        return null;
-    }
-
-    checkHitKing(isWhite) {
-
-        let kingPiece = this.searchMyKing(isWhite);
-
-        if (!kingPiece) {
-            console.log("King not found.");
-            return false; // Return false if no King is found
-        }
-
-        // Get all possible moves of the opponent's pieces
-        let possibleOpponentMoves = this.getAllPossibleMoves(!isWhite);
-
-        console.log("King Position: ", kingPiece);
-        console.log("Opponent's Possible Moves: ", possibleOpponentMoves);
-
-        // Check if any opponent's move can attack the King
-        for (let move of possibleOpponentMoves) {
-            if (kingPiece.row === move.newRow && kingPiece.column === move.newColumn) {
-                console.log("King is in check!");
-                return true; // King is in check if an opponent's move matches the King's position
-            }
-        }
-        return false; // King is not in check
-    } */
+    /*  searchMyKing(isWhite) {
+          for (let row = 0; row < this.boardArray.length; row++) {
+              for (let column = 0; column < this.boardArray[row].length; column++) {
+                  const piece = this.boardArray[row][column];
+                  if (piece && piece.__type === 'King' && piece.isWhite === isWhite) {
+                      // If the piece is a King and matches the isWhite color, return its position
+                      return { row, column };
+                  }
+              }
+          }
+          // If no King is found, return null or an error
+          return null;
+      }
+  
+      checkHitKing(isWhite) {
+  
+          let kingPiece = this.searchMyKing(isWhite);
+  
+          if (!kingPiece) {
+              console.log("King not found.");
+              return false; // Return false if no King is found
+          }
+  
+          // Get all possible moves of the opponent's pieces
+          let possibleOpponentMoves = this.getAllPossibleMoves(!isWhite);
+  
+          console.log("King Position: ", kingPiece);
+          console.log("Opponent's Possible Moves: ", possibleOpponentMoves);
+  
+          // Check if any opponent's move can attack the King
+          for (let move of possibleOpponentMoves) {
+              if (kingPiece.row === move.newRow && kingPiece.column === move.newColumn) {
+                  console.log("King is in check!");
+                  return true; // King is in check if an opponent's move matches the King's position
+              }
+          }
+          return false; // King is not in check
+      } */
 
 
     printMove(player, move, oldPositionCol, oldPositionRow, targetSquare) {
@@ -572,8 +572,8 @@ class ChessGame {
 
                 this.printMove(this.isWhiteTurn ? "White" : "Black", bestMove, oldPositionCol, oldPositionRow)
 
-                let isOpponentInCheck = this.checkHitKing(!this.isWhiteTurn)
-                console.log("isWhiteinCheck? ", isOpponentInCheck)
+               // let isOpponentInCheck = this.checkHitKing(!this.isWhiteTurn)
+               // console.log("isWhiteinCheck? ", isOpponentInCheck)
 
                 this.moveChessPiece(bestMove.piece, bestMove.newRow, bestMove.newColumn, enPassant, castling);
 
