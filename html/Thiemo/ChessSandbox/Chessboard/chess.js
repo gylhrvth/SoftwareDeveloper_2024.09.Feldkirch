@@ -314,10 +314,13 @@ class ChessGame {
                             castling = square.getAttribute('castling')
                         }
 
+                        let isOpponentInCheck = this.checkHitKing(!this.isWhiteTurn)
+                        console.log("isBlackinCheck? ", isOpponentInCheck)
+
                         // Move the piece
                         this.moveChessPiece(selectedPiece, targetRow, targetCol, enPassant, castling);
 
-                        let isOpponentInCheck = this.checkHitKing(!this.isWhiteTurn)
+
 
                         if (selectedPiece.__type === 'King' || selectedPiece.__type === 'Rook') {
                             selectedPiece.hasMoved = true;
@@ -438,46 +441,24 @@ class ChessGame {
 
                     // console.log(`Inspecting piece at row ${row}, column ${column}`);
 
-                    let piece = this.boardArray[row][column];
-
                     let possibleMovesOfPiece = this.boardArray[row][column].getPossibleMoves(chess)
-
 
                     // console.log(`Possible moves for piece at row ${row}, column ${column}:`, possibleMovesOfPiece);
 
-
-                    /*    possibleMovesOfPiece.forEach(move => {
-                            allPossibleMoves.push(move)
-                        });*/
-
-                    // Check each possible move for legality (if it doesn't leave the king in check)
                     possibleMovesOfPiece.forEach(move => {
-                        // Simulate the move
-                        chess.moveChessPiece(piece, move.newRow, move.newColumn);
-
-                        // Check if the move leaves the king in check
-                        const isKingSafe = !chess.checkHitKing(isWhite);
-
-                        // If the king is safe, add this move to the list of all possible moves
-                        if (isKingSafe) {
-                            allPossibleMoves.push(move);
-                        }
-
-                        // Undo the move to restore the board state
-                        chess.undoGameField();
+                        allPossibleMoves.push(move)
                     });
                 }
             }
         }
         //console.log("All Moves: ", allPossibleMoves)
-
         return allPossibleMoves;
     }
 
 
     //Todo: 004: array filter research with chatGPT
 
-    searchMyKing(isWhite) {
+  /*  searchMyKing(isWhite) {
         for (let row = 0; row < this.boardArray.length; row++) {
             for (let column = 0; column < this.boardArray[row].length; column++) {
                 const piece = this.boardArray[row][column];
@@ -503,10 +484,8 @@ class ChessGame {
         // Get all possible moves of the opponent's pieces
         let possibleOpponentMoves = this.getAllPossibleMoves(!isWhite);
 
-        //    console.log("King Position: ", kingPiece);
-        //    console.log("Opponent's Possible Moves: ", possibleOpponentMoves);
-
-
+        console.log("King Position: ", kingPiece);
+        console.log("Opponent's Possible Moves: ", possibleOpponentMoves);
 
         // Check if any opponent's move can attack the King
         for (let move of possibleOpponentMoves) {
@@ -516,7 +495,7 @@ class ChessGame {
             }
         }
         return false; // King is not in check
-    }
+    } */
 
 
     printMove(player, move, oldPositionCol, oldPositionRow, targetSquare) {
@@ -559,8 +538,26 @@ class ChessGame {
 
                 // Log the structured array of possible moves
                 console.log("AI's Possible Moves by Piece:", possibleMovesByPiece);
+
+                // Check if there are no valid moves
+                if (possibleMovesByPiece.length === 0) {
+                    console.log("AI could not find a valid move!");
+                    // Handle the case where no moves are available (stalemate or other logic)
+                    return;
+                }
+
+                // Get the best move from Minimax
                 let minmaxresult = minmax(this, 4, this.isWhiteTurn, -Infinity, Infinity)
                 let bestMove = minmaxresult.move
+
+                // Handle invalid bestMove
+                if (!bestMove) {
+                    console.error("AI could not find a valid move!");
+                    this.computerIsThinking = false;
+                    return;
+                }
+
+
                 let enPassant = false
                 if (bestMove.enPassant && bestMove.enPassant === true) {
                     enPassant = true
@@ -572,10 +569,13 @@ class ChessGame {
 
                 let oldPositionRow = bestMove.piece.currentRow
                 let oldPositionCol = bestMove.piece.currentCol
+
                 this.printMove(this.isWhiteTurn ? "White" : "Black", bestMove, oldPositionCol, oldPositionRow)
-                this.moveChessPiece(bestMove.piece, bestMove.newRow, bestMove.newColumn, enPassant, castling);
 
                 let isOpponentInCheck = this.checkHitKing(!this.isWhiteTurn)
+                console.log("isWhiteinCheck? ", isOpponentInCheck)
+
+                this.moveChessPiece(bestMove.piece, bestMove.newRow, bestMove.newColumn, enPassant, castling);
 
                 if (bestMove.__type === 'King' || bestMove.__type === 'Rook') {
                     bestMove.hasMoved = true;
