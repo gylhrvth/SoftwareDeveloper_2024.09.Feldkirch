@@ -9,11 +9,18 @@ let playerWS = [];
 let gameState = {
     maxPlayers: 4,
     currentPlayers: 0,
+    gameStarted: false, // Ensure gameStarted is initialized
 };
+
+// Trivia
+let activeTriviaSocket = null;
 
 app.use(express.static('public'));
 
+// Master
 app.ws('/game', function (ws, req) {
+    activeTriviaSocket = ws;
+
     if (gameMaster != null) {
         console.log('There is already a Game Master!');
         ws.close(1000, 'There is already a Game Master!');
@@ -24,32 +31,68 @@ app.ws('/game', function (ws, req) {
             messageType: 'gameState',
             gameState: gameState
         }));
+        
+        if (gameState.gameStarted) {
+            updateActivePlayer();
+        }
     }
 
     ws.on('message', (message) => {
-        const data = JSON.parse(message);
+        try {
+            const data = JSON.parse(message);
+            console.log('Server received ACTION', data.action);
 
-        if (data.action === 'startGame') {
-            if (playerWS.length >= 2 && playerWS.length <= 4) {
-                gameState.gameStarted = true;
-                gameState.currentPlayers = playerWS.length;
+            if (data.action === 'startGame') {
+                if (playerWS.length >= 2 && playerWS.length <= 4) {
+                    gameState.gameStarted = true;
+                    gameState.currentPlayers = playerWS.length;
 
-                startActivePlayerCycle();
+                    startActivePlayerCycle();
 
-                broadcastToPlayers({
-                    type: 'gameStarted',
-                    message: 'The game has started!',
-                });
-            } else {
-                gameMaster.send(
-                    JSON.stringify({
-                        messageType: 'error',
-                        message: 'Too many players to start the game.',
-                    })
-                );
+                    broadcastToPlayers({
+                        type: 'gameStarted',
+                        message: 'The game has started!',
+                    });
+                } else {
+                    gameMaster.send(
+                        JSON.stringify({
+                            messageType: 'error',
+                            message: 'Too many players to start the game.',
+                        })
+                    );
+                }
             }
+            if (data.action === 'getGameState') {
+                const gameState = {
+                    players: playerWS.map((player) => player.name),
+                    currentPlayer: activePlayerIndex
+                };
+                ws.send(JSON.stringify({
+                    messageType: 'gameState',
+                    gameState: gameState
+                }));
+            }
+
+            if (data.action === 'selectCategory') {
+                console.log('send questions....');
+                ws.send(JSON.stringify({
+                    messageType: 'question',
+                    questionText: 'Who are you?'
+                }));
+            }
+
+            if (data.action === 'changeActivePlayer') {
+                changeActivePlayer();
+            }
+        } catch (error) {
+            console.error('Error processing message:', error);
+            ws.send(JSON.stringify({
+                messageType: 'error',
+                message: 'Invalid message format.',
+            }));
         }
     });
+
     ws.on('close', () => {
         console.log('Game Master disconnected.');
         gameMaster = null;
@@ -83,7 +126,7 @@ app.ws('/player', function(ws, req) {
         return;
     }
     
-    if(playerWS.length > 4) {
+    if (playerWS.length >= 4) {
         console.log('Maximum player limit reached!');
         ws.send(JSON.stringify({
             messageType: 'error',
@@ -92,36 +135,45 @@ app.ws('/player', function(ws, req) {
         ws.close(1000, 'Maximum player limit reached');
         return;
     }
+
     console.log('Player connected');
     playerWS.push({ ws: ws, name: null });
 
     ws.on('message', (message) => {
-        const data = JSON.parse(message);
+        try {
+            const data = JSON.parse(message);
 
-        if (data.action === 'registerPlayer') {
-            const playerName = data.playerName;
+            if (data.action === 'registerPlayer') {
+                const playerName = data.playerName;
 
-            if (playerName) {
-                const existingPlayer = playerWS.find(player => player.ws === ws && player.name === playerName);
-                if (!existingPlayer) {
-                    const player = { ws: ws, name: playerName };
-                    playerWS = playerWS.filter(p => p.ws !== ws);
-                    playerWS.push(player);
-                }
-            
-                console.log('Player registered:', playerName);
+                if (playerName) {
+                    const existingPlayer = playerWS.find(player => player.ws === ws && player.name === playerName);
+                    if (!existingPlayer) {
+                        const player = { ws: ws, name: playerName };
+                        playerWS = playerWS.filter(p => p.ws !== ws);
+                        playerWS.push(player);
+                    }
+                
+                    console.log('Player registered:', playerName);
 
-                if (gameMaster) {
-                    gameMaster.send(
-                        JSON.stringify({
-                            messageType: 'newPlayer',
-                            message: `${playerName} has joined.`,
-                            currentPlayers: playerWS.filter(p => p.name).length,
-                            playerNames: playerWS.map((player) => player.name).filter(Boolean),
-                        })
-                    );
+                    if (gameMaster) {
+                        gameMaster.send(
+                            JSON.stringify({
+                                messageType: 'newPlayer',
+                                message: `${playerName} has joined.`,
+                                currentPlayers: playerWS.filter(p => p.name).length,
+                                playerNames: playerWS.map((player) => player.name).filter(Boolean),
+                            })
+                        );
+                    }
                 }
             }
+        } catch (error) {
+            console.error('Error processing player message:', error);
+            ws.send(JSON.stringify({
+                messageType: 'error',
+                message: 'Invalid message format.',
+            }));
         }
     });
 
@@ -152,34 +204,20 @@ app.listen(port, () => {
 
 // Active Player
 let activePlayerIndex = 0;
-let activePlayerCycle = null;
 
-function startActivePlayerCycle() {
-    if (activePlayerCycle) {
-        clearInterval(activePlayerCycle);
-    }
-    updateActivePlayer();
-    activePlayerCycle = setInterval(updateActivePlayer, 10000);
-}
-
-function updateActivePlayer() {
+function changeActivePlayer(){
     if (playerWS.length === 0) return;
 
     activePlayerIndex = (activePlayerIndex + 1) % playerWS.length;
     const activePlayer = playerWS[activePlayerIndex];
 
+    updateActivePlayer(activePlayer);
+}
+
+function updateActivePlayer(activePlayer) {
     broadcastToPlayers({
         activePlayerName: activePlayer.name,
     });
-
-    if (activeTriviaSocket) {
-        activeTriviaSocket.send(
-            JSON.stringify({
-                type: 'activePlayer',
-                playerName: activePlayer.name,
-            })
-        );
-    }
 
     if (gameMaster) {
         gameMaster.send(
@@ -188,68 +226,38 @@ function updateActivePlayer() {
                 playerName: activePlayer.name,
             })
         );
+
+        const magicData = [
+            {
+                categoryName: 'Musik',
+                openQuestions: [
+                    {id: 'm100', label: '100'},
+                    {id: 'm200', label: '200'},
+                ]
+            },
+            {
+                categoryName: 'Geschichte',
+                openQuestions: [
+                    {id: 'g100', label: '100'},
+                    {id: 'g200', label: '200'},
+                ]
+            },
+            {
+                categoryName: 'Serie',
+                openQuestions: [
+                    {id: 's100', label: '100'},
+                    {id: 's200', label: '200'},
+                    {id: 's300', label: '300'},
+                ]
+            }
+        ];
+
+        gameMaster.send(
+            JSON.stringify({
+                messageType: 'showCategories',
+                categories: magicData,
+            })
+        );
     }
     console.log(`Active Player: ${activePlayer.name}`);
 }
-
-// Trivia 
-let activeTriviaSocket = null;
-
-app.ws('/trivia', function(ws, req) {
-    console.log('Trivia WebSocket connection established');
-    activeTriviaSocket = ws;
-
-    ws.on('message', (message) => {
-        const data = JSON.parse(message);
-
-        if (data.action === 'getGameState') {
-            const gameState = {
-                players: playerWS.map((player) => player.name),
-                currentPlayer: activePlayerIndex
-            };
-            ws.send(JSON.stringify({
-                type: 'gameState',
-                gameState: gameState
-            }));
-        }
-    });
-
-    ws.on('close', () => {
-        console.log('Trivia WebSocket connection closed');
-    });
-
-    ws.on('error', (err) => {
-        console.error('WebSocket error:', err);
-    });
-});
-
-//Question
-let activeQuestionSocket = null;
-
- app.ws('/question', function(ws, req) {
-    console.log('Question WebSocket connection established');
-    activeQuestionSocket = ws;
-
-    ws.on('message', (message) => {
-        const data = JSON.parse(message);
-
-        if (data.action === 'getGameState') {
-            const gameState = {
-                players: playerWS.map((player) => player.name),
-                currentPlayer: activePlayerIndex
-            };
-            ws.send(JSON.stringify({
-                type: 'gameState',
-                gameState: gameState
-            }));
-        }
-    });
-
-    ws.on('close', () => {
-        console.log('Questioon WebSocket connection closed');
-    });
-
-    ws.on('error', (err) => {
-        console.error('WebSocket error:', err);
-    });
-})
