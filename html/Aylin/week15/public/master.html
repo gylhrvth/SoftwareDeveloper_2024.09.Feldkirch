@@ -6,16 +6,177 @@
     <title>Game Master</title>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <style>
-       
+        .categorie-container, .categorie2-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .trivia {
+            display: none;
+            width: 95%;
+        }
+
+        .triviaHeader, .triviaValues{
+            display: flex;
+            gap: 20px;
+            align-items: start;
+        }
+
+        h2 {
+            text-align: center;
+            font-family: Comic sans;
+        }
+
+        button {
+            padding: 30px 60px 30px 60px;
+        }
+
+        #startButton {
+            padding: 5px 15px; /* Daha küçük boyut */
+            font-size: 14px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        #player-name {
+            display: none;
+            text-align: center;
+            align-items: center;
+            font-family: 'Franklin Gothic Medium';
+            font-size: 30px;
+            font-weight: bold;
+            color: blue;
+            margin-top: 10px;
+        }
+
+        #Quiz {
+            display: none;
+        }
+
+        /*
+        Question css
+        #player-name {
+            position: fixed;
+            text-align: center;
+            font-family: 'Franklin Gothic Medium';
+            font-size: 30px;
+            top: 50px;
+            transform: translateX(-50%); 
+        }*/
+        
+        .q{
+            display: none;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+            flex-direction: column;
+        }
+
+        .quiz-container {
+            width: 80%;
+            height: 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            position: relative;
+            text-align: center;
+        }
+
+        .Kategorie {
+            position: absolute;
+            text-align: center;
+            top: 15px;
+            left: 15px;
+            font-size: 16px;
+            padding: 10px 20px;
+            background-color: #fff;
+            border: 2px solid #353575;
+            border-bottom: 2px solid #3a3a7a;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(73, 72, 72, 0.2);
+        }
+
+        #question {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 50px;
+            font-weight: bold;
+            text-align: center;       
+        }
+
+        #countdown {
+            position: absolute;
+            font-size: 20px;
+            font-weight: bold;
+            bottom: 0;
+        }
+
+        .progress-bar {
+            position: absolute;
+            width: 100%;
+            border-radius: 5px;
+            overflow: hidden;
+            bottom: 0;
+        }
+
+        .progress {
+            height: 7px;
+            background-color: rgb(13, 2, 111);
+            width: 100%;
+            border-radius: 10px;
+            transition: width 1s linear;
+        }
     </style>
 </head>
 <body>
-    <h1>Game Master Console</h1>
-    <h2>Connected Players</h2>
-    <div id="playersCount">Players connected: 0</div>
-    <button id="startButton">Start Game</button>
-    <div id="messageLog"></div>
-    <div id="statusText"></div>
+    <header>
+        <div id="player-name"></div>
+    </header>
+    <div class="registration" id="registration">
+        <h1>Game Master Console</h1>
+        <div id="playersCount">Players connected: 0</div>
+        <button id="startButton">Start Game</button>
+        <h4>Connected Players</h4>
+        <div id="messageLog"></div>
+        <div id="statusText"></div>
+    </div>
+    <div class="trivia" id="trivia"></div>
+    <div id="Quiz">
+        <div class="Kategorie">
+            <p id="category"></p>
+            <p id="question-value"></p>
+        </div>
+        <div class="quiz-container">
+            <p id="question"></p>
+            <p id="countdown"></p>
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+        </div>
+    </div>
+<!--
+    <script src="script/triviaQ.js"></script>
+    <script src="script/question.js"></script>
+    <script src="script/counter.js"></script>
+-->
     <script>
         function displayMessage(message) {
             const log = document.getElementById('messageLog');
@@ -27,11 +188,21 @@
         const socket = new WebSocket('ws://' + window.location.hostname + ':5400/game');
         const startButton = document.getElementById('startButton');
         const playersCountElement = document.getElementById('playersCount');
+        const playerNameDiv = document.getElementById('player-name');
 
         startButton.addEventListener('click', () => {
             socket.send(JSON.stringify({ action: 'startGame' }));
-            window.location.href = 'http://' + window.location.hostname + ':5400/trivia.html';
+            const registrationDiv = document.getElementById('registration');
+            const triviaDiv = document.getElementById('trivia');
+            const name = document.getElementById('player-name');
+            const triviaButtons = document.querySelectorAll('.q');
+
+            registrationDiv.style.display = 'none';
+            name.style.display = 'flex';
+            triviaDiv.style.display = 'block';
         });
+
+  
 
         socket.addEventListener('open', () => {
             console.log('Connected to the WebSocket');
@@ -39,6 +210,8 @@
 
         socket.addEventListener('message', (event) => {
             const data = JSON.parse(event.data);
+            console.log('WebSocket Message received', data.messageType)
+
             //Players connected
             if (data.messageType === 'gameState') {
                 playersCountElement.textContent = `Players connected: ${data.gameState.currentPlayers}`;
@@ -54,7 +227,77 @@
             //Game started
             if (data.messageType === 'gameStart') {
                 alert(data.message);
-                window.location.href = 'http//' + window.location.hostname +':5400/trivia.html';
+            }
+
+            // Active Player
+            if (data.messageType === 'activePlayer') {
+                const activePlayerName = data.playerName;
+                playerNameDiv.textContent = `${activePlayerName}'s turn`;
+            }
+
+            if (data.messageType === 'showCategories'){
+                const categories = data.categories;
+
+                let trivia = document.getElementById('trivia')
+                trivia.innerHTML = ''
+
+                let triviaHeader = document.createElement('div')
+                triviaHeader.classList.add('triviaHeader')
+                for (let category of categories) {
+                    let divElement = document.createElement('div')
+                    divElement.classList.add('categorie-container')
+
+                    let h2Element = document.createElement('h2')
+                    h2Element.innerText = category.categoryName
+                    divElement.appendChild(h2Element)
+                    triviaHeader.appendChild(divElement)
+                }
+
+                let triviaValues = document.createElement('div')
+                triviaValues.classList.add('triviaValues')
+                for (let category of categories) {
+                    let divElement = document.createElement('div')
+                    divElement.classList.add('categorie-container')
+
+
+                    for (let openQuestion of category.openQuestions) {
+                        let button = document.createElement('button')
+                        button.innerText = openQuestion.label
+                        button.setAttribute('id', openQuestion.id)
+                        button.addEventListener('click', () => {
+                            console.log('select category ', openQuestion.id)
+                            socket.send(JSON.stringify({ 
+                                action: 'selectCategory',
+                                questionID: openQuestion.id
+                            }));
+                        })
+
+                        divElement.appendChild(button)
+                    }
+                    triviaValues.appendChild(divElement)
+
+                    trivia.appendChild(triviaHeader)
+                    trivia.appendChild(triviaValues)
+                    trivia.style.display = 'block';
+
+                }
+
+            }
+
+            if (data.messageType === 'question') {
+                // Gelen soruyu al ve Quiz ekranını hazırla
+                const quizDiv = document.getElementById('Quiz');
+                const questionElement = document.getElementById('question');
+                const registrationDiv = document.getElementById('registration');
+                const triviaDiv = document.getElementById('trivia');
+
+                // Soruyu göster
+                questionElement.textContent = data.questionText;
+
+                // Görünürlükleri ayarla
+                registrationDiv.style.display = 'none'; // Kayıt ekranını gizle
+                triviaDiv.style.display = 'none'; // Trivia ekranını gizle
+                quizDiv.style.display = 'block'; // Quiz ekranını göster
             }
 
             if (data.message) {

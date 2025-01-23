@@ -9,15 +9,13 @@ let playerWS = [];
 let gameState = {
     maxPlayers: 4,
     currentPlayers: 0,
-    gameStarted: false, // Ensure gameStarted is initialized
 };
-
 // Trivia
 let activeTriviaSocket = null;
 
 app.use(express.static('public'));
 
-// Master
+//Master
 app.ws('/game', function (ws, req) {
     activeTriviaSocket = ws;
 
@@ -32,67 +30,56 @@ app.ws('/game', function (ws, req) {
             gameState: gameState
         }));
         
-        if (gameState.gameStarted) {
-            updateActivePlayer();
+        if (gameState.gameStarted){
+            updateActivePlayer()
         }
     }
 
     ws.on('message', (message) => {
-        try {
-            const data = JSON.parse(message);
-            console.log('Server received ACTION', data.action);
+        const data = JSON.parse(message);
+        console.log('Server received ACTION', data.action)
 
-            if (data.action === 'startGame') {
-                if (playerWS.length >= 2 && playerWS.length <= 4) {
-                    gameState.gameStarted = true;
-                    gameState.currentPlayers = playerWS.length;
+        if (data.action === 'startGame') {
+            if (playerWS.length >= 2 && playerWS.length <= 4) {
+                gameState.gameStarted = true;
+                gameState.currentPlayers = playerWS.length;
 
-                    startActivePlayerCycle();
+                startActivePlayerCycle();
 
-                    broadcastToPlayers({
-                        type: 'gameStarted',
-                        message: 'The game has started!',
-                    });
-                } else {
-                    gameMaster.send(
-                        JSON.stringify({
-                            messageType: 'error',
-                            message: 'Too many players to start the game.',
-                        })
-                    );
-                }
+                broadcastToPlayers({
+                    type: 'gameStarted',
+                    message: 'The game has started!',
+                });
+            } else {
+                gameMaster.send(
+                    JSON.stringify({
+                        messageType: 'error',
+                        message: 'Too many players to start the game.',
+                    })
+                );
             }
-            if (data.action === 'getGameState') {
-                const gameState = {
-                    players: playerWS.map((player) => player.name),
-                    currentPlayer: activePlayerIndex
-                };
-                ws.send(JSON.stringify({
-                    messageType: 'gameState',
-                    gameState: gameState
-                }));
-            }
-
-            if (data.action === 'selectCategory') {
-                console.log('send questions....');
-                ws.send(JSON.stringify({
-                    messageType: 'question',
-                    questionText: 'Who are you?'
-                }));
-            }
-
-            if (data.action === 'changeActivePlayer') {
-                changeActivePlayer();
-            }
-        } catch (error) {
-            console.error('Error processing message:', error);
+        }
+        if (data.action === 'getGameState') {
+            const gameState = {
+                players: playerWS.map((player) => player.name),
+                currentPlayer: activePlayerIndex
+            };
             ws.send(JSON.stringify({
-                messageType: 'error',
-                message: 'Invalid message format.',
+                messageType: 'gameState',
+                gameState: gameState
             }));
         }
-    });
 
+        if (data.action === 'selectCategory') {
+            console.log('send questions....')
+            ws.send(JSON.stringify({
+                messageType: 'question',
+                questionText: 'Who are you?'
+            }));
+        }
+
+        
+    });
     ws.on('close', () => {
         console.log('Game Master disconnected.');
         gameMaster = null;
@@ -126,7 +113,7 @@ app.ws('/player', function(ws, req) {
         return;
     }
     
-    if (playerWS.length >= 4) {
+    if(playerWS.length > 4) {
         console.log('Maximum player limit reached!');
         ws.send(JSON.stringify({
             messageType: 'error',
@@ -135,45 +122,36 @@ app.ws('/player', function(ws, req) {
         ws.close(1000, 'Maximum player limit reached');
         return;
     }
-
     console.log('Player connected');
     playerWS.push({ ws: ws, name: null });
 
     ws.on('message', (message) => {
-        try {
-            const data = JSON.parse(message);
+        const data = JSON.parse(message);
 
-            if (data.action === 'registerPlayer') {
-                const playerName = data.playerName;
+        if (data.action === 'registerPlayer') {
+            const playerName = data.playerName;
 
-                if (playerName) {
-                    const existingPlayer = playerWS.find(player => player.ws === ws && player.name === playerName);
-                    if (!existingPlayer) {
-                        const player = { ws: ws, name: playerName };
-                        playerWS = playerWS.filter(p => p.ws !== ws);
-                        playerWS.push(player);
-                    }
-                
-                    console.log('Player registered:', playerName);
+            if (playerName) {
+                const existingPlayer = playerWS.find(player => player.ws === ws && player.name === playerName);
+                if (!existingPlayer) {
+                    const player = { ws: ws, name: playerName };
+                    playerWS = playerWS.filter(p => p.ws !== ws);
+                    playerWS.push(player);
+                }
+            
+                console.log('Player registered:', playerName);
 
-                    if (gameMaster) {
-                        gameMaster.send(
-                            JSON.stringify({
-                                messageType: 'newPlayer',
-                                message: `${playerName} has joined.`,
-                                currentPlayers: playerWS.filter(p => p.name).length,
-                                playerNames: playerWS.map((player) => player.name).filter(Boolean),
-                            })
-                        );
-                    }
+                if (gameMaster) {
+                    gameMaster.send(
+                        JSON.stringify({
+                            messageType: 'newPlayer',
+                            message: `${playerName} has joined.`,
+                            currentPlayers: playerWS.filter(p => p.name).length,
+                            playerNames: playerWS.map((player) => player.name).filter(Boolean),
+                        })
+                    );
                 }
             }
-        } catch (error) {
-            console.error('Error processing player message:', error);
-            ws.send(JSON.stringify({
-                messageType: 'error',
-                message: 'Invalid message format.',
-            }));
         }
     });
 
@@ -204,6 +182,15 @@ app.listen(port, () => {
 
 // Active Player
 let activePlayerIndex = 0;
+let activePlayerCycle = null;
+
+function startActivePlayerCycle() {
+    if (activePlayerCycle) {
+        clearInterval(activePlayerCycle);
+    }
+    changeActivePlayer();
+    activePlayerCycle = setInterval(changeActivePlayer, 10000);
+}
 
 function changeActivePlayer(){
     if (playerWS.length === 0) return;
@@ -211,10 +198,12 @@ function changeActivePlayer(){
     activePlayerIndex = (activePlayerIndex + 1) % playerWS.length;
     const activePlayer = playerWS[activePlayerIndex];
 
-    updateActivePlayer(activePlayer);
+    updateActivePlayer(activePlayer)
 }
 
 function updateActivePlayer(activePlayer) {
+
+
     broadcastToPlayers({
         activePlayerName: activePlayer.name,
     });
@@ -231,26 +220,47 @@ function updateActivePlayer(activePlayer) {
             {
                 categoryName: 'Musik',
                 openQuestions: [
-                    {id: 'm100', label: '100'},
-                    {id: 'm200', label: '200'},
+                    {
+                        id: 'm100',
+                        label: '100'
+                    },
+                    {
+                        id: 'm200',
+                        label: '200'
+                    },
                 ]
             },
             {
                 categoryName: 'Geschichte',
                 openQuestions: [
-                    {id: 'g100', label: '100'},
-                    {id: 'g200', label: '200'},
+                    {
+                        id: 'g100',
+                        label: '100'
+                    },
+                    {
+                        id: 'g200',
+                        label: '200'
+                    },
                 ]
             },
             {
                 categoryName: 'Serie',
                 openQuestions: [
-                    {id: 's100', label: '100'},
-                    {id: 's200', label: '200'},
-                    {id: 's300', label: '300'},
+                    {
+                        id: 's100',
+                        label: '100'
+                    },
+                    {
+                        id: 's200',
+                        label: '200'
+                    },
+                    {
+                        id: 's300',
+                        label: '300'
+                    },
                 ]
             }
-        ];
+        ]
 
         gameMaster.send(
             JSON.stringify({

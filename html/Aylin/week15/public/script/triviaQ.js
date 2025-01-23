@@ -11,6 +11,6 @@ function selectCategory(category, points) {
     let randomIndexM1 = Math.floor(Math.random() * questionM1.length);
     let randomQuestionM1 = questionM1[randomIndexM1];
     
-    const url = `question.html?category=${encodeURIComponent(category)}&points=${points}&question=${encodeURIComponent(randomQuestionM1)}`;
+    const url = `master.html?category=${encodeURIComponent(category)}&points=${points}&question=${encodeURIComponent(randomQuestionM1)}`;
     window.location.href = url;  // Navigate to question.html with the parameters
 }
