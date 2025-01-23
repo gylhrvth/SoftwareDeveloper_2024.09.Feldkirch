@@ -44,10 +44,11 @@ app.ws('/game', function (ws, req) {
                 gameState.gameStarted = true;
                 gameState.currentPlayers = playerWS.length;
 
-                startActivePlayerCycle();
+                //startActivePlayerCycle();
+                updateActivePlayer(playerWS[activePlayerIndex]);
 
                 broadcastToPlayers({
-                    type: 'gameStarted',
+                    messageType: 'gameStarted',
                     message: 'The game has started!',
                 });
             } else {
@@ -71,10 +72,15 @@ app.ws('/game', function (ws, req) {
         }
 
         if (data.action === 'selectCategory') {
-            console.log('send questions....')
+            console.log('send questions to MASTER....')
             ws.send(JSON.stringify({
                 messageType: 'question',
                 questionText: 'Who are you?'
+            }));
+            console.log('send possible answers to', playerWS[activePlayerIndex].name)
+            playerWS[activePlayerIndex].ws.send(JSON.stringify({
+                messageType: 'possibleAnswers',
+                answers: ['A', 'B', 'C', 'D']
             }));
         }
 
@@ -92,7 +98,7 @@ function broadcastToPlayers(message) {
 
         const playerMessage = {
             ...message,
-            type: isActivePlayer ? 'yourTurn' : 'otherPlayerTurn',
+            messageType: isActivePlayer ? 'yourTurn' : 'otherPlayerTurn',
             message: isActivePlayer
                 ? "Your turn"
                 : `${playerWS[activePlayerIndex]?.name || 'Unknown'}'s turn`,
@@ -184,6 +190,7 @@ app.listen(port, () => {
 let activePlayerIndex = 0;
 let activePlayerCycle = null;
 
+/*
 function startActivePlayerCycle() {
     if (activePlayerCycle) {
         clearInterval(activePlayerCycle);
@@ -191,6 +198,7 @@ function startActivePlayerCycle() {
     changeActivePlayer();
     activePlayerCycle = setInterval(changeActivePlayer, 10000);
 }
+*/
 
 function changeActivePlayer(){
     if (playerWS.length === 0) return;
