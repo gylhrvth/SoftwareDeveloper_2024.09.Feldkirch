@@ -16,7 +16,9 @@ export function minmax(chessOriginal, depth, isWhite, alpha, beta){
             if (move.piece === undefined){
                 console.log('move.piece is undefined', move, moves)
             }
-            chess.moveChessPiece(move.piece, move.newRow, move.newColumn);
+            let enPassant = (move.enPassant !== undefined && move.enPassant)
+            let castling = (move.castling !== undefined && move.castling)
+            chess.moveChessPiece(move.piece, move.newRow, move.newColumn, enPassant, castling);
             let evalResult = minmax(chess, depth-1, !isWhite, alpha, beta);
             chess.undoGameField();
             if(evalResult.score > maxEval){

@@ -96,7 +96,7 @@ class ChessGame {
 
         this.addNewChessPiece(0, 4, new King(false))
         this.addNewChessPiece(7, 4, new King(true))
-        this.addNewChessPiece(0, 0, new Rook(false))
+        this.addNewChessPiece(0, 5, new Rook(false))
         this.addNewChessPiece(0, 7, new Rook(false))
         this.addNewChessPiece(7, 0, new Rook(true))
         this.addNewChessPiece(7, 7, new Rook(true))
@@ -250,7 +250,10 @@ class ChessGame {
             // Add event listener for each square
             square.addEventListener('click', () => {
 
-                const piece = this.boardArray[row][col];
+                const piece = structuredClone(this.boardArray[row][col]);
+                if (piece){
+                    piece.__proto__ = Object.getPrototypeOf(this.boardArray[row][col])
+                }
 
                 // If a piece of the current turn's color is clicked
                 if ((this.isWhiteTurn && this.isWhiteHuman) || (!this.isWhiteTurn && this.isBlackHuman)) {
@@ -262,7 +265,9 @@ class ChessGame {
                             sq.classList.remove('highlightSquare');
                         });
 
-                        const possibleMoves = piece.getPossibleMoves(this);
+                        let possibleMoves = piece.getPossibleMoves(this);
+                        // filter nach check
+                        possibleMoves = this.filterMovesForCheck(possibleMoves)
                         possibleMoves.forEach(move => {
                             const targetSquare = chessBoard.children[move.newRow * 8 + move.newColumn];
                             targetSquare.classList.add('highlightSquare');
@@ -274,8 +279,7 @@ class ChessGame {
                             }
                         });
 
-                        console.log(`Selected piece: ${piece.label} at ${String.fromCharCode(65 + col)}${8 - row}`, piece.getPossibleMoves(this));
-                        //     console.log("possible Moves: ",piece.getPossibleMoves(this))
+                        console.log(`Selected piece: ${piece.label} at ${String.fromCharCode(65 + col)}${8 - row}`, possibleMoves);
                     }
 
                     // If a highlighted square is clicked
@@ -305,21 +309,10 @@ class ChessGame {
                         this.moveChessPiece(selectedPiece, targetRow, targetCol, enPassant, castling);
 
 
-                        if (this.isWhiteTurn) {
-                            // White just moved, so check if black is in check
-                            let isBlackInCheck = this.isKingInCheck(false); // false represents the opponent, i.e., black
-                            console.log("Checking if black's king is in check:", isBlackInCheck);
-                            if (isBlackInCheck) {
-                                console.log("White's move results in black being in check");
-                            }
-                        } else {
-                            // Black just moved, so check if white is in check
-                            let isWhiteInCheck = this.isKingInCheck(true); // true represents the opponent, i.e., white
-                            console.log("Checking if white's king is in check:", isWhiteInCheck);
-                            if (isWhiteInCheck) {
-                                console.log("Black's move results in white being in check");
-                            }
-                        } 
+                        let isOpponentInCheck = this.isKingInCheck(!this.isWhiteTurn);
+                        // Black just moved, so check if white is in check
+                        console.log(this.isWhiteTurn?"BLACK":"WHITE", "in check?", isOpponentInCheck);
+        
 
 
                         if (selectedPiece.__type === 'King' || selectedPiece.__type === 'Rook') {
@@ -442,7 +435,7 @@ class ChessGame {
                     // console.log(`Inspecting piece at row ${row}, column ${column}`);
 
                     let possibleMovesOfPiece = this.boardArray[row][column].getPossibleMoves(chess)
-
+                    // TODO: use the same filter as in human move
                     // console.log(`Possible moves for piece at row ${row}, column ${column}:`, possibleMovesOfPiece);
 
                     possibleMovesOfPiece.forEach(move => {
@@ -455,6 +448,15 @@ class ChessGame {
         return allPossibleMoves;
     }
 
+
+    filterMovesForCheck(moves) {
+        console.log('filterMovesForCheck', moves)
+        let filteredMoves = [];
+        moves = structuredClone(moves)
+        
+        console.log('filterMovesForCheck RESULT', filteredMoves)
+        return filteredMoves;
+    }
 
     isKingInCheck(isWhite) {
         console.log("Is King in Check");
@@ -508,7 +510,7 @@ class ChessGame {
             if ((this.isWhiteTurn && !this.isWhiteHuman) || (!this.isWhiteTurn && !this.isBlackHuman)) {
                 console.log('Try to move AI')
                 this.computerIsThinking = true;
-
+/*
                 // Collect all possible moves for the AI
                 const possibleMovesByPiece = [];
                 this.boardArray.forEach((row) => {
@@ -528,7 +530,7 @@ class ChessGame {
 
                 // Log the structured array of possible moves
                 console.log("AI's Possible Moves by Piece:", possibleMovesByPiece);
-
+*/
                 let minmaxresult = minmax(this, 4, this.isWhiteTurn, -Infinity, Infinity)
                 let bestMove = minmaxresult.move
                 let enPassant = false
@@ -549,7 +551,6 @@ class ChessGame {
                 let isOpponentInCheck = this.isKingInCheck(!this.isWhiteTurn);
                 // Black just moved, so check if white is in check
                 console.log("isWhiteinCheck? ", isOpponentInCheck);
-                
 
 
                 if (bestMove.__type === 'King' || bestMove.__type === 'Rook') {
