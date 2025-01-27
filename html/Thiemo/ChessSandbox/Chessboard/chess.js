@@ -6,16 +6,11 @@ import { Rook } from "../Pieces/Rook.js";
 import { Queen } from "../Pieces/Queen.js"
 import { King } from "../Pieces/King.js"
 
-
-
 // The next time you use code I suggest, 
 // pause and ask yourself: “What does each line do? 
 // Why is it written this way?” 
 // Break it apart and test your understanding.
 // That process turns "copying" into learning.
-
-
-// TODO: 
 
 class ChessGame {
     constructor() {
@@ -35,7 +30,7 @@ class ChessGame {
 
         this.isWhiteTurn = true;
         this.isWhiteHuman = true;
-        this.isBlackHuman = true;
+        this.isBlackHuman = false;
         this.computerIsThinking = false;
     }
 
@@ -96,10 +91,17 @@ class ChessGame {
 
         this.addNewChessPiece(0, 4, new King(false))
         this.addNewChessPiece(7, 4, new King(true))
-        this.addNewChessPiece(0, 5, new Rook(false))
+        this.addNewChessPiece(3, 5, new Rook(false))
         this.addNewChessPiece(0, 7, new Rook(false))
         this.addNewChessPiece(7, 0, new Rook(true))
         this.addNewChessPiece(7, 7, new Rook(true))
+
+  /*      this.addNewChessPiece(6, 2, new King(false))
+        this.addNewChessPiece(2, 1, new King(true)) */
+        this.addNewChessPiece(0, 0, new Rook(false))
+        this.addNewChessPiece(3, 2, new Rook(false))
+        this.addNewChessPiece(6, 1, new Rook(true))
+        this.addNewChessPiece(5, 5, new Rook(true)) 
 
     }
 
@@ -279,7 +281,7 @@ class ChessGame {
                             }
                         });
 
-                        console.log(`Selected piece: ${piece.label} at ${String.fromCharCode(65 + col)}${8 - row}`, possibleMoves);
+                        console.log(`Selected piece: ${piece.label}${piece.__type} at ${String.fromCharCode(65 + col)}${8 - row}`, possibleMoves);
                     }
 
                     // If a highlighted square is clicked
@@ -308,13 +310,10 @@ class ChessGame {
                         // Move the piece
                         this.moveChessPiece(selectedPiece, targetRow, targetCol, enPassant, castling);
 
-
                         let isOpponentInCheck = this.isKingInCheck(!this.isWhiteTurn);
                         // Black just moved, so check if white is in check
                         console.log(this.isWhiteTurn?"BLACK":"WHITE", "in check?", isOpponentInCheck);
         
-
-
                         if (selectedPiece.__type === 'King' || selectedPiece.__type === 'Rook') {
                             selectedPiece.hasMoved = true;
                         }
@@ -423,9 +422,6 @@ class ChessGame {
         return score
     }
 
-    // for what is this function then???
-    // do i need it for the minmax algorithm?
-    // or for the isincheck function?
     getAllPossibleMoves(isWhite) {
         let allPossibleMoves = [];
         for (let row = 0; row < this.boardArray.length; row++) {
@@ -435,6 +431,7 @@ class ChessGame {
                     // console.log(`Inspecting piece at row ${row}, column ${column}`);
 
                     let possibleMovesOfPiece = this.boardArray[row][column].getPossibleMoves(chess)
+
                     // TODO: use the same filter as in human move
                     // console.log(`Possible moves for piece at row ${row}, column ${column}:`, possibleMovesOfPiece);
 
@@ -448,18 +445,25 @@ class ChessGame {
         return allPossibleMoves;
     }
 
-
     filterMovesForCheck(moves) {
         console.log('filterMovesForCheck', moves)
         let filteredMoves = [];
         moves = structuredClone(moves)
+
+        for (let move of moves) {
+            let cloneGame = this.cloneChessGame();
+            cloneGame.moveChessPiece(move.piece, move.newRow, move.newColumn, move.enPassant, move.castling);
+            if (!cloneGame.isKingInCheck(move.piece.isWhite)) {
+                filteredMoves.push(move);
+            }
+        }
         
         console.log('filterMovesForCheck RESULT', filteredMoves)
         return filteredMoves;
     }
 
     isKingInCheck(isWhite) {
-        console.log("Is King in Check");
+       // console.log("Is King in Check");
 
         let kingPosition = this.findKingPosition(isWhite);
         if (!kingPosition) {
@@ -476,9 +480,8 @@ class ChessGame {
         return false;
     }
 
-
     findKingPosition(isWhite) {
-        console.log("Find King Position");
+      //  console.log("Find King Position");
         for (let row = 0; row < this.boardArray.length; row++) {
             for (let column = 0; column < this.boardArray[row].length; column++) {
                 let piece = this.boardArray[row][column];
@@ -490,20 +493,17 @@ class ChessGame {
         return null;
     }
 
-
     printMove(player, move, oldPositionCol, oldPositionRow, targetSquare) {
         if (targetSquare == undefined) {
-            console.log(player, "MOVE", move.piece.__type, "from",
+            console.log(player, "MOVE",move.label, move.__type, "from",
                 String.fromCharCode(65 + oldPositionCol) + (8 - oldPositionRow), "to",
                 String.fromCharCode(65 + move.newColumn) + (8 - move.newRow));
         } else {
-            console.log(player, "HIT", move.piece.__type, "from",
+            console.log(player, "HIT",move.label, move.__type, "from",
                 String.fromCharCode(65 + oldPositionCol) + (8 - oldPositionRow), "to",
                 String.fromCharCode(65 + move.newColumn) + (8 - move.newRow));
         }
     }
-
-
 
     tryToMoveAI() {
         if (!this.computerIsThinking) {
@@ -568,84 +568,9 @@ class ChessGame {
     }
 }
 
-
 let chess = new ChessGame()
 chess.initGameField()
 chess.printGameField()
 
-
 setInterval(() => chess.tryToMoveAI(), 1000)
 
-
-/*
-let allMoves = chess.getAllPossibleMoves(true)
-// let allMovesBlack = ["no empty"]
-let allMovesBlack = allMoves
-let allMovesDone = [];
-let stepLeft = 0
-let movesDone = 0
-let randomIndex
-let randomMove
-let minmaxresult
-let oldPositionRow
-let oldPositionCol
-
-
-while (allMoves.length > 0 && allMovesBlack.length > 0 && stepLeft > 0) {
-    // Teil WEISS
-    randomIndex = Math.floor(Math.random() * allMoves.length);
-    randomMove = allMoves[randomIndex];
-    //console.log(randomMove, randomIndex);
-
-    //  minmaxresult = minmax(chess, 4, true, -Infinity, Infinity)
-    //  randomMove = minmaxresult.move
-    //console.log("MinMaxResult: ", minmaxresult)
-
-    oldPositionRow = randomMove.piece.currentRow
-    oldPositionCol = randomMove.piece.currentCol
-    console.log("White", allMoves)
-    chess.printMove("White", randomMove, oldPositionCol, oldPositionRow)
-
-    chess.moveChessPiece(randomMove.piece, randomMove.newRow, randomMove.newColumn);
-
-    chess.printGameField()
-    //   chess.printMove("White", randomMove, oldPositionCol, oldPositionRow)
-    console.log("Score is ", chess.calculateScore())
-
-
-    //console.log(chess)
-
-    // Teil SCHWARZ
-    allMovesBlack = chess.getAllPossibleMoves(false)
-    if (allMovesBlack.length > 0) {
-        randomIndex = Math.floor(Math.random() * allMovesBlack.length);
-        randomMove = allMovesBlack[randomIndex];
-
-        //minmaxresult = minmax(chess, 4, false, -Infinity, Infinity)
-        // console.log("MinMaxResult: ", minmaxresult)
-        // randomMove = minmaxresult.move
-        oldPositionRow = randomMove.piece.currentRow
-        oldPositionCol = randomMove.piece.currentCol
-        console.log("Black", allMovesBlack)
-        chess.printMove("Black", randomMove, oldPositionCol, oldPositionRow)
-
-        chess.moveChessPiece(randomMove.piece, randomMove.newRow, randomMove.newColumn);
-
-        chess.printGameField()
-        //       chess.printMove("Black", randomMove, oldPositionCol, oldPositionRow)
-        // Vorbereitung WEISS
-        allMoves = chess.getAllPossibleMoves(true)
-        console.log("Score is ", chess.calculateScore())
-
-    }
-    --stepLeft
-    movesDone++
-    console.log("Moves done", movesDone)
-
-
-}
-
-chess.printGameField()
-console.log("Game over")
-
-*/
