@@ -4,7 +4,7 @@ class King {
     constructor(isWhite) {
         this.__type = 'King';
         this.hasMoved = false;
-        this.isInCheck = false;
+     //   this.isInCheck = false;
         this.currentRow = null;
         this.currentCol = null;
         this.isWhite = isWhite;
@@ -15,7 +15,7 @@ class King {
         this.currentRow = value.currentRow;
         this.currentCol = value.currentCol;
         this.hasMoved = value.hasMoved;
-        this.isInCheck = value.isInCheck;
+  //      this.isInCheck = value.isInCheck;
         this.isWhite = value.isWhite;
         this.label = value.isWhite ? "♔" : "♚";
     }
@@ -63,7 +63,7 @@ class King {
         return false;
     }
 
-    getValidMoves(chess) {
+ /*  getValidMoves(chess) {
         const possibleMoves = this.getPossibleMoves(chess);
         const validMoves = [];
 
@@ -86,7 +86,7 @@ class King {
 
         console.log("Valid moves I get back: ", validMoves);
         return validMoves;
-    }
+    } */
 
 
     getPossibleMoves(chess) {

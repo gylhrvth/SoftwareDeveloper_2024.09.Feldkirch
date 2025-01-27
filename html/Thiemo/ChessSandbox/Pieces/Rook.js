@@ -7,7 +7,7 @@ export { Rook };
 class Rook {
     constructor(isWhite) {
         this.__type = 'Rook';
-this.hasMoved = false;
+        this.hasMoved = false;
         this.currentRow = null
         this.currentCol = null
         this.isWhite = isWhite
@@ -52,19 +52,19 @@ this.hasMoved = false;
             if (up && !this.testOutOfBounds(-distance, 0)) {
                 if (chess.getChessPiece(row - distance, col) == undefined) {
                     moves.push({ newRow: row - distance, newColumn: col, piece: this })
-                } else if (chess.getChessPiece(row - distance, col ).isWhite != this.isWhite) {
-                    moves.push({ newRow: row - distance,newColumn: col ,  piece: this })
+                } else if (chess.getChessPiece(row - distance, col).isWhite != this.isWhite) {
+                    moves.push({ newRow: row - distance, newColumn: col, piece: this })
                     up = false
                 } else {
-                   up = false
+                    up = false
                 }
             }
 
             if (down && !this.testOutOfBounds(distance, 0)) {
                 if (chess.getChessPiece(row + distance, col) == undefined) {
-                    moves.push({ newRow: row + distance,newColumn: col , piece: this })
-                } else if (chess.getChessPiece(row + distance, col ).isWhite != this.isWhite) {
-                    moves.push({ newRow: row + distance,newColumn: col , piece: this })
+                    moves.push({ newRow: row + distance, newColumn: col, piece: this })
+                } else if (chess.getChessPiece(row + distance, col).isWhite != this.isWhite) {
+                    moves.push({ newRow: row + distance, newColumn: col, piece: this })
                     down = false
                 } else {
                     down = false
@@ -72,10 +72,10 @@ this.hasMoved = false;
             }
 
             if (right && !this.testOutOfBounds(0, distance)) {
-                if (chess.getChessPiece(row , col + distance) == undefined) {
-                    moves.push( {newRow: row , newColumn: col + distance, piece: this })
-                } else if (chess.getChessPiece(row , col + distance).isWhite != this.isWhite) {
-                    moves.push({ newRow: row , newColumn: col + distance, piece: this })
+                if (chess.getChessPiece(row, col + distance) == undefined) {
+                    moves.push({ newRow: row, newColumn: col + distance, piece: this })
+                } else if (chess.getChessPiece(row, col + distance).isWhite != this.isWhite) {
+                    moves.push({ newRow: row, newColumn: col + distance, piece: this })
                     right = false
                 } else {
                     right = false
@@ -83,10 +83,10 @@ this.hasMoved = false;
             }
 
             if (left && !this.testOutOfBounds(0, -distance)) {
-                if (chess.getChessPiece(row , col - distance) == undefined) {
-                    moves.push({ newRow: row ,  newColumn: col - distance, piece: this })
+                if (chess.getChessPiece(row, col - distance) == undefined) {
+                    moves.push({ newRow: row, newColumn: col - distance, piece: this })
                 } else if (chess.getChessPiece(row, col - distance).isWhite != this.isWhite) {
-                    moves.push({ newRow: row ,  newColumn: col - distance, piece: this })
+                    moves.push({ newRow: row, newColumn: col - distance, piece: this })
                     left = false
                 } else {
                     left = false
@@ -98,29 +98,29 @@ this.hasMoved = false;
         return moves;
     }
 
-    getValidMoves(chess) {
-        const possibleMoves = this.getPossibleMoves(chess);
-        const validMoves = [];
-
-        for (let move of possibleMoves) {
-            // Temporarily simulate the move
-            const originalRow = this.currentRow;
-            const originalCol = this.currentCol;
-            this.currentRow = move.newRow;
-            this.currentCol = move.newColumn;
-
-            // Check if King would still be in check
-            if (!chess.isKingInCheck(this.isWhite)) {
-                validMoves.push(move);
+    /*    getValidMoves(chess) {
+            const possibleMoves = this.getPossibleMoves(chess);
+            const validMoves = [];
+    
+            for (let move of possibleMoves) {
+                // Temporarily simulate the move
+                const originalRow = this.currentRow;
+                const originalCol = this.currentCol;
+                this.currentRow = move.newRow;
+                this.currentCol = move.newColumn;
+    
+                // Check if King would still be in check
+                if (!chess.isKingInCheck(this.isWhite)) {
+                    validMoves.push(move);
+                }
+    
+                // Restore original position
+                this.currentRow = originalRow;
+                this.currentCol = originalCol;
             }
-
-            // Restore original position
-            this.currentRow = originalRow;
-            this.currentCol = originalCol;
-        }
-
-        console.log("Valid moves I get back: ", validMoves);
-        return validMoves;
-    }
+    
+            console.log("Valid moves I get back: ", validMoves);
+            return validMoves;
+        } */
 }
 

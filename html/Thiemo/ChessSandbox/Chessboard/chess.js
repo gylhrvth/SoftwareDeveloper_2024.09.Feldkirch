@@ -94,8 +94,8 @@ class ChessGame {
                    this.addNewChessPiece(6, 5, new Pawn(true))
                    this.addNewChessPiece(6, 7, new Pawn(true)) */
 
-        this.addNewChessPiece(6, 4, new King(false))
-        this.addNewChessPiece(1, 4, new King(true))
+        this.addNewChessPiece(0, 4, new King(false))
+        this.addNewChessPiece(7, 4, new King(true))
         this.addNewChessPiece(0, 0, new Rook(false))
         this.addNewChessPiece(0, 7, new Rook(false))
         this.addNewChessPiece(7, 0, new Rook(true))
@@ -110,12 +110,12 @@ class ChessGame {
     }
 
     moveChessPiece(piece, newRow, newColumn, enPassant, castling) {
+
         this.saveGameField(piece, newRow, newColumn);
         this.boardArray[newRow][newColumn] = this.boardArray[piece.currentRow][piece.currentCol];
         this.boardArray[piece.currentRow][piece.currentCol] = undefined;
         this.boardArray[newRow][newColumn].currentRow = newRow;
         this.boardArray[newRow][newColumn].currentCol = newColumn;
-
 
         if (enPassant) {
             console.log("moveChessPiece: En passant")
@@ -125,9 +125,8 @@ class ChessGame {
             }
             this.boardArray[piece.currentRow + deletePawnInRow][piece.currentCol] = undefined;
         }
-     //  console.log(castling)
 
-        // Castling logic
+     //  console.log(castling)
         if (castling) {
             console.log("moveChessPiece: Castling");
 
@@ -304,6 +303,8 @@ class ChessGame {
 
                         // Move the piece
                         this.moveChessPiece(selectedPiece, targetRow, targetCol, enPassant, castling);
+
+
                         if (this.isWhiteTurn) {
                             // White just moved, so check if black is in check
                             let isBlackInCheck = this.isKingInCheck(false); // false represents the opponent, i.e., black
@@ -318,7 +319,7 @@ class ChessGame {
                             if (isWhiteInCheck) {
                                 console.log("Black's move results in white being in check");
                             }
-                        }
+                        } 
 
 
                         if (selectedPiece.__type === 'King' || selectedPiece.__type === 'Rook') {
@@ -380,8 +381,6 @@ class ChessGame {
         });
     }
 
-
-    // TODO : Calculae score for every eaten Piece(pawn +1, (knight +3,bishop +3, rook +5, queen +9, king +100)) 
     calculateScore() {
         let score = 0.0
         for (let row = 0; row < this.boardArray.length; row++) {
@@ -431,29 +430,21 @@ class ChessGame {
         return score
     }
 
-
-
     // for what is this function then???
     // do i need it for the minmax algorithm?
     // or for the isincheck function?
     getAllPossibleMoves(isWhite) {
-        // TODO 005/a: Create a variable allPossibleMoves as an empty array
         let allPossibleMoves = [];
-        // TODO 005/b: Go through all rows and columns.
         for (let row = 0; row < this.boardArray.length; row++) {
             for (let column = 0; column < this.boardArray[row].length; column++) {
-                // TODO 005/c: If position not empty and piece on position is acording "isWhite"
                 if (this.boardArray[row][column] != undefined && this.boardArray[row][column].isWhite == isWhite) {
 
                     // console.log(`Inspecting piece at row ${row}, column ${column}`);
 
-                    // TODO 005/d: Get possible moves from the single piece
                     let possibleMovesOfPiece = this.boardArray[row][column].getPossibleMoves(chess)
-
 
                     // console.log(`Possible moves for piece at row ${row}, column ${column}:`, possibleMovesOfPiece);
 
-                    // TODO 005/e: Push possible moves into allPossibleMoves
                     possibleMovesOfPiece.forEach(move => {
                         allPossibleMoves.push(move)
                     });
@@ -461,8 +452,6 @@ class ChessGame {
             }
         }
         //console.log("All Moves: ", allPossibleMoves)
-
-        // TODO 005/f: return allPossibleMoves
         return allPossibleMoves;
     }
 
@@ -479,11 +468,9 @@ class ChessGame {
         let opponentMoves = this.getAllPossibleMoves(!isWhite);
         for (let move of opponentMoves) {
             if (move.newRow === kingPosition.row && move.newColumn === kingPosition.column) {
-                this.isInCheck = true;  // Set the King's isInCheck attribute to true
                 return true;
             }
         }
-        this.isInCheck = false; // Set the King's isInCheck attribute to false
         return false;
     }
 
@@ -562,7 +549,7 @@ class ChessGame {
                 let isOpponentInCheck = this.isKingInCheck(!this.isWhiteTurn);
                 // Black just moved, so check if white is in check
                 console.log("isWhiteinCheck? ", isOpponentInCheck);
-                console.log(this.isInCheck)
+                
 
 
                 if (bestMove.__type === 'King' || bestMove.__type === 'Rook') {
