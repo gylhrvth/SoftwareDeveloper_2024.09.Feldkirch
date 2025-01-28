@@ -5,7 +5,7 @@ export function minmax(chessOriginal, depth, isWhite, alpha, beta){
         return {score: chessOriginal.calculateScore(), move: null};
     }
     let chess = chessOriginal.cloneChessGame();
-    const moves = JSON.parse(JSON.stringify(chess.getAllPossibleMoves(isWhite)));
+    const moves = JSON.parse(JSON.stringify(chess.getAllPossibleMoves(isWhite, true)));
     if (moves.length == 0){
         return {score: chess.calculateScore(), move: null};
     }

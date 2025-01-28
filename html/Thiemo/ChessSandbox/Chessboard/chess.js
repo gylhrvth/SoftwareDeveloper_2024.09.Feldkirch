@@ -91,7 +91,7 @@ class ChessGame {
 
         this.addNewChessPiece(0, 4, new King(false))
         this.addNewChessPiece(7, 4, new King(true))
-        this.addNewChessPiece(3, 5, new Rook(false))
+        this.addNewChessPiece(3, 4, new Rook(false))
         this.addNewChessPiece(0, 7, new Rook(false))
         this.addNewChessPiece(7, 0, new Rook(true))
         this.addNewChessPiece(7, 7, new Rook(true))
@@ -101,7 +101,7 @@ class ChessGame {
         this.addNewChessPiece(0, 0, new Rook(false))
         this.addNewChessPiece(3, 2, new Rook(false))
         this.addNewChessPiece(6, 1, new Rook(true))
-        this.addNewChessPiece(5, 5, new Rook(true)) 
+        this.addNewChessPiece(5, 4, new Rook(true)) 
 
     }
 
@@ -120,7 +120,7 @@ class ChessGame {
         this.boardArray[newRow][newColumn].currentCol = newColumn;
 
         if (enPassant) {
-            console.log("moveChessPiece: En passant")
+            //console.log("moveChessPiece: En passant")
             let deletePawnInRow = -1
             if (piece.isWhite) {
                 deletePawnInRow = 1
@@ -130,7 +130,7 @@ class ChessGame {
 
      //  console.log(castling)
         if (castling) {
-            console.log("moveChessPiece: Castling");
+            //console.log("moveChessPiece: Castling");
 
             let rookOldCol, rookNewCol;
             if (newColumn === 6) { // Kingside castling
@@ -156,7 +156,7 @@ class ChessGame {
             rook.currentRow = newRow;
             rook.currentCol = rookNewCol;
 
-            console.log(`Rook moved from column ${rookOldCol} to column ${rookNewCol}`);
+            //console.log(`Rook moved from column ${rookOldCol} to column ${rookNewCol}`);
         }
     }
 
@@ -342,7 +342,7 @@ class ChessGame {
             square.appendChild(figure);
             chessBoard.appendChild(square);
         }
-
+/*
         // Print the board state to the console
         for (let i = 0; i < this.boardArray.length; ++i) {
             let line = " ";
@@ -359,7 +359,7 @@ class ChessGame {
 
         console.log(" ");
         console.log("white turn?", this.isWhiteTurn)
-        
+ */       
         // Remove highlights and clear selection when clicking outside the chessboard
         document.addEventListener('click', (event) => {
             if (!chessBoard.contains(event.target)) {
@@ -422,7 +422,7 @@ class ChessGame {
         return score
     }
 
-    getAllPossibleMoves(isWhite) {
+    getAllPossibleMoves(isWhite, filteredMoves) {
         let allPossibleMoves = [];
         for (let row = 0; row < this.boardArray.length; row++) {
             for (let column = 0; column < this.boardArray[row].length; column++) {
@@ -431,7 +431,9 @@ class ChessGame {
                     // console.log(`Inspecting piece at row ${row}, column ${column}`);
 
                     let possibleMovesOfPiece = this.boardArray[row][column].getPossibleMoves(chess)
-
+                    if (filteredMoves) {
+                        possibleMovesOfPiece = this.filterMovesForCheck(possibleMovesOfPiece)
+                    }
                     // TODO: use the same filter as in human move
                     // console.log(`Possible moves for piece at row ${row}, column ${column}:`, possibleMovesOfPiece);
 
@@ -451,10 +453,25 @@ class ChessGame {
         moves = structuredClone(moves)
 
         for (let move of moves) {
-            let cloneGame = this.cloneChessGame();
-            cloneGame.moveChessPiece(move.piece, move.newRow, move.newColumn, move.enPassant, move.castling);
-            if (!cloneGame.isKingInCheck(move.piece.isWhite)) {
-                filteredMoves.push(move);
+            if (move.castling === undefined || !this.isKingInCheck(move.piece.isWhite)) {
+                let testCol = 0
+                let kingHasAttackedOnGoThrough = false
+                if (move.castling === 'left'){
+                    testCol = move.piece.currentCol - 1
+                } else if (move.castling === 'right'){
+                    testCol = move.piece.currentCol + 1
+                }
+                if (testCol != 0){
+                    this.moveChessPiece(move.piece, move.newRow, testCol, undefined, undefined);
+                    kingHasAttackedOnGoThrough = this.isKingInCheck(move.piece.isWhite)
+                    this.undoGameField()
+                }
+ 
+                this.moveChessPiece(move.piece, move.newRow, move.newColumn, move.enPassant, move.castling);
+                if (!kingHasAttackedOnGoThrough && !this.isKingInCheck(move.piece.isWhite)) {
+                    filteredMoves.push(move);
+                }
+                this.undoGameField()
             }
         }
         
@@ -471,7 +488,7 @@ class ChessGame {
             return false;
         }
 
-        let opponentMoves = this.getAllPossibleMoves(!isWhite);
+        let opponentMoves = this.getAllPossibleMoves(!isWhite, false);
         for (let move of opponentMoves) {
             if (move.newRow === kingPosition.row && move.newColumn === kingPosition.column) {
                 return true;
