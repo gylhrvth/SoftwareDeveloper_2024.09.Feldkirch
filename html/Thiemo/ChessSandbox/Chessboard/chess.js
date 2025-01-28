@@ -30,7 +30,7 @@ class ChessGame {
 
         this.isWhiteTurn = true;
         this.isWhiteHuman = true;
-        this.isBlackHuman = false;
+        this.isBlackHuman = true;
         this.computerIsThinking = false;
     }
 
@@ -57,51 +57,42 @@ class ChessGame {
 
     initGameField() {
 
-        /*      for (let column = 0; column < this.boardArray[0].length; ++column) {
-                  this.addNewChessPiece(1, column, new Pawn(false))
-                  this.addNewChessPiece(6, column, new Pawn(true))
-              }
-      
-              this.addNewChessPiece(0, 1, new Knight(false))
-              this.addNewChessPiece(0, 6, new Knight(false))
-              this.addNewChessPiece(7, 1, new Knight(true))
-              this.addNewChessPiece(7, 6, new Knight(true))
-              this.addNewChessPiece(0, 2, new Bishop(false))
-              this.addNewChessPiece(0, 5, new Bishop(false))
-              this.addNewChessPiece(7, 2, new Bishop(true))
-              this.addNewChessPiece(7, 5, new Bishop(true))
-              this.addNewChessPiece(0, 3, new Queen(false))
-              this.addNewChessPiece(7, 3, new Queen(true))
-      
-              this.addNewChessPiece(0, 4, new King(false))
-              this.addNewChessPiece(7, 4, new King(true))
-              this.addNewChessPiece(0, 0, new Rook(false))
-              this.addNewChessPiece(0, 7, new Rook(false))
-              this.addNewChessPiece(7, 0, new Rook(true))
-              this.addNewChessPiece(7, 7, new Rook(true))
-      
-              /*     this.addNewChessPiece(4, 0, new Pawn(false))
-                   this.addNewChessPiece(4, 2, new Pawn(false))
-                   this.addNewChessPiece(4, 4, new Pawn(false))
-                   this.addNewChessPiece(4, 6, new Pawn(false))
-                   this.addNewChessPiece(6, 1, new Pawn(true))
-                   this.addNewChessPiece(6, 3, new Pawn(true))
-                   this.addNewChessPiece(6, 5, new Pawn(true))
-                   this.addNewChessPiece(6, 7, new Pawn(true)) */
+        for (let column = 0; column < this.boardArray[0].length; ++column) {
+            this.addNewChessPiece(1, column, new Pawn(false))
+            this.addNewChessPiece(6, column, new Pawn(true))
+        }
 
+        this.addNewChessPiece(0, 1, new Knight(false))
+        this.addNewChessPiece(0, 6, new Knight(false))
+        this.addNewChessPiece(7, 1, new Knight(true))
+        this.addNewChessPiece(7, 6, new Knight(true))
+        this.addNewChessPiece(0, 2, new Bishop(false))
+        this.addNewChessPiece(0, 5, new Bishop(false))
+        this.addNewChessPiece(7, 2, new Bishop(true))
+        this.addNewChessPiece(7, 5, new Bishop(true))
+        this.addNewChessPiece(0, 3, new Queen(false))
+        this.addNewChessPiece(7, 3, new Queen(true))
         this.addNewChessPiece(0, 4, new King(false))
         this.addNewChessPiece(7, 4, new King(true))
-        this.addNewChessPiece(3, 4, new Rook(false))
+        this.addNewChessPiece(0, 0, new Rook(false))
         this.addNewChessPiece(0, 7, new Rook(false))
         this.addNewChessPiece(7, 0, new Rook(true))
         this.addNewChessPiece(7, 7, new Rook(true))
 
-  /*      this.addNewChessPiece(6, 2, new King(false))
-        this.addNewChessPiece(2, 1, new King(true)) */
-        this.addNewChessPiece(0, 0, new Rook(false))
-        this.addNewChessPiece(3, 2, new Rook(false))
-        this.addNewChessPiece(6, 1, new Rook(true))
-        this.addNewChessPiece(5, 4, new Rook(true)) 
+
+        /*    this.addNewChessPiece(0, 4, new King(false))
+            this.addNewChessPiece(7, 4, new King(true))
+            this.addNewChessPiece(3, 4, new Rook(false))
+            this.addNewChessPiece(0, 7, new Rook(false))
+            this.addNewChessPiece(7, 0, new Rook(true))
+            this.addNewChessPiece(7, 7, new Rook(true))
+    
+            this.addNewChessPiece(6, 2, new King(false))
+            this.addNewChessPiece(2, 1, new King(true)) 
+            this.addNewChessPiece(0, 0, new Rook(false))
+            this.addNewChessPiece(3, 2, new Rook(false))
+            this.addNewChessPiece(6, 1, new Rook(true))
+            this.addNewChessPiece(5, 4, new Rook(true)) */
 
     }
 
@@ -119,16 +110,23 @@ class ChessGame {
         this.boardArray[newRow][newColumn].currentRow = newRow;
         this.boardArray[newRow][newColumn].currentCol = newColumn;
 
+        // Handle en passant
         if (enPassant) {
-            //console.log("moveChessPiece: En passant")
-            let deletePawnInRow = -1
-            if (piece.isWhite) {
-                deletePawnInRow = 1
-            }
-            this.boardArray[piece.currentRow + deletePawnInRow][piece.currentCol] = undefined;
+            console.log("moveChessPiece: En passant");
+
+            // Correctly calculate the opponent's original row
+            const opponentPawnRow = piece.isWhite ? newRow + 1 : newRow - 1;
+
+            // Debug: Print the current row and the row where the opponent's pawn should be removed
+            console.log(`En Passant - Piece: ${piece.label} | Current Row: ${piece.currentRow} | Opponent's Pawn Row: ${opponentPawnRow}`);
+
+            // Remove the opponent's pawn from the correct position
+            this.boardArray[opponentPawnRow][newColumn] = undefined;
+            console.log("Opponent's pawn removed at: ", opponentPawnRow, newColumn);
         }
 
-     //  console.log(castling)
+
+        //  console.log(castling)
         if (castling) {
             //console.log("moveChessPiece: Castling");
 
@@ -144,7 +142,7 @@ class ChessGame {
             // Ensure the rook exists at the correct position before attempting castling
             let rook = this.boardArray[newRow][rookOldCol];
             if (!rook) {
-                console.error("Rook not found for castling at column ", rookOldCol);
+                //    console.error("Rook not found for castling at column ", rookOldCol);
                 return;
             }
 
@@ -201,7 +199,8 @@ class ChessGame {
     }
 
     printGameField() {
-
+        console.log(this.isWhiteTurn ? "White's Turn \n": "Black's Turn \n");
+        
         const chessBoard = document.getElementById('chess-board');
         chessBoard.innerText = '';
 
@@ -248,12 +247,12 @@ class ChessGame {
                 }
             }
 
-
+        
             // Add event listener for each square
             square.addEventListener('click', () => {
 
                 const piece = structuredClone(this.boardArray[row][col]);
-                if (piece){
+                if (piece) {
                     piece.__proto__ = Object.getPrototypeOf(this.boardArray[row][col])
                 }
 
@@ -306,18 +305,18 @@ class ChessGame {
                         if (square.getAttribute('castling') !== undefined) {
                             castling = square.getAttribute('castling')
                         }
-
+                        
                         // Move the piece
                         this.moveChessPiece(selectedPiece, targetRow, targetCol, enPassant, castling);
 
                         let isOpponentInCheck = this.isKingInCheck(!this.isWhiteTurn);
                         // Black just moved, so check if white is in check
-                        console.log(this.isWhiteTurn?"BLACK":"WHITE", "in check?", isOpponentInCheck);
-        
+                        console.log(this.isWhiteTurn ? "BLACK" : "WHITE", "in check?", isOpponentInCheck);
+
                         if (selectedPiece.__type === 'King' || selectedPiece.__type === 'Rook') {
                             selectedPiece.hasMoved = true;
                         }
-
+                       
                         // Switch turns
                         this.isWhiteTurn = !this.isWhiteTurn;
 
@@ -342,24 +341,24 @@ class ChessGame {
             square.appendChild(figure);
             chessBoard.appendChild(square);
         }
-/*
-        // Print the board state to the console
-        for (let i = 0; i < this.boardArray.length; ++i) {
-            let line = " ";
-            for (let j = 0; j < this.boardArray[i].length; ++j) {
-                if (this.boardArray[i][j] == undefined) {
-                    line += ". ";
-                } else {
-                    line += this.boardArray[i][j].label;
+        /*
+                // Print the board state to the console
+                for (let i = 0; i < this.boardArray.length; ++i) {
+                    let line = " ";
+                    for (let j = 0; j < this.boardArray[i].length; ++j) {
+                        if (this.boardArray[i][j] == undefined) {
+                            line += ". ";
+                        } else {
+                            line += this.boardArray[i][j].label;
+                        }
+                    }
+        
+                    console.log(line);
                 }
-            }
-
-            console.log(line);
-        }
-
-        console.log(" ");
-        console.log("white turn?", this.isWhiteTurn)
- */       
+        
+                console.log(" ");
+                console.log("white turn?", this.isWhiteTurn)
+         */
         // Remove highlights and clear selection when clicking outside the chessboard
         document.addEventListener('click', (event) => {
             if (!chessBoard.contains(event.target)) {
@@ -448,7 +447,7 @@ class ChessGame {
     }
 
     filterMovesForCheck(moves) {
-        console.log('filterMovesForCheck', moves)
+        // console.log('filterMovesForCheck', moves)
         let filteredMoves = [];
         moves = structuredClone(moves)
 
@@ -456,17 +455,17 @@ class ChessGame {
             if (move.castling === undefined || !this.isKingInCheck(move.piece.isWhite)) {
                 let testCol = 0
                 let kingHasAttackedOnGoThrough = false
-                if (move.castling === 'left'){
+                if (move.castling === 'left') {
                     testCol = move.piece.currentCol - 1
-                } else if (move.castling === 'right'){
+                } else if (move.castling === 'right') {
                     testCol = move.piece.currentCol + 1
                 }
-                if (testCol != 0){
+                if (testCol != 0) {
                     this.moveChessPiece(move.piece, move.newRow, testCol, undefined, undefined);
                     kingHasAttackedOnGoThrough = this.isKingInCheck(move.piece.isWhite)
                     this.undoGameField()
                 }
- 
+
                 this.moveChessPiece(move.piece, move.newRow, move.newColumn, move.enPassant, move.castling);
                 if (!kingHasAttackedOnGoThrough && !this.isKingInCheck(move.piece.isWhite)) {
                     filteredMoves.push(move);
@@ -474,17 +473,17 @@ class ChessGame {
                 this.undoGameField()
             }
         }
-        
-        console.log('filterMovesForCheck RESULT', filteredMoves)
+
+        // console.log('filterMovesForCheck RESULT', filteredMoves)
         return filteredMoves;
     }
 
     isKingInCheck(isWhite) {
-       // console.log("Is King in Check");
+        // console.log("Is King in Check");
 
         let kingPosition = this.findKingPosition(isWhite);
         if (!kingPosition) {
-            console.error("King not found");
+            //    console.error("King not found");
             return false;
         }
 
@@ -498,7 +497,7 @@ class ChessGame {
     }
 
     findKingPosition(isWhite) {
-      //  console.log("Find King Position");
+        //  console.log("Find King Position");
         for (let row = 0; row < this.boardArray.length; row++) {
             for (let column = 0; column < this.boardArray[row].length; column++) {
                 let piece = this.boardArray[row][column];
@@ -512,11 +511,11 @@ class ChessGame {
 
     printMove(player, move, oldPositionCol, oldPositionRow, targetSquare) {
         if (targetSquare == undefined) {
-            console.log(player, "MOVE",move.label, move.__type, "from",
+            console.log(player, "MOVE", move.piece.label, move.piece.__type, "from",
                 String.fromCharCode(65 + oldPositionCol) + (8 - oldPositionRow), "to",
                 String.fromCharCode(65 + move.newColumn) + (8 - move.newRow));
         } else {
-            console.log(player, "HIT",move.label, move.__type, "from",
+            console.log(player, "HIT", move.piece.label, move.piece.__type, "from",
                 String.fromCharCode(65 + oldPositionCol) + (8 - oldPositionRow), "to",
                 String.fromCharCode(65 + move.newColumn) + (8 - move.newRow));
         }
@@ -527,27 +526,27 @@ class ChessGame {
             if ((this.isWhiteTurn && !this.isWhiteHuman) || (!this.isWhiteTurn && !this.isBlackHuman)) {
                 console.log('Try to move AI')
                 this.computerIsThinking = true;
-/*
-                // Collect all possible moves for the AI
-                const possibleMovesByPiece = [];
-                this.boardArray.forEach((row) => {
-                    row.forEach((piece) => {
-                        if (piece && piece.isWhite === this.isWhiteTurn) {
-                            const possibleMoves = piece.getPossibleMoves(this);
-                            if (possibleMoves.length > 0) {
-                                possibleMovesByPiece.push({
-                                    pieceType: piece.__type,
-                                    position: { row: piece.currentRow, col: piece.currentCol },
-                                    moves: possibleMoves.map((move) => ({ row: move.newRow, col: move.newColumn })),
+                /*
+                                // Collect all possible moves for the AI
+                                const possibleMovesByPiece = [];
+                                this.boardArray.forEach((row) => {
+                                    row.forEach((piece) => {
+                                        if (piece && piece.isWhite === this.isWhiteTurn) {
+                                            const possibleMoves = piece.getPossibleMoves(this);
+                                            if (possibleMoves.length > 0) {
+                                                possibleMovesByPiece.push({
+                                                    pieceType: piece.__type,
+                                                    position: { row: piece.currentRow, col: piece.currentCol },
+                                                    moves: possibleMoves.map((move) => ({ row: move.newRow, col: move.newColumn })),
+                                                });
+                                            }
+                                        }
+                                    });
                                 });
-                            }
-                        }
-                    });
-                });
-
-                // Log the structured array of possible moves
-                console.log("AI's Possible Moves by Piece:", possibleMovesByPiece);
-*/
+                
+                                // Log the structured array of possible moves
+                                console.log("AI's Possible Moves by Piece:", possibleMovesByPiece);
+                */
                 let minmaxresult = minmax(this, 4, this.isWhiteTurn, -Infinity, Infinity)
                 let bestMove = minmaxresult.move
                 let enPassant = false
@@ -557,7 +556,7 @@ class ChessGame {
                 let castling = false;
                 if (bestMove.castling && bestMove.castling === true) {
                     castling = true
-                    }
+                }
 
                 let oldPositionRow = bestMove.piece.currentRow
                 let oldPositionCol = bestMove.piece.currentCol
@@ -579,7 +578,7 @@ class ChessGame {
                 this.printGameField()
                 this.computerIsThinking = false
 
-              //  console.log("History ", this.history)
+                //  console.log("History ", this.history)
             }
         }
     }

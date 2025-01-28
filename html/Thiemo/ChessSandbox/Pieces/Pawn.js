@@ -3,7 +3,6 @@ export { Pawn };
 class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
     constructor(isWhite) {
         this.__type = 'Pawn';
-
         this.currentRow = null
         this.currentCol = null
         this.isWhite = isWhite
@@ -100,6 +99,7 @@ class Pawn {    //Pawn with (constructor, restoreData??, getPossibleMoves)
         let moves = [];
 
         this.addPosibleMoveEnPassant(chess, moves);
+        
 
         // Black pieces
         if (!this.isWhite) {
