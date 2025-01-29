@@ -4,6 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Player</title>
+<style>
+    #answerBlock {
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+    #possibleAnswers {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+        width: 92vw;
+        height: 40vw;
+        justify-content: center;
+    }
+
+    #possibleAnswers>div {
+        width: 100%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        text-align: center;
+    }
+    #possibleAnswers>div:nth-child(1) {
+        background-color: darkred;
+        color: white
+    }
+    #possibleAnswers>div:nth-child(2) {
+        background-color: darkgreen;
+        color: white;
+    }
+    #possibleAnswers>div:nth-child(3) {
+        background-color: darkblue;
+        color: white;
+    }
+    #possibleAnswers>div:nth-child(4) {
+        background-color: darkmagenta;
+        color: white;
+    }
+
+    body.correctAnswer {
+        background-color: green;
+    }
+    body.incorrectAnswer {
+        background-color: red;
+    }
+</style>
 </head>
 <body>
     <h2 id="welcomeMsg">Please enter a Team name</h2>
@@ -17,6 +62,15 @@
         </form>
     </div>
     <div id="result"></div>
+    <div id="answerBlock">
+        <div id="possibleAnswers">
+            <div>A</div>
+            <div>B</div>
+            <div>C</div>
+            <div>D</div>
+        </div>
+    </div>
+
     <script>
         let playerNames = [];
         let myName = sessionStorage.getItem("myName");
@@ -42,22 +96,72 @@
             if (data.message) {
                 displayMessage(data.message);
             }
-            if (data.type === 'gameStarted') {
+            if (data.messageType === 'gameStarted') {
                 if (welcomeMsg) {
                     welcomeMsg.style.display = 'none';
                 }
             }
 
-            if (data.type === 'yourTurn' || data.type === 'otherPlayerTurn') {
+            if (data.messageType === 'yourTurn' || data.messageType === 'otherPlayerTurn') {
                 if (welcomeMsg) {
                     welcomeMsg.style.display = 'none';
                 }
+                document.getElementById('answerBlock').style.display = 'none';
+                document.body.classList.remove('correctAnswer');
+                document.body.classList.remove('incorrectAnswer');
+            }
+
+            if (data.messageType === 'possibleAnswers'){
+                showPossibleAnswers(data.answers);
             }
         });
 
         socket.addEventListener('close', (event) => {
             console.log('Disconnected from WebSocket-Server', event);
         })
+
+        async function showPossibleAnswers(answers) {
+            const correctAnswer = answers[0];
+            for (let i = 0; i < 3 + 3 * answers.length; i++) {
+                const randomIndex1 = Math.floor(Math.random() * answers.length);
+                const randomIndex2 = Math.floor(Math.random() * answers.length);
+                const temp = answers[randomIndex1];
+                answers[randomIndex1] = answers[randomIndex2];
+                answers[randomIndex2] = temp;
+            }
+            console.log('Randomized answers:', answers);
+
+            const possibleAnswers = document.getElementById('possibleAnswers');
+            possibleAnswers.innerHTML = '';
+            document.getElementById('answerBlock').style.display = 'grid';
+
+            let answered = false;
+
+            answers.forEach(choice => {
+                const div = document.createElement('div');
+                div.innerText = choice;
+                div.addEventListener('click', () => {
+                    if(answered) return;
+                    answered = true;
+                    
+                    socket.send(
+                        JSON.stringify({
+                            action: 'answer',
+                            correctAnswer: correctAnswer,
+                            answer: choice,
+                        })
+                    );
+                    if (choice === correctAnswer) {
+                        document.body.classList.remove('incorrectAnswer');
+                        document.body.classList.add('correctAnswer');
+                    } else {
+                        document.body.classList.remove('correctAnswer');
+                        document.body.classList.add('incorrectAnswer');
+                    }
+                }); 
+                possibleAnswers.appendChild(div);
+            });
+        }
 
         async function registerPlayer(e) {
             e.preventDefault();
