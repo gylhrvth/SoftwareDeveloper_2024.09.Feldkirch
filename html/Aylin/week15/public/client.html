@@ -42,7 +42,12 @@
         color: white;
     }
 
-
+    body.correctAnswer {
+        background-color: green;
+    }
+    body.incorrectAnswer {
+        background-color: red;
+    }
 </style>
 </head>
 <body>
@@ -57,6 +62,15 @@
         </form>
     </div>
     <div id="result"></div>
+    <div id="answerBlock">
+        <div id="possibleAnswers">
+            <div>A</div>
+            <div>B</div>
+            <div>C</div>
+            <div>D</div>
+        </div>
+    </div>
+
     <script>
         let playerNames = [];
         let myName = sessionStorage.getItem("myName");
@@ -82,16 +96,23 @@
             if (data.message) {
                 displayMessage(data.message);
             }
-            if (data.type === 'gameStarted') {
+            if (data.messageType === 'gameStarted') {
                 if (welcomeMsg) {
                     welcomeMsg.style.display = 'none';
                 }
             }
 
-            if (data.type === 'yourTurn' || data.type === 'otherPlayerTurn') {
+            if (data.messageType === 'yourTurn' || data.messageType === 'otherPlayerTurn') {
                 if (welcomeMsg) {
                     welcomeMsg.style.display = 'none';
                 }
+                document.getElementById('answerBlock').style.display = 'none';
+                document.body.classList.remove('correctAnswer');
+                document.body.classList.remove('incorrectAnswer');
+            }
+
+            if (data.messageType === 'possibleAnswers'){
+                showPossibleAnswers(data.answers);
             }
         });
 
@@ -131,9 +152,11 @@
                         })
                     );
                     if (choice === correctAnswer) {
-                        document.body.style.backgroundColor = 'green';
+                        document.body.classList.remove('incorrectAnswer');
+                        document.body.classList.add('correctAnswer');
                     } else {
-                        document.body.style.backgroundColor = 'red';
+                        document.body.classList.remove('correctAnswer');
+                        document.body.classList.add('incorrectAnswer');
                     }
                 }); 
                 possibleAnswers.appendChild(div);
