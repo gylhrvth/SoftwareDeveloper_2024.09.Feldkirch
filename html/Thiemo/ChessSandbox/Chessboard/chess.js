@@ -312,6 +312,7 @@ class ChessGame {
                         console.log("Before move:", selectedPiece.__type, selectedPiece.hasMoved);
                         if (selectedPiece.__type === 'King' || selectedPiece.__type === 'Rook') {
                             selectedPiece.hasMoved = true;
+                            this.boardArray[targetRow][targetCol].hasMoved = true;
                         }
                         console.log("After move:", selectedPiece.__type, selectedPiece.hasMoved);
 
