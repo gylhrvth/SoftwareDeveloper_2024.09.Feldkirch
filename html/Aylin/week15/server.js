@@ -10,15 +10,10 @@ let gameState = {
     maxPlayers: 4,
     currentPlayers: 0,
 };
-// Trivia
-let activeTriviaSocket = null;
 
 app.use(express.static('public'));
 
-//Master
 app.ws('/game', function (ws, req) {
-    activeTriviaSocket = ws;
-
     if (gameMaster != null) {
         console.log('There is already a Game Master!');
         ws.close(1000, 'There is already a Game Master!');
@@ -29,26 +24,20 @@ app.ws('/game', function (ws, req) {
             messageType: 'gameState',
             gameState: gameState
         }));
-        
-        if (gameState.gameStarted){
-            updateActivePlayer()
-        }
     }
 
     ws.on('message', (message) => {
         const data = JSON.parse(message);
-        console.log('Server received ACTION', data.action)
 
         if (data.action === 'startGame') {
             if (playerWS.length >= 2 && playerWS.length <= 4) {
                 gameState.gameStarted = true;
                 gameState.currentPlayers = playerWS.length;
 
-                //startActivePlayerCycle();
-                updateActivePlayer(playerWS[activePlayerIndex]);
+                startActivePlayerCycle();
 
                 broadcastToPlayers({
-                    messageType: 'gameStarted',
+                    type: 'gameStarted',
                     message: 'The game has started!',
                 });
             } else {
@@ -111,7 +100,7 @@ function broadcastToPlayers(message) {
 
         const playerMessage = {
             ...message,
-            messageType: isActivePlayer ? 'yourTurn' : 'otherPlayerTurn',
+            type: isActivePlayer ? 'yourTurn' : 'otherPlayerTurn',
             message: isActivePlayer
                 ? "Your turn"
                 : `${playerWS[activePlayerIndex]?.name || 'Unknown'}'s turn`,
@@ -203,31 +192,32 @@ app.listen(port, () => {
 let activePlayerIndex = 0;
 let activePlayerCycle = null;
 
-/*
 function startActivePlayerCycle() {
     if (activePlayerCycle) {
         clearInterval(activePlayerCycle);
     }
-    changeActivePlayer();
-    activePlayerCycle = setInterval(changeActivePlayer, 10000);
+    updateActivePlayer();
+    activePlayerCycle = setInterval(updateActivePlayer, 10000);
 }
-*/
 
-function changeActivePlayer(){
+function updateActivePlayer() {
     if (playerWS.length === 0) return;
 
     activePlayerIndex = (activePlayerIndex + 1) % playerWS.length;
     const activePlayer = playerWS[activePlayerIndex];
 
-    updateActivePlayer(activePlayer)
-}
-
-function updateActivePlayer(activePlayer) {
-
-
     broadcastToPlayers({
         activePlayerName: activePlayer.name,
     });
+
+    if (activeTriviaSocket) {
+        activeTriviaSocket.send(
+            JSON.stringify({
+                type: 'activePlayer',
+                playerName: activePlayer.name,
+            })
+        );
+    }
 
     if (gameMaster) {
         gameMaster.send(
@@ -236,59 +226,68 @@ function updateActivePlayer(activePlayer) {
                 playerName: activePlayer.name,
             })
         );
-
-        const magicData = [
-            {
-                categoryName: 'Musik',
-                openQuestions: [
-                    {
-                        id: 'm100',
-                        label: '100'
-                    },
-                    {
-                        id: 'm200',
-                        label: '200'
-                    },
-                ]
-            },
-            {
-                categoryName: 'Geschichte',
-                openQuestions: [
-                    {
-                        id: 'g100',
-                        label: '100'
-                    },
-                    {
-                        id: 'g200',
-                        label: '200'
-                    },
-                ]
-            },
-            {
-                categoryName: 'Serie',
-                openQuestions: [
-                    {
-                        id: 's100',
-                        label: '100'
-                    },
-                    {
-                        id: 's200',
-                        label: '200'
-                    },
-                    {
-                        id: 's300',
-                        label: '300'
-                    },
-                ]
-            }
-        ]
-
-        gameMaster.send(
-            JSON.stringify({
-                messageType: 'showCategories',
-                categories: magicData,
-            })
-        );
     }
     console.log(`Active Player: ${activePlayer.name}`);
 }
+
+// Trivia 
+let activeTriviaSocket = null;
+
+app.ws('/trivia', function(ws, req) {
+    console.log('Trivia WebSocket connection established');
+    activeTriviaSocket = ws;
+
+    ws.on('message', (message) => {
+        const data = JSON.parse(message);
+
+        if (data.action === 'getGameState') {
+            const gameState = {
+                players: playerWS.map((player) => player.name),
+                currentPlayers: activePlayerIndex
+            };
+            ws.send(JSON.stringify({
+                type: 'gameState',
+                gameState: gameState
+            }));
+        }
+    });
+
+    ws.on('close', () => {
+        console.log('Trivia WebSocket connection closed');
+    });
+
+    ws.on('error', (err) => {
+        console.error('WebSocket error:', err);
+    });
+});
+
+//Question
+let activeQuestionSocket = null;
+
+ app.ws('question', function(ws, req) {
+    console.log('Question WebSocket connection established');
+    activeQuestionSocket = ws;
+
+    ws.on('message', (message) => {
+        const data = JSON.parse(message);
+
+        if (data.action === 'getGameState') {
+            const gameState = {
+                players: playerWS.map((player) => player.name),
+                currentPlayers: activePlayerIndex
+            };
+            ws.send(JSON.stringify({
+                type: 'gameState',
+                gameState: gameState
+            }));
+        }
+    });
+
+    ws.on('close', () => {
+        console.log('Questioon WebSocket connection closed');
+    });
+
+    ws.on('error', (err) => {
+        console.error('WebSocket error:', err);
+    });
+})

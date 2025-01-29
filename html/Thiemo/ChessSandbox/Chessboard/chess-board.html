@@ -27,14 +27,14 @@
     }
 
     #chess-board-wrapper {
-  position: relative;
-  width: 1000px;
-  height: 1000px;
-  border:  15px solid white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+      position: relative;
+      width: 1000px;
+      height: 1000px;
+      border: 15px solid white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
     #arrows-container {
       position: absolute;
@@ -53,24 +53,26 @@
       color: black;
       margin: 5px 0;
       text-align: center;
-      transition: transform 0.5s; /* Smooth rotation transition */
+      transition: transform 0.5s;
+      /* Smooth rotation transition */
     }
 
     .rotate {
-      transform: rotate(180deg); /* Rotate 180 degrees */
+      transform: rotate(180deg);
+      /* Rotate 180 degrees */
     }
 
 
-#chess-board {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(8, 1fr);
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
+    #chess-board {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
 
     .coordinateRank {
       position: absolute;
@@ -160,7 +162,7 @@
     <div id="chess-board-wrapper">
       <div id="chess-board"></div>
       <div id="arrows-container">
- <!--     <p>▲</p>
+ <!--       <p>▲</p>
         <p>▲</p>
         <p>▲</p>
         <p>▲</p>
@@ -183,7 +185,7 @@
       </div>
     </div>
   </div>
-  
+
  <!-- <script>
     // Function to rotate arrows every 10 seconds
     function rotateArrows() {
@@ -198,7 +200,7 @@
 
     // Initial call to ensure the rotation starts immediately
     rotateArrows();
-  </script>-->
+  </script> -->
   <br>
 
   <script type="module" src="chess.js"></script>

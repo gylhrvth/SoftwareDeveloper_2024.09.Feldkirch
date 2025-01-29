@@ -97,5 +97,30 @@ class Rook {
         // console.log("Rook", moves)
         return moves;
     }
+
+    /*    getValidMoves(chess) {
+            const possibleMoves = this.getPossibleMoves(chess);
+            const validMoves = [];
+    
+            for (let move of possibleMoves) {
+                // Temporarily simulate the move
+                const originalRow = this.currentRow;
+                const originalCol = this.currentCol;
+                this.currentRow = move.newRow;
+                this.currentCol = move.newColumn;
+    
+                // Check if King would still be in check
+                if (!chess.isKingInCheck(this.isWhite)) {
+                    validMoves.push(move);
+                }
+    
+                // Restore original position
+                this.currentRow = originalRow;
+                this.currentCol = originalCol;
+            }
+    
+            console.log("Valid moves I get back: ", validMoves);
+            return validMoves;
+        } */
 }
 

@@ -57,15 +57,6 @@
         </form>
     </div>
     <div id="result"></div>
-    <div id="answerBlock">
-        <div id="possibleAnswers">
-            <div>A</div>
-            <div>B</div>
-            <div>C</div>
-            <div>D</div>
-        </div>
-    </div>
-
     <script>
         let playerNames = [];
         let myName = sessionStorage.getItem("myName");
@@ -91,20 +82,16 @@
             if (data.message) {
                 displayMessage(data.message);
             }
-            if (data.messageType === 'gameStarted') {
+            if (data.type === 'gameStarted') {
                 if (welcomeMsg) {
                     welcomeMsg.style.display = 'none';
                 }
             }
 
-            if (data.messageType === 'yourTurn' || data.messageType === 'otherPlayerTurn') {
+            if (data.type === 'yourTurn' || data.type === 'otherPlayerTurn') {
                 if (welcomeMsg) {
                     welcomeMsg.style.display = 'none';
                 }
-            }
-
-            if (data.messageType === 'possibleAnswers'){
-                showPossibleAnswers(data.answers);
             }
         });
 
