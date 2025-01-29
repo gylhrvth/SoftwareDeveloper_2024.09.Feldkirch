@@ -84,6 +84,19 @@ app.ws('/game', function (ws, req) {
             }));
         }
 
+        if (data.action === 'answered') {
+            console.log(`${playerWS[activePlayerIndex].name} answered the question. Returning back to the Categories.`);
+
+            setTimeout(() => {
+                if (gameMaster) {
+                    gameMaster.send(JSON.stringify({
+                        messageType: 'showCategories',
+                        categories: magicData,
+                    }));
+                }
+            }, 5000);
+        }
+
         
     });
     ws.on('close', () => {
