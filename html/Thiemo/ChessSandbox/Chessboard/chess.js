@@ -56,7 +56,7 @@ class ChessGame {
     }
 
     initGameField() {
-
+/*
         for (let column = 0; column < this.boardArray[0].length; ++column) {
             this.addNewChessPiece(1, column, new Pawn(false))
             this.addNewChessPiece(6, column, new Pawn(true))
@@ -77,23 +77,18 @@ class ChessGame {
         this.addNewChessPiece(0, 0, new Rook(false))
         this.addNewChessPiece(0, 7, new Rook(false))
         this.addNewChessPiece(7, 0, new Rook(true))
-        this.addNewChessPiece(7, 7, new Rook(true))
+        this.addNewChessPiece(7, 7, new Rook(true))*/
 
-
-        /*    this.addNewChessPiece(0, 4, new King(false))
+            this.addNewChessPiece(0, 4, new King(false))
             this.addNewChessPiece(7, 4, new King(true))
             this.addNewChessPiece(3, 4, new Rook(false))
             this.addNewChessPiece(0, 7, new Rook(false))
             this.addNewChessPiece(7, 0, new Rook(true))
             this.addNewChessPiece(7, 7, new Rook(true))
-    
-            this.addNewChessPiece(6, 2, new King(false))
-            this.addNewChessPiece(2, 1, new King(true)) 
             this.addNewChessPiece(0, 0, new Rook(false))
             this.addNewChessPiece(3, 2, new Rook(false))
             this.addNewChessPiece(6, 1, new Rook(true))
-            this.addNewChessPiece(5, 4, new Rook(true)) */
-
+            this.addNewChessPiece(5, 4, new Rook(true)) 
     }
 
     addNewChessPiece(row, column, piece) {
@@ -199,6 +194,7 @@ class ChessGame {
     }
 
     printGameField() {
+        console.log(" ")
         console.log(this.isWhiteTurn ? "White's Turn \n": "Black's Turn \n");
         
         const chessBoard = document.getElementById('chess-board');
@@ -313,10 +309,12 @@ class ChessGame {
                         // Black just moved, so check if white is in check
                         console.log(this.isWhiteTurn ? "BLACK" : "WHITE", "in check?", isOpponentInCheck);
 
+                        console.log("Before move:", selectedPiece.__type, selectedPiece.hasMoved);
                         if (selectedPiece.__type === 'King' || selectedPiece.__type === 'Rook') {
                             selectedPiece.hasMoved = true;
                         }
-                       
+                        console.log("After move:", selectedPiece.__type, selectedPiece.hasMoved);
+
                         // Switch turns
                         this.isWhiteTurn = !this.isWhiteTurn;
 
@@ -370,6 +368,7 @@ class ChessGame {
                 selectedPiece = null;
             }
         });
+        
     }
 
     calculateScore() {
@@ -473,7 +472,6 @@ class ChessGame {
                 this.undoGameField()
             }
         }
-
         // console.log('filterMovesForCheck RESULT', filteredMoves)
         return filteredMoves;
     }
@@ -568,7 +566,6 @@ class ChessGame {
                 // Black just moved, so check if white is in check
                 console.log("isWhiteinCheck? ", isOpponentInCheck);
 
-
                 if (bestMove.__type === 'King' || bestMove.__type === 'Rook') {
                     bestMove.hasMoved = true;
                 }
@@ -589,4 +586,3 @@ chess.initGameField()
 chess.printGameField()
 
 setInterval(() => chess.tryToMoveAI(), 1000)
-

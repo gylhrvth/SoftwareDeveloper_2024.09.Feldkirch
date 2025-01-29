@@ -4,7 +4,6 @@ class King {
     constructor(isWhite) {
         this.__type = 'King';
         this.hasMoved = false;
-     //   this.isInCheck = false;
         this.currentRow = null;
         this.currentCol = null;
         this.isWhite = isWhite;
@@ -15,13 +14,10 @@ class King {
         this.currentRow = value.currentRow;
         this.currentCol = value.currentCol;
         this.hasMoved = value.hasMoved;
-  //      this.isInCheck = value.isInCheck;
         this.isWhite = value.isWhite;
         this.label = value.isWhite ? "♔" : "♚";
     }
 
-    
-        
     testOutOfBounds(row, col) {
         return row < 0 || row > 7 || col < 0 || col > 7;
     }
@@ -63,32 +59,6 @@ class King {
         return false;
     }
 
- /*  getValidMoves(chess) {
-        const possibleMoves = this.getPossibleMoves(chess);
-        const validMoves = [];
-
-        for (let move of possibleMoves) {
-            // Temporarily simulate the move
-            const originalRow = this.currentRow;
-            const originalCol = this.currentCol;
-            this.currentRow = move.newRow;
-            this.currentCol = move.newColumn;
-
-            // Check if King would still be in check
-            if (!chess.isKingInCheck(this.isWhite)) {
-                validMoves.push(move);
-            }
-
-            // Restore original position
-            this.currentRow = originalRow;
-            this.currentCol = originalCol;
-        }
-
-        console.log("Valid moves I get back: ", validMoves);
-        return validMoves;
-    } */
-
-
     getPossibleMoves(chess) {
         const moves = [];
         const directions = [
@@ -107,8 +77,6 @@ class King {
                 }
             }
         }
-
-
 
         if (this.canCastle(chess)) {
             if (this.canCastleLeft(chess)) {
