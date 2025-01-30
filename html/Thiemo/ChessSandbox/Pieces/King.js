@@ -3,6 +3,7 @@ export { King };
 class King {
     constructor(isWhite) {
         this.__type = 'King';
+        this.score = 1000;
         this.hasMoved = false;
         this.currentRow = null;
         this.currentCol = null;
@@ -10,6 +11,7 @@ class King {
         this.label = isWhite ? "♔" : "♚";
     }
 
+/*
     restoreData(value) {
         this.currentRow = value.currentRow;
         this.currentCol = value.currentCol;
@@ -17,6 +19,7 @@ class King {
         this.isWhite = value.isWhite;
         this.label = value.isWhite ? "♔" : "♚";
     }
+*/
 
     testOutOfBounds(row, col) {
         return row < 0 || row > 7 || col < 0 || col > 7;

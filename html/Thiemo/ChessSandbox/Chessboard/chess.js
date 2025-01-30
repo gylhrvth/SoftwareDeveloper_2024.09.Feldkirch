@@ -12,7 +12,6 @@ import { King } from "../Pieces/King.js"
 // Break it apart and test your understanding.
 // That process turns "copying" into learning.
 
-
 // TODO: ai doesnt filter correctly for check
 // TODO: ai doesnt filter correctly for check
 // TODO: ai doesnt filter correctly for check
@@ -39,17 +38,17 @@ class ChessGame {
         ];
 
         this.isWhiteTurn = true;
-        this.isWhiteHuman = true;
-        this.isBlackHuman = false;
+        this.isWhiteHuman = false;
+        this.isBlackHuman = true;
         this.computerIsThinking = false;
     }
-
+/*
     restoreData(value) {
         this.history = value.history
         this.boardArray = value.boardArray
         //console.log('Restored ChessGame', this.boardArray)
     }
-
+*/
     cloneChessGame() {
         let clone = structuredClone(this)
         Object.setPrototypeOf(clone, Object.getPrototypeOf(this))
@@ -326,7 +325,7 @@ class ChessGame {
                         
                         // Print the move
                         this.printMove(
-                            this.isWhiteTurn ? "Black" : "White",
+                            this.isWhiteTurn ? "White" : "Black",
                             { piece: selectedPiece, newRow: targetRow, newColumn: targetCol },
                             oldPositionCol,
                             oldPositionRow,
@@ -336,6 +335,7 @@ class ChessGame {
                         let isOpponentInCheck = this.isKingInCheck(!this.isWhiteTurn);
                         // Black just moved, so check if white is in check
                         console.log(this.isWhiteTurn ? "BLACK" : "WHITE", "in check?", isOpponentInCheck);
+                        console.log("History ", this.history)
 
                         if (selectedPiece.__type === 'King' || selectedPiece.__type === 'Rook') {
                             selectedPiece.hasMoved = true;
@@ -347,8 +347,7 @@ class ChessGame {
 
                         // Re-render the board
                         this.printGameField();
-                        console.log("History ", this.history)
-
+                        
                         console.log("Score is ", chess.calculateScore())
                     }
                     // If an empty square (not highlighted) is clicked, clear selection
@@ -586,6 +585,7 @@ class ChessGame {
                 let isOpponentInCheck = this.isKingInCheck(!this.isWhiteTurn);
                 // Black just moved, so check if white is in check
                 console.log("isWhiteinCheck? ", isOpponentInCheck);
+                console.log("History ", this.history)
 
                 if (bestMove.__type === 'King' || bestMove.__type === 'Rook') {
                     bestMove.hasMoved = true;

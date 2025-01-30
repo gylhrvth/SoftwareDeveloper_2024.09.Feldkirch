@@ -3,18 +3,21 @@ export { Queen };
 class Queen {
     constructor(isWhite) {
         this.__type = 'Queen';
+        this.score = 9;
         this.currentRow = null
         this.currentCol = null
         this.isWhite = isWhite
         this.label = isWhite ? "♕" : "♛";
     }
-
-    // restoreData(value) {
-    //     this.currentRow = value.currentRow
-    //     this.currentCol = value.currentCol
-    //     this.isWhite = value.isWhite
-    //     this.label = isWhite ? "♕" : "♛";
-    // }
+/*
+     restoreData(value) {
+        this.score = value.score
+         this.currentRow = value.currentRow
+         this.currentCol = value.currentCol
+         this.isWhite = value.isWhite
+         this.label = isWhite ? "♕" : "♛";
+     }
+*/
 
     testOutOfBounds(row, col) {
         return row < 0 || row > 7 || col < 0 || col > 7;

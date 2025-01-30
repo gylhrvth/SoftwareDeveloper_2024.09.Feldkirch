@@ -3,18 +3,21 @@ export { Bishop };
 class Bishop {
     constructor(isWhite) {
         this.__type = 'Bishop';
+        this.score = 3;
         this.currentRow = null;
         this.currentCol = null;
         this.isWhite = isWhite;
         this.label = isWhite ? '♗' : '♝';
     }
 
+    /*
     restoreData(value) {
         this.currentRow = value.currentRow;
         this.currentCol = value.currentCol;
         this.isWhite = value.isWhite;
         this.label = value.isWhite ? '♗' : '♝';
     }
+        */
 
     getPossibleMoves(chess) {
         const moves = [];

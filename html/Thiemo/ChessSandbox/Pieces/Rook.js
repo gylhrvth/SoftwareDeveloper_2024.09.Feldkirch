@@ -3,6 +3,7 @@ export { Rook };
 class Rook {
     constructor(isWhite) {
         this.__type = 'Rook';
+        this.score = 5;
         this.hasMoved = false;
         this.currentRow = null;
         this.currentCol = null;
@@ -10,13 +11,15 @@ class Rook {
         this.label = isWhite ? "♖" : "♜";
     }
 
-    restoreData(value) {
+ /*
+   restoreData(value) {
         this.hasMoved = value.hasMoved;
         this.currentRow = value.currentRow;
         this.currentCol = value.currentCol;
         this.isWhite = value.isWhite;
         this.label = value.isWhite ? "♖" : "♜";
     }
+        */
 
     testOutOfBounds(row, col) {
         return row < 0 || row > 7 || col < 0 || col > 7;
