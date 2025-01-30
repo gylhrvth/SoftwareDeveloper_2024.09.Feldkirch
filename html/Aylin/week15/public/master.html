@@ -177,6 +177,9 @@
             const name = document.getElementById('player-name');
             const triviaButtons = document.querySelectorAll('.q');
 
+            //Damit die Buttons wieder aktiviert werden
+            localStorage.clear();
+
             registrationDiv.style.display = 'none';
             name.style.display = 'flex';
             triviaDiv.style.display = 'block';
@@ -248,16 +251,19 @@
                         let button = document.createElement('button')
                         button.innerText = openQuestion.label
                         button.setAttribute('id', openQuestion.id)
+
+                        // Disable the button after it is clicked
+                        if (localStorage.getItem(`disabledButton_${openQuestion.id}`) === 'true') {
+                                button.disabled = true;
+                                button.style.backgroundColor = '#ccc';
+                            } 
+
                         button.addEventListener('click', () => {
-
                             selectedCategory = category.categoryName;
-                            selectedValue = openQuestion.label;
+                            selectedValue = openQuestion.label;       
 
-                            // Disable the button after it is clicked
-                            button.disabled = true;
-                            button.style.backgroundColor = '#ccc';
-
-                            localStorage.setItem(`disabledButton_${openQuestion.id}`, 'true');
+                             //Deaktivieren der Buttons
+                             localStorage.setItem(`disabledButton_${openQuestion.id}`, 'true');
 
                             // Update the Kategory class with the selected category and value
                             document.getElementById('category').textContent = selectedCategory;

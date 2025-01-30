@@ -270,11 +270,13 @@ const magicData = [
                 id: 'm100',
                 label: '100',
                 questionText: 'Who plays the guitar in the band The Beatles?',
+                answers: ['A', 'B', 'C', 'D'],
             },
             {
                 id: 'm200',
                 label: '200',
                 questionText: 'In which year was the song "Yesterday" released?',
+                answers: ['A', 'B', 'C', 'D'],
             },
         ]
     },
