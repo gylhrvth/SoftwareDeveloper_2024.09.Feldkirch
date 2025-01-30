@@ -12,6 +12,16 @@ import { King } from "../Pieces/King.js"
 // Break it apart and test your understanding.
 // That process turns "copying" into learning.
 
+
+// TODO: ai doesnt filter correctly for check
+// TODO: ai doesnt filter correctly for check
+// TODO: ai doesnt filter correctly for check
+// TODO: ai doesnt filter correctly for check
+// TODO: ai doesnt filter correctly for check
+// TODO: ai doesnt filter correctly for check
+// TODO: ai doesnt filter correctly for check
+// TODO: ai doesnt filter correctly for check
+
 class ChessGame {
     constructor() {
         this.__type = 'ChessGame';
@@ -30,7 +40,7 @@ class ChessGame {
 
         this.isWhiteTurn = true;
         this.isWhiteHuman = true;
-        this.isBlackHuman = true;
+        this.isBlackHuman = false;
         this.computerIsThinking = false;
     }
 
@@ -79,21 +89,25 @@ class ChessGame {
         this.addNewChessPiece(7, 0, new Rook(true))
         this.addNewChessPiece(7, 7, new Rook(true))
 
+        /*     this.addNewChessPiece(0, 4, new King(false))
+             this.addNewChessPiece(7, 4, new King(true))
+             this.addNewChessPiece(3, 4, new Rook(false))
+             this.addNewChessPiece(0, 7, new Rook(false))
+             this.addNewChessPiece(7, 0, new Rook(true))
+             this.addNewChessPiece(7, 7, new Rook(true))
+             this.addNewChessPiece(0, 0, new Rook(false))
+             this.addNewChessPiece(3, 2, new Rook(false))
+             this.addNewChessPiece(6, 1, new Rook(true))
+             this.addNewChessPiece(5, 4, new Rook(true)) */
 
-        /*    this.addNewChessPiece(0, 4, new King(false))
-            this.addNewChessPiece(7, 4, new King(true))
-            this.addNewChessPiece(3, 4, new Rook(false))
-            this.addNewChessPiece(0, 7, new Rook(false))
-            this.addNewChessPiece(7, 0, new Rook(true))
-            this.addNewChessPiece(7, 7, new Rook(true))
-    
-            this.addNewChessPiece(6, 2, new King(false))
-            this.addNewChessPiece(2, 1, new King(true)) 
-            this.addNewChessPiece(0, 0, new Rook(false))
-            this.addNewChessPiece(3, 2, new Rook(false))
-            this.addNewChessPiece(6, 1, new Rook(true))
-            this.addNewChessPiece(5, 4, new Rook(true)) */
-
+        /*    this.addNewChessPiece(1, 3, new Queen(false))
+            this.addNewChessPiece(6, 3, new Queen(true))
+            this.addNewChessPiece(2, 3, new Queen(false))
+            this.addNewChessPiece(5, 3, new Queen(true))
+            this.addNewChessPiece(3, 3, new Queen(false))
+            this.addNewChessPiece(7, 3, new Queen(true))
+            this.addNewChessPiece(0, 4, new King(false))
+            this.addNewChessPiece(7, 4, new King(true)) */
     }
 
     addNewChessPiece(row, column, piece) {
@@ -199,8 +213,9 @@ class ChessGame {
     }
 
     printGameField() {
-        console.log(this.isWhiteTurn ? "White's Turn \n": "Black's Turn \n");
-        
+        console.log(" ")
+        console.log(this.isWhiteTurn ? "White's Turn \n" : "Black's Turn \n");
+
         const chessBoard = document.getElementById('chess-board');
         chessBoard.innerText = '';
 
@@ -247,7 +262,7 @@ class ChessGame {
                 }
             }
 
-        
+
             // Add event listener for each square
             square.addEventListener('click', () => {
 
@@ -283,7 +298,7 @@ class ChessGame {
                         console.log(`Selected piece: ${piece.label}${piece.__type} at ${String.fromCharCode(65 + col)}${8 - row}`, possibleMoves);
                     }
 
-                    // If a highlighted square is clicked
+                    // If a highlighted square is clicked, move the piece
                     else if (selectedPiece && square.classList.contains('highlightSquare')) {
                         const targetRow = Math.floor(i / 8);
                         const targetCol = i % 8;
@@ -305,25 +320,10 @@ class ChessGame {
                         if (square.getAttribute('castling') !== undefined) {
                             castling = square.getAttribute('castling')
                         }
-                        
+
                         // Move the piece
                         this.moveChessPiece(selectedPiece, targetRow, targetCol, enPassant, castling);
-
-                        let isOpponentInCheck = this.isKingInCheck(!this.isWhiteTurn);
-                        // Black just moved, so check if white is in check
-                        console.log(this.isWhiteTurn ? "BLACK" : "WHITE", "in check?", isOpponentInCheck);
-
-                        if (selectedPiece.__type === 'King' || selectedPiece.__type === 'Rook') {
-                            selectedPiece.hasMoved = true;
-                        }
-                       
-                        // Switch turns
-                        this.isWhiteTurn = !this.isWhiteTurn;
-
-                        // Re-render the board
-                        this.printGameField();
-                        console.log("History ", this.history)
-
+                        
                         // Print the move
                         this.printMove(
                             this.isWhiteTurn ? "Black" : "White",
@@ -332,8 +332,31 @@ class ChessGame {
                             oldPositionRow,
                             targetSquare
                         );
-                        console.log("Score is ", chess.calculateScore())
 
+                        let isOpponentInCheck = this.isKingInCheck(!this.isWhiteTurn);
+                        // Black just moved, so check if white is in check
+                        console.log(this.isWhiteTurn ? "BLACK" : "WHITE", "in check?", isOpponentInCheck);
+
+                        if (selectedPiece.__type === 'King' || selectedPiece.__type === 'Rook') {
+                            selectedPiece.hasMoved = true;
+                            this.boardArray[targetRow][targetCol].hasMoved = true;
+                        }
+
+                        // Switch turns
+                        this.isWhiteTurn = !this.isWhiteTurn;
+
+                        // Re-render the board
+                        this.printGameField();
+                        console.log("History ", this.history)
+
+                        console.log("Score is ", chess.calculateScore())
+                    }
+                    // If an empty square (not highlighted) is clicked, clear selection
+                    else {
+                        document.querySelectorAll('.highlightSquare').forEach(sq => {
+                            sq.classList.remove('highlightSquare');
+                        });
+                        selectedPiece = null;
                     }
                 }
             });
@@ -352,13 +375,10 @@ class ChessGame {
                             line += this.boardArray[i][j].label;
                         }
                     }
-        
                     console.log(line);
                 }
-        
-                console.log(" ");
-                console.log("white turn?", this.isWhiteTurn)
-         */
+                console.log(" ");*/
+
         // Remove highlights and clear selection when clicking outside the chessboard
         document.addEventListener('click', (event) => {
             if (!chessBoard.contains(event.target)) {
@@ -473,7 +493,6 @@ class ChessGame {
                 this.undoGameField()
             }
         }
-
         // console.log('filterMovesForCheck RESULT', filteredMoves)
         return filteredMoves;
     }
@@ -568,9 +587,9 @@ class ChessGame {
                 // Black just moved, so check if white is in check
                 console.log("isWhiteinCheck? ", isOpponentInCheck);
 
-
                 if (bestMove.__type === 'King' || bestMove.__type === 'Rook') {
                     bestMove.hasMoved = true;
+                    this.boardArray[bestMove.newRow][bestMove.newColumn].hasMoved = true;
                 }
 
                 // Switch turns
@@ -589,4 +608,3 @@ chess.initGameField()
 chess.printGameField()
 
 setInterval(() => chess.tryToMoveAI(), 1000)
-

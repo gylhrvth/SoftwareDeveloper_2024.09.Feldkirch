@@ -29,34 +29,30 @@ class King {
 
     canCastleLeft(chess) {
         const rookColumn = 0;
-        const castlingRow = this.isWhite ? 7 : 0;
-
-        if (this.currentRow === castlingRow && this.currentCol === 4) {
-            const rook = chess.boardArray[castlingRow][rookColumn];
-            if (!rook || rook.hasMoved) return false;
-
-            for (let col = rookColumn + 1; col < 4; col++) {
-                if (chess.boardArray[castlingRow][col]) return false;
-            }
-            return true;
+        const rookRow = this.isWhite ? 7 : 0;
+        if (this.currentRow !== rookRow || this.currentCol !== 4) return false;
+        
+        const rook = chess.boardArray[rookRow][rookColumn];
+        if (!rook || rook.__type !== 'Rook' || rook.hasMoved) return false;
+        
+        for (let col = rookColumn + 1; col < 4; col++) {
+            if (chess.boardArray[rookRow][col]) return false;
         }
-        return false;
+        return true;
     }
 
     canCastleRight(chess) {
         const rookColumn = 7;
-        const castlingRow = this.isWhite ? 7 : 0;
-
-        if (this.currentRow === castlingRow && this.currentCol === 4) {
-            const rook = chess.boardArray[castlingRow][rookColumn];
-            if (!rook || rook.hasMoved) return false;
-
-            for (let col = 5; col < rookColumn; col++) {
-                if (chess.boardArray[castlingRow][col]) return false;
-            }
-            return true;
+        const rookRow = this.isWhite ? 7 : 0;
+        if (this.currentRow !== rookRow || this.currentCol !== 4) return false;
+        
+        const rook = chess.boardArray[rookRow][rookColumn];
+        if (!rook || rook.__type !== 'Rook' || rook.hasMoved) return false;
+        
+        for (let col = 5; col < rookColumn; col++) {
+            if (chess.boardArray[rookRow][col]) return false;
         }
-        return false;
+        return true;
     }
 
     getPossibleMoves(chess) {
@@ -86,7 +82,6 @@ class King {
                 moves.push({ piece: this, newRow: this.currentRow, newColumn: 6, castling: 'right' });
             }
         }
-
         return moves;
     }
 }
