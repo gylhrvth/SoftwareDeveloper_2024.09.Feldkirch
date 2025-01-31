@@ -3,146 +3,57 @@ export { Queen };
 class Queen {
     constructor(isWhite) {
         this.__type = 'Queen';
-
+        this.score = 9;
         this.currentRow = null
         this.currentCol = null
         this.isWhite = isWhite
-        if (isWhite) {
-            this.label = "♕"
-        } else {
-            this.label = "♛";
-        }
+        this.label = isWhite ? "♕" : "♛";
     }
+/*
+     restoreData(value) {
+        this.score = value.score
+         this.currentRow = value.currentRow
+         this.currentCol = value.currentCol
+         this.isWhite = value.isWhite
+         this.label = isWhite ? "♕" : "♛";
+     }
+*/
 
-    //Black ♝,♞,♟,♜,♛,♚
-    //White ♗,♘,♙,♖,♕,♔
-    restoreData(value) {
-        this.currentRow = value.currentRow
-        this.currentCol = value.currentCol
-        this.isWhite = value.isWhite
-        if (value.isWhite) {
-            this.label = "♕"
-        } else {
-            this.label = "♛";
-        }
+    testOutOfBounds(row, col) {
+        return row < 0 || row > 7 || col < 0 || col > 7;
     }
-
-    testOutOfBounds(rowCount, colCount) {
-        let newRow = this.currentRow + rowCount;
-        let newCol = this.currentCol + colCount;
-
-        // Return true if newRow or newCol are out of bounds (its like a boolean without creating one?? )
-        return newRow < 0 || newRow > 7 || newCol < 0 || newCol > 7;
-    }
-
 
     getPossibleMoves(chess) {
         let moves = []
-        let up = true
-        let down = true
-        let right = true
-        let left = true
+        const directions = [
+            { row: 1, col: 0 },   // Down
+            { row: -1, col: 0 },  // Up
+            { row: 0, col: 1 },   // Right
+            { row: 0, col: -1 },  // Left
+            { row: 1, col: 1 },   // Down Right
+            { row: 1, col: -1 },  // Down Left
+            { row: -1, col: 1 },  // Up Right
+            { row: -1, col: -1 }  // Up Left
+        ];
 
-        let topRight = true
-        let topLeft = true
-        let bottomRight = true
-        let bottomLeft = true
+        directions.forEach(direction => {
+            let distance = 1;
+            while (true) {
+                const newRow = this.currentRow + direction.row * distance;
+                const newCol = this.currentCol + direction.col * distance;
 
-        let row = this.currentRow
-        let col = this.currentCol
+                if (this.testOutOfBounds(newRow, newCol)) break;
 
-
-        for (let distance = 1; distance < 8; distance++) {
-            if (up && !this.testOutOfBounds(-distance, 0)) {
-                if (chess.getChessPiece(row - distance, col) == undefined) {
-                    moves.push({ newRow: row - distance, newColumn: col, piece: this })
-                } else if (chess.getChessPiece(row - distance, col ).isWhite != this.isWhite) {
-                    moves.push({ newRow: row - distance,newColumn: col ,  piece: this })
-                    up = false
-                } else {
-                   up = false
+                const piece = chess.getChessPiece(newRow, newCol);
+                if (!piece || piece.isWhite !== this.isWhite) {
+                    moves.push({ newRow, newColumn: newCol, piece: this });
                 }
-            }
 
-            if (down && !this.testOutOfBounds(distance, 0)) {
-                if (chess.getChessPiece(row + distance, col) == undefined) {
-                    moves.push({ newRow: row + distance,newColumn: col , piece: this })
-                } else if (chess.getChessPiece(row + distance, col ).isWhite != this.isWhite) {
-                    moves.push({ newRow: row + distance,newColumn: col , piece: this })
-                    down = false
-                } else {
-                    down = false
-                }
+                if (piece) break;  // Stop if an opponent's piece is encountered
+                distance++;
             }
+        });
 
-            if (right && !this.testOutOfBounds(0, distance)) {
-                if (chess.getChessPiece(row , col + distance) == undefined) {
-                    moves.push( {newRow: row , newColumn: col + distance, piece: this })
-                } else if (chess.getChessPiece(row , col + distance).isWhite != this.isWhite) {
-                    moves.push({ newRow: row , newColumn: col + distance, piece: this })
-                    right = false
-                } else {
-                    right = false
-                }
-            }
-
-            if (left && !this.testOutOfBounds(0, -distance)) {
-                if (chess.getChessPiece(row , col - distance) == undefined) {
-                    moves.push({ newRow: row ,  newColumn: col - distance, piece: this })
-                } else if (chess.getChessPiece(row, col - distance).isWhite != this.isWhite) {
-                    moves.push({ newRow: row ,  newColumn: col - distance, piece: this })
-                    left = false
-                } else {
-                    left = false
-                }
-            }
-
-            if (topRight && !this.testOutOfBounds(-distance, distance)) {
-                if (chess.getChessPiece(row - distance, col + distance) == undefined) {
-                    moves.push({ newRow: row - distance, newColumn: col + distance, piece: this })
-                } else if (chess.getChessPiece(row - distance, col + distance).isWhite != this.isWhite) {
-                    moves.push({ newRow: row - distance, newColumn: col + distance, piece: this })
-                    topRight = false
-                } else {
-                    topRight = false
-                }
-            }
-
-            if (topLeft && !this.testOutOfBounds(-distance, -distance)) {
-                if (chess.getChessPiece(row - distance, col - distance) == undefined) {
-                    moves.push({ newRow: row - distance, newColumn: col - distance, piece: this })
-                } else if (chess.getChessPiece(row - distance, col - distance).isWhite != this.isWhite) {
-                    moves.push({ newRow: row - distance, newColumn: col - distance, piece: this })
-                    topLeft = false
-                } else {
-                    topLeft = false
-                }
-            }
-
-            if (bottomRight && !this.testOutOfBounds(distance, distance)) {
-                if (chess.getChessPiece(row + distance, col + distance) == undefined) {
-                    moves.push({ newRow: row + distance, newColumn: col + distance, piece: this })
-                } else if (chess.getChessPiece(row + distance, col + distance).isWhite != this.isWhite) {
-                    moves.push({ newRow: row + distance, newColumn: col + distance, piece: this })
-                    bottomRight = false
-                } else {
-                    bottomRight = false
-                }
-            }
-
-            if (bottomLeft && !this.testOutOfBounds(distance, -distance)) {
-                if (chess.getChessPiece(row + distance, col - distance) == undefined) {
-                    moves.push({ newRow: row + distance, newColumn: col - distance, piece: this })
-                } else if (chess.getChessPiece(row + distance, col - distance).isWhite != this.isWhite) {
-                    moves.push({ newRow: row + distance, newColumn: col - distance, piece: this })
-                    bottomLeft = false
-                } else {
-                    bottomLeft = false
-                }
-            }
-        }
-
-        // console.log("Queen", moves)
         return moves;
     }
 }

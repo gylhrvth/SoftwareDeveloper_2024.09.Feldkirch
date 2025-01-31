@@ -3,18 +3,22 @@ export { Pawn };
 class Pawn {
     constructor(isWhite) {
         this.__type = 'Pawn';
+        this.score = 1;
         this.currentRow = null;
         this.currentCol = null;
         this.isWhite = isWhite;
         this.label = isWhite ? "♙" : "♟";
     }
 
+    /*
     restoreData(value) {
+        this.score = value.score;
         this.currentRow = value.currentRow;
         this.currentCol = value.currentCol;
         this.isWhite = value.isWhite;
         this.label = value.isWhite ? "♙" : "♟";
     }
+        */
 
     addPossibleMoveEnPassant(chess, moves) {
         const direction = this.isWhite ? -1 : 1;
@@ -46,7 +50,8 @@ class Pawn {
 
         this.addPossibleMoveEnPassant(chess, moves);
         this.addMoveIfEmpty(chess, moves, direction); // Move forward
-        if (this.currentRow === (this.isWhite ? 6 : 1)) {
+        if (this.currentRow === (this.isWhite ? 6 : 1) &&
+         chess.getChessPiece(this.currentRow + direction, this.currentCol) === undefined) {
             this.addMoveIfEmpty(chess, moves, direction * 2); // Double move at the start
         }
         this.addAttackMoves(chess, moves, direction); // Attack moves

@@ -72,15 +72,19 @@ app.ws('/game', function (ws, req) {
         }
 
         else if (data.action === 'selectCategory') {
-            console.log('send questions to MASTER....')
+            console.log('send questions to MASTER....', data)
+            let q = getQuestionByCategoryValue(data.category, data.value)
+
             ws.send(JSON.stringify({
                 messageType: 'question',
-                questionText: 'Who are you?'
+                questionText: q.questionText,
+                questionCategory: data.category,
+                questionValue: data.value
             }));
             console.log('send possible answers to', playerWS[activePlayerIndex].name)
             playerWS[activePlayerIndex].ws.send(JSON.stringify({
                 messageType: 'possibleAnswers',
-                answers: ['A', 'B', 'C', 'D']
+                answers: q.answers
             }));
         }
 
@@ -205,17 +209,6 @@ app.listen(port, () => {
 
 // Active Player
 let activePlayerIndex = 0;
-let activePlayerCycle = null;
-
-/*
-function startActivePlayerCycle() {
-    if (activePlayerCycle) {
-        clearInterval(activePlayerCycle);
-    }
-    changeActivePlayer();
-    activePlayerCycle = setInterval(changeActivePlayer, 10000);
-}
-*/
 
 function changeActivePlayer(){
     if (playerWS.length === 0) return;
@@ -250,6 +243,24 @@ function updateActivePlayer(activePlayer) {
     console.log(`Active Player: ${activePlayer.name}`);
 }
 
+function getQuestionByCategoryValue(cat, val){
+    for (let category of magicData){
+        if (category.categoryName === cat){
+            for (let question of category.openQuestions){
+                if (question.label === val){
+                    return {
+                        questionText: question.questionText,
+                        answers: ['A', 'B', 'C', 'D'],
+                    }
+                }
+            }
+        }
+    }
+    return {
+        questionText: 'There is no more questions.',
+        answers: []
+    };
+}
 
 const magicData = [
     {
@@ -257,11 +268,15 @@ const magicData = [
         openQuestions: [
             {
                 id: 'm100',
-                label: '100'
+                label: '100',
+                questionText: 'Who plays the guitar in the band The Beatles?',
+                answers: ['A', 'B', 'C', 'D'],
             },
             {
                 id: 'm200',
-                label: '200'
+                label: '200',
+                questionText: 'In which year was the song "Yesterday" released?',
+                answers: ['A', 'B', 'C', 'D'],
             },
         ]
     },
@@ -270,11 +285,18 @@ const magicData = [
         openQuestions: [
             {
                 id: 'g100',
-                label: '100'
+                label: '100',
+                questionText: 'Who are you?',
             },
             {
                 id: 'g200',
-                label: '200'
+                label: '200',
+                questionText: 'Who are you?',
+            },
+            {
+                id: 'g300',
+                label: '300',
+                questionText: 'Who are you?',
             },
         ]
     },
@@ -283,15 +305,18 @@ const magicData = [
         openQuestions: [
             {
                 id: 's100',
-                label: '100'
+                label: '100',
+                questionText: 'Who are you?',
             },
             {
                 id: 's200',
-                label: '200'
+                label: '200',
+                questionText: 'Who are you?',
             },
             {
                 id: 's300',
-                label: '300'
+                label: '300',
+                questionText: 'Who are you?',
             },
         ]
     }

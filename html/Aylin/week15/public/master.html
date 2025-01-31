@@ -59,21 +59,6 @@
             display: none;
         }
 
-        /*
-        Question css
-        #player-name {
-            position: fixed;
-            text-align: center;
-            font-family: 'Franklin Gothic Medium';
-            font-size: 30px;
-            top: 50px;
-            transform: translateX(-50%); 
-        }*/
-        
-        .q{
-            display: none;
-        }
-        
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -172,11 +157,6 @@
             </div>
         </div>
     </div>
-<!--
-    <script src="script/triviaQ.js"></script>
-    <script src="script/question.js"></script>
-    <script src="script/counter.js"></script>
--->
     <script>
         function displayMessage(message) {
             const log = document.getElementById('messageLog');
@@ -197,12 +177,13 @@
             const name = document.getElementById('player-name');
             const triviaButtons = document.querySelectorAll('.q');
 
+            //Damit die Buttons wieder aktiviert werden
+            localStorage.clear();
+
             registrationDiv.style.display = 'none';
             name.style.display = 'flex';
             triviaDiv.style.display = 'block';
         });
-
-  
 
         socket.addEventListener('open', () => {
             console.log('Connected to the WebSocket');
@@ -216,7 +197,7 @@
             if (data.messageType === 'gameState') {
                 playersCountElement.textContent = `Players connected: ${data.gameState.currentPlayers}`;
                 startButton.disabled = data.gameState.currentPlayers < 2;
-                }
+            }
 
             //New Player
             if (data.messageType === 'newPlayer') {
@@ -235,6 +216,9 @@
                 playerNameDiv.textContent = `${activePlayerName}'s turn`;
             }
 
+            let selectedCategory = "";
+            let selectedValue = "";
+
             if (data.messageType === 'showCategories'){
                 const categories = data.categories;
 
@@ -245,6 +229,7 @@
 
                 let triviaHeader = document.createElement('div')
                 triviaHeader.classList.add('triviaHeader')
+
                 for (let category of categories) {
                     let divElement = document.createElement('div')
                     divElement.classList.add('categorie-container')
@@ -257,23 +242,41 @@
 
                 let triviaValues = document.createElement('div')
                 triviaValues.classList.add('triviaValues')
+
                 for (let category of categories) {
                     let divElement = document.createElement('div')
                     divElement.classList.add('categorie-container')
-
 
                     for (let openQuestion of category.openQuestions) {
                         let button = document.createElement('button')
                         button.innerText = openQuestion.label
                         button.setAttribute('id', openQuestion.id)
+
+                        // Disable the button after it is clicked
+                        if (localStorage.getItem(`disabledButton_${openQuestion.id}`) === 'true') {
+                                button.disabled = true;
+                                button.style.backgroundColor = '#ccc';
+                            } 
+
                         button.addEventListener('click', () => {
+                            selectedCategory = category.categoryName;
+                            selectedValue = openQuestion.label;       
+
+                             //Deaktivieren der Buttons
+                             localStorage.setItem(`disabledButton_${openQuestion.id}`, 'true');
+
+                            // Update the Kategory class with the selected category and value
+                            document.getElementById('category').textContent = selectedCategory;
+                            document.getElementById('question-value').textContent = selectedValue;
+
                             console.log('select category ', openQuestion.id)
                             socket.send(JSON.stringify({ 
                                 action: 'selectCategory',
-                                questionID: openQuestion.id
+                                questionID: openQuestion.id,
+                                category: category.categoryName,
+                                value: openQuestion.label
                             }));
                         })
-
                         divElement.appendChild(button)
                     }
                     triviaValues.appendChild(divElement)
@@ -287,11 +290,15 @@
             }
 
             if (data.messageType === 'question') {
+                console.log('question', data.questionCategory, data.questionValue)
                 // Gelen soruyu al ve Quiz ekranını hazırla
                 const quizDiv = document.getElementById('Quiz');
                 const questionElement = document.getElementById('question');
                 const registrationDiv = document.getElementById('registration');
                 const triviaDiv = document.getElementById('trivia');
+
+                const category = document.getElementById('category');
+                const questionValue = document.getElementById('question-value');
 
                 // Soruyu göster
                 questionElement.textContent = data.questionText;
@@ -319,7 +326,7 @@
         })
 
         socket.addEventListener('error', (event) =>{
-            console.log('WebSoket Error', event);
+            console.log('WebSocket Error', event);
             alert('A connection error occurred');
         });
     </script>

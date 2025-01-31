@@ -3,17 +3,20 @@ export { Knight };
 class Knight {
     constructor(isWhite) {
         this.__type = 'Knight';
+        this.score = 3;
         this.currentRow = null;
         this.currentCol = null;
         this.isWhite = isWhite;
         this.label = isWhite ? "♘" : "♞"; // Ternary operator for label assignment
     }
 
+    /*
     restoreData(value) {
         this.constructor(value.isWhite); // Call constructor to reset the isWhite value
         this.currentRow = value.currentRow;
         this.currentCol = value.currentCol;
     }
+        */
 
     testOutOfBounds(rowCount, colCount) {
         return (this.currentRow + rowCount < 0 || this.currentRow + rowCount > 7 ||
