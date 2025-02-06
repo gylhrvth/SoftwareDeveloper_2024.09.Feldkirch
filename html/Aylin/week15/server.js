@@ -5,15 +5,77 @@ const port = 5400;
 
 let gameMaster = null;
 let playerWS = [];
+let magicData = [];
 
 let gameState = {
     maxPlayers: 4,
     currentPlayers: 0,
 };
+
 // Trivia
 let activeTriviaSocket = null;
 
 app.use(express.static('public'));
+
+const mysql = require('mysql2/promise');
+require('dotenv').config();
+
+async function readDataFromSQL() {
+    try {
+        console.log('Trying to connect to SQL server...');
+        const connection = await mysql.createConnection({
+            host: process.env.SQL_SERVER,
+            user: process.env.SQL_USER,
+            password: process.env.SQL_PASSWORD,
+            database: process.env.SQL_DATABASE,
+        });
+        console.log('Connected to SQL server.');
+        const [rows] = await connection.query(`
+            SELECT Questions.category, Questions.value, Questions.question, Questions.answerA, Questions.answerB, Questions.answerC, Questions.answerD
+            FROM
+            (
+                SELECT *, RANK() OVER (PARTITION BY category, value ORDER BY RAND()) QuestionRank FROM Trivia
+            ) Questions
+            JOIN
+            (
+                SELECT *, RANK() OVER (ORDER BY category='Musik' DESC, RAND() ASC) CategoryRank
+                FROM (select distinct category from Trivia) CategoryList
+            ) Category ON Category.category = Questions.category
+            WHERE CategoryRank <= 2 AND QuestionRank = 1`);
+        console.log('Test-Query Result:', rows);
+        await connection.end();
+        console.log('Connection closed.');
+
+        // Transform the query result into the required format
+        magicData = transformData(rows);
+
+    } catch (error) {
+        console.error('Error connecting to SQL server:', error);
+    }
+}
+
+function transformData(rows) {
+    const data = {};
+    rows.forEach(row => {
+        if (!data[row.category]) {
+            data[row.category] = [];
+        }
+        const answerLabels = [row.answerA, row.answerB, row.answerC, row.answerD].map((answer, index) => `Answer ${String.fromCharCode(65 + index)}: ${answer}`);
+        data[row.category].push({
+            id: `${row.category[0].toLowerCase()}${row.value}`,
+            label: `${row.value}`,
+            questionText: row.question,
+            answers: answerLabels,
+        });
+    });
+
+    return Object.keys(data).map(categoryName => ({
+        categoryName,
+        openQuestions: data[categoryName],
+    }));
+}
+
+readDataFromSQL(); // Populate magicData with data from SQL
 
 //Master
 app.ws('/game', function (ws, req) {
@@ -29,6 +91,14 @@ app.ws('/game', function (ws, req) {
             messageType: 'gameState',
             gameState: gameState
         }));
+
+        // Send categories to the game master
+        gameMaster.send(
+            JSON.stringify({
+                messageType: 'showCategories',
+                categories: magicData,
+            })
+        );
         
         if (gameState.gameStarted){
             updateActivePlayer()
@@ -69,30 +139,26 @@ app.ws('/game', function (ws, req) {
                 messageType: 'gameState',
                 gameState: gameState
             }));
-        }
-
-        else if (data.action === 'selectCategory') {
+        } else if (data.action === 'selectCategory') {
             console.log('send questions to MASTER....', data)
             let q = getQuestionByCategoryValue(data.category, data.value)
-
-            ws.send(JSON.stringify({
-                messageType: 'question',
-                questionText: q.questionText,
-                questionCategory: data.category,
-                questionValue: data.value
-            }));
-            console.log('send possible answers to', playerWS[activePlayerIndex].name)
-            playerWS[activePlayerIndex].ws.send(JSON.stringify({
-                messageType: 'possibleAnswers',
-                answers: q.answers
-            }));
-        }
-
-        else {
+    
+            q.then(questionData => {
+                ws.send(JSON.stringify({
+                    messageType: 'question',
+                    questionText: questionData.questionText,
+                    questionCategory: data.category,
+                    questionValue: data.value
+                }));
+                console.log('send possible answers to', playerWS[activePlayerIndex].name)
+                playerWS[activePlayerIndex].ws.send(JSON.stringify({
+                    messageType: 'possibleAnswers',
+                    answers: questionData.answers
+                }));
+            });
+        } else {
             console.log('Unknown action from MASTER:', data.action, data);
         }
-
-        
     });
     ws.on('close', () => {
         console.log('Game Master disconnected.');
@@ -174,9 +240,7 @@ app.ws('/player', function(ws, req) {
             setTimeout(() => {
                 changeActivePlayer();
             }, 5000);
-        }
-
-        else {
+        }else {
             console.log('Unknown action from PLAYER:', data.action, data);
         }
     });
@@ -243,81 +307,34 @@ function updateActivePlayer(activePlayer) {
     console.log(`Active Player: ${activePlayer.name}`);
 }
 
-function getQuestionByCategoryValue(cat, val){
-    for (let category of magicData){
-        if (category.categoryName === cat){
-            for (let question of category.openQuestions){
-                if (question.label === val){
-                    return {
-                        questionText: question.questionText,
-                        answers: ['A', 'B', 'C', 'D'],
-                    }
-                }
-            }
-        }
-    }
-    return {
-        questionText: 'There is no more questions.',
-        answers: []
-    };
-}
+async function getQuestionByCategoryValue(cat, val) {
+    try {
+        const connection = await mysql.createConnection({
+            host: process.env.SQL_SERVER,
+            user: process.env.SQL_USER,
+            password: process.env.SQL_PASSWORD,
+            database: process.env.SQL_DATABASE,
+        });
+        const [rows] = await connection.query(`
+            SELECT question, answerA, answerB, answerC, answerD
+            FROM Trivia
+            WHERE category = ? AND value = ?
+        `, [cat, val]);
+        
+        await connection.end();
 
-const magicData = [
-    {
-        categoryName: 'Musik',
-        openQuestions: [
-            {
-                id: 'm100',
-                label: '100',
-                questionText: 'Who plays the guitar in the band The Beatles?',
-                answers: ['A', 'B', 'C', 'D'],
-            },
-            {
-                id: 'm200',
-                label: '200',
-                questionText: 'In which year was the song "Yesterday" released?',
-                answers: ['A', 'B', 'C', 'D'],
-            },
-        ]
-    },
-    {
-        categoryName: 'Geschichte',
-        openQuestions: [
-            {
-                id: 'g100',
-                label: '100',
-                questionText: 'Who are you?',
-            },
-            {
-                id: 'g200',
-                label: '200',
-                questionText: 'Who are you?',
-            },
-            {
-                id: 'g300',
-                label: '300',
-                questionText: 'Who are you?',
-            },
-        ]
-    },
-    {
-        categoryName: 'Serie',
-        openQuestions: [
-            {
-                id: 's100',
-                label: '100',
-                questionText: 'Who are you?',
-            },
-            {
-                id: 's200',
-                label: '200',
-                questionText: 'Who are you?',
-            },
-            {
-                id: 's300',
-                label: '300',
-                questionText: 'Who are you?',
-            },
-        ]
+        if (rows.length > 0) {
+            return {
+                questionText: rows[0].question,
+                answers: [rows[0].answerA, rows[0].answerB, rows[0].answerC, rows[0].answerD].map((answer, index) => `${answer}`), 
+            };
+        }
+    } catch (error) {
+        console.error('Error querying the database:', error);
+        return {
+            questionText: 'Error retrieving question.',
+            answers: []
+        };
     }
-]
+}
+readDataFromSQL();

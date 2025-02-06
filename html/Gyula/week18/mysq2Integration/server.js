@@ -35,9 +35,9 @@ async function readDataFromSQL() {
         copySQLResultinMagicData(results)
         //console.log(results); // results contains rows returned by server
         //console.log(fields); // fields contains extra meta data about results, if available
-      } catch (err) {
+    } catch (err) {
         console.log(err);
-      }
+    }
 }
 
 function copySQLResultinMagicData(results){

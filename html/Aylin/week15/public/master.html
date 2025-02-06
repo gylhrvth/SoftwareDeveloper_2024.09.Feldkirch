@@ -208,6 +208,7 @@
             //Game started
             if (data.messageType === 'gameStart') {
                 alert(data.message);
+                document.getElementById('Quiz').style.display = 'none';
             }
 
             // Active Player
@@ -284,9 +285,7 @@
                     trivia.appendChild(triviaHeader)
                     trivia.appendChild(triviaValues)
                     trivia.style.display = 'block';
-
                 }
-
             }
 
             if (data.messageType === 'question') {
