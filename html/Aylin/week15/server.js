@@ -7,14 +7,14 @@ let gameMaster = null;
 let playerWS = [];
 let magicData = [];
 
+let questionTimer = null;
+
 let gameState = {
     maxPlayers: 4,
     currentPlayers: 0,
 };
 
 // Trivia
-let activeTriviaSocket = null;
-
 app.use(express.static('public'));
 
 const mysql = require('mysql2/promise');
@@ -60,7 +60,7 @@ function transformData(rows) {
         if (!data[row.category]) {
             data[row.category] = [];
         }
-        const answerLabels = [row.answerA, row.answerB, row.answerC, row.answerD].map((answer, index) => `Answer ${String.fromCharCode(65 + index)}: ${answer}`);
+        const answerLabels = [row.answerA, row.answerB, row.answerC, row.answerD].map((answer, index) => `${answer}`);
         data[row.category].push({
             id: `${row.category[0].toLowerCase()}${row.value}`,
             label: `${row.value}`,
@@ -75,7 +75,7 @@ function transformData(rows) {
     }));
 }
 
-readDataFromSQL(); // Populate magicData with data from SQL
+readDataFromSQL();
 
 //Master
 app.ws('/game', function (ws, req) {
@@ -96,6 +96,13 @@ app.ws('/game', function (ws, req) {
         gameMaster.send(
             JSON.stringify({
                 messageType: 'showCategories',
+                categories: magicData,
+            })
+        );
+
+        gameMaster.send(
+            JSON.stringify({
+                messageType: 'selectCategory',
                 categories: magicData,
             })
         );
@@ -140,24 +147,24 @@ app.ws('/game', function (ws, req) {
                 gameState: gameState
             }));
         } else if (data.action === 'selectCategory') {
-            console.log('send questions to MASTER....', data)
-            let q = getQuestionByCategoryValue(data.category, data.value)
-    
-            q.then(questionData => {
-                ws.send(JSON.stringify({
-                    messageType: 'question',
-                    questionText: questionData.questionText,
-                    questionCategory: data.category,
-                    questionValue: data.value
-                }));
-                console.log('send possible answers to', playerWS[activePlayerIndex].name)
-                playerWS[activePlayerIndex].ws.send(JSON.stringify({
-                    messageType: 'possibleAnswers',
-                    answers: questionData.answers
-                }));
-            });
-        } else {
+            console.log('send questions to MASTER....', data, magicData);
+            let qData = magicData.filter(row => row.categoryName === data.category)       
+            let question = qData[0].openQuestions.filter(q => q.label === data.value)[0]
+
+            ws.send(JSON.stringify({
+                messageType: 'question',
+                questionText: question.questionText,
+                questionCategory: data.category,
+                questionValue: data.value
+            }));
+            console.log('send possible answers to', playerWS[activePlayerIndex].name)
+            playerWS[activePlayerIndex].ws.send(JSON.stringify({
+                messageType: 'possibleAnswers',
+                answers: question.answers,
+                value: data.value,
+            }));
             console.log('Unknown action from MASTER:', data.action, data);
+            startQuestionTimer();
         }
     });
     ws.on('close', () => {
@@ -174,11 +181,27 @@ function broadcastToPlayers(message) {
             ...message,
             messageType: isActivePlayer ? 'yourTurn' : 'otherPlayerTurn',
             message: isActivePlayer
-                ? "Your turn"
+                ? `Your turn. Your score: ${player.score}`
                 : `${playerWS[activePlayerIndex]?.name || 'Unknown'}'s turn`,
         };
         player.ws.send(JSON.stringify(playerMessage));
     });
+}
+
+function updateGameMasterWithScores() {
+    if(gameMaster) {
+        const playerScores = playerWS.map(player => ({
+            name: player.name,
+            score: player.score
+        }));
+
+        gameMaster.send(
+            JSON.stringify({
+                messageType: 'updateScores',
+                playerScores: playerScores,
+            })
+        )
+    }
 }
 
 // Player - Clients
@@ -214,7 +237,7 @@ app.ws('/player', function(ws, req) {
             if (playerName) {
                 const existingPlayer = playerWS.find(player => player.ws === ws && player.name === playerName);
                 if (!existingPlayer) {
-                    const player = { ws: ws, name: playerName };
+                    const player = { ws: ws, name: playerName, score: 0 };
                     playerWS = playerWS.filter(p => p.ws !== ws);
                     playerWS.push(player);
                 }
@@ -236,15 +259,17 @@ app.ws('/player', function(ws, req) {
 
         else if (data.action === 'answer') {
             console.log(`${playerWS[activePlayerIndex].name} answered the question. Returning back to the Categories.`);
+            console.log('Answer : ', data)
 
-            setTimeout(() => {
-                changeActivePlayer();
-            }, 5000);
+            const correctAnswer = data.correctAnswer;
+            const provideAnswer = data.answer;
+            const questionValue = Number(data.value);
+
+            checkAnswer(playerWS[activePlayerIndex], correctAnswer, provideAnswer, questionValue);
         }else {
             console.log('Unknown action from PLAYER:', data.action, data);
         }
     });
-
 
     ws.on('close', () => {
         const disconnectedPlayer = playerWS.find((player) => player.ws === ws);
@@ -271,6 +296,29 @@ app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
 
+function updatePlayerScore(player, questionValue) {
+    player.score = (player.score || 0) + questionValue;
+    console.log(`${player.name} new score: ${player.score}`);
+}
+
+async function checkAnswer(player, correctAnswer, providedAnswer, questionValue) {
+    clearTimeout(questionTimer);
+    console.log(`Correct Answer: ${correctAnswer}, Provided Answer: ${providedAnswer}`);
+    
+    if (providedAnswer === correctAnswer) {
+        console.log(`${player.name} answered correctly! Adding ${questionValue} points.`);
+        updatePlayerScore(player, questionValue); 
+        updateGameMasterWithScores();
+    } else {
+        console.log(`${player.name} answered incorrectly.`);
+    }
+    
+    setTimeout(() => {
+        changeActivePlayer();
+        startQuestionTimer();
+    }, 5000);
+}
+
 // Active Player
 let activePlayerIndex = 0;
 
@@ -280,11 +328,10 @@ function changeActivePlayer(){
     activePlayerIndex = (activePlayerIndex + 1) % playerWS.length;
     const activePlayer = playerWS[activePlayerIndex];
 
-    updateActivePlayer(activePlayer)
+    updateActivePlayer(activePlayer);
 }
 
 function updateActivePlayer(activePlayer) {
-
     broadcastToPlayers({
         activePlayerName: activePlayer.name,
     });
@@ -307,34 +354,18 @@ function updateActivePlayer(activePlayer) {
     console.log(`Active Player: ${activePlayer.name}`);
 }
 
-async function getQuestionByCategoryValue(cat, val) {
-    try {
-        const connection = await mysql.createConnection({
-            host: process.env.SQL_SERVER,
-            user: process.env.SQL_USER,
-            password: process.env.SQL_PASSWORD,
-            database: process.env.SQL_DATABASE,
-        });
-        const [rows] = await connection.query(`
-            SELECT question, answerA, answerB, answerC, answerD
-            FROM Trivia
-            WHERE category = ? AND value = ?
-        `, [cat, val]);
-        
-        await connection.end();
+async function startQuestionTimer() {
+    clearTimeout(questionTimer); // Önceki sayacı sıfırla
+    console.log(`Timer has started!`);
 
-        if (rows.length > 0) {
-            return {
-                questionText: rows[0].question,
-                answers: [rows[0].answerA, rows[0].answerB, rows[0].answerC, rows[0].answerD].map((answer, index) => `${answer}`), 
-            };
-        }
-    } catch (error) {
-        console.error('Error querying the database:', error);
-        return {
-            questionText: 'Error retrieving question.',
-            answers: []
-        };
-    }
+    questionTimer = setTimeout(() => {
+        console.log(`Time's up! ${playerWS[activePlayerIndex].name} didn't give an answer.`);
+        
+        // Oyuncuya sürenin dolduğunu bildir
+        playerWS[activePlayerIndex].ws.send(JSON.stringify({
+            messageType: 'timeout',
+            message: 'Time is up!',
+        }));
+        changeActivePlayer();
+    }, 15000); // 15 saniye
 }
-readDataFromSQL();

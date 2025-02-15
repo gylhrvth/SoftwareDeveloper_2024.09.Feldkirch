@@ -2,72 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=800, user-scalable=no">
     <title>Player</title>
-<style>
-    #answerBlock {
-        display: none;
-        justify-content: center;
-        align-items: center;
-    }
-    #possibleAnswers {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 10px;
-        width: 92vw;
-        height: 40vw;
-        justify-content: center;
-    }
-
-    #possibleAnswers>div {
-        width: 100%;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        text-align: center;
-    }
-    #possibleAnswers>div:nth-child(1) {
-        background-color: darkred;
-        color: white
-    }
-    #possibleAnswers>div:nth-child(2) {
-        background-color: darkgreen;
-        color: white;
-    }
-    #possibleAnswers>div:nth-child(3) {
-        background-color: darkblue;
-        color: white;
-    }
-    #possibleAnswers>div:nth-child(4) {
-        background-color: darkmagenta;
-        color: white;
-    }
-
-    body.correctAnswer {
-        background-color: green;
-    }
-    body.incorrectAnswer {
-        background-color: red;
-    }
-</style>
+    <link rel="stylesheet" href="css/client.css">
 </head>
 <body>
-    <h2 id="welcomeMsg">Please enter a Team name</h2>
-    <div id="player"></div>
-    <div id="turn-message"></div>
-    <div id="Form">
-        <form onsubmit="registerPlayer(event)" action="#" method="get">
-            <label for="Name">Name:</label>
-            <input type="text" id="name" name="name"><br><br>
-            <input type="submit" value="Submit"><br><br>
-        </form>
-    </div>
-    <div id="result"></div>
-    <div id="answerBlock">
-        <div id="possibleAnswers">
-            <div>A</div>
-            <div>B</div>
-            <div>C</div>
-            <div>D</div>
+    <div id="container">
+        <h2 id="welcomeMsg">Please enter a Team name</h2>
+        <div id="player"></div>
+        <div id="turn-message"></div>
+        <div id="Form">
+            <form onsubmit="registerPlayer(event)" action="#" method="get">
+                <label for="Name">Name:</label>
+                <input type="text" id="name" name="name"><br><br>
+                <input type="submit" value="Submit"><br><br>
+            </form>
+        </div>
+        <div id="result"></div>
+        <div id="answerBlock">
+            <div id="possibleAnswers">
+                <div>A</div>
+                <div>B</div>
+                <div>C</div>
+                <div>D</div>
+            </div>
         </div>
     </div>
 
@@ -112,7 +70,7 @@
             }
 
             if (data.messageType === 'possibleAnswers'){
-                showPossibleAnswers(data.answers);
+                showPossibleAnswers(data.answers, data.value);
             }
         });
 
@@ -120,7 +78,7 @@
             console.log('Disconnected from WebSocket-Server', event);
         })
 
-        async function showPossibleAnswers(answers) {
+        async function showPossibleAnswers(answers, value) {
             const correctAnswer = answers[0];
             for (let i = 0; i < 3 + 3 * answers.length; i++) {
                 const randomIndex1 = Math.floor(Math.random() * answers.length);
@@ -149,6 +107,7 @@
                             action: 'answer',
                             correctAnswer: correctAnswer,
                             answer: choice,
+                            value: value,
                         })
                     );
                     if (choice === correctAnswer) {
@@ -192,6 +151,20 @@
             // Name is saved to sessionStorage
             sessionStorage.setItem('myName', name);
         }
+        function adjustOrientation() {
+            if (window.innerHeight > window.innerWidth) {
+                // Telefon dikeyse 90 derece çevir
+                document.getElementById("container").style.transform = "rotate(90deg)";
+            } else {
+                // Telefon zaten yataysa normal bırak
+                document.getElementById("container").style.transform = "rotate(0deg)";
+            }
+        }
+
+        // Sayfa açıldığında ve ekran yönü değiştiğinde uygula
+        window.addEventListener("load", adjustOrientation);
+        window.addEventListener("resize", adjustOrientation);
+    
     </script>
-</body>
+    </body>
 </html>
