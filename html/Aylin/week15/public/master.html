@@ -15,11 +15,16 @@
         <h4>Connecting with Players...</h4>
         <div id="messageLog"></div>
         <div id="statusText"></div>
+        <div class="qr-container">
+            <img id="qrImage" src="" alt="QR Code">
+            <p>Scan the QR code to join</p>
+        </div>
         <button id="startButton">Start Game</button>
     </div>
     <div class="trivia" id="trivia"></div>
     <div id="Quiz">
         <div class="Kategorie">
+            <div id="playerAndScore"></div>
             <p id="category"></p>
             <p id="question-value"></p>
         </div>
@@ -63,8 +68,19 @@
         });
 
         socket.addEventListener('message', (event) => {
+            const progressBar = document.getElementById("progress");
+            const countdownElement = document.getElementById("countdown");
+
             const data = JSON.parse(event.data);
-            console.log('WebSocket Message received', data.messageType)
+            console.log('WebSocket Message received', data.messageType);
+
+            // Debug log for progress bar updates
+            if (data.messageType === "questionTimer") {
+                console.log('Received timer update:', {
+                    counter: data.counter,
+                    progressWidth: data.progressWidth
+                });
+            }
 
             //Mindestens 2 Player müssen sich anmelden, damit das Button ab 2 Player aktiviert wird
             if (data.messageType === 'gameState') {
@@ -146,7 +162,7 @@
 
                             // Update the Kategory class with the selected category and value
                             document.getElementById('category').textContent = selectedCategory;
-                            document.getElementById('question-value').textContent = selectedValue;
+                            document.getElementById('question-value'). textContent = selectedValue;
 
                             console.log('select category ', openQuestion.id)
                             socket.send(JSON.stringify({ 
@@ -156,6 +172,22 @@
                                 value: openQuestion.label
                             }));
                         })
+
+                        const value = parseInt(openQuestion.label); // Convert the label to an integer
+                        if (value === 100) {
+                            button.style.backgroundColor = 'green';
+                        } else if (value === 500) {
+                            button.style.backgroundColor = 'red';
+                        } else if (value === 300) {
+                            button.style.backgroundColor = 'yellow';
+                        } else if (value === 200) {
+                            button.style.backgroundColor = 'lightgreen';
+                        } else if (value === 400) {
+                            button.style.backgroundColor = 'orange';
+                        } else {
+                            button.style.backgroundColor = 'gray';
+                        }
+
                         divElement.appendChild(button)
                     }
                     triviaValues.appendChild(divElement)
@@ -186,8 +218,66 @@
                 quizDiv.style.display = 'block'; // Quiz ekranını göster
             }
 
+            if (data.messageType === "questionTimer") {
+                const progressBar = document.getElementById("progress");
+                const countdownElement = document.getElementById("countdown");
+                countdownElement.innerText = data.counter;
+
+                if (progressBar) {
+                    document.querySelector(".progress").style.width = (data.counter / 15) * 100 + "%";
+                }
+
+                if (data.counter >= 10) {
+                    countdownElement.style.color = "green";
+                    progressBar.style.backgroundColor = "green";
+                } else if (data.counter >= 5) {
+                    countdownElement.style.color = "orange";
+                    progressBar.style.backgroundColor = "orange";
+                } else {
+                    countdownElement.style.color = "red";
+                    progressBar.style.backgroundColor = "red";
+                }
+
+                if (data.messageType === "timeUp") {
+                    document.getElementById("countdown").innerText = "Time's up!";
+                    document.getElementById("progress").style.width = "0%";
+                }
+            }
+
+            if (data.messageType === 'updateScores') {
+                console.log("Updated scores received:", data);
+                const playerAndScoreDiv = document.getElementById('playerAndScore');
+                if (!playerAndScoreDiv) {
+                    console.error("playerAndScore div not found!");
+                    return; // Eğer div bulunamazsa, fonksiyondan çık
+                }
+
+                // Yeni skorları ekleyelim
+                const playerDiv = document.createElement('div');
+                playerDiv.classList.add('player-score');
+                playerDiv.textContent = `${player.name}: ${player.score}`;
+                playerAndScoreDiv.appendChild(playerDiv);
+            }
+
+            if (data.messageType === "gameOver") {
+                const winnerContainer = document.getElementById("winners");
+                winnerContainer.innerHTML = ""; // Önce eski verileri temizle
+
+                data.winners.forEach((player, index) => {
+                    let title = index === 0 ? "h1" : index === 1 ? "h2" : "h3";
+                    let winnerElement = document.createElement(title);
+                    winnerElement.innerText = `${player.rank}. ${player.name} - ${player.score} points`;
+                    winnerContainer.appendChild(winnerElement);
+                });
+            }
+
             if (data.message) {
                 displayMessage(data.message);
+            }
+
+            if (data.messageType === "qrCode") {
+                console.log("QR Code received:", data.qrCode);
+                document.getElementById("qrImage").src = data.qrCode;
             }
         });
 

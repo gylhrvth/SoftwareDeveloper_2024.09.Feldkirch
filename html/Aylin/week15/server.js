@@ -2,12 +2,13 @@ const express = require('express');
 const app = express();
 const expressWs = require('express-ws')(app);
 const port = 5400;
+const QRCode = require('qrcode');
 
 let gameMaster = null;
 let playerWS = [];
 let magicData = [];
 
-let questionTimer = null;
+let questionTimer = 100;
 
 let gameState = {
     maxPlayers: 4,
@@ -177,12 +178,15 @@ function broadcastToPlayers(message) {
     playerWS.forEach((player, index) => {
         const isActivePlayer = index === activePlayerIndex;
 
+        const scoreBoard = playerWS.map(p => `${p.name}: ${p.score}`).join("\n");
+
         const playerMessage = {
             ...message,
             messageType: isActivePlayer ? 'yourTurn' : 'otherPlayerTurn',
-            message: isActivePlayer
-                ? `Your turn. Your score: ${player.score}`
+            message: isActivePlayer 
+                ? "Your turn! Please select a question" 
                 : `${playerWS[activePlayerIndex]?.name || 'Unknown'}'s turn`,
+            scoreBoard: scoreBoard
         };
         player.ws.send(JSON.stringify(playerMessage));
     });
@@ -194,6 +198,8 @@ function updateGameMasterWithScores() {
             name: player.name,
             score: player.score
         }));
+
+        console.log("Sending updated scores to Game Master:", playerScores);
 
         gameMaster.send(
             JSON.stringify({
@@ -248,7 +254,7 @@ app.ws('/player', function(ws, req) {
                     gameMaster.send(
                         JSON.stringify({
                             messageType: 'newPlayer',
-                            message: `${playerName} has joined.`,
+                            message: `${playerName} joined.`,
                             currentPlayers: playerWS.filter(p => p.name).length,
                             playerNames: playerWS.map((player) => player.name).filter(Boolean),
                         })
@@ -296,27 +302,80 @@ app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
 
+async function startQuestionTimer() {
+    let counter = 15;
+
+    console.log('Starting question timer...');
+
+    questionTimer = setInterval(() => {
+        console.log(`${counter}`);
+
+        // Send timer update to Game Master
+        gameMaster.send(JSON.stringify({
+            messageType: 'questionTimer',
+            counter: counter,
+        }));
+
+        playerWS.forEach((player) => {
+            player.ws.send(JSON.stringify({
+                messageType: 'questionTimer',
+                counter: counter,
+            }));
+        })
+
+        if(counter === 0){
+            console.log('Time is up!');
+            clearInterval(questionTimer);
+
+            // Notify Game Master when time is up
+            gameMaster.send(JSON.stringify({
+                messageType: 'timeUp',
+                message: "Time's up!"
+            }));
+
+            playerWS.forEach((player) => {
+                player.ws.send(JSON.stringify({
+                    messageType: 'timeUp',
+                    message: "Time's up!"
+                }));
+            })
+            changeActivePlayer();
+        }
+        counter--;
+    }, 1000);
+}
+
+
+function allQuestionsAnswered() {
+    return magicData.every(category => category.openQuestions.length === 0);
+}
+
 function updatePlayerScore(player, questionValue) {
     player.score = (player.score || 0) + questionValue;
     console.log(`${player.name} new score: ${player.score}`);
 }
 
 async function checkAnswer(player, correctAnswer, providedAnswer, questionValue) {
-    clearTimeout(questionTimer);
     console.log(`Correct Answer: ${correctAnswer}, Provided Answer: ${providedAnswer}`);
     
     if (providedAnswer === correctAnswer) {
         console.log(`${player.name} answered correctly! Adding ${questionValue} points.`);
         updatePlayerScore(player, questionValue); 
         updateGameMasterWithScores();
+        clearTimeout(questionTimer);
     } else {
         console.log(`${player.name} answered incorrectly.`);
+        clearTimeout(questionTimer);
     }
-    
-    setTimeout(() => {
-        changeActivePlayer();
-        startQuestionTimer();
-    }, 5000);
+
+    if (allQuestionsAnswered()) {  
+        declareWinner();
+    } else {
+        setTimeout(() => {
+            changeActivePlayer();
+            clearTimeout(questionTimer);
+        }, 5000);
+    }
 }
 
 // Active Player
@@ -334,7 +393,7 @@ function changeActivePlayer(){
 function updateActivePlayer(activePlayer) {
     broadcastToPlayers({
         activePlayerName: activePlayer.name,
-    });
+  });
 
     if (gameMaster) {
         gameMaster.send(
@@ -354,18 +413,33 @@ function updateActivePlayer(activePlayer) {
     console.log(`Active Player: ${activePlayer.name}`);
 }
 
-async function startQuestionTimer() {
-    clearTimeout(questionTimer); // Önceki sayacı sıfırla
-    console.log(`Timer has started!`);
+function declareWinner() {
+    if (allQuestionsAnswered()) {
+        console.log("All questions answered");
 
-    questionTimer = setTimeout(() => {
-        console.log(`Time's up! ${playerWS[activePlayerIndex].name} didn't give an answer.`);
-        
-        // Oyuncuya sürenin dolduğunu bildir
-        playerWS[activePlayerIndex].ws.send(JSON.stringify({
-            messageType: 'timeout',
-            message: 'Time is up!',
+        let sortedPlayers = playerWS.sort((a, b) => b.score - a.score);
+
+        gameMaster.send(JSON.stringify({
+            messageType: "gameOver",
+            winners: sortedPlayers.map((player, index) => ({
+                rank: index + 1,
+                name: player.name,
+                score: player.score
+            }))
         }));
-        changeActivePlayer();
-    }, 15000); // 15 saniye
+    }
+}  
+
+//QR-Code
+/*async function generateQRCode(data) {
+    try {
+        return await QRCode.toDataURL(data);
+    } catch (err) {
+        console.error(err);
+    }
 }
+    
+socket.on("connection", async (ws) => {
+    const qrCodePlayer = await generateQRCode("ws://" + window.location.hostname + ":5400/player");
+    ws.send(JSON.stringify({ messageType: "qrCode", qrCode }));
+});*/

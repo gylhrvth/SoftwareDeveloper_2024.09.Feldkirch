@@ -24,6 +24,10 @@ h2 {
 
 button {
     padding: 30px 60px 30px 60px;
+    border: 2px;
+    border-radius: 10px;
+    font-size: 20px;
+    color: white;
 }
 
 #startButton {
@@ -38,13 +42,16 @@ button {
 
 #player-name {
     display: none;
-    text-align: center;
-    align-items: center;
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
     font-family: 'Franklin Gothic Medium';
     font-size: 30px;
     font-weight: bold;
     color: blue;
-    margin-top: 10px;
+    text-align: center;
+    padding: 10px 20px;
 }
 
 #Quiz {
@@ -56,11 +63,12 @@ body {
     color: white;
     margin: 0;
     padding: 0;
-    margin-top: 60px;
+    margin-top: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
     background-image: url('/trivia.jpg');
     background-size: 100%;
     background-repeat: no-repeat;
@@ -68,18 +76,19 @@ body {
 }
 
 .quiz-container {
-    width: 80%;
-    height: 60%;
+    width: 1200px;
+    height: 450px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
     position: relative;
-    text-align: center;
+    overflow: auto;
 }
 
 .Kategorie {
@@ -90,6 +99,7 @@ body {
     font-size: 16px;
     padding: 10px 20px;
     background-color: #fff;
+    color: black;
     border: 2px solid #353575;
     border-bottom: 2px solid #3a3a7a;
     border-radius: 5px;
@@ -101,7 +111,9 @@ body {
     color: black;
     font-size: 50px;
     font-weight: bold;
-    text-align: center;       
+    text-align: center;    
+    word-wrap: break-word; /* Taşan kelimeleri kır */
+    max-width: 95%;   
 }
 
 #countdown {
@@ -114,15 +126,36 @@ body {
 .progress-bar {
     position: absolute;
     width: 100%;
+    height: 7px;
     border-radius: 5px;
     overflow: hidden;
     bottom: 0;
+    display: block;
 }
 
 .progress {
-    height: 7px;
+    height: 100%;
     background-color: rgb(13, 2, 111);
-    width: 100%;
-    border-radius: 10px;
     transition: width 1s linear;
+}
+
+.qr-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.qr-container img {
+    width: 150px;
+    height: 150px;
+    border: 2px solid #333;
+    padding: 5px;
+    background: white;
+}
+
+.qr-container p {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
 }

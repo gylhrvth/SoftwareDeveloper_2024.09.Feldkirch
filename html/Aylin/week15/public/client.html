@@ -8,13 +8,12 @@
 </head>
 <body>
     <div id="container">
-        <h2 id="welcomeMsg">Please enter a Team name</h2>
+        <h2 id="welcomeMsg"></h2>
         <div id="player"></div>
         <div id="turn-message"></div>
         <div id="Form">
             <form onsubmit="registerPlayer(event)" action="#" method="get">
-                <label for="Name">Name:</label>
-                <input type="text" id="name" name="name"><br><br>
+                <input type="text" id="name" name="name" placeholder="Nickname"><br><br>
                 <input type="submit" value="Submit"><br><br>
             </form>
         </div>
@@ -26,7 +25,12 @@
                 <div>C</div>
                 <div>D</div>
             </div>
+            <p id="countdown"></p>
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
         </div>
+        <div id="gameArea"></div>
     </div>
 
     <script>
@@ -54,6 +58,7 @@
             if (data.message) {
                 displayMessage(data.message);
             }
+            
             if (data.messageType === 'gameStarted') {
                 if (welcomeMsg) {
                     welcomeMsg.style.display = 'none';
@@ -67,10 +72,51 @@
                 document.getElementById('answerBlock').style.display = 'none';
                 document.body.classList.remove('correctAnswer');
                 document.body.classList.remove('incorrectAnswer');
+
+                if (!document.getElementById('possibleAnswers').hasChildNodes()) {
+                    turnMessageDiv.innerText = data.message;
+                }
             }
 
             if (data.messageType === 'possibleAnswers'){
                 showPossibleAnswers(data.answers, data.value);
+            }
+
+            if (data.messageType === 'gameOver') {
+                console.log(`Game Over! Winner: ${data.winner}`);
+
+                const gameArea = document.getElementById('gameArea'); // Ana oyun alanı div'i
+                gameArea.innerHTML = `<h1>${data.winner} wins!</h1>`;
+                
+                const restartButton = document.createElement('button');
+                restartButton.textContent = 'Yeniden Başlat';
+                restartButton.onclick = () => location.reload(); // Sayfayı yenileyerek oyunu resetle
+                gameArea.appendChild(restartButton);
+            }
+
+            if (data.messageType === "questionTimer") {
+                const progressBar = document.getElementById("progress");
+                const countdownElement = document.getElementById("countdown");
+                countdownElement.innerText = data.counter;
+
+                if (progressBar) {
+                    document.querySelector(".progress").style.width = (data.counter / 15) * 100 + "%" ;
+                    if (data.counter >= 10) {
+                        countdownElement.style.color = "green";
+                        progressBar.style.backgroundColor = "green";
+                    } else if (data.counter >= 5) {
+                        countdownElement.style.color = "orange";
+                        progressBar.style.backgroundColor = "orange";
+                    } else {
+                        countdownElement.style.color = "red";
+                        progressBar.style.backgroundColor = "red";
+                    }
+                }
+
+                if (data.messageType === "timeUp") {
+                    document.getElementById("countdown").innerText = "Time's up!";
+                    document.getElementById("progress").style.width = "0%";
+                }
             }
         });
 
@@ -80,6 +126,8 @@
 
         async function showPossibleAnswers(answers, value) {
             const correctAnswer = answers[0];
+
+            // Cevapları karıştır (shuffle)
             for (let i = 0; i < 3 + 3 * answers.length; i++) {
                 const randomIndex1 = Math.floor(Math.random() * answers.length);
                 const randomIndex2 = Math.floor(Math.random() * answers.length);
@@ -87,21 +135,24 @@
                 answers[randomIndex1] = answers[randomIndex2];
                 answers[randomIndex2] = temp;
             }
+
             console.log('Randomized answers:', answers);
 
             const possibleAnswers = document.getElementById('possibleAnswers');
-            possibleAnswers.innerHTML = '';
+            possibleAnswers.innerHTML = ''; // Önceki içerikleri temizle
             document.getElementById('answerBlock').style.display = 'grid';
 
             let answered = false;
 
             answers.forEach(choice => {
-                const div = document.createElement('div');
-                div.innerText = choice;
-                div.addEventListener('click', () => {
-                    if(answered) return;
+                const button = document.createElement('button');
+                button.innerText = choice;
+                button.classList.add('answer-button');
+
+                button.addEventListener('click', () => {
+                    if (answered) return;
                     answered = true;
-                    
+
                     socket.send(
                         JSON.stringify({
                             action: 'answer',
@@ -110,15 +161,17 @@
                             value: value,
                         })
                     );
+
+                    // Doğru / Yanlış renkleri güncelle
                     if (choice === correctAnswer) {
-                        document.body.classList.remove('incorrectAnswer');
-                        document.body.classList.add('correctAnswer');
+                        button.classList.add('correctAnswer');
                     } else {
-                        document.body.classList.remove('correctAnswer');
-                        document.body.classList.add('incorrectAnswer');
+                        button.classList.add('incorrectAnswer');
+                        button.classList.add('correctAnswer');
                     }
-                }); 
-                possibleAnswers.appendChild(div);
+                });
+
+                possibleAnswers.appendChild(button);
             });
         }
 
@@ -145,12 +198,13 @@
             // Welcome message
             const welcomeMsg = document.getElementById('welcomeMsg');
             if(welcomeMsg) {
-                welcomeMsg.innerHTML = `Welcome, ${name}!`;
+                welcomeMsg.innerHTML = `Hi, ${name}! You are now registered.`;
             }
             
             // Name is saved to sessionStorage
             sessionStorage.setItem('myName', name);
         }
+        
         function adjustOrientation() {
             if (window.innerHeight > window.innerWidth) {
                 // Telefon dikeyse 90 derece çevir
